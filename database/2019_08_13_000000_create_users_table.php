@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('user_location', 45)->nullable();
             $table->string('user_photo', 75)->nullable();
             $table->string('user_description')->nullable();
-            $table->string('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->nullableTimestamps();
         });
