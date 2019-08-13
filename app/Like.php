@@ -8,7 +8,7 @@ class Like extends Model
 {
    protected $primarykey = 'like_id';
 
-  /*  protected function setKeysForSaveQuery(Builder $query)
+  /* protected function setKeysForSaveQuery(Builder $query)
     {
         $query
             ->where('user_id', '=', $this->getAttribute('user_id'))
