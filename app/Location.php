@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-    protected $primarykey = 'locality_id';
+    protected $primaryKey = 'locality_id';
 }
