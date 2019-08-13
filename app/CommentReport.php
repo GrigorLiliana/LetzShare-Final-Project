@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class CommentReport extends Model
 {
     protected $table = 'commentReports';
-    protected $primarykey = 'commentReport_id';
+    protected $primaryKey = 'commentReport_id';
 }

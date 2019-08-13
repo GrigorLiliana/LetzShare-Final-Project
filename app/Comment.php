@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $primarykey = 'comment_id';
+    protected $primaryKey = 'comment_id';
 }

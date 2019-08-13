@@ -63,10 +63,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+       $userId = $user->user_id;
+
+       if (!file_exists("uploads/$userId")) {
+        mkdir("uploads/$userId", 0777, true);
+        }
+
+       return $user;
+
     }
 }
