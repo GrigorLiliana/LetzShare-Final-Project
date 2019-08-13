@@ -73,7 +73,7 @@ class RegisterController extends Controller
        $userId = $user->user_id;
 
        if (!file_exists("uploads/$userId")) {
-        mkdir("uploads/$userId", 0777, true);
+        mkdir("uploads/$userId", 0755, true);
         }
 
        return $user;
