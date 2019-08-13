@@ -61,3 +61,9 @@ Ricardo Ribiero
 Michel dos Santos
 Liliana Grigor
 
+Update Notes
+
+13-Aug 13:00
+SQL info migrated using plugin - note in "users" table created_at and updated_at were automatically converted to timestamp
+email_verified at was not changed and remains as VARCHAR (was timestamp in default "users" table)
+
