@@ -29,7 +29,7 @@ class CreatePhotosTable extends Migration
             $table->integer('likes_sum')->nullable();
             $table->integer('reports_sum')->nullable();
             $table->string('location', 75)->nullable();
-            $table->date('date')->nullable();
+            $table->timestamp('date')->nullable();
             $table->unsignedInteger('locality_id');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('user_id');

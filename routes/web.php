@@ -11,12 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
 Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/gallery', 'PhotoController');
+
+Route::resource('/contact', 'ContactController');
+
+Route::get("send/email", "HomeController@mail");
+
+/**
+ * Tests
+ */
+Route::get('/chupelagaite', function () {
+    return view('chupelagaite');
+});

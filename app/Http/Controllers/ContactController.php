@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class PhotoController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +13,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photos = DB::table('photos')
-            ->join('users', 'users.user_id', '=', 'photos.user_id')
-            ->select('photos.*', 'users.name')
-            ->get();
-
-        return view('gallery', ['photos' => $photos]);
+        return view('contact');
     }
 
     /**
