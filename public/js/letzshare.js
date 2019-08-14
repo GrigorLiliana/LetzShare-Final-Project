@@ -1,1 +1,1 @@
-console.log('letzshare loaded successfull!');
+console.log('letzshare.js loaded successfull!');

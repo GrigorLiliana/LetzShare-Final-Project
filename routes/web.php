@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/chupelagaite', function () {
+    return view('chupelagaite');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
