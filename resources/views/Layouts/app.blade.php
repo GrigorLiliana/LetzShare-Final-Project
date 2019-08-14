@@ -18,10 +18,9 @@
     ></script>
     <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="{{ asset('js/modernizr-custom.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/letzshare.js') }}" defer></script>
-    <script src="{{ asset('js/modernizr-custom.js') }}"></script>
-
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,6 +29,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/normalize.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/demo.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style_gallery.css') }}" rel="stylesheet">
 </head>
 
 <body>
