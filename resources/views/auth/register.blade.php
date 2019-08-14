@@ -44,23 +44,7 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                <div id="pswd_info">
-                                    <h4>Your passwork must contains :</h4>
-                                    <ul>
-                                    <li id="letter" class="invalid">
-                                        At least <strong>a letter</strong>
-                                    </li>
-                                    <li id="capital" class="invalid">
-                                        At least <strong>a capital letter</strong>
-                                    </li>
-                                    <li id="number" class="invalid">
-                                        At least <strong>a number</strong>
-                                    </li>
-                                    <li id="length" class="invalid">
-                                        At least <strong>8 caracters</strong>
-                                    </li>
-                                    </ul>
-                                </div>
+
                             </div>
                         </div>
 
@@ -80,6 +64,23 @@
                             </div>
                         </div>
                     </form>
+                    <div id="pswd_info">
+                        <h4>Your passwork must contains :</h4>
+                        <ul>
+                        <li id="letter" class="invalid">
+                            At least <strong>a letter</strong>
+                        </li>
+                        <li id="capital" class="invalid">
+                            At least <strong>a capital letter</strong>
+                        </li>
+                        <li id="number" class="invalid">
+                            At least <strong>a number</strong>
+                        </li>
+                        <li id="length" class="invalid">
+                            At least <strong>8 caracters</strong>
+                        </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
