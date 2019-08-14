@@ -48,12 +48,4 @@ class HomeController extends Controller
             ['topUsers' => $topUsers]
         );
     }
-
-
-    /*mail*/
-    public function mail()
-    {
-        Mail::to('therichposts@gmail.com')->send(new PaymentDone());
-        return 'Email was sent';
-    }
 }
