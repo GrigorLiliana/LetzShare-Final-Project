@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+app\Photo;
 
 class PhotoController extends Controller
 {
@@ -13,7 +14,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $photos = Photo::all();
+        return view('photo', ['photo' => $photos]);
     }
 
     /**
