@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('LetzShare@noreply.lu', 'letzshare@mailgun.lu'),
-        'name' => env('LetzShare', 'LetzShare'),
+        'address' => env('MAIL_USERNAME', 'postmaster@sandboxae21098005b54a16b9b2a1f6aa15589e.mailgun.org'),
+        'name' => env('MAIL_PASSWORD', '028d677d43ad50a9a877b274b4b47543-898ca80e-89e5ba7d'),
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('letzshare@mailgun.lu'),
+    'username' => env('MAIL_USERNAME'),
 
-    'password' => env('LetzShare1#'),
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
