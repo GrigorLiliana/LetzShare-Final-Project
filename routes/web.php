@@ -21,7 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/gallery', 'PhotoController');
 
-Route::resource('/contact', 'ContactController');
+Route::get('/contact', 'ContactController@index')->name('contact');
+Route::post('/contact', 'ContactController@store');
 
 Route::get("send/email", "HomeController@mail");
 
