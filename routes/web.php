@@ -27,3 +27,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/photos-gallery', 'PhotoController');
+Route::get("send/email", "HomeController@mail");
