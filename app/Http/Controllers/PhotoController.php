@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-app\Photo;
+
+use App\Photo;
+use Illuminate\Support\Facades\DB;
 
 class PhotoController extends Controller
 {
@@ -14,8 +16,12 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photos = Photo::all();
-        return view('photo', ['photo' => $photos]);
+        $photos = DB::table('photos')
+            ->join('users', 'users.user_id', '=', 'photos.user_id')
+            ->select('photos.*', 'users.name')
+            ->get();
+
+        return view('gallery', ['photos' => $photos]);
     }
 
     /**
