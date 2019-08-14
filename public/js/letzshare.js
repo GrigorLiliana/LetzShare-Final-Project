@@ -1,3 +1,4 @@
+console.log('letzshare.js loaded successfull!');
 $(function() {
     /* Registration password validation*/
 

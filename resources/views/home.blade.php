@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<p>This is the home.blade.php</p>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
