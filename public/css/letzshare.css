@@ -62,3 +62,16 @@ li {
     display: none;
 }
 /* End of the Registration password validation*/
+
+/* Home Page Styles */
+
+#topPics {
+    display: flex;
+}
+
+#homeGallery {
+    width: 400px;
+    height: 300px;
+}
+
+/* End of Home Page Styles */
