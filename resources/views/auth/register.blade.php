@@ -86,45 +86,4 @@
     </div>
 </div>
 @endsection
-<script
-      type="text/javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"
-    ></script>
-<script>
-    $(function() {
-  // Apply a display block to #pswd_info on focus on password
-  $("#password").on("focus", function() {
-    $("#pswd_info").css("display", "block");
-  });
-  //display none to #pswd_info when blur
-  $("#password").on("blur", function() {
-    $("#pswd_info").css("display", "none");
-  });
-    // on every key pressed
-  $("#password").on("keyup", checkAllCases);
-  function checkAllCases() {
-    // Gathering : checked the password value
-    const thePass = $("#pswd").val();
-    // this refere to the element that trigger the event
-    console.log(thePass);
-
-    // Logic
-    // length >= 8
-    const lengthValid = thePass.length >= 8;
-    // at least one letter str.match(/[A-z]/)
-    const letterValid = !!thePass.match(/[A-z]/);
-    console.log(letterValid);
-    // at least one Capital letter str.match(/[A-Z]/)
-    const upperValid = thePass.match(/[A-Z]/); //null or smth
-    // at least one number str.match(/\d/)
-    const numberValid = thePass.match(/\d/);
-
-    //display *4
-    displayValid("#letter", letterValid);
-    displayValid("#length", lengthValid);
-    displayValid("#capital", upperValid);
-    displayValid("#number", numberValid);
-  }
-}); //LAST DO NOT DELETE
-</script>
 
