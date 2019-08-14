@@ -7,6 +7,7 @@ use App\Photo;
 use App\User;
 use App\Mail\PaymentDone;
 use Illuminate\Support\Facades\Mail;
+use DB;
 
 class HomeController extends Controller
 {
@@ -27,24 +28,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $topPics = Photo::all()
-        ->orderBy('likesSum' , 'desc')
-        ->take(3)
-        ->get();
-        $recentPics = Photo::all()
-        ->orderBy('date' , 'desc')
-        ->take(3)
-        ->get();
-        $topUsers = User::all()
-        ->join('photos', 'users.user_id', '=', 'photos.user_id')
-        ->groupBy('photos.id_user')
-        ->orderBy( 'count(photos.id_photo)' , 'desc')
-        ->take(3)
-        ->get();
-        return view('home',
+        $topPics = Photo::orderBy('likes_sum', 'desc')
+            ->take(3)
+            ->get();
+        $recentPics = Photo::orderBy('date', 'desc')
+            ->take(3)
+            ->get();
+        $topUsers = DB::table('users')
+            ->select('photos.user_id', DB::raw('count(*) as total_photos'))
+            ->join('photos', 'users.user_id', '=', 'photos.user_id')
+            ->groupBy('photos.user_id')
+            ->orderBy('total_photos', 'desc')
+            ->take(3)
+            ->get();
+        var_dump($topPics);
+        var_dump($recentPics);
+        var_dump($topUsers);
+        /*return view(
+            'home',
             ['topPics' => $topPics],
             ['recentPics' => $recentPics],
-            ['topUsers' => $topUsers]);
+            ['topUsers' => $topUsers]
+        );*/
     }
 
 
@@ -55,4 +60,3 @@ class HomeController extends Controller
         return 'Email was sent';
     }
 }
-
