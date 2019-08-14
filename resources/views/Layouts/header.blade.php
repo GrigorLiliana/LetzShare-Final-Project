@@ -21,4 +21,3 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet">
 </head>
-<p>This is the header (header.blade.php)</p>

@@ -2,8 +2,6 @@
 
 @section('content')
 
-<p>This is the home.blade.php</p>
-
 <div class="container">
     <div class="row">
         <div class="topPics">

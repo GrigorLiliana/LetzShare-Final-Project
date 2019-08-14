@@ -11,20 +11,20 @@
 |
 */
 
-Route::get('', function () {
-    return view('home');
-});
+Auth::routes();
+
 Route::get('/', function () {
     return view('home');
 });
-
-Route::get('/chupelagaite', function () {
-    return view('chupelagaite');
-});
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/photos-gallery', 'PhotoController');
 Route::get("send/email", "HomeController@mail");
+
+/**
+ * Tests
+ */
+Route::get('/chupelagaite', function () {
+    return view('chupelagaite');
+});
