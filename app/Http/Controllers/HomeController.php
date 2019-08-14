@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Photo;
 use App\User;
+use App\Mail\PaymentDone;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -43,6 +45,14 @@ class HomeController extends Controller
             ['topPics' => $topPics],
             ['recentPics' => $recentPics],
             ['topUsers' => $topUsers]);
+    }
+
+
+    /*mail*/
+    public function mail()
+    {
+        Mail::to('therichposts@gmail.com')->send(new PaymentDone());
+        return 'Email was sent';
     }
 }
 
