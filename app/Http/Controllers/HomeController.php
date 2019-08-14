@@ -25,20 +25,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $top3Pics = Photo::all()
+        $topPics = Photo::all()
         ->orderBy('likesSum' , 'desc')
         ->take(3)
         ->get();
-        $recent3Pics = Photo::all()
+        $recentPics = Photo::all()
         ->orderBy('date' , 'desc')
         ->take(3)
         ->get();
-        $top3Users = User::all()
+        $topUsers = User::all()
         ->join('photos', 'users.user_id', '=', 'photos.user_id')
         ->groupBy('photos.id_user')
         ->orderBy( 'count(photos.id_photo)' , 'desc')
         ->take(3)
         ->get();
-        return view('home');
+        return view('home',
+            ['topPics' => $topPics],
+            ['recentPics' => $recentPics],
+            ['topUsers' => $topUsers]);
     }
 }
+
