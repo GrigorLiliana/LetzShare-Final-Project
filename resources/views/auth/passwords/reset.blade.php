@@ -32,9 +32,7 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                <p id="passwordHelpBlock" class="form-text text-muted">
-        Your password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.
-</p>
+
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -59,6 +57,23 @@
                             </div>
                         </div>
                     </form>
+                    <div id="pswd_info">
+                        <h4>Your passwork must contains :</h4>
+                        <ul>
+                        <li id="letter" class="invalid">
+                            At least <strong>a letter</strong>
+                        </li>
+                        <li id="capital" class="invalid">
+                            At least <strong>a capital letter</strong>
+                        </li>
+                        <li id="number" class="invalid">
+                            At least <strong>a number</strong>
+                        </li>
+                        <li id="length" class="invalid">
+                            At least <strong>8 caracters</strong>
+                        </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
