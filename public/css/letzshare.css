@@ -65,13 +65,13 @@ li {
 
 /* Home Page Styles */
 
-#topPics {
+.topPics {
     display: flex;
 }
 
-#homeGallery {
-    width: 400px;
-    height: 300px;
+.homeGallery {
+    width: 300px;
+    height: 200px;
 }
 
 /* End of Home Page Styles */
