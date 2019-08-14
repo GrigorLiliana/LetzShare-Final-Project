@@ -41,15 +41,12 @@ class HomeController extends Controller
             ->orderBy('total_photos', 'desc')
             ->take(3)
             ->get();
-        var_dump($topPics);
-        var_dump($recentPics);
-        var_dump($topUsers);
-        /*return view(
+        return view(
             'home',
             ['topPics' => $topPics],
             ['recentPics' => $recentPics],
             ['topUsers' => $topUsers]
-        );*/
+        );
     }
 
 
