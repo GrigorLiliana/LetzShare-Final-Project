@@ -17,9 +17,10 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('/gallery', 'PhotoController');
+
 Route::resource('/contact', 'ContactController');
 
-Route::resource('/photos-gallery', 'PhotoController');
 Route::get("send/email", "HomeController@mail");
 
 /**
