@@ -72,9 +72,8 @@ email_verified at was not changed and remains as VARCHAR (was timestamp in defau
 
 14-Aug 15:00
 Send Email to reset password
-1 - I folow this:
-https://therichpost.com/best-practices-send-mail-from-localhost-in-laravel
-2 -In the terminal:
+1 - In the terminal:
 composer require guzzlehttp/guzzle
+2 - Put " " in the MAIL_USERNAME and MAIL_PASSWORD
 
 .
