@@ -1,3 +1,9 @@
+<?php
+
+//use DB;
+
+?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -23,7 +29,6 @@
             foreach($recentPics as $recentPic) {
                 echo "<div class='homePic'>";
                 $path=URL::asset($recentPic->image_URL);
-
                 echo "<h5>$recentPic->image_title</h5>
                 <img class='homeGallery' src='$path' />
                 <p>$recentPic->image_description</p>
@@ -32,10 +37,20 @@
         ?>
     </div>
     <br><br>
-    <div class="row">
-        <div class="homePics">
-            <h3>Our Top Photographers</h3>
-        </div>
+    <h3>Our Top Photographers</h3>
+    <div class="homePics">
+        <?php
+            foreach($topUsers as $topUser) {
+                echo "<div class='homePic'>";
+                $userId=$topUser->user_id;
+                $user = App\User::where('user_id' , $userId)->get();
+                //$path=URL::asset($user->user_photo);
+                // echo "<h5>$user->name</h5>";
+                //<img class='homeGallery' src='$path' />
+                //<p> $user->name has posted $topUser->total_photos photos</p>
+                //</div>";
+            }
+        ?>
     </div>
 </div>
 
