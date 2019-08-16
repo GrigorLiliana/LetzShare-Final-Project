@@ -66,19 +66,35 @@ li {
 
 /* Home Page Styles */
 
-.homePics {
+h1 {
+    margin: 0.3em 2em;
+}
+
+#blurb {
+    margin: 0.5em 5.0em;
+}
+
+.row {
     display: flex;
 }
 
-.homePics p {
-    font-size: 12px;
+.row p {
+    font-size: 1.0rem;
+    margin: 0.5rem;
 }
+
+.container h3, h5 {
+    margin: 0.75rem;
+}
+
 .homeGallery {
-    width: 300px;
-    height: 200px;
+    max-width: 300px;
+    object-fit: contain;
+    border-radius: 5px;
 }
 
 /* End of Home Page Styles */
+
 /* User Account Styles */
 .add {
     font-size: 2rem;
