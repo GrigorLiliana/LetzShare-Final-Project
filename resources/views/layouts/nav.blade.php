@@ -20,7 +20,7 @@
                                 <a class="nav-link" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#photo-gallery">Photo gallery</a>
+                                <a class="nav-link" href="/gallery">Photo gallery</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#about-us">About us</a>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Location;
+use App\Category;
+
 class PhotoController extends Controller
 {
     /**
@@ -29,8 +32,10 @@ class PhotoController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
+        $locations = Location::all();
         Auth::user()->user_id;
-        return view('uploadphoto');
+        return view('uploadphoto', ['categories'=>$categories, 'locations'=>$locations]);
     }
 
     /**
