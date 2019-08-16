@@ -31,8 +31,7 @@ class SendMail extends Mailable
     public function build()
     {
         return $this->subject('Message from LetzShare!')
-            ->bcc('projectletzshare@gmail.com')
-            ->view('email_template')
+            ->view('contact_email')
             ->with('data', $this->_data);;
     }
 }
