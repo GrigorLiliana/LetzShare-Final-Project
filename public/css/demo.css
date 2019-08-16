@@ -31,17 +31,6 @@
 	clear: both;
 }
 
-body {
-	font-family: "Avenir Next", Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
-	color: #fff;
-	background: #252323;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	width: 100vw;
-}
-
 a {
 	outline: none;
 	color: #77d45b;
