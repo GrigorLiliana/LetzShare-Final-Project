@@ -78,7 +78,7 @@ h1 {
 }
 
 .blurb {
-    margin: 0.5em 0em;
+    /* margin: 0.5em 0em; */
 }
 
 .topPics,
@@ -87,6 +87,11 @@ h1 {
     margin: 1rem auto;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#homePage .card {
+    margin-bottom: 3rem;
 }
 
 .row {
