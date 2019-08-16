@@ -18,6 +18,7 @@
                 echo "<h5>$topPic->image_title</h5>
                 <img class='homeGallery' src='$path' />
                 <p>$topPic->image_description</p>
+                <p>$topPic->likes_sum likes</p>
                 </div>";
             }
             ?>
@@ -32,6 +33,7 @@
                 echo "<h5>$recentPic->image_title</h5>
                 <img class='homeGallery' src='$path' />
                 <p>$recentPic->image_description</p>
+                <p>$recentPic->likes_sum likes</p>
                 </div>";
             }
         ?>
@@ -43,12 +45,13 @@
             foreach($topUsers as $topUser) {
                 echo "<div class='homePic'>";
                 $userId=$topUser->user_id;
-                $user = App\User::where('user_id' , $userId)->get();
-                //$path=URL::asset($user->user_photo);
-                // echo "<h5>$user->name</h5>";
-                //<img class='homeGallery' src='$path' />
-                //<p> $user->name has posted $topUser->total_photos photos</p>
-                //</div>";
+                $user = App\User::where('user_id' , $userId)->first();
+
+                $path=URL::asset($user->user_photo);
+                 echo "<h5>$user->name</h5>
+                <img class='homeGallery' src='$path' />
+                <p> $user->name has posted $topUser->total_photos photos</p>
+                </div>";
             }
         ?>
     </div>
