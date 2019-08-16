@@ -11,7 +11,7 @@
             <div class="form-group">
             <label for="image">Select an amazing image </label>
             <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile">
+            <input type="file" class="custom-file-input" id="customFile" required>
             <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
         </div>
@@ -27,11 +27,17 @@
             <div class="form-group">
                 <label for="locality">Locality</label>
                 <select name="locatily" id="locatily" required>
-                    <option value="">Belval</option>
+                @foreach ($locations as $locality)
+                    <option value="">{{$locality->locality_name}}</option>
+                @endforeach
                 </select>
+
                 <label for="category">Category</label>
                 <select name="category" id="category" required>
-                    <option value="">Nature</option>
+                <option value="" selected disabled>Select</option>
+                @foreach ($categories as $category)
+                <option value="">{{$category->category_name}}</option>
+                @endforeach
                 </select>
             </div>
 
