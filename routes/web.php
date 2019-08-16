@@ -17,7 +17,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/gallery', 'PhotoController');
+//Route::resource('/gallery', 'PhotoController');
 
 Route::get('/about-us', function () {
     return view('about-us');
@@ -33,4 +33,5 @@ Route::get('/chupelagaite', function () {
     return view('chupelagaite');
 });
 Route::get('/uploadphoto', 'PhotoController@create')->name('uploadphoto');
+Route::post('/uploadphoto', 'PhotoController@store');
 Route::get('/useraccount', 'UserController@index')->name('useraccount');
