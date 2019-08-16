@@ -33,3 +33,4 @@ Route::get("send/email", "HomeController@mail");
 Route::get('/chupelagaite', function () {
     return view('chupelagaite');
 });
+Route::get('/myaccount/{id}', 'PhotoController@create')->name('myaccount');
