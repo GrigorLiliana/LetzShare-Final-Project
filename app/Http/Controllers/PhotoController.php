@@ -36,7 +36,7 @@ class PhotoController extends Controller
     {
         $categories = Category::all();
         $locations = Location::all();
-        Auth::user()->user_id;
+
         return view('uploadphoto', ['categories'=>$categories, 'locations'=>$locations]);
     }
 
@@ -51,12 +51,23 @@ class PhotoController extends Controller
         request()->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-            
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+        $userId = Auth::user()->user_id;
+        $imageName = $userId.'.'.request()->image->getClientOriginalExtension();
 
 
+        if (!file_exists("uploads/$userId")) {
+            mkdir("uploads/$userId", 0755, true);
+        }
 
-        request()->image->move(public_path('images'), $imageName);
+        if(file_exists("uploads/$userId/$imageName")){
+        $i=0;
+        do {
+            $imageName = $userId . "_" . $i .'.'.request()->image->getClientOriginalExtension();;
+        } while(file_exists("uploads/$userId/$imageName"));
+        }
+
+        request()->image->move(public_path("uploads/$userId"), $imageName);
 
 
 
@@ -66,7 +77,7 @@ class PhotoController extends Controller
 
             ->with('image',$imageName);
 
-    }
+
     }
 
     /**

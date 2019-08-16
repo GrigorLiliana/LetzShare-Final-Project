@@ -5,16 +5,17 @@
 
 <div class="container">
 <button><a href="{{route('useraccount')}}">My account</a></button>
-    <form class="formbox" enctype="multipart/form-data">
+    <form class="formbox" method="POST" enctype="multipart/form-data">
+    @csrf
         <div class="col-md-6 offset-3">
             <h3>Upload photo</h2>
             <div class="form-group">
-            <label for="image">Select an amazing image </label>
-            <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile" required>
-            <label class="custom-file-label" for="customFile">Choose file</label>
+                <label for="image">Select an amazing image </label>
+                    <div class="custom-file">
+                        <label class="" for="customFile"></label>
+                        <input type="file" name="image" class="" id="customFile" required>
+                    </div>
             </div>
-        </div>
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Enter the photo title" required>
@@ -27,6 +28,7 @@
             <div class="form-group">
                 <label for="locality">Locality</label>
                 <select name="locatily" id="locatily" required>
+                <option value="" selected disabled>Select</option>
                 @foreach ($locations as $locality)
                     <option value="">{{$locality->locality_name}}</option>
                 @endforeach
