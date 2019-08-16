@@ -17,6 +17,12 @@
     <div class="row">
         <div class="recentPics">
             <p>content of recentPics</p>
+            <?php
+            foreach($recentPics as $recentPic) {
+                $path=URL::asset($recentPic->image_URL);
+                echo "<img class='homeGallery' src='$path' />";
+            }
+            ?>
         </div>
     </div>
     <div class="row">
