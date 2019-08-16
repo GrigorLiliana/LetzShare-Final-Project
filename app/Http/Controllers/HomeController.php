@@ -41,11 +41,12 @@ class HomeController extends Controller
             ->orderBy('total_photos', 'desc')
             ->take(3)
             ->get();
+        // dd($topUsers);
         return view(
             'home',
-            ['topPics' => $topPics],
-            ['recentPics' => $recentPics],
-            ['topUsers' => $topUsers]
+            ['topPics' => $topPics,
+            'recentPics' => $recentPics,
+            'topUsers' => $topUsers]
         );
     }
 }
