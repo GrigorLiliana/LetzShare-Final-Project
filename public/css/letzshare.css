@@ -1,5 +1,6 @@
 body {
     background: #252323;
+    color: white;
 }
 
 /* Registration password validation*/
@@ -65,10 +66,14 @@ li {
 
 /* Home Page Styles */
 
-.topPics {
+
+.homePics {
     display: flex;
 }
 
+.homePics p {
+    font-size: 12px;
+}
 .homeGallery {
     width: 300px;
     height: 200px;
