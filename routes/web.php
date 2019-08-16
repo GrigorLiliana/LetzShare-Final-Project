@@ -33,4 +33,5 @@ Route::get("send/email", "HomeController@mail");
 Route::get('/chupelagaite', function () {
     return view('chupelagaite');
 });
-Route::get('/myaccount/{id}', 'PhotoController@create')->name('myaccount');
+Route::get('/uploadphoto', 'PhotoController@create')->name('uploadphoto');
+Route::get('/useraccount', 'UserController@index')->name('useraccount');
