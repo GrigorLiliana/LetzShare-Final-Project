@@ -3,6 +3,12 @@ body {
     color: white;
 }
 
+/* contact page */
+#contactForm,
+#aboutUs {
+    margin-top: 80px;
+}
+
 /* Registration password validation*/
 ul,
 li {

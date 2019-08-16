@@ -21,10 +21,10 @@
                                 <a class="nav-link" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/gallery">Photo gallery</a>
+                                <a class="nav-link" href="{{ url('/gallery') }}">Photo gallery</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#about-us">About us</a>
+                                <a class="nav-link" href="{{ route('about-us') }}">About us</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('contact') }}">Contact</a>
