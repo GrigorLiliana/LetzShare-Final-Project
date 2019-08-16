@@ -19,6 +19,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/gallery', 'PhotoController');
 
+Route::get('/about-us', function () {
+    return view('about-us');
+})->name('about-us');
+
 Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact/sendemail', 'ContactController@sendEmail');
 
