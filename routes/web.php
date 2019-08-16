@@ -35,3 +35,4 @@ Route::get('/chupelagaite', function () {
 Route::get('/uploadphoto', 'PhotoController@create')->name('uploadphoto');
 Route::post('/uploadphoto', 'PhotoController@store');
 Route::get('/useraccount', 'UserController@index')->name('useraccount');
+Route::get('/gallery', 'PhotoController@index');
