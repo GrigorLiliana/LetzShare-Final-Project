@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
@@ -17,11 +18,13 @@ class Admin
     {
         //https://hackernoon.com/laravel-multiple-authentication-80daa855322b
 
-        if(auth()->user()->isAdmin === 1){
+        // if registered AND admin
+        if(Auth::check() && auth()->user()->isAdmin === 1)
             return $next($request);
-        }
+            
+        else
+            //... ->with('ERROR','You have not admin access'); returns ==> {{ session('ERROR') }}
+            return redirect()->route('home')->with('error', 'Restricted area. You have not admin access');
         
-        return redirect('home')->with('error','You have not admin access');
-
     }
 }

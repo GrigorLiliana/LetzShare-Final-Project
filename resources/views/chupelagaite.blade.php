@@ -1,24 +1,92 @@
 @extends('layouts.app')
 
+@section('pageTitle', 'Chupelagaite Page')
+
 @section('content')
 
 <div class="container">
-    <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <h1>Chupelagaite</h1>
+<hr>
+
+    <p>User ID: {{ $id = Auth::id() }}</p>
+    <p>User: {{ $user = Auth::user() }}</p>
+    <pre>
+    {{-- {{ print_r($user) }} --}}
+    </pre>
+
+
+
+    @guest
+        <p>I'm a <strong>@@guest</strong></p>
+    @endguest
+
+
+    @auth
+        @if ( auth()->user()->isAdmin === 1 )
+            <p>I'm authenticated <strong>@@auth and isAdmin</strong></p>
+        @else
+            <p>I'm authenticated <strong>@@auth</strong></p>
+        @endif
+    @endauth
+
+    @if (Auth::check())
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+            <div>
+                <strong>return Auth::check() = </strong>
+                <strong>{{ Auth::check() }}</strong>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    @endif
+
+    @if ($user = Auth::user())
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+            <div>
+                <strong>return Auth::user() = </strong>
+                <strong>{{ Auth::user() }}</strong>
+            </div>
         </div>
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    @endif
+
+    <div class="errors">
+        @if ( session('error') )
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span>{{ session('error') }}</span>
+            </div>
+        @endif
+    </div>
+
+    @if(count($errors) > 0)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                @foreach($errors->all() as $error)
+                <li><strong>{{ $error }}</strong></li>
+                @endforeach
+            </ul>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 </div>
 
 @endsection
+

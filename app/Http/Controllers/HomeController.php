@@ -49,8 +49,4 @@ class HomeController extends Controller
             'topUsers' => $topUsers]
         );
     }
-    
-    public function admin(){
-        return view('admin');
-    }
 }

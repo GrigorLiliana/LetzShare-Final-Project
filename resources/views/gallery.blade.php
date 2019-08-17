@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Photo Gallery')
+@section('pageTitle', 'Photo Gallery | LetzShare')
 
 @section('content')
 

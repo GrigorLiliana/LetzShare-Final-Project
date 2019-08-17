@@ -52,13 +52,16 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('useraccount') }}">
+                                    <a class="dropdown-item {{ (current_page('useraccount')) ? 'active' : '' }}" href="{{ route('useraccount') }}">
                                         My account
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('uploadphoto') }}">
+                                    <a class="dropdown-item {{ (current_page('userprofile')) ? 'active' : '' }}" href="{{ route('userprofile') }}">
+                                        My profile
+                                    </a>
+                                    <a class="dropdown-item {{ (current_page('uploadphoto')) ? 'active' : '' }}" href="{{ route('uploadphoto') }}">
                                         Upload photo
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item {{ (current_page('logout')) ? 'active' : '' }}" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -82,3 +85,13 @@
             
         </nav>
 </header>
+<div class="errors">
+    @if ( $message = Session::get('error') )
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <span>{{ $message }}</span>
+        </div>
+    @endif
+</div>

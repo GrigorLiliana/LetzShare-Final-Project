@@ -8,5 +8,9 @@ use App\Location;
 
 class LocationController extends Controller
 {
-    //
+    function index()
+    {
+        //return view('');
+    }
+
 }
