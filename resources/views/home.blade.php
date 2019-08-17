@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container" id="homePage">
+<div class="container">
 
     <div class="jumbotron">
         <h1 class="display-4">LetzShare</h1>

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use App\Photo;
 use App\User;
 use App\Mail\PaymentDone;
-use Illuminate\Support\Facades\Mail;
-use DB;
 
 class HomeController extends Controller
 {
@@ -48,5 +48,9 @@ class HomeController extends Controller
             'recentPics' => $recentPics,
             'topUsers' => $topUsers]
         );
+    }
+    
+    public function admin(){
+        return view('admin');
     }
 }

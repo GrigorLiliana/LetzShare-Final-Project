@@ -3,10 +3,7 @@ body {
     color: white;
 }
 
-/* Margin top */
-#contactForm,
-#aboutUs,
-#homePage {
+.container {
     margin-top: 80px;
 }
 
@@ -75,10 +72,6 @@ li {
 
 h1 {
     margin: 0.3em 0em;
-}
-
-.blurb {
-    /* margin: 0.5em 0em; */
 }
 
 .topPics,
