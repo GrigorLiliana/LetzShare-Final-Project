@@ -43,13 +43,15 @@
                                 <li>
                             </ul>
                         </div>
-                        @if (auth()->user()->isAdmin === 1)
-                        <div class="card-footer text-muted">
-                            <small class="text-muted">Photo ID: {{ $photo->photo_id }}</small>
-                            <small class="text-muted">Category ID: {{ $photo->category_id }}</small>
-                            <small class="text-muted">Locality ID: {{ $photo->locality_id }}</small>
-                        </div>
-                        @endif
+                        @auth
+                            @if (auth()->user()->isAdmin === 1)
+                            <div class="card-footer text-muted">
+                                <small class="text-muted">Photo ID: {{ $photo->photo_id }}</small>
+                                <small class="text-muted">Category ID: {{ $photo->category_id }}</small>
+                                <small class="text-muted">Locality ID: {{ $photo->locality_id }}</small>
+                            </div>
+                            @endif
+                        @endauth
                 </div>
             </div>
             @endforeach
