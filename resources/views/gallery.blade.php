@@ -9,7 +9,9 @@
         <div class="col-sm">
             @foreach ($photos as $photo)
             <div class="card mb-3">
-                <a href="{{ $photo->image_URL }}" class="img-wrap"><img src="{{ $photo->image_URL }}" class="card-img-top" alt="{{ $photo->image_title }}">
+                <a href="{{ $photo->image_URL }}" class="img-wrap">
+                    <img src="{{ $photo->image_URL }}" class="card-img-top" alt="{{ $photo->image_title }}">
+                </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ $photo->image_title }}</h5>
                         <p class="card-text">{{ $photo->image_description }}</p>
