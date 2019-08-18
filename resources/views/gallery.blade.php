@@ -71,14 +71,16 @@
     <div>
 
       <!-- Title -->
-      <h4 class="card-title font-weight-bold mb-2">{{ $photo->title }}</h4>
+      <h4 class="card-title font-weight-bold mb-2">{{ $photo->image_title }}</h4>
       <!-- Subtitle -->
-      <p class="card-text"><i class="far fa-clock pr-2"></i>$photo->date</p>
+      <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $photo->date }}</p>
 
     </div>
 
   </div>
 
+
+  @foreach ($photos as $photo)
   <!-- Card image -->
   <div class="view overlay">
     <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}" alt="Card image cap">
@@ -93,7 +95,7 @@
     <div class="collapse-content">
 
       <!-- Text -->
-      <p class="card-text collapse" id="collapseContent">{{ $photo->description }}</p>
+      <p class="card-text collapse" id="collapseContent">{{ $photo->image_description }}</p>
       <!-- Button -->
       <ul>
         <li>
@@ -130,12 +132,12 @@
         <li>
     </ul>
 
-    </div>
+  </div>
 
   </div>
 
 </div>
-<!-- Card -->∏
+<!-- Card -->
 
 
 @endsection
