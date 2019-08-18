@@ -128,7 +128,7 @@
             <span>Night Life</span>
             @endif
         <li>
-          </ul>
+    </ul>
 
     </div>
 
