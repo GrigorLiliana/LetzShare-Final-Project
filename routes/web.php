@@ -13,9 +13,9 @@
 
 Auth::routes();
 
-//Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::resource('/gallery', 'PhotoController');
 
@@ -26,13 +26,13 @@ Route::get('/about-us', function () {
 Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact/sendemail', 'ContactController@sendEmail');
 
+/**
+ * Tests
+ */
+Route::get('/chupelagaite', function () {
+    return view('chupelagaite');
+});
 Route::get('/uploadphoto', 'PhotoController@create')->name('uploadphoto');
 Route::post('/uploadphoto', 'PhotoController@store');
 Route::get('/useraccount', 'UserController@index')->name('useraccount');
-
 Route::get('/gallery', 'PhotoController@index');
-Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
-
-//Route::get('/admin/routes', 'HomeController@admin')->middleware('admin');
-Route::get('/admin', 'HomeController@admin')->middleware('admin');
-

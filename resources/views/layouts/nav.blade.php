@@ -6,7 +6,7 @@
         }
     @endphp
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            
+            <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/') }}/LetzShare_logo.png" alt="LetzShare logo." width="60px">
                     {{ config('app.name', 'LetzShare') }}
@@ -79,6 +79,6 @@
                         @endguest
                     </ul>
                 </div>
-            
+            </div>
         </nav>
 </header>
