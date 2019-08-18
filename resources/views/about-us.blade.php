@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@section('pageTitle', 'About Us | LetzShare')
+
 @section('content')
-<div class="container" id="aboutUs">
+
+<div class="container">
     <h1>About Us</h1>
 </div>
+
 @endsection
