@@ -3,10 +3,9 @@ body {
     color: white;
 }
 
-/* Margin top */
+/* contact page */
 #contactForm,
-#aboutUs,
-#homePage {
+#aboutUs {
     margin-top: 80px;
 }
 
@@ -40,7 +39,7 @@ li {
 }
 
 #pswd_info::before {
-    content: "\25B2";
+    content: '\25B2';
     /* triangle pointu en haut de la div */
     position: absolute;
     top: -12px;
@@ -86,12 +85,11 @@ h1 {
 }
 
 .row p {
-    font-size: 1rem;
+    font-size: 1.0rem;
     margin: 0.5rem;
 }
 
-.container h3,
-h5 {
+.container h3, h5 {
     margin: 0.75rem;
 }
 
