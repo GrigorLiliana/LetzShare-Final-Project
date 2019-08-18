@@ -13,10 +13,15 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
 
-Route::view('/terms', 'termsconditions')->name('terms');
-Route::view('/about-us', 'about-us')->name('about-us');
+Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::resource('/gallery', 'PhotoController');
+
+Route::get('/about-us', function () {
+    return view('about-us');
+})->name('about-us');
 
 Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact/sendemail', 'ContactController@sendEmail');
@@ -29,17 +34,5 @@ Route::get('/chupelagaite', function () {
 });
 Route::get('/uploadphoto', 'PhotoController@create')->name('uploadphoto');
 Route::post('/uploadphoto', 'PhotoController@store');
-
 Route::get('/useraccount', 'UserController@index')->name('useraccount');
-Route::get('/userprofile', 'UserController@index')->name('userprofile');
-
 Route::get('/gallery', 'PhotoController@index');
-Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
-
-
-//** ADMIN - Middleware auth validation */
-Route::get('/admin', 'AdminController@index')->middleware('admin');
-
-
-//** TESTs */
-Route::view('/chupelagaite', 'chupelagaite');

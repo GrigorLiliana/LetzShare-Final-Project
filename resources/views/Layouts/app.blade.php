@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('pageTitle')</title>
+    <title>{{ config('app.name', 'LetzShare') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -38,6 +38,5 @@
 <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{ asset('js/letzshare.js') }}" defer></script>
-
 </body>
 </html>

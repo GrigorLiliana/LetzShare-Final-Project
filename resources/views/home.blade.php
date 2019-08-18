@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('pageTitle', 'Homepage | LetzShare')
-
 @section('content')
 <div class="container">
     <h1>LetzShare - The beauty of Luxembourg</h1>
