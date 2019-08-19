@@ -40,7 +40,7 @@ li {
 }
 
 #pswd_info::before {
-    content: "\25B2";
+    content: '\25B2';
     /* triangle pointu en haut de la div */
     position: absolute;
     top: -12px;
@@ -102,19 +102,11 @@ h1 {
 
 /* User Account Styles */
 .add {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
+    font-size: 1.5rem;
+    color: black;
     text-decoration: none;
-    padding: 0 0.8rem;
-    border: 3px solid white;
-    border-radius: 50%;
 }
-.add:hover {
-    color: white;
-    text-decoration: none;
-    transform: scale(1.1);
-}
+
 /* Enf of User Account Styles */
 
 /* Gallery Styles */

@@ -83,17 +83,13 @@ class PhotoController extends Controller
             $photo->image_title = $request->title;
             $photo->image_URL = "uploads/$userId/$imageName";
             $photo->image_description = $request->description;
-
             $photo->category_id = Input::get('category');
-
             $photo->locality_id = Input::get('locality');
-
             $photo->user_id = $userId;
             $photo->likes_sum = 0;
             $photo->save();
 
-            return redirect('uploadphoto');
-
+            return redirect('useraccount');
             }
 
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Photo;
 use App\User;
-use App\Mail\PaymentDone;
 use Illuminate\Support\Facades\Mail;
 use DB;
 
