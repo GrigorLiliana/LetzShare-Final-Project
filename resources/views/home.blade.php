@@ -97,17 +97,13 @@
                             <i class="fas fa-heart"></i>
                             <p> {{ $recentPic->likes_sum }}</p>
                         </div>
+                        <?php if (Auth::check()) ?>
                         <div class="card-item">
-                            <i class="far fa-heart"></i>
-                            <p> Like</p>
+                                <i class="far fa-heart"></i>
+                                <p> Like</p>
                         </div>
                     </div>
 
-
-                        <?php if (Auth::check())
-                        echo 'login';
-                    else
-                        echo 'who are you?'; ?>
                 </div>
             </div>
         <?php } ?>
