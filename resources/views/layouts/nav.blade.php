@@ -6,7 +6,7 @@
         }
     @endphp
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            
+
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/') }}/LetzShare_logo.png" alt="LetzShare logo." width="60px">
                     {{ config('app.name', 'LetzShare') }}
@@ -55,7 +55,7 @@
                                     <a class="dropdown-item {{ (current_page('useraccount')) ? 'active' : '' }}" href="{{ route('useraccount') }}">
                                         My account
                                     </a>
-                                    <a class="dropdown-item {{ (current_page('userprofile')) ? 'active' : '' }}" href="{{ route('userprofile') }}">
+                                    <a class="dropdown-item {{ (current_page('userprofile')) ? 'active' : '' }}" href="/userprofile{{Auth::user()->user_id}}">
                                         My profile
                                     </a>
                                     <a class="dropdown-item {{ (current_page('uploadphoto')) ? 'active' : '' }}" href="{{ route('uploadphoto') }}">
@@ -82,7 +82,7 @@
                         @endguest
                     </ul>
                 </div>
-            
+
         </nav>
 </header>
 <div class="errors">
