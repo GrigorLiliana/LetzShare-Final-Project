@@ -109,12 +109,12 @@
                         <?php if (Auth::check()) {
                             $like = App\Like::where('photo_id' , $recentPic->photo_id)->where('user_id' , Auth::user()->user_id)->first();
                             if ($like)
-                            echo '<div class="card-item">
+                            echo '<div class="card-item" id="unlike">
                                 <i class="far fa-thumbs-down"></i>
                                 <p> Unlike</p>
                             </div>';
                             else
-                            echo '<div class="card-item">
+                            echo '<div class="card-item" id="like">
                                 <i class="far fa-heart"></i>
                                 <p> Like</p>
                             </div>';
