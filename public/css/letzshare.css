@@ -108,17 +108,17 @@ h1 {
 
 /* Gallery Styles */
 
-
 .card {
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+        0 2px 10px 0 rgba(0, 0, 0, 0.12);
     border: 0;
     font-weight: 400;
 }
 
 /* Filters Form Styles */
 
-.filters-form {
-    margin: 10px 0;
-    padding: 0 20px;
-
+.filters {
+    margin: 20px 0 70px;
+    padding: 10px;
+    background-color: lightgrey;
 }

@@ -25,13 +25,15 @@
 
         @include('layouts.nav')
 
-        <main class="py-4">
+        <main class="container py-4">
             @yield('content')
         </main>
     </div>
 
     @include('layouts.footer')
     <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 </body>
 
