@@ -8,7 +8,7 @@ use Auth;
 use App\Location;
 use App\Category;
 use App\Photo;
-
+use Illuminate\Support\Facades\Input;
 class PhotoController extends Controller
 {
     /**
@@ -84,18 +84,15 @@ class PhotoController extends Controller
             $photo->image_URL = "uploads/$userId/$imageName";
             $photo->image_description = $request->description;
 
-           // $category = Category::where('category_name', $request->category)->get();
-          //  $categoryId = $category->category_id;
-            $photo->category_id = 1;
+            $photo->category_id = Input::get('category');
 
-            $locality = Location::where('locality_name', $request->locality)->get();
-            $photo->locality_id = 1;
+            $photo->locality_id = Input::get('locality');
 
             $photo->user_id = $userId;
             $photo->save();
 
-            return redirect('uploadphoto');
-            //response()->json(['success' => 'successiful entered', 'uploaded_image' => '<img src="uploads/'. $userID .'/'. $imageName.'" class="img-thumbnail" width="300" />',]);
+            return redirect('uploadphoto', ['photo' => $photo->image_URL]);
+
 
             }
 
