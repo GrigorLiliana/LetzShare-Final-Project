@@ -89,6 +89,7 @@ class PhotoController extends Controller
             $photo->locality_id = Input::get('locality');
 
             $photo->user_id = $userId;
+            $photo->likes_sum = 0;
             $photo->save();
 
             return redirect('uploadphoto', ['photo' => $photo->image_URL]);
