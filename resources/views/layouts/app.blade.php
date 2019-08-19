@@ -9,10 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('pageTitle')</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet">
@@ -30,9 +26,12 @@
         </main>
     </div>
 
-    @include('layouts.footer')
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+@include('layouts.footer')
+<!-- Scripts -->
+<script src="https://kit.fontawesome.com/ff9603d652.js"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/letzshare.js') }}" defer></script>
+
 </body>
 
 </html>
