@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $userId = Auth::user()->user_id;
-        $userPhotos = Photo::where('user_id', $userId)->get();
+        $userPhotos = Photo::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
         return view('useraccount', ['userPhotos' => $userPhotos]);
     }
 
