@@ -39,4 +39,32 @@ $(function() {
         }
     }
     /* End of the Registration password validation*/
+    //*Ajax call to upload photo
+
+    $('#uploadform').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/uploadphoto',
+            type: 'post',
+            data: $('#uploadform').serialize(),
+            success: function(result) {
+                if (result.success) {
+                    $('#my-div').html(
+                        '<p style="color:green">' + result.success + '<p>'
+                    );
+                } else {
+                    $('#resultForm').html('');
+                    $.each(result.errors, function(key, value) {
+                        $('#my-div').append(
+                            '<p style="color:red">' + value + '<p>'
+                        );
+                    });
+                }
+            },
+            error: function(err) {
+                // IF an Ajax error happens
+            }
+        });
+    });
+    //*end ajax call upload photo
 }); //LAST DO NOT DELETE

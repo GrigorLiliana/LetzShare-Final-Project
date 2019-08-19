@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Location;
 use App\Category;
+use APP\Photo;
 
 class PhotoController extends Controller
 {
@@ -54,7 +55,7 @@ class PhotoController extends Controller
         ]);
 
         $userId = Auth::user()->user_id;
-        $imageName = $userId.'.'.request()->image->getClientOriginalExtension();
+        $imageName = $userId.'_0.'.request()->image->getClientOriginalExtension();
 
 
         if (!file_exists("uploads/$userId")) {
@@ -64,20 +65,40 @@ class PhotoController extends Controller
         if(file_exists("uploads/$userId/$imageName")){
         $i=0;
         do {
-            $imageName = $userId . "_" . $i .'.'.request()->image->getClientOriginalExtension();;
+            $imageName = $userId . "_" . $i .'.'.request()->image->getClientOriginalExtension();
+            $i++;
         } while(file_exists("uploads/$userId/$imageName"));
         }
 
         request()->image->move(public_path("uploads/$userId"), $imageName);
 
+        $validatedData = \Validator::make($request->all(),[
+            'title'=> 'required|min:4|max:20|',
+            'description'=> 'required|min:4',
+            'locality' => 'required',
+            'category' => 'required'
+        ]);
+        if($validatedData->fails()){
+        return response()->json(['errors' => $validatedData->errors()->all()]);
 
+        }else{
 
-        return back()
+            $photo = new Photo();
+            $photo->image_title = $request->title;
+            $photo->image_URL = "uploads/$userID/$imageName";
+            $photo->image_description = $request->description;
 
-            ->with('success','You have successfully upload image.')
+            $category = Category::where('category_name', $request->category)->get();
+            $photo->locality_id = $category->category_id;
 
-            ->with('image',$imageName);
+            $locality = Location::where('locality_name', $request->locality)->get();
+            $photo->category_id = $locality->locality_id;
 
+            $photo->user_id = $userId;
+            $photo->save();
+
+            return response()->json(['success' => 'successiful entered', 'uploaded_image' => '<img src="uploads/'. $userID .'/'. $imageName.'" class="img-thumbnail" width="300" />',]);
+            }
 
     }
 
