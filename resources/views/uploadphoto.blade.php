@@ -5,6 +5,9 @@
 
 <div class="container">
 <button><a href="{{route('useraccount')}}">My account</a></button>
+@if($photo)
+<img src="{{$photo}}" alt="">
+@endif
     <form id="uploadform" class="formbox" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="col-md-6 offset-3">
@@ -30,7 +33,7 @@
                 <select name="locality" id="locality" required>
                 <option value="" disabled>Select</option>
                 @foreach ($locations as $locality)
-                    <option value="{{$locality->locality_name}}">{{$locality->locality_name}}</option>
+                    <option value="{{$locality->locality_id}}">{{$locality->locality_name}}</option>
                 @endforeach
                 </select>
 
@@ -38,7 +41,7 @@
                 <select name="category" id="category" required>
                 <option value="" disabled>Select</option>
                 @foreach ($categories as $category)
-                <option value="{{$category->category_name}}">{{$category->category_name}}</option>
+                <option value="{{$category->category_id}}">{{$category->category_name}}</option>
                 @endforeach
                 </select>
             </div>
