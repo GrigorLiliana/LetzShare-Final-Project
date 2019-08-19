@@ -104,7 +104,7 @@
                     <div class="card-row">
                         <div class="card-item">
                             <i class="fas fa-heart"></i>
-                            <p> {{ $recentPic->likes_sum }} , {{ $recentPic->photo_id }}</p>
+                            <p> {{ $recentPic->likes_sum }} </p>
                         </div>
                         <?php if (Auth::check()) {
                             $like = App\Like::where('photo_id' , $recentPic->photo_id)->where('user_id' , Auth::user()->user_id)->first();

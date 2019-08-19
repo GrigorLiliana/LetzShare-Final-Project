@@ -31,7 +31,7 @@ class HomeController extends Controller
         $topPics = Photo::orderBy('likes_sum', 'desc')
             ->take(3)
             ->get();
-        $recentPics = Photo::orderBy('date', 'asc')
+        $recentPics = Photo::orderBy('created_at', 'asc')
             ->take(3)
             ->get();
         $topUsers = DB::table('users')
