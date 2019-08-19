@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Location;
 use App\Category;
-use APP\Photo;
+use App\Photo;
 
 class PhotoController extends Controller
 {
@@ -78,29 +78,27 @@ class PhotoController extends Controller
             'locality' => 'required',
             'category' => 'required'
         ]);
-        if($validatedData->fails()){
-        return response()->json(['errors' => $validatedData->errors()->all()]);
-
-        }else{
 
             $photo = new Photo();
             $photo->image_title = $request->title;
-            $photo->image_URL = "uploads/$userID/$imageName";
+            $photo->image_URL = "uploads/$userId/$imageName";
             $photo->image_description = $request->description;
 
-            $category = Category::where('category_name', $request->category)->get();
-            $photo->locality_id = $category->category_id;
+           // $category = Category::where('category_name', $request->category)->get();
+          //  $categoryId = $category->category_id;
+            $photo->category_id = 1;
 
             $locality = Location::where('locality_name', $request->locality)->get();
-            $photo->category_id = $locality->locality_id;
+            $photo->locality_id = 1;
 
             $photo->user_id = $userId;
             $photo->save();
 
-            return response()->json(['success' => 'successiful entered', 'uploaded_image' => '<img src="uploads/'. $userID .'/'. $imageName.'" class="img-thumbnail" width="300" />',]);
+            return redirect('uploadphoto');
+            //response()->json(['success' => 'successiful entered', 'uploaded_image' => '<img src="uploads/'. $userID .'/'. $imageName.'" class="img-thumbnail" width="300" />',]);
+
             }
 
-    }
 
     /**
      * Display the specified resource.
