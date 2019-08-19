@@ -7,14 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'LetzShare') }}</title>
-
-    <!-- Scripts -->
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/letzshare.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
+    <title>@yield('pageTitle')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -32,7 +25,7 @@
 
         @include('layouts.nav')
 
-        <main class="container py-4">
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
