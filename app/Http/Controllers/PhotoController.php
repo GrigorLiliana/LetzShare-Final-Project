@@ -27,6 +27,10 @@ class PhotoController extends Controller
         return view('gallery', ['photos' => $photos]);
     }
 
+    public function filters(Request $request) {
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *

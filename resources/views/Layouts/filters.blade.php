@@ -37,7 +37,7 @@
             <div class="form-group col-sm-4">
                 <label for="photo-user">Date</label>
                 <select class="form-control form-control-sm">
-                    <option>select</option>
+                    <option >select</option>
                     <option>A-Z</option>
                 </select>
             </div>
