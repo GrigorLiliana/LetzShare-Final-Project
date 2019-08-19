@@ -55,32 +55,12 @@
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
                             <span>{{ $photo->locality_name }}</span></li>
-                        <li>
-                            @if($photo->category_id === 1)
-                            <i class="fas fa-landmark"></i>
-                            <span>Culture</span>
-                            @endif
-
-                            @if($photo->category_id === 2)
-                            <i class="fas fa-users"></i>
-                            <span>Events</span>
-                            @endif
-
-                            @if($photo->category_id === 4)
-                            <i class="fas fa-monument"></i>
-                            <span>Monuments</span>
-                            @endif
-
-                            @if($photo->category_id === 5)
-                            <i class="fas fa-tree"></i>
-                            <span>Nature</span>
-                            @endif
-
-                            @if($photo->category_id === 6)
-                            <i class="fas fa-glass-cheers"></i>
-                            <span>Night Life</span>
-                            @endif
-                        <li>
+                            <li>
+                            <?php $cat = App\Category::where('category_id', $photo->category_id)->first();?>
+                            <i class="{{$cat->category_icon}}">
+                            </i>
+                            <span> {{ $cat->category_name }}</span>
+                        </li>
                     </ul>
 
                 </div>
