@@ -9,10 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('pageTitle')</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet">

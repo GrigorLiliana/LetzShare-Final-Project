@@ -1,11 +1,11 @@
+@charset "UTF-8";
+
 body {
     background: #252323;
     color: white;
 }
 
-/* contact page */
-#contactForm,
-#aboutUs {
+.container {
     margin-top: 80px;
 }
 
@@ -40,7 +40,7 @@ li {
 }
 
 #pswd_info::before {
-    content: '\25B2';
+    content: "\25B2";
     /* triangle pointu en haut de la div */
     position: absolute;
     top: -12px;
