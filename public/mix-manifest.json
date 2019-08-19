@@ -1,6 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/css/letzshare.css": "/css/letzshare.css",
-    "/js/letzshare.js": "/js/letzshare.js"
+    "/css/app.css": "/css/app.css"
 }

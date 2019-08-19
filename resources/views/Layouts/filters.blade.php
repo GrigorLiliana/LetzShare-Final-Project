@@ -1,4 +1,4 @@
-<div class="filters-form">
+
     <form action="" method="GET">
         <div class="form-row">
             <div class="form-group form-inline form-control-md col-md-12">
@@ -46,4 +46,4 @@
             </div>
         </div>
     </form>
-</div>
+
