@@ -1,21 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<?php  var_dump($userPhotos);?>
-
-@foreach ($userPhotos as $userPhoto => $key)
-<h2> {{$key}}</h2>
-
-    <div class="row">
-    <div class="card-columns">
-
-        <!-- Card -->
-
-
-
+<h2>{{$userPhotos[0]->name}}</h2>
+<?php $userAvatar = URL::asset($userPhotos[0]->user_photo); ?>
+<!-- Avatar -->
+<img src="{{$userAvatar}}" class="rounded-circle mr-3"
+height="150px" width="150px" alt="avatar">
+@foreach ($userPhotos as $userPhoto)
         <?php
             $path = URL::asset($userPhoto->image_URL);
-            $userAvatar = URL::asset(Auth::user()->user_photo);
+
             $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
             $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first(); ?>
 
@@ -24,9 +18,7 @@
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
 
-                <!-- Avatar -->
-                <img src="{{$userAvatar}}" class="rounded-circle mr-3"
-                    height="50px" width="50px" alt="avatar">
+
 
                 <!-- Content -->
                 <div>
