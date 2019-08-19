@@ -96,6 +96,10 @@ h1 {
     justify-content: space-around;
 }
 
+.card-item i {
+    margin: 0.5rem;
+}
+
 /* End of Home Page Styles */
 
 /* User Account Styles */
