@@ -74,13 +74,36 @@
     <div class="card-deck">
         <?php
         foreach ($recentPics as $recentPic) {
-            $path = URL::asset($recentPic->image_URL); ?>
+            $path = URL::asset($recentPic->image_URL);
+            $cat = App\Category::where('category_id', $recentPic->category_id)->first();
+            $loc = App\Location::where('locality_id', $recentPic->locality_id)->first(); ?>
             <div class="card">
                 <img src="{{$path}}" class="card-img-top" alt="{{ $recentPic->image_title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $recentPic->image_title }}</h5>
                     <p class="card-text">{{ $recentPic->image_description }}</p>
-                    <p class="card-text"><small class="text-muted">{{$recentPic->likes_sum}} Likes</small></p>
+                    <div class="card-row">
+                        <div class="card-item">
+                            <i class="{{$cat->category_icon}}"></i>
+                            <p> {{ $cat->category_name }}</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p> {{ $loc->locality_name }}</p>
+                        </div>
+                    </div>
+                    <div class="card-row">
+                        <div class="card-item">
+                            <i class="fas fa-heart"></i>
+                            <p> {{ $recentPic->likes_sum }}</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="far fa-heart"></i>
+                            <p> Like</p>
+                        </div>
+                    </div>
+
+
                         <?php if (Auth::check())
                         echo 'login';
                     else
