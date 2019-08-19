@@ -17,8 +17,7 @@
             <div class="card-body d-flex flex-row">
 
                 <!-- Avatar -->
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle mr-3"
-                    height="50px" width="50px" alt="avatar">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
 
                 <!-- Content -->
                 <div>
@@ -34,8 +33,8 @@
 
             <!-- Card image -->
             <div class="view overlay">
-                <a href="{{ $photo->image_URL }}">
-                <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}" alt="{{ $photo->image_title }}">
+                <a href="{{ $photo->image_URL }}" data-fancybox="gallery" data-caption="{{ $photo->image_description }}">
+                    <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}" alt="{{ $photo->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>

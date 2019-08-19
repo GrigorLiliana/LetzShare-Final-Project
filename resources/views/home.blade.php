@@ -38,10 +38,19 @@
                             <i class="fas fa-heart"></i>
                             <p> {{ $topPic->likes_sum }}</p>
                         </div>
-                        <div class="card-item">
-                            <i class="far fa-heart"></i>
-                            <p> Like</p>
-                        </div>
+                        <?php if (Auth::check()) {
+                            $like = App\Like::where('photo_id' , $topPic->photo_id)->where('user_id' , Auth::user()->user_id)->first();
+                            if ($like)
+                            echo '<div class="card-item">
+                                <i class="far fa-thumbs-down"></i>
+                                <p> Unlike</p>
+                            </div>';
+                            else
+                            echo '<div class="card-item">
+                                <i class="far fa-heart"></i>
+                                <p> Like</p>
+                            </div>';
+                        } ?>
                     </div>
                 </div>
             </div>
@@ -95,13 +104,21 @@
                     <div class="card-row">
                         <div class="card-item">
                             <i class="fas fa-heart"></i>
-                            <p> {{ $recentPic->likes_sum }}</p>
+                            <p> {{ $recentPic->likes_sum }} , {{ $recentPic->photo_id }}</p>
                         </div>
-                        <?php if (Auth::check()) ?>
-                        <div class="card-item">
+                        <?php if (Auth::check()) {
+                            $like = App\Like::where('photo_id' , $recentPic->photo_id)->where('user_id' , Auth::user()->user_id)->first();
+                            if ($like)
+                            echo '<div class="card-item">
+                                <i class="far fa-thumbs-down"></i>
+                                <p> Unlike</p>
+                            </div>';
+                            else
+                            echo '<div class="card-item">
                                 <i class="far fa-heart"></i>
                                 <p> Like</p>
-                        </div>
+                            </div>';
+                        } ?>
                     </div>
 
                 </div>
