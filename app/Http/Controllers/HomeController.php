@@ -43,7 +43,7 @@ class HomeController extends Controller
             ->get();
         // dd($topUsers);
         return view(
-            'home',
+            '/',
             ['topPics' => $topPics,
             'recentPics' => $recentPics,
             'topUsers' => $topUsers]
