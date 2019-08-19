@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Photo;
 use App\User;
-use App\Mail\PaymentDone;
 use Illuminate\Support\Facades\Mail;
 use DB;
 
@@ -31,7 +30,7 @@ class HomeController extends Controller
         $topPics = Photo::orderBy('likes_sum', 'desc')
             ->take(3)
             ->get();
-        $recentPics = Photo::orderBy('date', 'asc')
+        $recentPics = Photo::orderBy('created_at', 'desc')
             ->take(3)
             ->get();
         $topUsers = DB::table('users')

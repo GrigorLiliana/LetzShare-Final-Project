@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use Illuminate\Http\Request;
+use App\Photo;
 
 class UserController extends Controller
 {
@@ -13,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('useraccount');
+        $userId = Auth::user()->user_id;
+        $userPhotos = Photo::where('user_id', $userId)->get();
+        return view('useraccount', ['userPhotos' => $userPhotos]);
     }
 
     /**

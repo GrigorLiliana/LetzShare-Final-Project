@@ -22,6 +22,7 @@ class PhotoController extends Controller
             ->join('users', 'users.user_id', '=', 'photos.user_id')
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
             ->select('photos.*', 'users.name', 'locality_name')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('gallery', ['photos' => $photos]);
@@ -87,17 +88,13 @@ class PhotoController extends Controller
             $photo->image_title = $request->title;
             $photo->image_URL = "uploads/$userId/$imageName";
             $photo->image_description = $request->description;
-
             $photo->category_id = Input::get('category');
-
             $photo->locality_id = Input::get('locality');
-
             $photo->user_id = $userId;
             $photo->likes_sum = 0;
             $photo->save();
 
-            return redirect('uploadphoto');
-
+            return redirect('useraccount');
             }
 
 
