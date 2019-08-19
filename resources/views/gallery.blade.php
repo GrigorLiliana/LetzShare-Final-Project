@@ -25,7 +25,7 @@
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $photo->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $photo->date }}</p>
+                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $photo->created_at }}</p>
 
                 </div>
 
