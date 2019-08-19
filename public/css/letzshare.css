@@ -118,7 +118,6 @@ h1 {
 /* Filters Form Styles */
 
 .filters {
-    margin: 20px 0 70px;
     padding: 10px;
-    background-color: lightgrey;
+    background-color: rgb(226, 214, 214);
 }
