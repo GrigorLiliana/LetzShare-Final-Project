@@ -92,8 +92,7 @@ class PhotoController extends Controller
             $photo->likes_sum = 0;
             $photo->save();
 
-            return redirect('uploadphoto', ['photo' => $photo->image_URL]);
-
+            return redirect('uploadphoto');
 
             }
 
