@@ -11,51 +11,65 @@
 </div>
 <div class="container">
     <h3>Our Top Rated Photos</h3>
-    <div class="row">
+
+    <div class="card-deck">
         <?php
         foreach ($topPics as $topPic) {
-            echo "<div class='col-sm'>";
-            $path = URL::asset($topPic->image_URL);
-            echo "<h5>$topPic->image_title</h5>
-                <img class='homeGallery' src='$path' />
-                <p>$topPic->image_description</p>
-                <p>$topPic->likes_sum likes</p>
-                </div>";
-            if (Auth::check())
-                echo 'login';
-        }
-        ?>
+            $path = URL::asset($topPic->image_URL); ?>
+            <div class="card">
+                <img src="{{$path}}" class="card-img-top" alt="{{ $topPic->image_title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $topPic->image_title }}</h5>
+                    <p class="card-text">{{ $topPic->image_description }}</p>
+                    <p class="card-text"><small class="text-muted">{{$topPic->likes_sum}} Likes</small></p>
+                </div>
+            </div>
+        <?php } ?>
     </div>
+    <br>
+
     <h3>Our Top Photographers</h3>
-    <div class="row">
+
+    <div class="card-deck">
         <?php
         foreach ($topUsers as $topUser) {
-            echo "<div class='col-sm'>";
             $userId = $topUser->user_id;
             $user = App\User::where('user_id', $userId)->first();
-
-            $path = URL::asset($user->user_photo);
-            echo "<h5>$user->name</h5>
-                <img class='homeGallery' src='$path' />
-                <p> $user->name has posted $topUser->total_photos photos</p>
-                </div>";
-        }
-        ?>
+            $path = URL::asset($user->user_photo); ?>
+            <div class="card">
+                <img src="{{$path}}" class="card-img-top" alt="{{ $user->name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $user->name }}</h5>
+                    <p class="card-text">{{ $topPic->user_description }}</p>
+                    <p class="card-text"><small class="text-muted">Has possted {{$topUser->total_photos}} photos</small></p>
+                </div>
+            </div>
+        <?php } ?>
     </div>
+    <br>
+
     <h3>Our Latest Photos</h3>
-    <div class="row">
+
+    <div class="card-deck">
         <?php
         foreach ($recentPics as $recentPic) {
-            echo "<div class='col-sm'>";
-            $path = URL::asset($recentPic->image_URL);
-            echo "<h5>$recentPic->image_title</h5>
-                <img class='homeGallery' src='$path' />
-                <p>$recentPic->image_description</p>
-                <p>$recentPic->likes_sum likes</p>
-                </div>";
-        }
-        ?>
+            $path = URL::asset($recentPic->image_URL); ?>
+            <div class="card">
+                <img src="{{$path}}" class="card-img-top" alt="{{ $recentPic->image_title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $recentPic->image_title }}</h5>
+                    <p class="card-text">{{ $recentPic->image_description }}</p>
+                    <p class="card-text"><small class="text-muted">{{$recentPic->likes_sum}} Likes</small></p>
+                        <?php if (Auth::check())
+                        echo 'login';
+                    else
+                        echo 'who are you?'; ?>
+                </div>
+            </div>
+        <?php } ?>
     </div>
+    <br>
+
 </div>
 
 @endsection
