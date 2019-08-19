@@ -2,12 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="container">
 <button><a href="{{route('useraccount')}}">My account</a></button>
-@if($photo)
-<img src="{{$photo}}" alt="">
-@endif
     <form id="uploadform" class="formbox" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="col-md-6 offset-3">
@@ -49,7 +44,5 @@
             <button type="submit" class="btn btn-primary btn-block">Upload</button>
         </div>
     </form>
-    <div id="my-div"></div>
-    <div id="resultForm"></div>
-</div>
+
 @endsection
