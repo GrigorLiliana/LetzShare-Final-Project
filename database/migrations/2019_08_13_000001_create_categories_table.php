@@ -24,6 +24,7 @@ class CreateCategoriesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('category_id');
             $table->string('category_name', 45)->nullable();
+            $table->string('category_icon', 50)->nullable();
         });
     }
 

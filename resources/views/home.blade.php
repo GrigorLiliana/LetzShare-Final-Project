@@ -15,13 +15,34 @@
     <div class="card-deck">
         <?php
         foreach ($topPics as $topPic) {
-            $path = URL::asset($topPic->image_URL); ?>
+            $path = URL::asset($topPic->image_URL);
+            $cat = App\Category::where('category_id', $topPic->category_id)->first();
+            $loc = App\Location::where('locality_id', $topPic->locality_id)->first(); ?>
             <div class="card">
                 <img src="{{$path}}" class="card-img-top" alt="{{ $topPic->image_title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $topPic->image_title }}</h5>
                     <p class="card-text">{{ $topPic->image_description }}</p>
-                    <p class="card-text"><small class="text-muted">{{$topPic->likes_sum}} Likes</small></p>
+                    <div class="card-row">
+                        <div class="card-item">
+                            <i class="{{$cat->category_icon}}"></i>
+                            <p> {{ $cat->category_name }}</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p> {{ $loc->locality_name }}</p>
+                        </div>
+                    </div>
+                    <div class="card-row">
+                        <div class="card-item">
+                            <i class="fas fa-heart"></i>
+                            <p> {{ $topPic->likes_sum }}</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="far fa-heart"></i>
+                            <p> Like</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         <?php } ?>
