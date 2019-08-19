@@ -33,7 +33,7 @@
 
             <!-- Card image -->
             <div class="view overlay">
-                <a href="{{ $photo->image_URL }}" data-fancybox="gallery" data-caption="{{ $photo->image_description }}">
+                <a href="{{ $photo->image_URL }}" data-fancybox="gallery" data-caption="{{ $photo->image_description }}, {{ $photo->likes_sum }}">
                     <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}" alt="{{ $photo->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
@@ -54,8 +54,8 @@
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
                             <span>{{ $photo->locality_name }}</span></li>
-                            <li>
-                            <?php $cat = App\Category::where('category_id', $photo->category_id)->first();?>
+                        <li>
+                            <?php $cat = App\Category::where('category_id', $photo->category_id)->first(); ?>
                             <i class="{{$cat->category_icon}}">
                             </i>
                             <span> {{ $cat->category_name }}</span>
