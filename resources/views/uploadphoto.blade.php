@@ -5,8 +5,8 @@
 
 <div class="container">
 <button><a href="{{route('useraccount')}}">My account</a></button>
-    <form class="formbox" method="POST" enctype="multipart/form-data">
-    @csrf
+    <form id="uploadform" class="formbox" method="POST" enctype="multipart/form-data">
+    {{ csrf_field() }}
         <div class="col-md-6 offset-3">
             <h3>Upload photo</h2>
             <div class="form-group">
@@ -30,7 +30,7 @@
                 <select name="locatily" id="locatily" required>
                 <option value="" selected disabled>Select</option>
                 @foreach ($locations as $locality)
-                    <option value="">{{$locality->locality_name}}</option>
+                    <option value="{{$locality->locality_name}}">{{$locality->locality_name}}</option>
                 @endforeach
                 </select>
 
@@ -38,7 +38,7 @@
                 <select name="category" id="category" required>
                 <option value="" selected disabled>Select</option>
                 @foreach ($categories as $category)
-                <option value="">{{$category->category_name}}</option>
+                <option value="{{$category->category_name}}">{{$category->category_name}}</option>
                 @endforeach
                 </select>
             </div>
@@ -46,5 +46,7 @@
             <button type="submit" class="btn btn-primary btn-block">Upload</button>
         </div>
     </form>
+    <div id="my-div"></div>
+    <div id="resultForm"></div>
 </div>
 @endsection
