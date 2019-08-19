@@ -5,8 +5,6 @@ body {
     color: white;
 }
 
-
-
 /* Registration password validation*/
 ul,
 li {
@@ -101,8 +99,6 @@ h1 {
 /* User Account Styles */
 .add {
     font-size: 1.5rem;
-    color: black;
-    text-decoration: none;
 }
 
 /* Enf of User Account Styles */

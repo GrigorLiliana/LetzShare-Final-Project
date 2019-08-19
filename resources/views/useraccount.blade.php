@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>{{ Auth::user()->name }}, welcome to your dashboard</h1>
+<h2>{{ Auth::user()->name }}, welcome to your dashboard</h2>
 <div>
     <p>
         <a href="{{route('uploadphoto')}}" class="add">
