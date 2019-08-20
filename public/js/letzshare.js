@@ -68,4 +68,5 @@ $(function() {
     });
 
     /*End of the Edit User Profile Name */
+
 }); //LAST DO NOT DELETE
