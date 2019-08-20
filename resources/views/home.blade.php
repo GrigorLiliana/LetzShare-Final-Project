@@ -168,22 +168,22 @@
                     <ul>
                         <li>
                         @if (Auth::check())
-                            <?php
-                            $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' , Auth::user()->user_id)->first();
-                            ?>
+                            @php
+                                $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' , Auth::user()->user_id)->first();
+                            @endphp
                             @if ($like)
-                                <div class="liked" id="logged">
+                                <div id="liked" class="logged">
                                 <i class="fas fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                                 </div>
                             @else
-                                <div class="not-liked" id="logged">
+                                <div id="not-liked" class="logged">
                                 <i class="far fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                                 </div>
                             @endif
                         @else
-                            <div class="not-liked" id="not-logged">
+                            <div class="not-logged">
                             <i class="far fa-heart"></i>
                             <span>{{ $picture->likes_sum }}</span>
                             </div>

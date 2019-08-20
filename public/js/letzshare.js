@@ -1,4 +1,4 @@
-console.log('letzshare.js loaded successfull!');
+console.log('letzshare.js loaded successfully!');
 $(function() {
     /* Registration password validation*/
 
@@ -11,7 +11,7 @@ $(function() {
 
     $('#password').on('keyup', checkAllCases);
     function checkAllCases() {
-        // Gathering : checked the password value
+        // Gathering : check the password value
         const thePass = $('#password').val();
         const lengthValid = thePass.length >= 8;
         // at least one letter str.match(/[A-z]/)
@@ -39,4 +39,16 @@ $(function() {
         }
     }
     /* End of the Registration password validation*/
+
+    /* Start of the Like-click listener */
+
+     $('#liked').on('click', removeLike);
+     $('#not-liked').on('click', addLike);
+
+    function removeLike() {}
+
+    function addLike() {}
+
+    /* End of the Like-click listener */
+
 }); //LAST DO NOT DELETE
