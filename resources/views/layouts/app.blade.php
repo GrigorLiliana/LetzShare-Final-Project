@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('pageTitle')</title>
+    <title>@yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet">
@@ -32,7 +32,7 @@
     </div>
 
     @include('layouts.footer')
-    
+
 </body>
 
 </html>

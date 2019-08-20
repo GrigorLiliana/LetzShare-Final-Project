@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('pageTitle', 'Contact page | LetzShare')
+@section('title', 'Contact page | LetzShare')
 
 @section('content')
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-sm-12 col-md-8">
-            
+
             <!-- Validation -->
             @if(count($errors) > 0)
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">

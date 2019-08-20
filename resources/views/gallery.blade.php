@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{-- @include('layouts.filters') --}}
+@include('layouts.filters')
 
 <div class="row">
     <div class="card-columns">
