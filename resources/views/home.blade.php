@@ -97,25 +97,28 @@
 
     <h3>Top Photographers</h3>
 
-    <div class="card-deck home">
-        <?php
-        foreach ($topUsers as $topUser) {
+    <div class="card-deck">
+        @foreach ($topUsers as $topUser)
+            <?php
             $userId = $topUser->user_id;
             $user = App\User::where('user_id', $userId)->first();
             $path = URL::asset($user->user_photo); ?>
-            <div class="" >
+            <div class="card">
+                <div class="card-body d-flex flex-row>
+                    <h6 class="card-title font-weight-bold mb-2">{{ $user->name }}</h6>
+                </div>
+                <div class="view overlay">
                     <a href="/userprofile/{{$user->user_id}}">
                     <img src="{{$path}}" class="rounded-circle mr-3"
                     height="200px" width="200px" alt="{{ $user->name }}">
                     </a>
-                <div class="">
-                    <h5 class="card-title">{{ $user->name }}</h5>
-                    <p class="card-text">{{ $picture->user_description }}</p>
-                    <p class="card-text"><small class="text-muted">Has possted {{$topUser->total_photos}} photos</small></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><small>{{ $user->user_description }}</small></p>
+                    <p class="card-text"><small class="text-muted">Has posted {{$topUser->total_photos}} photos</small></p>
                 </div>
             </div>
-        </div>
-        <?php } ?>
+        @endforeach
     </div>
     <br>
 
