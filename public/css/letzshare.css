@@ -92,9 +92,15 @@ h1 {
     margin-bottom: 1rem;
 }
 .profile-flex {
-    margin: 2rem 1rem;
+    margin: 1rem 1rem;
     display: flex;
     align-items: center;
+}
+.edit-photo {
+    text-align: center;
+}
+.edit-photo p {
+    margin: 1rem 16px 0 0;
 }
 /* Enf of User Account Styles */
 
