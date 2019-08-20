@@ -17,43 +17,44 @@
         foreach ($topPics as $topPic) {
             $path = URL::asset($topPic->image_URL);
             $cat = App\Category::where('category_id', $topPic->category_id)->first();
-            $loc = App\Location::where('locality_id', $topPic->locality_id)->first(); ?>
-            <div class="card">
-                <img src="{{$path}}" class="card-img-top" alt="{{ $topPic->image_title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $topPic->image_title }}</h5>
-                    <p class="card-text">{{ $topPic->image_description }}</p>
-                    <div class="card-row">
-                        <div class="card-item">
-                            <i class="{{$cat->category_icon}}"></i>
-                            <p> {{ $cat->category_name }}</p>
-                        </div>
-                        <div class="card-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p> {{ $loc->locality_name }}</p>
-                        </div>
+            $loc = App\Location::where('locality_id', $topPic->locality_id)->first();
+            ?>
+        <div class="card">
+            <img src="{{$path}}" class="card-img-top" alt="{{ $topPic->image_title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ $topPic->image_title }}</h5>
+                <p class="card-text">{{ $topPic->image_description }}</p>
+                <div class="card-row">
+                    <div class="card-item">
+                        <i class="{{$cat->category_icon}}"></i>
+                        <p> {{ $cat->category_name }}</p>
                     </div>
-                    <div class="card-row">
-                        <div class="card-item">
-                            <i class="fas fa-heart"></i>
-                            <p> {{ $topPic->likes_sum }}</p>
-                        </div>
-                        <?php if (Auth::check()) {
-                            $like = App\Like::where('photo_id' , $topPic->photo_id)->where('user_id' , Auth::user()->user_id)->first();
+                    <div class="card-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p> {{ $loc->locality_name }}</p>
+                    </div>
+                </div>
+                <div class="card-row">
+                    <div class="card-item">
+                        <i class="fas fa-heart"></i>
+                        <p> {{ $topPic->likes_sum }}</p>
+                    </div>
+                    <?php if (Auth::check()) {
+                            $like = App\Like::where('photo_id', $topPic->photo_id)->where('user_id', Auth::user()->user_id)->first();
                             if ($like)
-                            echo '<div class="card-item">
+                                echo '<div class="card-item">
                                 <i class="far fa-thumbs-down"></i>
                                 <p> Unlike</p>
                             </div>';
                             else
-                            echo '<div class="card-item">
+                                echo '<div class="card-item">
                                 <i class="far fa-heart"></i>
                                 <p> Like</p>
                             </div>';
                         } ?>
-                    </div>
                 </div>
             </div>
+        </div>
         <?php } ?>
     </div>
     <br>
@@ -66,14 +67,14 @@
             $userId = $topUser->user_id;
             $user = App\User::where('user_id', $userId)->first();
             $path = URL::asset($user->user_photo); ?>
-            <div class="card">
-                <img src="{{$path}}" class="card-img-top" alt="{{ $user->name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $user->name }}</h5>
-                    <p class="card-text">{{ $topPic->user_description }}</p>
-                    <p class="card-text"><small class="text-muted">Has possted {{$topUser->total_photos}} photos</small></p>
-                </div>
+        <div class="card">
+            <img src="{{$path}}" class="card-img-top" alt="{{ $user->name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ $user->name }}</h5>
+                <p class="card-text">{{ $topPic->user_description }}</p>
+                <p class="card-text"><small class="text-muted">Has possted {{$topUser->total_photos}} photos</small></p>
             </div>
+        </div>
         <?php } ?>
     </div>
     <br>
@@ -86,43 +87,43 @@
             $path = URL::asset($recentPic->image_URL);
             $cat = App\Category::where('category_id', $recentPic->category_id)->first();
             $loc = App\Location::where('locality_id', $recentPic->locality_id)->first(); ?>
-            <div class="card">
-                <img src="{{$path}}" class="card-img-top" alt="{{ $recentPic->image_title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $recentPic->image_title }}</h5>
-                    <p class="card-text">{{ $recentPic->image_description }}</p>
-                    <div class="card-row">
-                        <div class="card-item">
-                            <i class="{{$cat->category_icon}}"></i>
-                            <p> {{ $cat->category_name }}</p>
-                        </div>
-                        <div class="card-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p> {{ $loc->locality_name }}</p>
-                        </div>
+        <div class="card">
+            <img src="{{$path}}" class="card-img-top" alt="{{ $recentPic->image_title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ $recentPic->image_title }}</h5>
+                <p class="card-text">{{ $recentPic->image_description }}</p>
+                <div class="card-row">
+                    <div class="card-item">
+                        <i class="{{$cat->category_icon}}"></i>
+                        <p> {{ $cat->category_name }}</p>
                     </div>
-                    <div class="card-row">
-                        <div class="card-item">
-                            <i class="fas fa-heart"></i>
-                            <p> {{ $recentPic->likes_sum }} </p>
-                        </div>
-                        <?php if (Auth::check()) {
-                            $like = App\Like::where('photo_id' , $recentPic->photo_id)->where('user_id' , Auth::user()->user_id)->first();
+                    <div class="card-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p> {{ $loc->locality_name }}</p>
+                    </div>
+                </div>
+                <div class="card-row">
+                    <div class="card-item">
+                        <i class="fas fa-heart"></i>
+                        <p> {{ $recentPic->likes_sum }} </p>
+                    </div>
+                    <?php if (Auth::check()) {
+                            $like = App\Like::where('photo_id', $recentPic->photo_id)->where('user_id', Auth::user()->user_id)->first();
                             if ($like)
-                            echo '<div class="card-item" id="unlike">
+                                echo '<div class="card-item" id="unlike">
                                 <i class="far fa-thumbs-down"></i>
                                 <p> Unlike</p>
                             </div>';
                             else
-                            echo '<div class="card-item" id="like">
+                                echo '<div class="card-item" id="like">
                                 <i class="far fa-heart"></i>
                                 <p> Like</p>
                             </div>';
                         } ?>
-                    </div>
-
                 </div>
+
             </div>
+        </div>
         <?php } ?>
     </div>
     <br>
