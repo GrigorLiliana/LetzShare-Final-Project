@@ -5,16 +5,30 @@
 @endsection
 
 @section('content')
+
+
+
 <h2>{{$userPhotos[0]->name}}</h2>
+<hr>
+<div class="card promoting-card card-user">
 <?php $userAvatar = URL::asset($userPhotos[0]->user_photo); ?>
 <!-- Avatar -->
+<div class="profile-flex">
 <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile"
 height="150px" width="150px" alt="avatar">
-
+<div>
+    @if($userPhotos[0]->user_description)
+        <p><i>"{{$userPhotos[0]->user_description}}"<i></p>
+    @endif
+    @if($userPhotos[0]->user_location)
+        <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}</p>
+    @endif
 <a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a>
-
-<br>
-
+</div>
+</div>
+</div>
+<h2>Portfolio</h2>
+<hr>
 <div class="row">
     <div class="card-columns">
 @foreach ($userPhotos as $userPhoto)
