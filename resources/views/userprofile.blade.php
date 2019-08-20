@@ -6,8 +6,16 @@
 
 @section('content')
 
+@php
 
-
+if(Auth::user()->user_id==$userPhotos[0]->user_id)
+$ownUser=true;
+else
+$ownUser=false;
+@endphp
+@if($ownUser)
+<h2>Voce esta a ver o seu perfil</h2>
+@endif
 <h2>{{$userPhotos[0]->name}}</h2>
 <hr>
 <div class="card promoting-card card-user">
