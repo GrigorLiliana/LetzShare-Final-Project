@@ -104,7 +104,9 @@ h1 {
 .add {
     font-size: 1.5rem;
 }
-
+.user-profile {
+    margin: 1rem 0 5rem 0;
+}
 /* Enf of User Account Styles */
 
 /* Gallery Styles */
