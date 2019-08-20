@@ -13,10 +13,10 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="image">Select an amazing image </label>
-                            <div class="custom-file">
-                                <label class="" for="customFile"></label>
-                                <input type="file" name="image" class="" id="customFile" required>
-                            </div>
+                        <div class="custom-file">
+                            <label class="" for="customFile"></label>
+                            <input type="file" name="image" class="" id="customFile" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -26,7 +26,7 @@
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="3" placeholder="This is an amazin photo taked by {{ Auth::user()->name }}" required></textarea>
                     </div>
-        
+
                     <div class="form-group">
                         <label for="locality">Locality</label>
                         <select name="locality" id="locality" required>

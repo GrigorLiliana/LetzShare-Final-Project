@@ -11,31 +11,30 @@
 <h2>{{$userPhotos[0]->name}}</h2>
 <hr>
 <div class="card promoting-card card-user">
-<?php $userAvatar = URL::asset($userPhotos[0]->user_photo); ?>
-<!-- Avatar -->
-<div class="profile-flex">
-<img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile"
-height="150px" width="150px" alt="avatar">
-<div>
-    @if($userPhotos[0]->user_description)
-        <p><i>"{{$userPhotos[0]->user_description}}"<i></p>
-    @endif
-    @if($userPhotos[0]->user_location)
-        <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}</p>
-    @endif
-<a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a>
-</div>
-</div>
+    <?php $userAvatar = URL::asset($userPhotos[0]->user_photo); ?>
+    <!-- Avatar -->
+    <div class="profile-flex">
+        <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile" height="150px" width="150px" alt="avatar">
+        <div>
+            @if($userPhotos[0]->user_description)
+            <p><i>"{{$userPhotos[0]->user_description}}"<i></p>
+            @endif
+            @if($userPhotos[0]->user_location)
+            <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}</p>
+            @endif
+            <a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a>
+        </div>
+    </div>
 </div>
 <h2>Portfolio</h2>
 <hr>
 <div class="row">
     <div class="card-columns">
-@foreach ($userPhotos as $userPhoto)
+        @foreach ($userPhotos as $userPhoto)
         @php
-            $path = URL::asset($userPhoto->image_URL);
-            $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
-            $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first();
+        $path = URL::asset($userPhoto->image_URL);
+        $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
+        $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first();
         @endphp
 
         <div class="card promoting-card">
@@ -58,7 +57,7 @@ height="150px" width="150px" alt="avatar">
             <!-- Card image -->
             <div class="view overlay">
                 <a href="{{ $path }}">
-                <img class="card-img-top rounded-0" src="{{ $path }}" alt="{{ $userPhoto->image_title }}">
+                    <img class="card-img-top rounded-0" src="{{ $path }}" alt="{{ $userPhoto->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
@@ -94,7 +93,7 @@ height="150px" width="150px" alt="avatar">
         </div>
         @endforeach
         <!-- END Card -->
-        </div>
+    </div>
 </div>
 
 @endsection
