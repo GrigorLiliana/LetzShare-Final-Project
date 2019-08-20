@@ -55,7 +55,7 @@
                                     <a class="dropdown-item {{ (current_page('useraccount')) ? 'active' : '' }}" href="{{ route('useraccount') }}">
                                         My account
                                     </a>
-                                    <a class="dropdown-item {{ (current_page('userprofile')) ? 'active' : '' }}" href="/userprofile{{Auth::user()->user_id}}">
+                                    <a class="dropdown-item {{ (current_page('userprofile')) ? 'active' : '' }}" href="/userprofile/{{Auth::user()->user_id}}">
                                         My profile
                                     </a>
                                     <a class="dropdown-item {{ (current_page('uploadphoto')) ? 'active' : '' }}" href="{{ route('uploadphoto') }}">

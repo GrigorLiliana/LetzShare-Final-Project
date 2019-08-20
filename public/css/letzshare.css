@@ -97,7 +97,14 @@ h1 {
 .card-item i {
     margin: 0.5rem;
 }
-
+.card.home {
+    text-align: center;
+    padding-top: 1.5rem;
+}
+.card-deck.home {
+    text-align: center;
+    justify-content: space-around;
+}
 /* End of Home Page Styles */
 
 /* User Account Styles */

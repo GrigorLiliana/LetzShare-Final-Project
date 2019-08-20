@@ -24,14 +24,16 @@
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
                 <!-- Avatar -->
+            <a href="/userprofile/{{$user->user_id}}">
                 <img src="{{$user->user_photo}}" class="rounded-circle mr-3"
-                    height="50px" width="50px" alt="photographer avatar">
+                height="50px" width="50px" alt="photographer avatar">
+            </a>
                 <!-- Content -->
                 <div>
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $picture->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $picture->created_at }}</p>
+                    <p class="card-text"><small><i class="far fa-clock pr-2"></i>{{ $picture->created_at->format('d-m-Y') }}</small></p>
                 </div>
             </div>
 
@@ -48,7 +50,7 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ $picture->image_description }}</p>
+                    <p class="card-text " id="collapseContent">{{ str_limit($picture->image_description, 75, '...') }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
@@ -95,15 +97,18 @@
 
     <h3>Top Photographers</h3>
 
-    <div class="card-deck">
+    <div class="card-deck home">
         <?php
         foreach ($topUsers as $topUser) {
             $userId = $topUser->user_id;
             $user = App\User::where('user_id', $userId)->first();
             $path = URL::asset($user->user_photo); ?>
-            <div class="card">
-                <img src="{{$path}}" class="card-img-top" alt="{{ $user->name }}">
-                <div class="card-body">
+            <div class="" >
+                    <a href="/userprofile/{{$user->user_id}}">
+                    <img src="{{$path}}" class="rounded-circle mr-3"
+                    height="200px" width="200px" alt="{{ $user->name }}">
+                    </a>
+                <div class="">
                     <h5 class="card-title">{{ $user->name }}</h5>
                     <p class="card-text">{{ $picture->user_description }}</p>
                     <p class="card-text"><small class="text-muted">Has possted {{$topUser->total_photos}} photos</small></p>
@@ -128,14 +133,16 @@
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
                 <!-- Avatar -->
+                <a href="/userprofile/{{$user->user_id}}">
                 <img src="{{$user->user_photo}}" class="rounded-circle mr-3"
                     height="50px" width="50px" alt="photographer avatar">
+                </a>
                 <!-- Content -->
                 <div>
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $picture->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $picture->created_at }}</p>
+                    <p class="card-text"><small><i class="far fa-clock pr-2"></i>{{ $picture->created_at->format('d-m-Y') }}</small></p>
                 </div>
 
             </div>
@@ -153,7 +160,7 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ $picture->image_description }}</p>
+                    <p class="card-text " id="collapseContent">{{ str_limit($picture->image_description, 75, '...') }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
