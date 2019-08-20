@@ -77,34 +77,10 @@ h1 {
     margin: 0.5em 0em;
 }
 
-.homeGallery {
-    max-width: 300px;
-    object-fit: contain;
-    border-radius: 5px;
+#logged-like:hover {
+    background-color: lightgrey;
 }
 
-.card-row {
-    display: flex;
-    justify-content: space-between;
-    margin: 0.5rem 0rem;
-}
-
-.card-item {
-    display: flex;
-    justify-content: space-around;
-}
-
-.card-item i {
-    margin: 0.5rem;
-}
-.card.home {
-    text-align: center;
-    padding-top: 1.5rem;
-}
-.card-deck.home {
-    text-align: center;
-    justify-content: space-around;
-}
 /* End of Home Page Styles */
 
 /* User Account Styles */
@@ -115,9 +91,18 @@ h1 {
     margin-bottom: 1rem;
 }
 .profile-flex {
-    margin: 2rem 1rem;
+    margin: 1rem 1rem;
     display: flex;
     align-items: center;
+}
+.edit-photo {
+    text-align: center;
+}
+.edit-photo p {
+    margin: 1rem 16px 0 0;
+}
+.hide {
+    display: none;
 }
 /* Enf of User Account Styles */
 

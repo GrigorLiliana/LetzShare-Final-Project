@@ -31,9 +31,17 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $userPhotos = DB::table('photos')
+            ->join('users', 'users.user_id', '=', 'photos.user_id')
+            ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
+            ->where('users.user_id', $id)
+            ->select('photos.*', 'users.*','locality_name')
+            ->orderBy('photos.created_at', 'desc')
+            ->get();
+
+        return view('userprofile', ['userPhotos' => $userPhotos]);
     }
 
     /**

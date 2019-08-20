@@ -6,27 +6,57 @@
 
 @section('content')
 
+@php
+// check if the profile belongs to the user
+if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
+$ownUser=true;
+$userId=Auth::user()->user_id;
+}else
+$ownUser=false;
+@endphp
+<h2>
+    @if($ownUser)Hello, @endif <span class="old-name">{{$userPhotos[0]->name}}</span>
 
+    @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
+    @endif
+</h2>
 
-<h2>{{$userPhotos[0]->name}}</h2>
 <hr>
+<!-- User details -->
 <div class="card promoting-card card-user">
-    <?php $userAvatar = URL::asset($userPhotos[0]->user_photo); ?>
+    @php $userAvatar = URL::asset($userPhotos[0]->user_photo); @endphp
     <!-- Avatar -->
     <div class="profile-flex">
-        <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile" height="150px" width="150px" alt="avatar">
+        <div class="edit-photo">
+            <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile" height="150" width="150" alt="avatar">
+            @if($ownUser)<p><a href="{{route('useraccount')}}">Edit photo</a></p>@endif
+        </div>
         <div>
             @if($userPhotos[0]->user_description)
-            <p><i>"{{$userPhotos[0]->user_description}}"<i></p>
+            <p><i class="fas fa-comment"></i><i> "{{$userPhotos[0]->user_description}}"</i>
+                @if($ownUser) | <a href="{{route('useraccount')}}">Edit Description</a></p>
+            @endif
             @endif
             @if($userPhotos[0]->user_location)
-            <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}</p>
+            <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
+                @if($ownUser) | <a href="{{route('useraccount')}}">Edit Location</a></p>@endif
             @endif
-            <a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a>
+            @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
+            @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
+            @endif
         </div>
     </div>
 </div>
-<h2>Portfolio</h2>
+<!-- End of the User details -->
+
+<!-- User Portfolio -->
+<h2>Portfolio
+    @if($ownUser)|
+    <a href="{{route('uploadphoto')}}" class="add">
+        Upload new photo <i class="fas fa-plus-circle"></i>
+    </a>
+    @endif
+</h2>
 <hr>
 <div class="row">
     <div class="card-columns">
@@ -46,9 +76,13 @@
                 <div>
 
                     <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}</h6>
+                    <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
+                        @if($ownUser)
+                        <a href="{{route('useraccount')}}"><i class="far fa-edit"></i></a>
+                        <a href="{{route('useraccount')}}"><i class="far fa-trash-alt"></i></a>
+                        @endif</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $userPhoto->created_at }}</p>
+                    <p class="card-text"><i class="far fa-clock pr-2"></i> {{ $userPhoto->created_at }}</p>
 
                 </div>
 
@@ -68,21 +102,21 @@
                 <div class="collapse-content">
 
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ $userPhoto->image_description }}</p>
+                    <p class="card-text ">{{ $userPhoto->image_description }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
                             <i class="fas fa-heart"></i>
-                            <span>{{ $userPhoto->likes_sum }}</span>
+                            <span> {{ $userPhoto->likes_sum }}</span>
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ $loc->locality_name }}</span>
+                            <span> {{ $loc->locality_name }}</span>
                         </li>
                         <li>
                             <i class="{{$cat->category_icon}}">
                             </i>
-                            <span>{{ $cat->category_name }}</span>
+                            <span> {{ $cat->category_name }}</span>
                         </li>
                     </ul>
 
@@ -95,5 +129,5 @@
         <!-- END Card -->
     </div>
 </div>
-
+<!--End of the User Portfolio -->
 @endsection

@@ -1,4 +1,3 @@
-console.log('letzshare.js loaded successfull!');
 $(function() {
     /* Registration password validation*/
 
@@ -39,4 +38,35 @@ $(function() {
         }
     }
     /* End of the Registration password validation*/
+
+    /* Start of the Like-click listener */
+
+     $('#liked').on('click', removeLike);
+     $('#not-liked').on('click', addLike);
+
+    function removeLike() {}
+
+    function addLike() {}
+
+    /* End of the Like-click listener */
+
+    /* Upload file field --> show selected name */
+    $('#customFile').on('change', function() {
+        //replace the "Choose a file" label
+        var newFileName = $(this)[0].files[0].name;
+        $(this)
+            .next('.custom-file-label')
+            .html(newFileName);
+    });
+    /* END of Upload file field --> show selected name */
+
+    /*Edit User Profile Name */
+    $('#editName').on('click', function(event) {
+        event.preventDefault();
+        $('.old-name').addClass('hide');
+        $('#editName').addClass('hide');
+    });
+
+    /*End of the Edit User Profile Name */
+
 }); //LAST DO NOT DELETE
