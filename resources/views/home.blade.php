@@ -109,6 +109,7 @@
                     <p class="card-text"><small class="text-muted">Has possted {{$topUser->total_photos}} photos</small></p>
                 </div>
             </div>
+        </div>
         <?php } ?>
     </div>
     <br>
@@ -136,6 +137,7 @@
                     <!-- Subtitle -->
                     <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $picture->created_at }}</p>
                 </div>
+
             </div>
 
             <!-- Card image -->
