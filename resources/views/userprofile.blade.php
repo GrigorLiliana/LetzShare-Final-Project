@@ -13,25 +13,30 @@ $ownUser=true;
 else
 $ownUser=false;
 @endphp
-@if($ownUser)
-<h2>Voce esta a ver o seu perfil</h2>
-@endif
-<h2>{{$userPhotos[0]->name}}</h2>
+
+<h2>@if($ownUser)Hello, @endif{{$userPhotos[0]->name}}@if($ownUser) <p><a href="/useraccount">Edit Name</a></p>@endif</h2>
 <hr>
 <div class="card promoting-card card-user">
 <?php $userAvatar = URL::asset($userPhotos[0]->user_photo); ?>
 <!-- Avatar -->
 <div class="profile-flex">
+<div class="edit-photo">
 <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile"
 height="150px" width="150px" alt="avatar">
+@if($ownUser) <p><a href="/useraccount">Edit photo</a></p>@endif
+</div>
 <div>
     @if($userPhotos[0]->user_description)
-        <p><i>"{{$userPhotos[0]->user_description}}"<i></p>
+        <p><i>"{{$userPhotos[0]->user_description}}"</i></p>
+        @if($ownUser) <p><a href="/useraccount">Edit Description</a></p>@endif
     @endif
     @if($userPhotos[0]->user_location)
         <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}</p>
+        @if($ownUser) <p><a href="/useraccount">Edit Location</a></p>@endif
     @endif
-<a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a>
+    @if(!$ownUser)<a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a>
+    @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
+    @endif
 </div>
 </div>
 </div>
