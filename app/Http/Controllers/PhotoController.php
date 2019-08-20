@@ -23,20 +23,25 @@ class PhotoController extends Controller
             ->join('users', 'users.user_id', '=', 'photos.user_id')
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
             ->join('categories', 'categories.category_id', '=', 'photos.category_id')
-            ->select('photos.*', 'users.name', 'users.user_photo', 'locality_name', 'categories.category_icon', 'categories.category_name')
+            ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
             ->orderBy('created_at', 'desc')
             ->get();
+            
         return view('gallery', ['photos' => $photos]);
     }
 
     public function filters(Request $request)
     {
-        $users = User::all();
-        $locations = Location::all();
-        $categories = Category::all();
-        $likes = Like::all();
-
-        return layouts('filters', ['users' => $users, 'locations' => $locations, 'categories' => $categories, 'likes' => $likes]);
+        $photos = DB::table('photos')
+            ->join('users', 'users.user_id', '=', 'photos.user_id')
+            ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
+            ->join('categories', 'categories.category_id', '=', 'photos.category_id')
+            ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
+            ->where('categories.category_id', '=', $request->category.value)
+            ->orderBy('created_at', 'desc')
+            ->get();
+            
+        return view('gallery', ['photos' => $photos]);
     }
 
     /**

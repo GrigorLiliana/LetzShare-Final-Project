@@ -30,7 +30,7 @@
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="3" placeholder="This is an amazin photo taked by {{ Auth::user()->name }}" required></textarea>
                     </div>
-        
+
                     <div class="form-group">
                         <label for="locality">Locality</label>
                         <select class="custom-select" name="locality" id="locality" required>

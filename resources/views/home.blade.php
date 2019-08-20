@@ -20,18 +20,17 @@
     <div class="card-deck">
         @foreach ($topPics as $picture)
         <?php
-            $path = URL::asset($picture->image_URL);
-            $user = App\User::where('user_id', $picture->user_id)->first();
-            $cat = App\Category::where('category_id', $picture->category_id)->first();
-            $loc = App\Location::where('locality_id', $picture->locality_id)->first(); ?>
+        $path = URL::asset($picture->image_URL);
+        $user = App\User::where('user_id', $picture->user_id)->first();
+        $cat = App\Category::where('category_id', $picture->category_id)->first();
+        $loc = App\Location::where('locality_id', $picture->locality_id)->first(); ?>
 
         <div class="card promoting-card">
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
                 <!-- Avatar -->
                 <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px"
-                        alt="photographer avatar">
+                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px" alt="photographer avatar">
                 </a>
                 <!-- Content -->
                 <div>
@@ -46,8 +45,7 @@
             <!-- Card image -->
             <div class="view overlay">
                 <a href="{{ $picture->image_URL }}">
-                    <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
-                        alt="{{ $picture->image_title }}">
+                    <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}" alt="{{ $picture->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
@@ -64,7 +62,7 @@
                         <li>
                             @if (Auth::check())
                             <?php
-                            $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' , Auth::user()->user_id)->first();
+                            $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id', Auth::user()->user_id)->first();
                             ?>
                             @if ($like)
                             <div class="liked" id="logged-like">
@@ -128,57 +126,55 @@
         </div>
         @endforeach
     </div>
-    <br>
+    <?php } ?>
+</div>
+<br>
 
-    <h3>Latest Photos</h3>
+<h3>Latest Photos</h3>
 
-    <div class="card-deck">
-        @foreach ($recentPics as $picture)
-        <?php
-            $path = URL::asset($picture->image_URL);
-            $user = App\User::where('user_id', $picture->user_id)->first();
-            $cat = App\Category::where('category_id', $picture->category_id)->first();
-            $loc = App\Location::where('locality_id', $picture->locality_id)->first(); ?>
+<div class="card-deck">
+    @foreach ($recentPics as $picture)
+    <?php
+    $path = URL::asset($picture->image_URL);
+    $user = App\User::where('user_id', $picture->user_id)->first();
+    $cat = App\Category::where('category_id', $picture->category_id)->first();
+    $loc = App\Location::where('locality_id', $picture->locality_id)->first(); ?>
 
-        <div class="card promoting-card">
-            <!-- Card content -->
-            <div class="card-body d-flex flex-row">
-                <!-- Avatar -->
-                <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px"
-                        alt="photographer avatar">
-                </a>
-                <!-- Content -->
-                <div>
-                    <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $picture->image_title }}</h6>
-                    <!-- Subtitle -->
-                    <p class="card-text"><small><i class="far fa-clock pr-2"></i>
-                            {{ $picture->created_at->format('d-m-Y') }}</small></p>
-                </div>
-
+    <div class="card promoting-card">
+        <!-- Card content -->
+        <div class="card-body d-flex flex-row">
+            <!-- Avatar -->
+            <a href="/userprofile/{{$user->user_id}}">
+                <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px" alt="photographer avatar">
+            </a>
+            <!-- Content -->
+            <div>
+                <!-- Title -->
+                <h6 class="card-title font-weight-bold mb-2">{{ $picture->image_title }}</h6>
+                <!-- Subtitle -->
+                <p class="card-text"><small><i class="far fa-clock pr-2"></i>{{ $picture->created_at->format('d-m-Y') }}</small></p>
             </div>
 
-            <!-- Card image -->
-            <div class="view overlay">
-                <a href="{{ $picture->image_URL }}">
-                    <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
-                        alt="{{ $picture->image_title }}">
-                    <div class="mask rgba-white-slight"></div>
-                </a>
-            </div>
+        </div>
 
-            <!-- Card content -->
-            <div class="card-body">
+        <!-- Card image -->
+        <div class="view overlay">
+            <a href="{{ $picture->image_URL }}">
+                <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}" alt="{{ $picture->image_title }}">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
 
-                <div class="collapse-content">
-                    <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ str_limit($picture->image_description, 75, '...') }}
-                    </p>
-                    <!-- Button -->
-                    <ul>
-                        <li>
-                            @if (Auth::check())
+        <!-- Card content -->
+        <div class="card-body">
+
+            <div class="collapse-content">
+                <!-- Text -->
+                <p class="card-text " id="collapseContent">{{ str_limit($picture->image_description, 75, '...') }}</p>
+                <!-- Button -->
+                <ul>
+                    <li>
+                        @if (Auth::check())
                             @php
                             $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
                             Auth::user()->user_id)->first();
@@ -196,29 +192,35 @@
                             @endif
                             @else
                             <div class="not-logged">
-                                <i class="far fa-heart"></i>
-                                <span>{{ $picture->likes_sum }}</span>
-                            </div>
-                            @endif
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ $loc->locality_name }}</span>
-                        </li>
-                        <li>
-                            <i class="{{$cat->category_icon}}">
-                            </i>
-                            <span>{{ $cat->category_name }}</span>
-                        </li>
-                    </ul>
-                </div>
-
+                            <i class="far fa-heart"></i>
+                            <span>{{ $picture->likes_sum }}</span>
+                        </div>
+                        @endif
+                        @else
+                        <div class="not-liked" id="not-logged">
+                            <i class="far fa-heart"></i>
+                            <span>{{ $picture->likes_sum }}</span>
+                        </div>
+                        @endif
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ $loc->locality_name }}</span>
+                    </li>
+                    <li>
+                        <i class="{{$cat->category_icon}}">
+                        </i>
+                        <span>{{ $cat->category_name }}</span>
+                    </li>
+                </ul>
             </div>
 
         </div>
-        @endforeach
-    </div> <!-- end card deck -->
-    <br>
+
+    </div>
+    @endforeach
+</div> <!-- end card deck -->
+<br>
 
 </div> <!-- end container -->
 
