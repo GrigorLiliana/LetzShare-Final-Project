@@ -33,7 +33,7 @@
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $picture->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><small><i class="far fa-clock pr-2"></i>{{ $picture->created_at->format('d-m-Y') }}</small></p>
+                    <p class="card-text"><small><i class="far fa-calendar-alt"></i>{{ $picture->created_at->format('d-m-Y') }}</small></p>
                 </div>
             </div>
 
@@ -59,12 +59,12 @@
                             $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' , Auth::user()->user_id)->first();
                             ?>
                             @if ($like)
-                                <div class="liked" id="logged">
+                                <div class="liked" id="logged-like">
                                 <i class="fas fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                                 </div>
                             @else
-                                <div class="not-liked" id="logged">
+                                <div class="not-liked" id="logged-like">
                                 <i class="far fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                                 </div>
