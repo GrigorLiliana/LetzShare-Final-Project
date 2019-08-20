@@ -130,6 +130,17 @@ h1 {
     background-color: rgb(226, 214, 214);
 }
 
+/* fancybox Form Styles */
+.fancybox-caption {
+    padding: 0 !important;
+}
+
+.fancybox-caption__body {
+    padding: 10px;
+    color: #252323;
+    background-color: white;
+}
 .fancybox-caption__body li {
+    color: #252323;
     padding: 10px;
 }
