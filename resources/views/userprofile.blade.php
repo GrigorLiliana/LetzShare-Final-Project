@@ -8,14 +8,18 @@
 <h2>{{$userPhotos[0]->name}}</h2>
 <?php $userAvatar = URL::asset($userPhotos[0]->user_photo); ?>
 <!-- Avatar -->
-<img src="{{$userAvatar}}" class="rounded-circle mr-3"
+<img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile"
 height="150px" width="150px" alt="avatar">
+
+<a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a>
+
+<br>
+
 <div class="row">
     <div class="card-columns">
 @foreach ($userPhotos as $userPhoto)
         <?php
             $path = URL::asset($userPhoto->image_URL);
-
             $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
             $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first(); ?>
 
@@ -23,8 +27,6 @@ height="150px" width="150px" alt="avatar">
 
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
-
-
 
                 <!-- Content -->
                 <div>
