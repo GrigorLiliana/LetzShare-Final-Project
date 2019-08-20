@@ -13,12 +13,12 @@
     <h3>Top Rated Photos</h3>
 
     <div class="card-deck">
-        <?php
-        foreach ($topPics as $topPic) {
-            $path = URL::asset($topPic->image_URL);
-            $user = App\User::where('user_id', $topPic->user_id)->first();
-            $cat = App\Category::where('category_id', $topPic->category_id)->first();
-            $loc = App\Location::where('locality_id', $topPic->locality_id)->first(); ?>
+        @foreach ($topPics as $picture)
+            <?php
+            $path = URL::asset($picture->image_URL);
+            $user = App\User::where('user_id', $picture->user_id)->first();
+            $cat = App\Category::where('category_id', $picture->category_id)->first();
+            $loc = App\Location::where('locality_id', $picture->locality_id)->first(); ?>
 
         <div class="card promoting-card">
             <!-- Card content -->
@@ -29,16 +29,16 @@
                 <!-- Content -->
                 <div>
                     <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $topPic->image_title }}</h6>
+                    <h6 class="card-title font-weight-bold mb-2">{{ $picture->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $topPic->created_at }}</p>
+                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $picture->created_at }}</p>
                 </div>
             </div>
 
             <!-- Card image -->
             <div class="view overlay">
-                <a href="{{ $topPic->image_URL }}">
-                <img class="card-img-top rounded-0" src="{{ $topPic->image_URL }}" alt="{{ $topPic->image_title }}">
+                <a href="{{ $picture->image_URL }}">
+                <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}" alt="{{ $picture->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
@@ -48,12 +48,31 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ $topPic->image_description }}</p>
+                    <p class="card-text " id="collapseContent">{{ $picture->image_description }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
-                            <i class="fas fa-heart"></i>
-                            <span>{{ $topPic->likes_sum }}</span>
+                        @if (Auth::check())
+                            <?php
+                            $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' , Auth::user()->user_id)->first();
+                            ?>
+                            @if ($like)
+                                <div class="liked" id="logged">
+                                <i class="fas fa-heart"></i>
+                                <span>{{ $picture->likes_sum }}</span>
+                                </div>
+                            @else
+                                <div class="not-liked" id="logged">
+                                <i class="far fa-heart"></i>
+                                <span>{{ $picture->likes_sum }}</span>
+                                </div>
+                            @endif
+                        @else
+                            <div class="not-liked" id="not-logged">
+                            <i class="far fa-heart"></i>
+                            <span>{{ $picture->likes_sum }}</span>
+                            </div>
+                        @endif
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
@@ -70,7 +89,7 @@
             </div>
 
         </div>
-        <?php } ?>
+        @endforeach
     </div> <!-- end card deck -->
     <br>
 
@@ -86,7 +105,7 @@
                 <img src="{{$path}}" class="card-img-top" alt="{{ $user->name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $user->name }}</h5>
-                    <p class="card-text">{{ $topPic->user_description }}</p>
+                    <p class="card-text">{{ $picture->user_description }}</p>
                     <p class="card-text"><small class="text-muted">Has possted {{$topUser->total_photos}} photos</small></p>
                 </div>
             </div>
@@ -97,49 +116,83 @@
     <h3>Latest Photos</h3>
 
     <div class="card-deck">
-        <?php
-        foreach ($recentPics as $recentPic) {
-            $path = URL::asset($recentPic->image_URL);
-            $cat = App\Category::where('category_id', $recentPic->category_id)->first();
-            $loc = App\Location::where('locality_id', $recentPic->locality_id)->first(); ?>
-            <div class="card">
-                <img src="{{$path}}" class="card-img-top" alt="{{ $recentPic->image_title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $recentPic->image_title }}</h5>
-                    <p class="card-text">{{ $recentPic->image_description }}</p>
-                    <div class="card-row">
-                        <div class="card-item">
-                            <i class="{{$cat->category_icon}}"></i>
-                            <p> {{ $cat->category_name }}</p>
-                        </div>
-                        <div class="card-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p> {{ $loc->locality_name }}</p>
-                        </div>
-                    </div>
-                    <div class="card-row">
-                        <div class="card-item">
-                            <i class="fas fa-heart"></i>
-                            <p> {{ $recentPic->likes_sum }} </p>
-                        </div>
-                        <?php if (Auth::check()) {
-                            $like = App\Like::where('photo_id' , $recentPic->photo_id)->where('user_id' , Auth::user()->user_id)->first();
-                            if ($like)
-                            echo '<div class="card-item" id="unlike">
-                                <i class="far fa-thumbs-down"></i>
-                                <p> Unlike</p>
-                            </div>';
-                            else
-                            echo '<div class="card-item" id="like">
-                                <i class="far fa-heart"></i>
-                                <p> Like</p>
-                            </div>';
-                        } ?>
-                    </div>
+    @foreach ($recentPics as $picture)
+            <?php
+            $path = URL::asset($picture->image_URL);
+            $user = App\User::where('user_id', $picture->user_id)->first();
+            $cat = App\Category::where('category_id', $picture->category_id)->first();
+            $loc = App\Location::where('locality_id', $picture->locality_id)->first(); ?>
 
+        <div class="card promoting-card">
+            <!-- Card content -->
+            <div class="card-body d-flex flex-row">
+                <!-- Avatar -->
+                <img src="{{$user->user_photo}}" class="rounded-circle mr-3"
+                    height="50px" width="50px" alt="photographer avatar">
+                <!-- Content -->
+                <div>
+                    <!-- Title -->
+                    <h6 class="card-title font-weight-bold mb-2">{{ $picture->image_title }}</h6>
+                    <!-- Subtitle -->
+                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $picture->created_at }}</p>
                 </div>
-            </div> <!-- end individual card -->
-        <?php } ?>
+            </div>
+
+            <!-- Card image -->
+            <div class="view overlay">
+                <a href="{{ $picture->image_URL }}">
+                <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}" alt="{{ $picture->image_title }}">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body">
+
+                <div class="collapse-content">
+                    <!-- Text -->
+                    <p class="card-text " id="collapseContent">{{ $picture->image_description }}</p>
+                    <!-- Button -->
+                    <ul>
+                        <li>
+                        @if (Auth::check())
+                            <?php
+                            $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' , Auth::user()->user_id)->first();
+                            ?>
+                            @if ($like)
+                                <div class="liked" id="logged">
+                                <i class="fas fa-heart"></i>
+                                <span>{{ $picture->likes_sum }}</span>
+                                </div>
+                            @else
+                                <div class="not-liked" id="logged">
+                                <i class="far fa-heart"></i>
+                                <span>{{ $picture->likes_sum }}</span>
+                                </div>
+                            @endif
+                        @else
+                            <div class="not-liked" id="not-logged">
+                            <i class="far fa-heart"></i>
+                            <span>{{ $picture->likes_sum }}</span>
+                            </div>
+                        @endif
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ $loc->locality_name }}</span>
+                        </li>
+                        <li>
+                            <i class="{{$cat->category_icon}}">
+                            </i>
+                            <span>{{ $cat->category_name }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+        @endforeach
     </div> <!-- end card deck -->
     <br>
 
