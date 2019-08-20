@@ -33,7 +33,7 @@
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $picture->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $picture->created_at->format('d-m-Y') }}</p>
+                    <p class="card-text"><small><i class="far fa-clock pr-2"></i>{{ $picture->created_at->format('d-m-Y') }}</small></p>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ $picture->image_description }}</p>
+                    <p class="card-text " id="collapseContent">{{ str_limit($picture->image_description, 75, '...') }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
@@ -158,7 +158,7 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ $picture->image_description }}</p>
+                    <p class="card-text " id="collapseContent">{{ str_limit($picture->image_description, 75, '...') }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
