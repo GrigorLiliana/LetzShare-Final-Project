@@ -33,7 +33,7 @@
 
             <!-- Card image -->
             <div class="view overlay">
-                <a href="{{ $photo->image_URL }}" data-fancybox="gallery" data-caption="<p>{{ $photo->image_description }}</p><ul><li>
+                <a href="{{ $photo->image_URL }}" data-fancybox="gallery" data-caption="<p>{{ $photo->image_description }}</p><hr><ul><li>
                             <i class='fas fa-map-marker-alt'></i>
                             <span>{{ $photo->locality_name }}</span>
                         </li><li><i class='fas fa-heart'></i>

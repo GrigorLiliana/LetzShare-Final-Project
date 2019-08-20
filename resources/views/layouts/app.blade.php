@@ -9,17 +9,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('pageTitle')</title>
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script> -->
+    <script src="{{ asset('js/letzshare.js') }}"></script>
+    <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
-    <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script> -->
-    <script src="{{ asset('js/letzshare.js') }}"></script>
 </head>
 
 <body>
@@ -33,7 +34,7 @@
     </div>
 
     @include('layouts.footer')
-    
+
 </body>
 
 </html>
