@@ -1,15 +1,14 @@
-console.log('letzshare.js loaded successfully!');
 $(function() {
     /* Registration password validation*/
 
-    $('#password').on('focus', function() {
-        $('#pswd_info').css('display', 'block');
+    $("#password").on("focus", function() {
+        $("#pswd_info").css("display", "block");
     });
-    $('#password').on('blur', function() {
-        $('#pswd_info').css('display', 'none');
+    $("#password").on("blur", function() {
+        $("#pswd_info").css("display", "none");
     });
 
-    $('#password').on('keyup', checkAllCases);
+    $("#password").on("keyup", checkAllCases);
     function checkAllCases() {
         // Gathering : check the password value
         const thePass = $('#password').val();
@@ -21,21 +20,21 @@ $(function() {
         // at least one number str.match(/\d/)
         const numberValid = thePass.match(/\d/);
         //display *4
-        displayValid('#letter', letterValid);
-        displayValid('#length', lengthValid);
-        displayValid('#capital', upperValid);
-        displayValid('#number', numberValid);
+        displayValid("#letter", letterValid);
+        displayValid("#length", lengthValid);
+        displayValid("#capital", upperValid);
+        displayValid("#number", numberValid);
     }
 
     function displayValid(selector, condition) {
         if (condition) {
             $(selector)
-                .addClass('valid')
-                .removeClass('invalid');
+                .addClass("valid")
+                .removeClass("invalid");
         } else {
             $(selector)
-                .addClass('invalid')
-                .removeClass('valid');
+                .addClass("invalid")
+                .removeClass("valid");
         }
     }
     /* End of the Registration password validation*/
@@ -51,4 +50,13 @@ $(function() {
 
     /* End of the Like-click listener */
 
+    /* Upload file field --> show selected name */
+    $("#customFile").on("change", function() {
+        //replace the "Choose a file" label
+        var newFileName = $(this)[0].files[0].name;
+        $(this)
+            .next(".custom-file-label")
+            .html(newFileName);
+    });
+    /* END of Upload file field --> show selected name */
 }); //LAST DO NOT DELETE

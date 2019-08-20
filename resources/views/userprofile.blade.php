@@ -7,48 +7,59 @@
 @section('content')
 
 @php
-
-if(Auth::user()->user_id==$userPhotos[0]->user_id)
+if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
 $ownUser=true;
-else
+$userId=Auth::user()->user_id;
+}else
 $ownUser=false;
 @endphp
 
-<h2>@if($ownUser)Hello, @endif{{$userPhotos[0]->name}}@if($ownUser) <p><a href="/useraccount">Edit Name</a></p>@endif</h2>
+<h2>
+    @if($ownUser)Hello, @endif
+    {{$userPhotos[0]->name}}
+    @if($ownUser) | <a href="{{route('useraccount')}}">Edit Name</a>
+    @endif
+</h2>
 <hr>
 <div class="card promoting-card card-user">
-<?php $userAvatar = URL::asset($userPhotos[0]->user_photo); ?>
-<!-- Avatar -->
-<div class="profile-flex">
-<div class="edit-photo">
-<img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile"
-height="150px" width="150px" alt="avatar">
-@if($ownUser) <p><a href="/useraccount">Edit photo</a></p>@endif
+    @php $userAvatar = URL::asset($userPhotos[0]->user_photo); @endphp
+    <!-- Avatar -->
+    <div class="profile-flex">
+        <div class="edit-photo">
+            <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile" height="150" width="150" alt="avatar">
+            @if($ownUser)<p><a href="{{route('useraccount')}}">Edit photo</a></p>@endif
+        </div>
+        <div>
+            @if($userPhotos[0]->user_description)
+            <p><i class="fas fa-comment"></i><i> "{{$userPhotos[0]->user_description}}"</i>
+                @if($ownUser) | <a href="{{route('useraccount')}}">Edit Description</a></p>
+            @endif
+            @endif
+            @if($userPhotos[0]->user_location)
+            <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
+                @if($ownUser) | <a href="{{route('useraccount')}}">Edit Location</a></p>@endif
+            @endif
+            @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
+            @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
+            @endif
+        </div>
+    </div>
 </div>
-<div>
-    @if($userPhotos[0]->user_description)
-        <p><i>"{{$userPhotos[0]->user_description}}"</i></p>
-        @if($ownUser) <p><a href="/useraccount">Edit Description</a></p>@endif
+<h2>Portfolio
+    @if($ownUser)|
+    <a href="{{route('uploadphoto')}}" class="add">
+        Upload new photo <i class="fas fa-plus-circle"></i>
+    </a>
     @endif
-    @if($userPhotos[0]->user_location)
-        <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}</p>
-        @if($ownUser) <p><a href="/useraccount">Edit Location</a></p>@endif
-    @endif
-    @if(!$ownUser)<a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a>
-    @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
-    @endif
-</div>
-</div>
-</div>
-<h2>Portfolio</h2>
+</h2>
 <hr>
 <div class="row">
     <div class="card-columns">
-@foreach ($userPhotos as $userPhoto)
+        @foreach ($userPhotos as $userPhoto)
         @php
-            $path = URL::asset($userPhoto->image_URL);
-            $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
-            $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first();
+        $path = URL::asset($userPhoto->image_URL);
+        $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
+        $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first();
         @endphp
 
         <div class="card promoting-card">
@@ -60,9 +71,13 @@ height="150px" width="150px" alt="avatar">
                 <div>
 
                     <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}</h6>
+                    <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
+                        @if($ownUser)
+                        <a href="{{route('useraccount')}}"><i class="far fa-edit"></i></a>
+                        <a href="{{route('useraccount')}}"><i class="far fa-trash-alt"></i></a>
+                        @endif</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $userPhoto->created_at }}</p>
+                    <p class="card-text"><i class="far fa-clock pr-2"></i> {{ $userPhoto->created_at }}</p>
 
                 </div>
 
@@ -71,7 +86,7 @@ height="150px" width="150px" alt="avatar">
             <!-- Card image -->
             <div class="view overlay">
                 <a href="{{ $path }}">
-                <img class="card-img-top rounded-0" src="{{ $path }}" alt="{{ $userPhoto->image_title }}">
+                    <img class="card-img-top rounded-0" src="{{ $path }}" alt="{{ $userPhoto->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
@@ -82,21 +97,21 @@ height="150px" width="150px" alt="avatar">
                 <div class="collapse-content">
 
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ $userPhoto->image_description }}</p>
+                    <p class="card-text ">{{ $userPhoto->image_description }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
                             <i class="fas fa-heart"></i>
-                            <span>{{ $userPhoto->likes_sum }}</span>
+                            <span> {{ $userPhoto->likes_sum }}</span>
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ $loc->locality_name }}</span>
+                            <span> {{ $loc->locality_name }}</span>
                         </li>
                         <li>
                             <i class="{{$cat->category_icon}}">
                             </i>
-                            <span>{{ $cat->category_name }}</span>
+                            <span> {{ $cat->category_name }}</span>
                         </li>
                     </ul>
 
@@ -107,7 +122,7 @@ height="150px" width="150px" alt="avatar">
         </div>
         @endforeach
         <!-- END Card -->
-        </div>
+    </div>
 </div>
 
 @endsection
