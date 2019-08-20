@@ -27,6 +27,7 @@ Route::post('/uploadphoto', 'PhotoController@store');
 Route::get('/useraccount', 'UserController@index')->name('useraccount');
 Route::get('/userprofile/{id}', 'ProfileController@index')->name('userprofile');
 
+
 Route::get('/gallery', 'PhotoController@index');
 Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
 

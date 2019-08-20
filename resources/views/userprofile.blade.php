@@ -7,20 +7,22 @@
 @section('content')
 
 @php
+// check if the profile belongs to the user
 if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
 $ownUser=true;
 $userId=Auth::user()->user_id;
 }else
 $ownUser=false;
 @endphp
-
 <h2>
-    @if($ownUser)Hello, @endif
-    {{$userPhotos[0]->name}}
-    @if($ownUser) | <a href="{{route('useraccount')}}">Edit Name</a>
+    @if($ownUser)Hello, @endif <span class="old-name">{{$userPhotos[0]->name}}</span>
+
+    @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
     @endif
 </h2>
+
 <hr>
+<!-- User details -->
 <div class="card promoting-card card-user">
     @php $userAvatar = URL::asset($userPhotos[0]->user_photo); @endphp
     <!-- Avatar -->
@@ -45,6 +47,9 @@ $ownUser=false;
         </div>
     </div>
 </div>
+<!-- End of the User details -->
+
+<!-- User Portfolio -->
 <h2>Portfolio
     @if($ownUser)|
     <a href="{{route('uploadphoto')}}" class="add">
@@ -124,5 +129,5 @@ $ownUser=false;
         <!-- END Card -->
     </div>
 </div>
-
+<!--End of the User Portfolio -->
 @endsection

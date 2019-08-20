@@ -81,7 +81,6 @@ h1 {
     background-color: lightgrey;
 }
 
-
 /* End of Home Page Styles */
 
 /* User Account Styles */
@@ -101,6 +100,9 @@ h1 {
 }
 .edit-photo p {
     margin: 1rem 16px 0 0;
+}
+.hide {
+    display: none;
 }
 /* Enf of User Account Styles */
 
