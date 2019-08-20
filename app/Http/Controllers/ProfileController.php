@@ -1,22 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
+
 use Illuminate\Http\Request;
 use App\Photo;
+use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $userId = Auth::user()->user_id;
-        $userPhotos = Photo::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
-        return view('useraccount', ['userPhotos' => $userPhotos]);
+        $userPhotos = DB::table('photos')
+            ->join('users', 'users.user_id', '=', 'photos.user_id')
+            ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
+            ->where('users.user_id', $id)
+            ->select('photos.*', 'users.name', 'users.user_photo','locality_name')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('userprofile', ['userPhotos' => $userPhotos]);
     }
 
     /**

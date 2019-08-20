@@ -22,10 +22,9 @@ class PhotoController extends Controller
         $photos = DB::table('photos')
             ->join('users', 'users.user_id', '=', 'photos.user_id')
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
-            ->select('photos.*', 'users.name', 'locality_name')
+            ->select('photos.*', 'users.name', 'users.user_photo','locality_name')
             ->orderBy('created_at', 'desc')
             ->get();
-
         return view('gallery', ['photos' => $photos]);
     }
 
