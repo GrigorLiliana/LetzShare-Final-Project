@@ -32,10 +32,11 @@ height="150px" width="150px" alt="avatar">
 <div class="row">
     <div class="card-columns">
 @foreach ($userPhotos as $userPhoto)
-        <?php
+        @php
             $path = URL::asset($userPhoto->image_URL);
             $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
-            $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first(); ?>
+            $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first();
+        @endphp
 
         <div class="card promoting-card">
 
@@ -56,8 +57,8 @@ height="150px" width="150px" alt="avatar">
 
             <!-- Card image -->
             <div class="view overlay">
-                <a href="{{ $userPhoto->image_URL }}">
-                <img class="card-img-top rounded-0" src="{{ $userPhoto->image_URL }}" alt="{{ $userPhoto->image_title }}">
+                <a href="{{ $path }}">
+                <img class="card-img-top rounded-0" src="{{ $path }}" alt="{{ $userPhoto->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
