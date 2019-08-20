@@ -41,8 +41,8 @@ $(function() {
 
     /* Start of the Like-click listener */
 
-     $('#liked').on('click', removeLike);
-     $('#not-liked').on('click', addLike);
+    $('#liked').on('click', removeLike);
+    $('#not-liked').on('click', addLike);
 
     function removeLike() {}
 
@@ -65,6 +65,7 @@ $(function() {
         event.preventDefault();
         $('.old-name').addClass('hide');
         $('#editName').addClass('hide');
+        $('input.hide').removeClass('hide');
     });
 
     /*End of the Edit User Profile Name */

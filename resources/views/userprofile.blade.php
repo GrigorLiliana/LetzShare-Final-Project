@@ -14,13 +14,17 @@ $userId=Auth::user()->user_id;
 }else
 $ownUser=false;
 @endphp
-<h2>
-    @if($ownUser)Hello, @endif <span class="old-name">{{$userPhotos[0]->name}}</span>
+<form action="" method="post">
+    <h2>
+        @if($ownUser)Hello, @endif <span class="old-name">{{$userPhotos[0]->name}}</span>
 
-    @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
-    @endif
-</h2>
-
+        @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
+        @endif
+    </h2>
+    <input class="hide" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
+        placeholder="{{$userPhotos[0]->name}}">
+    <input class="hide" type="button" value="Edit" name="edit">
+</form>
 <hr>
 <!-- User details -->
 <div class="card promoting-card card-user">
@@ -82,7 +86,10 @@ $ownUser=false;
                         <a href="{{route('useraccount')}}"><i class="far fa-trash-alt"></i></a>
                         @endif</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i> {{ $userPhoto->created_at }}</p>
+                    <p class="card-text"><i class="far fa-calendar-alt"></i>
+                        {{ $userPhoto->created_at }}
+                        <small>
+                        </small></p>
 
                 </div>
 
