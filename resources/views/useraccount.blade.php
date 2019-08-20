@@ -2,14 +2,12 @@
 
 @section('content')
 <h2>{{ Auth::user()->name }}, welcome to your dashboard</h2>
-<div>
     <p>
         <a href="{{route('uploadphoto')}}" class="add">
             Upload new photo <i class="fas fa-plus-circle"></i>
         </a>
     </p>
-    <div class="row">
-    <div class="card-columns">
+
 
         <!-- Card -->
 
@@ -20,7 +18,8 @@
             $userAvatar = URL::asset(Auth::user()->user_photo);
             $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
             $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first(); ?>
-
+<div class="row">
+    <div class="card-columns">
         <div class="card promoting-card">
 
             <!-- Card content -->

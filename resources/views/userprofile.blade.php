@@ -12,7 +12,8 @@ height="150px" width="150px" alt="avatar">
 
             $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
             $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first(); ?>
-
+<div class="row">
+    <div class="card-columns">
         <div class="card promoting-card">
 
             <!-- Card content -->
