@@ -24,8 +24,10 @@
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
                 <!-- Avatar -->
+            <a href="/userprofile/{{$user->user_id}}">
                 <img src="{{$user->user_photo}}" class="rounded-circle mr-3"
-                    height="50px" width="50px" alt="photographer avatar">
+                height="50px" width="50px" alt="photographer avatar">
+            </a>
                 <!-- Content -->
                 <div>
                     <!-- Title -->
@@ -102,7 +104,9 @@
             $user = App\User::where('user_id', $userId)->first();
             $path = URL::asset($user->user_photo); ?>
             <div class="card">
-                <img src="{{$path}}" class="card-img-top" alt="{{ $user->name }}">
+                    <a href="/userprofile/{{$user->user_id}}">
+                    <img src="{{$path}}" class="card-img-top" alt="{{ $user->name }}">
+                    </a>
                 <div class="card-body">
                     <h5 class="card-title">{{ $user->name }}</h5>
                     <p class="card-text">{{ $picture->user_description }}</p>
@@ -127,8 +131,10 @@
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
                 <!-- Avatar -->
+                <a href="/userprofile/{{$user->user_id}}">
                 <img src="{{$user->user_photo}}" class="rounded-circle mr-3"
                     height="50px" width="50px" alt="photographer avatar">
+                </a>
                 <!-- Content -->
                 <div>
                     <!-- Title -->
