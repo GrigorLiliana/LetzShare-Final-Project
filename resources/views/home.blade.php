@@ -10,55 +10,71 @@
     <br>
 </div>
 <div class="container">
-    <h3>Our Top Rated Photos</h3>
+    <h3>Top Rated Photos</h3>
 
     <div class="card-deck">
         <?php
         foreach ($topPics as $topPic) {
             $path = URL::asset($topPic->image_URL);
+            $user = App\User::where('user_id', $topPic->user_id)->first();
             $cat = App\Category::where('category_id', $topPic->category_id)->first();
             $loc = App\Location::where('locality_id', $topPic->locality_id)->first(); ?>
-            <div class="card">
-                <img src="{{$path}}" class="card-img-top" alt="{{ $topPic->image_title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $topPic->image_title }}</h5>
-                    <p class="card-text">{{ $topPic->image_description }}</p>
-                    <div class="card-row">
-                        <div class="card-item">
-                            <i class="{{$cat->category_icon}}"></i>
-                            <p> {{ $cat->category_name }}</p>
-                        </div>
-                        <div class="card-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p> {{ $loc->locality_name }}</p>
-                        </div>
-                    </div>
-                    <div class="card-row">
-                        <div class="card-item">
-                            <i class="fas fa-heart"></i>
-                            <p> {{ $topPic->likes_sum }}</p>
-                        </div>
-                        <?php if (Auth::check()) {
-                            $like = App\Like::where('photo_id' , $topPic->photo_id)->where('user_id' , Auth::user()->user_id)->first();
-                            if ($like)
-                            echo '<div class="card-item">
-                                <i class="far fa-thumbs-down"></i>
-                                <p> Unlike</p>
-                            </div>';
-                            else
-                            echo '<div class="card-item">
-                                <i class="far fa-heart"></i>
-                                <p> Like</p>
-                            </div>';
-                        } ?>
-                    </div>
+
+        <div class="card promoting-card">
+            <!-- Card content -->
+            <div class="card-body d-flex flex-row">
+                <!-- Avatar -->
+                <img src="{{$user->user_photo}}" class="rounded-circle mr-3"
+                    height="50px" width="50px" alt="photographer avatar">
+                <!-- Content -->
+                <div>
+                    <!-- Title -->
+                    <h6 class="card-title font-weight-bold mb-2">{{ $topPic->image_title }}</h6>
+                    <!-- Subtitle -->
+                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $topPic->created_at }}</p>
                 </div>
             </div>
+
+            <!-- Card image -->
+            <div class="view overlay">
+                <a href="{{ $topPic->image_URL }}">
+                <img class="card-img-top rounded-0" src="{{ $topPic->image_URL }}" alt="{{ $topPic->image_title }}">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body">
+
+                <div class="collapse-content">
+                    <!-- Text -->
+                    <p class="card-text " id="collapseContent">{{ $topPic->image_description }}</p>
+                    <!-- Button -->
+                    <ul>
+                        <li>
+                            <i class="fas fa-heart"></i>
+                            <span>{{ $topPic->likes_sum }}</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ $loc->locality_name }}</span>
+                        </li>
+                        <li>
+                            <i class="{{$cat->category_icon}}">
+                            </i>
+                            <span>{{ $cat->category_name }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
         <?php } ?>
-    </div>
+    </div> <!-- end card deck -->
     <br>
 
-    <h3>Our Top Photographers</h3>
+    <h3>Top Photographers</h3>
 
     <div class="card-deck">
         <?php
@@ -78,7 +94,7 @@
     </div>
     <br>
 
-    <h3>Our Latest Photos</h3>
+    <h3>Latest Photos</h3>
 
     <div class="card-deck">
         <?php
@@ -122,11 +138,11 @@
                     </div>
 
                 </div>
-            </div>
+            </div> <!-- end individual card -->
         <?php } ?>
-    </div>
+    </div> <!-- end card deck -->
     <br>
 
-</div>
+</div> <!-- end container -->
 
 @endsection
