@@ -59,4 +59,5 @@ $(function() {
             .html(newFileName);
     });
     /* END of Upload file field --> show selected name */
+    
 }); //LAST DO NOT DELETE
