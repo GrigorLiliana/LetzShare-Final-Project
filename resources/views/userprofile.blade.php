@@ -16,7 +16,7 @@ $ownUser=false;
 @endphp
 <form action="" method="post">
     <h2>
-        @if($ownUser)Hello, @endif <span class="old-name">{{$userPhotos[0]->name}}</span>
+        @if($ownUser)Hello, @endif <span class="old-name text-capitalize">{{$userPhotos[0]->name}}</span>
 
         @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
         @endif
@@ -86,9 +86,9 @@ $ownUser=false;
                         <a href="{{route('useraccount')}}"><i class="far fa-trash-alt"></i></a>
                         @endif</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-calendar-alt"></i>
-                        {{ var_dump($userPhoto->photodate) }}
-                        <small>
+                    <p class="card-text"><small><i class="far fa-calendar-alt"></i>
+                            {{ date('d-m-Y', strtotime($userPhoto->photodate)) }}
+
                         </small></p>
 
                 </div>
@@ -123,7 +123,7 @@ $ownUser=false;
                         <li>
                             <i class="{{$cat->category_icon}}">
                             </i>
-                            <span> {{ $cat->category_name }}</span>
+                            <span class="text-capitalize"> {{ $cat->category_name }}</span>
                         </li>
                     </ul>
 
