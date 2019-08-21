@@ -41,14 +41,21 @@ $(function() {
 
     /* Start of the Like-click listener */
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $('.liked').on('click', function (e) {
         event.preventDefault();
         console.log(this.id, "No likey");
+        console.log(urlLike);
         let like= false;
         $.ajax({
             method:'POST',
             url: urlLike,
-            data: {isLiked: like, photoId: this.id, _token: token}
+            data: {isLiked: like, photoId: this.id}
         })
         .done(function() {
             // Change the page
@@ -61,7 +68,7 @@ $(function() {
         $.ajax({
             method: 'POST',
             url: urlLike,
-            data: {isLiked: like, photoId: this.id, _token: token}
+            data: {isLiked: like, photoId: this.id}
         })
         .done(function() {
             // Change the page

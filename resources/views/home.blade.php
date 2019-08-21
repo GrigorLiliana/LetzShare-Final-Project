@@ -68,12 +68,14 @@
                             $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id', Auth::user()->user_id)->first();
                             @endphp
                             @if ($like)
-                        <div class="liked" id="{{$picture->photo_id}}">
+                            <div class="liked" id="{{$picture->photo_id}}">
+                                @csrf
                                 <i class="fas fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                             </div>
                             @else
                             <div class="not-liked" id="{{$picture->photo_id}}">
+                                @csrf
                                 <i class="far fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                             </div>
@@ -228,7 +230,6 @@
 </div> <!-- end container -->
 
 <script>
-    let token = '{{Session::token()}}';
     let urlLike = '{{route('like')}}';
 </script>
 
