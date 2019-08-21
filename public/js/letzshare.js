@@ -99,7 +99,7 @@ $(function() {
         event.preventDefault();
         let id = $('#user_id').val();
         $.ajax({
-            url: '/userprofile/' + id,
+            url: '/useraccount',
             type: 'post',
             data: $('form').serialize(),
             success: function(result) {
