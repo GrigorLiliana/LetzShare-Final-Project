@@ -52,7 +52,16 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = \Validator::make($request->all(),[
+            'name'=> 'required|min:4|max:20|',
+        ]);
+            if($validatedData->fails()){
+            return response()->json(['errors' => $validatedData->errors()->all()]);
+
+        }else{
+
+            return response()->json(['success' => 'successiful entered']);
+            }
     }
 
     /**

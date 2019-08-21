@@ -45,11 +45,11 @@ $(function() {
     $('.not-liked').on('click', addLike());
 
     function removeLike() {
-        console.log("No likey");
+        console.log('No likey');
     }
 
     function addLike() {
-        console.log("like");
+        console.log('like');
     }
 
     /* End of the Like-click listener */
@@ -84,6 +84,7 @@ $(function() {
     $('.form-profile').on('submit', function(event) {
         event.preventDefault();
         let id = $('#user_id').val();
+        id = id + id;
         console.log(id);
         $.ajax({
             url: '/userprofile/' + id,
@@ -91,6 +92,7 @@ $(function() {
             data: $('form').serialize(),
             success: function(result) {
                 if (result.success) {
+                    console.log(result.success);
                     $('#my-div').html(
                         '<p style="color:green">' + result.success + '<p>'
                     );

@@ -16,7 +16,7 @@ $ownUser=false;
 @endphp
 <form action="/useraccount" method="post" class="form-profile">
     @csrf
-    @method()
+
     <h2>
         @if($ownUser)Hello, @endif <span class="old-name text-capitalize">{{$userPhotos[0]->name}}</span>
 
