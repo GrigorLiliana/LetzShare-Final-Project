@@ -17,15 +17,18 @@
             <div class="card-body d-flex flex-row">
 
                 <!-- Avatar -->
-                <img src="{{URL::asset($photo->user_photo)}}" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
+                <img src="{{URL::asset($photo->user_photo)}}" class="rounded-circle mr-3" height="50px" width="50px"
+                    alt="avatar">
 
                 <!-- Content -->
                 <div>
 
                     <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $photo->image_title }}</h6>
+                    <h6 class="card-title font-weight-bold mb-2 text-capitalize">{{ $photo->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $photo->created_at }}</p>
+                    <p class="card-text"><small><i class="far fa-calendar-alt"></i>
+                            {{date('d-m-Y', strtotime($photo->created_at)) }}
+                        </small></p>
 
                 </div>
 
@@ -38,7 +41,7 @@
                             <span>{{ $photo->locality_name }}</span>
                         </li><li><i class='fas fa-heart'></i>
                             <span>{{ $photo->likes_sum }}</span></li><li><i class='{{ $photo->category_icon }}'></i>
-                            <span>{{ $photo->category_name }}</span></li></ul>">
+                            <span class='text-capitalize'>{{ $photo->category_name }}</span></li></ul>">
                     <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}" alt="{{ $photo->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
@@ -50,7 +53,8 @@
                 <div class="collapse-content">
 
                     <!-- Text -->
-                    <p class="card-text collapse" id="collapseContent">{{ $photo->image_description }}</p>
+                    <p class="card-text collapse text-capitalize" id="collapseContent">
+                        {{ $photo->image_description }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
@@ -63,7 +67,7 @@
                         </li>
                         <li>
                             <i class="{{ $photo->category_icon }}"></i>
-                            <span>{{ $photo->category_name }}</span>
+                            <span class="text-capitalize">{{ $photo->category_name }}</span>
                         </li>
                     </ul>
 

@@ -19,7 +19,7 @@ class ProfileController extends Controller
             ->join('users', 'users.user_id', '=', 'photos.user_id')
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
             ->where('users.user_id', $id)
-            ->select('photos.*', 'users.*','locality_name')
+            ->select('photos.*', 'photos.created_at as photodate', 'users.*','locations.locality_name')
             ->orderBy('photos.created_at', 'desc')
             ->get();
 

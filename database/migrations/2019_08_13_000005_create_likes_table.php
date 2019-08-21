@@ -25,6 +25,7 @@ class CreateLikesTable extends Migration
             $table->increments('like_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('photo_id');
+            $table->unsignedInteger('islikes');
 
             $table->index(["photo_id"], 'fk_users_has_photos_photos2_idx');
 

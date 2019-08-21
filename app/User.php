@@ -29,6 +29,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function photos()
+    {
+        return $this->hasMany(App/Photo);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(App/Like);
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
