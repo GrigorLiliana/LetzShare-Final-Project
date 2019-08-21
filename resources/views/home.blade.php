@@ -31,7 +31,7 @@
                 <!-- Avatar -->
                 <a href="/userprofile/{{$user->user_id}}">
                     <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px"
-                        alt="photographer avatar">
+                        alt="{{$user->name}}">
                 </a>
                 <!-- Content -->
                 <div>
@@ -152,15 +152,15 @@
             <!-- Avatar -->
             <a href="/userprofile/{{$user->user_id}}">
                 <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px"
-                    alt="photographer avatar">
+                    alt="{{$user->name}}">
             </a>
             <!-- Content -->
             <div>
                 <!-- Title -->
                 <h6 class="card-title font-weight-bold mb-2 text-capitalize">{{ $picture->image_title }}</h6>
                 <!-- Subtitle -->
-                <p class="card-text"><small><i
-                            class="far fa-clock pr-2"></i>{{ $picture->created_at->format('d-m-Y') }}</small></p>
+                <p class="card-text"><small><i class="far fa-calendar-alt"></i>
+                        {{ $picture->created_at->format('d-m-Y') }}</small></p>
             </div>
 
         </div>
@@ -190,28 +190,28 @@
                         @endphp
                         @if ($like)
                         <div id="liked" class="logged">
-                            <i class="fas fa-heart"></i><span>{{ $picture->likes_sum }}</span>
+                            <i class="fas fa-heart"></i><span> {{ $picture->likes_sum }}</span>
                         </div>
                         @else
                         <div id="not-liked" class="logged">
-                            <i class="far fa-heart"></i><span>{{ $picture->likes_sum }}</span>
+                            <i class="far fa-heart"></i><span> {{ $picture->likes_sum }}</span>
                         </div>
                         @endif
                         @else
                         <div class="not-logged">
-                            <i class="far fa-heart"></i><span>{{ $picture->likes_sum }}</span>
+                            <i class="far fa-heart"></i><span> {{ $picture->likes_sum }}</span>
                         </div>
                         <div class="not-liked" id="not-logged">
-                            <i class="far fa-heart"></i><span>{{ $picture->likes_sum }}</span>
+                            <i class="far fa-heart"></i><span> {{ $picture->likes_sum }}</span>
                         </div>
                         @endif
                     </li>
                     <li>
-                        <i class="fas fa-map-marker-alt"></i><span>{{ $loc->locality_name }}</span>
+                        <i class="fas fa-map-marker-alt"></i><span> {{ $loc->locality_name }}</span>
                     </li>
                     <li>
-                        <i class="{{$cat->category_icon}}"></i><span
-                            class="text-capitalize">{{ $cat->category_name }}</span>
+                        <i class="{{$cat->category_icon}}"></i><span class="text-capitalize">
+                            {{ $cat->category_name }}</span>
                     </li>
                 </ul>
             </div>

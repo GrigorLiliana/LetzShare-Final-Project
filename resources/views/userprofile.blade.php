@@ -82,8 +82,8 @@ $ownUser=false;
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
                         @if($ownUser)
-                        <a href="{{route('useraccount')}}"><i class="far fa-edit"></i></a>
-                        <a href="{{route('useraccount')}}"><i class="far fa-trash-alt"></i></a>
+                        <a href="{{route('useraccount')}}"><i class="far fa-edit text-success"></i></a>
+                        <a href="{{route('useraccount')}}"><i class="far fa-trash-alt text-danger text-right"></i></a>
                         @endif</h6>
                     <!-- Subtitle -->
                     <p class="card-text"><small><i class="far fa-calendar-alt"></i>
@@ -109,7 +109,7 @@ $ownUser=false;
                 <div class="collapse-content">
 
                     <!-- Text -->
-                    <p class="card-text ">{{ $userPhoto->image_description }}</p>
+                    <p class="card-text ">{{ str_limit($userPhoto->image_description, 90, '...') }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
