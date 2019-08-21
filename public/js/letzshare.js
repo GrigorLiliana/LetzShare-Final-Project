@@ -41,16 +41,33 @@ $(function() {
 
     /* Start of the Like-click listener */
 
-    $('.liked').on('click', removeLike());
-    $('.not-liked').on('click', addLike());
+    $('.liked').on('click', function (e) {
+        event.preventDefault();
+        console.log(this.id, "No likey");
+        let like= false;
+        $.ajax({
+            method:'POST',
+            url: urlLike,
+            data: {isLiked: like, photoId: this.id, _token: token}
+        })
+        .done(function() {
+            // Change the page
+        })
+    });
+    $('.not-liked').on('click', function (e) {
+        event.preventDefault();
+        console.log(this.id, "Liked");
+        let like= true;
+        $.ajax({
+            method: 'POST',
+            url: urlLike,
+            data: {isLiked: like, photoId: this.id, _token: token}
+        })
+        .done(function() {
+            // Change the page
+        })
+    });
 
-    function removeLike() {
-        console.log('No likey');
-    }
-
-    function addLike() {
-        console.log('like');
-    }
 
     /* End of the Like-click listener */
 
@@ -85,7 +102,7 @@ $(function() {
         event.preventDefault();
         let id = $('#user_id').val();
         $.ajax({
-            url: '/userprofile/' + id,
+            url: '/useraccount',
             type: 'post',
             data: $('form').serialize(),
             success: function(result) {

@@ -31,6 +31,8 @@ Route::post('/userprofile/{id}', 'ProfileController@store');
 Route::get('/gallery', 'PhotoController@index');
 Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
 
+//** Likes handler */
+Route::get('/like', 'PhotoController@photoLikePhoto')->name('like');
 
 //** ADMIN - Middleware auth validation */
 //Route::get('/admin', 'AdminController@index')->middleware('admin');
