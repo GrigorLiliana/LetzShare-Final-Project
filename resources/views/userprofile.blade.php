@@ -87,7 +87,7 @@ $ownUser=false;
                         @endif</h6>
                     <!-- Subtitle -->
                     <p class="card-text"><i class="far fa-calendar-alt"></i>
-                        {{ $userPhoto->created_at }}
+                        {{ var_dump($userPhoto->photodate) }}
                         <small>
                         </small></p>
 
