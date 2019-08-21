@@ -85,7 +85,6 @@ h1 {
     background-color: lightgrey;
 }
 
-
 /* End of Home Page Styles */
 
 /* User Account Styles */
@@ -119,6 +118,10 @@ h1 {
 }
 .hide {
     display: none;
+}
+
+.errors {
+    width: max-content !important;
 }
 /* Enf of User Account Styles */
 

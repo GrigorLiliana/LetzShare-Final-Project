@@ -50,7 +50,7 @@
                 @endif
                 @else
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-capitalize" href="#" role="button"
+                    <a id="navbarDropdown" class="nav-name nav-link dropdown-toggle text-capitalize" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
@@ -91,13 +91,4 @@
 
     </nav>
 </header>
-<div class="errors">
-    @if ( $message = Session::get('error') )
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <span>{{ $message }}</span>
-    </div>
-    @endif
-</div>
+

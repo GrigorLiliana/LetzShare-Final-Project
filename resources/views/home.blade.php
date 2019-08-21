@@ -68,12 +68,12 @@
                             $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id', Auth::user()->user_id)->first();
                             @endphp
                             @if ($like)
-                            <div class="liked">
+                        <div class="liked" id="{{$picture->photo_id}}">
                                 <i class="fas fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                             </div>
                             @else
-                            <div class="not-liked">
+                            <div class="not-liked" id="{{$picture->photo_id}}">
                                 <i class="far fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                             </div>
@@ -189,16 +189,19 @@
                         @endphp
                         @if ($like)
                         <div class="liked">
-                            <i class="fas fa-heart"></i><span>{{ $picture->likes_sum }}</span>
+                            <i class="fas fa-heart"></i>
+                            <span>{{ $picture->likes_sum }}</span>
                         </div>
                         @else
                         <div class="not-liked">
-                            <i class="far fa-heart"></i><span>{{ $picture->likes_sum }}</span>
+                            <i class="far fa-heart"></i>
+                            <span>{{ $picture->likes_sum }}</span>
                         </div>
                         @endif
                         @else
                         <div class="not-logged">
-                            <i class="far fa-heart"></i><span> {{ $picture->likes_sum }}</span>
+                            <i class="far fa-heart"></i>
+                            <span> {{ $picture->likes_sum }}</span>
                         </div>
                         <div class="not-liked" id="not-logged">
                             <i class="far fa-heart"></i><span> {{ $picture->likes_sum }}</span>
@@ -226,7 +229,7 @@
 
 <script>
     let token = '{{Session::token()}}';
-    let urlEdit = '{{route('useraccount')}}';
+    let urlLike = '{{route('like')}}';
 </script>
 
 @endsection

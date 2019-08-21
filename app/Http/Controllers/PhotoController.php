@@ -10,6 +10,7 @@ use App\Location;
 use App\Category;
 use App\Photo;
 use App\User;
+use App\Like;
 
 class PhotoController extends Controller
 {
@@ -116,6 +117,44 @@ class PhotoController extends Controller
         return redirect('useraccount');
     }
 
+    public function photoLikePhoto(Request $request) {
+        // collect data from POST
+        $photo_id = $request['photoId'];
+        $is_like = $request['isLiked'] === 'true';
+        $update = false;
+        $photo = Photo::find($photo_id);
+        // check if photo exists
+        if (!$photo) {
+            return null;
+        }
+        // check if user has already liked photo
+        $user = Auth::user();
+        $like = $user->likes()->where('photo_id' , $photo_id)->first();
+        // if yes, remove the like from the table
+        if ($like) {
+            $already_like = $like->islike;
+            $update = true;
+            if ($already_like == $is_like) {
+                $like->delete();
+                return null;
+            }
+        // if not already liked, create a new like
+        } else {
+            $like = new Like();
+        }
+        // make $like parameters equal to the values retrieved from POST
+        $like->islike = $is_like;
+        $like->user_id = $user->user_id;
+        $like->photo_id = $photo_id;
+        // if like already exists, update, if not create new
+        if ($update) {
+            $like->update();
+        } else {
+            $like->save();
+        }
+        return null;
+
+    }
 
     /**
      * Display the specified resource.

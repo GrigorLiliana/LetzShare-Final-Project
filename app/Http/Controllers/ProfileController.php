@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Photo;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
@@ -50,7 +51,7 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $validatedData = \Validator::make($request->all(),[
             'name'=> 'required|min:4|max:20|',
@@ -59,8 +60,10 @@ class ProfileController extends Controller
             return response()->json(['errors' => $validatedData->errors()->all()]);
 
         }else{
-            
-            return response()->json(['success' => 'successiful entered']);
+            $user = User::find($id);
+            $user->name = $request->name;
+            $user->save();
+            return response()->json(['success' => 'successiful entered', 'name'=>$user->name]);
             }
     }
 

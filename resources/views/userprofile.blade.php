@@ -16,17 +16,18 @@ $ownUser=false;
 @endphp
 <form action="/useraccount" method="post" class="form-profile">
     @csrf
+
     <h2>
-        @if($ownUser)Hello, @endif <span class="old-name text-capitalize">{{$userPhotos[0]->name}}</span>
+        @if($ownUser)Hello, @endif <span class="old-name old text-capitalize">{{$userPhotos[0]->name}}</span>
 
         @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
         @endif
     </h2>
     <div class="form-group div-form-profile hide">
         <input class="form-control profile-field" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
-            placeholder="{{$userPhotos[0]->name}}">
+            placeholder="Edit your name">
         <input type="number" class="hide" name="user_is" id="user_id" value="{{Auth::user()->user_id}}">
-        <input class="btn btn-primary mb-2 profile-field" type="submit" value="Edit" name="edit">
+        <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
         <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
     </div>
 </form>
@@ -37,24 +38,38 @@ $ownUser=false;
     <!-- Avatar -->
     <div class="profile-flex">
         <div class="edit-photo">
-            <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile" height="150" width="150" alt="avatar">
+            <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile img-thumbnail" height="150" width="150"
+                alt="avatar">
             @if($ownUser)<p><a href="{{route('useraccount')}}">Edit photo</a></p>@endif
         </div>
-        <div>
-            @if($userPhotos[0]->user_description)
-            <p><i class="fas fa-comment"></i><i> "{{$userPhotos[0]->user_description}}"</i>
-                @if($ownUser) | <a href="{{route('useraccount')}}">Edit Description</a></p>
-            @endif
-            @endif
-            @if($userPhotos[0]->user_location)
-            <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
-                @if($ownUser) | <a href="{{route('useraccount')}}">Edit Location</a></p>@endif
-            @endif
-            @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
-            @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
-            @endif
-        </div>
+
+        <form action="/useraccount" method="post" class="notform-profile">
+            <div>
+                @if($userPhotos[0]->user_description)
+                <p><i class="fas fa-comment"></i><i> "{{$userPhotos[0]->user_description}}"</i>
+                    @if($ownUser) | <a href="{{route('useraccount')}}">Edit Description</a></p>
+
+                @csrf
+                <div class="form-group div-form-profile ">
+                    <textarea name="description" id="description" cols="50" rows="1"
+                        value="{{$userPhotos[0]->user_description}}" placeholder="Edit your description"></textarea>
+                    <input type="number" class="hide user_id" name="user_is" value="{{Auth::user()->user_id}}">
+                    <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
+                    <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel"
+                        name="cancel">
+                </div>
+        </form>
+        @endif
+        @endif
+        @if($userPhotos[0]->user_location)
+        <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
+            @if($ownUser) | <a href="{{route('useraccount')}}">Edit Location</a></p>@endif
+        @endif
+        @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
+        @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
+        @endif
     </div>
+</div>
 </div>
 <!-- End of the User details -->
 
