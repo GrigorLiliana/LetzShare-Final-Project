@@ -19,12 +19,12 @@
 
     <div class="card-deck">
         @foreach ($topPics as $picture)
-        @php
-        $path = URL::asset($picture->image_URL);
-        $user = App\User::where('user_id', $picture->user_id)->first();
-        $cat = App\Category::where('category_id', $picture->category_id)->first();
-        $loc = App\Location::where('locality_id', $picture->locality_id)->first();
-        @endphp
+            @php
+                $path = URL::asset($picture->image_URL);
+                $user = App\User::where('user_id', $picture->user_id)->first();
+                $cat = App\Category::where('category_id', $picture->category_id)->first();
+                $loc = App\Location::where('locality_id', $picture->locality_id)->first();
+            @endphp
         <div class="card promoting-card">
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
@@ -224,5 +224,10 @@
 <br>
 
 </div> <!-- end container -->
+
+<script>
+    let token = '{{Session::token()}}';
+    let urlEdit = '{{route('useraccount')}}';
+</script>
 
 @endsection
