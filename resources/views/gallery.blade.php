@@ -14,37 +14,37 @@
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="photo-user">Photographers</label>
-                <select class="form-control form-control-sm" name="users" id="users" required>
-                    <option value="" disable>Select</option>
-                    @foreach ($photos as $photo)
-                    <option value="{{$photo->user_id}}">{{$photo->name}}</option>
+                <select class="form-control form-control-sm" name="users" id="users">
+                    <option value="default">Select</option>
+                    @foreach ($users as $user)
+                    <option value="{{$user->user_id}}">{{$user->name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-md-2">
                 <label for="photo-user">Location</label>
-                <select class="form-control form-control-sm" name="locality" id="locality" required>
-                    <option value="" disabled>Select</option>
-                    @foreach ($photos as $photo)
-                    <option value="{{$photo->locality_id}}">{{$photo->locality_name}}</option>
+                <select class="form-control form-control-sm" name="locality" id="locality">
+                    <option value="">Select</option>
+                    @foreach ($locations as $location)
+                    <option value="{{$location->locality_id}}">{{$location->locality_name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-md-2">
                 <label for="photo-user">Category</label>
-                <select class="form-control form-control-sm" name="category" id="category" required>
-                    <option value="" disabled>Select</option>
-                    @foreach ($photos as $photo)
-                    <option value="{{$photo->category_id}}">{{$photo->category_name}}</option>
+                <select class="form-control form-control-sm" name="category" id="category">
+                    <option value="">Select</option>
+                    @foreach ($categories as $category)
+                    <option value="{{$category->category_id}}">{{$category->category_name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-md-2">
                 <label for="photo-user">Likes</label>
-                <select class="form-control form-control-sm" name="likes" id="likes_sum" required>
-                    <option value="" disabled>Select</option>
-                    @foreach ($photos as $photo)
-                    <option value="{{$photo->likes_sum}}">{{$photo->likes_sum}}</option>
+                <select class="form-control form-control-sm" name="likes" id="likes_sum">
+                    <option value="">Select</option>
+                    @foreach ($likes as $like)
+                    <option value="{{$like->likes_sum}}">{{$like->likes_sum}}</option>
                     @endforeach
                 </select>
             </div>
