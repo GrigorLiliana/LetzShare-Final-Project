@@ -41,12 +41,16 @@ $(function() {
 
     /* Start of the Like-click listener */
 
-    $('#liked').on('click', removeLike);
-    $('#not-liked').on('click', addLike);
+    $('.liked').on('click', removeLike());
+    $('.not-liked').on('click', addLike());
 
-    function removeLike() {}
+    function removeLike() {
+        console.log("No likey");
+    }
 
-    function addLike() {}
+    function addLike() {
+        console.log("like");
+    }
 
     /* End of the Like-click listener */
 
@@ -61,13 +65,49 @@ $(function() {
     /* END of Upload file field --> show selected name */
 
     /*Edit User Profile Name */
-    $('#editName').on('click', function(event) {
-        event.preventDefault();
+    $('#editName').on('click', function() {
         $('.old-name').addClass('hide');
         $('#editName').addClass('hide');
-        $('input.hide').removeClass('hide');
+        $('div.hide')
+            .removeClass('hide')
+            .addClass('show');
+    });
+
+    $('.cancel-edit').on('click', function() {
+        $('.old-name').removeClass('hide');
+        $('#editName').removeClass('hide');
+        $('div.show')
+            .addClass('hide')
+            .removeClass('show');
+    });
+
+    $('.form-profile').on('submit', function(event) {
+        event.preventDefault();
+        let id = $('#user_id').val();
+        console.log(id);
+        $.ajax({
+            url: '/userprofile/' + id,
+            type: 'post',
+            data: $('form').serialize(),
+            success: function(result) {
+                if (result.success) {
+                    $('#my-div').html(
+                        '<p style="color:green">' + result.success + '<p>'
+                    );
+                } else {
+                    $('#resultForm').html('');
+                    $.each(result.errors, function(key, value) {
+                        $('#my-div').append(
+                            '<p style="color:red">' + value + '<p>'
+                        );
+                    });
+                }
+            },
+            error: function(err) {
+                // IF an Ajax error happens
+            }
+        });
     });
 
     /*End of the Edit User Profile Name */
-
 }); //LAST DO NOT DELETE

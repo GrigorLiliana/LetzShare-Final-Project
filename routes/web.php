@@ -33,7 +33,7 @@ Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
 
 
 //** ADMIN - Middleware auth validation */
-Route::get('/admin', 'AdminController@index')->middleware('admin');
+//Route::get('/admin', 'AdminController@index')->middleware('admin');
 
 
 //** TESTs */

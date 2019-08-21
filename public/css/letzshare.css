@@ -77,9 +77,14 @@ h1 {
     margin: 0.5em 0em;
 }
 
-#logged-like:hover {
+.liked:hover {
     background-color: lightgrey;
 }
+
+.not-liked:hover {
+    background-color: lightgrey;
+}
+
 
 /* End of Home Page Styles */
 
@@ -100,6 +105,17 @@ h1 {
 }
 .edit-photo p {
     margin: 1rem 16px 0 0;
+}
+
+.form-profile {
+    display: flex;
+}
+.div-form-profile {
+    display: flex;
+}
+.profile-field {
+    width: max-content !important;
+    margin-left: 0.5rem;
 }
 .hide {
     display: none;

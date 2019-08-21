@@ -14,16 +14,22 @@ $userId=Auth::user()->user_id;
 }else
 $ownUser=false;
 @endphp
-<form action="" method="post">
+<form action="/useraccount" method="post" class="form-profile">
+    @csrf
+    @method()
     <h2>
-        @if($ownUser)Hello, @endif <span class="old-name">{{$userPhotos[0]->name}}</span>
+        @if($ownUser)Hello, @endif <span class="old-name text-capitalize">{{$userPhotos[0]->name}}</span>
 
         @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
         @endif
     </h2>
-    <input class="hide" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
-        placeholder="{{$userPhotos[0]->name}}">
-    <input class="hide" type="button" value="Edit" name="edit">
+    <div class="form-group div-form-profile hide">
+        <input class="form-control profile-field" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
+            placeholder="{{$userPhotos[0]->name}}">
+        <input type="number" class="hide" name="user_is" id="user_id" value="{{Auth::user()->user_id}}">
+        <input class="btn btn-primary mb-2 profile-field" type="submit" value="Edit" name="edit">
+        <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
+    </div>
 </form>
 <hr>
 <!-- User details -->
@@ -82,13 +88,13 @@ $ownUser=false;
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
                         @if($ownUser)
-                        <a href="{{route('useraccount')}}"><i class="far fa-edit"></i></a>
-                        <a href="{{route('useraccount')}}"><i class="far fa-trash-alt"></i></a>
+                        <a href="{{route('useraccount')}}"><i class="far fa-edit text-success"></i></a>
+                        <a href="{{route('useraccount')}}"><i class="far fa-trash-alt text-danger text-right"></i></a>
                         @endif</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-calendar-alt"></i>
-                        {{ $userPhoto->created_at }}
-                        <small>
+                    <p class="card-text"><small><i class="far fa-calendar-alt"></i>
+                            {{ date('d-m-Y', strtotime($userPhoto->photodate)) }}
+
                         </small></p>
 
                 </div>
@@ -109,7 +115,7 @@ $ownUser=false;
                 <div class="collapse-content">
 
                     <!-- Text -->
-                    <p class="card-text ">{{ $userPhoto->image_description }}</p>
+                    <p class="card-text ">{{ str_limit($userPhoto->image_description, 90, '...') }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
@@ -123,7 +129,7 @@ $ownUser=false;
                         <li>
                             <i class="{{$cat->category_icon}}">
                             </i>
-                            <span> {{ $cat->category_name }}</span>
+                            <span class="text-capitalize"> {{ $cat->category_name }}</span>
                         </li>
                     </ul>
 
