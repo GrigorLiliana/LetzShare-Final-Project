@@ -121,6 +121,18 @@ class PhotoController extends Controller
         return redirect('useraccount');
     }
 
+    public function postLikePost(Request $request) {
+        $photo_id = $request['photoId'];
+        $is_like = $request['isLiked'] === 'true';
+        $update = false;
+        $photo = Photo::find($photo_id);
+        if (!$photo) {
+            return null;
+        }
+        $user = Auth::user();
+        $like = $user->likes()->where('photo_id' , $photo_id)->first();
+    }
+
 
     /**
      * Display the specified resource.
