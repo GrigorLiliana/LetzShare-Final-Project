@@ -43,8 +43,8 @@ $(function() {
 
     $('.liked').on('click', function(e) {
         event.preventDefault();
-        console.log(this.id, "No likey");
-        let like= false;
+        console.log(this.id, 'No likey');
+        let like = false;
         $.ajax({
             method: 'POST',
             url: urlLike,
@@ -55,16 +55,15 @@ $(function() {
     });
     $('.not-liked').on('click', function(e) {
         event.preventDefault();
-        console.log(this.id, "Liked");
-        let like= true;
+        console.log(this.id, 'Liked');
+        let like = true;
         $.ajax({
             method: 'POST',
             url: urlLike,
-            data: {isLiked: like, photoId: this.id, _token: token}
-        })
-        .done(function() {
+            data: { isLiked: like, photoId: this.id, _token: token }
+        }).done(function() {
             // Change the page
-        })
+        });
     });
 
     /* End of the Like-click listener */
@@ -118,7 +117,7 @@ $(function() {
                     });
                     setTimeout(function() {
                         $('.errors-profile').hide(500);
-                    }, 2500);
+                    }, 3500);
                 }
             },
             error: function(err) {
