@@ -23,7 +23,7 @@
                 $path = URL::asset($picture->image_URL);
                 $user = App\User::where('user_id', $picture->user_id)->first();
                 $cat = App\Category::where('category_id', $picture->category_id)->first();
-                $loc = App\Location::where('locality_id', $picture->locality_id)->first(); 
+                $loc = App\Location::where('locality_id', $picture->locality_id)->first();
             @endphp
         <div class="card promoting-card">
             <!-- Card content -->
@@ -62,7 +62,7 @@
                         <li>
                             @if (Auth::check())
                             @php
-                                $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id', Auth::user()->user_id)->first();  
+                                $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id', Auth::user()->user_id)->first();
                             @endphp
                             @if ($like)
                                 <div class="liked" id="logged-like">
@@ -108,7 +108,7 @@
             @php
                 $userId = $topUser->user_id;
                 $user = App\User::where('user_id', $userId)->first();
-                $path = URL::asset($user->user_photo);           
+                $path = URL::asset($user->user_photo);
             @endphp
             <div class="card">
                 <div class="card-body d-flex flex-row>
@@ -138,7 +138,7 @@
             $path = URL::asset($picture->image_URL);
             $user = App\User::where('user_id', $picture->user_id)->first();
             $cat = App\Category::where('category_id', $picture->category_id)->first();
-            $loc = App\Location::where('locality_id', $picture->locality_id)->first();       
+            $loc = App\Location::where('locality_id', $picture->locality_id)->first();
         @endphp
 
         <div class="card promoting-card">
@@ -214,5 +214,10 @@
 <br>
 
 </div> <!-- end container -->
+
+<script>
+    let token = '{{Session::token()}}';
+    let urlEdit = '{{route('useraccount')}}';
+</script>
 
 @endsection
