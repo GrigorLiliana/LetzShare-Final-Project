@@ -53,18 +53,18 @@ $(function() {
         console.log(urlLike);
         let like= false;
         $.ajax({
-            method:'POST',
+            method: 'POST',
             url: urlLike,
             data: {isLiked: like, photoId: this.id}
         })
         .done(function() {
             // Change the page
-        })
+        });
     });
-    $('.not-liked').on('click', function (e) {
+    $('.not-liked').on('click', function(e) {
         event.preventDefault();
-        console.log(this.id, "Liked");
-        let like= true;
+        console.log(this.id, 'Liked');
+        let like = true;
         $.ajax({
             method: 'POST',
             url: urlLike,
@@ -72,9 +72,8 @@ $(function() {
         })
         .done(function() {
             // Change the page
-        })
+        });
     });
-
 
     /* End of the Like-click listener */
 
@@ -92,46 +91,47 @@ $(function() {
     $('#editName').on('click', function() {
         $('.old-name').addClass('hide');
         $('#editName').addClass('hide');
-        $('div.hide')
-            .removeClass('hide')
-            .addClass('show');
+        $('div.div-form-profile').removeClass('hide');
     });
 
     $('.cancel-edit').on('click', function() {
         $('.old-name').removeClass('hide');
         $('#editName').removeClass('hide');
-        $('div.show')
-            .addClass('hide')
-            .removeClass('show');
+        $('div.div-form-profile').addClass('hide');
     });
-
+    /*Ajax call to edit profil*/
     $('.form-profile').on('submit', function(event) {
         event.preventDefault();
         let id = $('#user_id').val();
         $.ajax({
-            url: '/useraccount',
+            url: '/userprofile/' + id,
             type: 'post',
             data: $('form').serialize(),
             success: function(result) {
                 if (result.success) {
-                    console.log(result.success);
-                    $('#my-div').html(
-                        '<p style="color:green">' + result.success + '<p>'
-                    );
+                    $('.success-profile').removeClass('hide');
+                    $('.successMsg').text(result.success);
+                    $('.old-name').removeClass('hide');
+                    $('#editName').removeClass('hide');
+                    $('div.div-form-profile').addClass('hide');
+                    $('.old').text(result.name);
+                    $('.nav-name').text(result.name);
+                    setTimeout(function() {
+                        $('.success-profile').hide(500);
+                    }, 2000);
                 } else {
-                    $('#resultForm').html('');
+                    $('.errors-profile').removeClass('hide');
                     $.each(result.errors, function(key, value) {
-                        $('#my-div').append(
-                            '<p style="color:red">' + value + '<p>'
-                        );
+                        $('.errorMsg').text(value);
                     });
+                    setTimeout(function() {
+                        $('.errors-profile').hide(500);
+                    }, 3500);
                 }
             },
             error: function(err) {
                 // IF an Ajax error happens
             }
-        });
-    });
-
-    /*End of the Edit User Profile Name */
-}); //LAST DO NOT DELETE
+        }); /*end ajax call*/
+    }); /*End of the Edit User Profile Name */
+}); //LAST JQuery DO NOT DELETE

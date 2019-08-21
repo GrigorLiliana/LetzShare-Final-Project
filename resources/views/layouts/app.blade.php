@@ -29,6 +29,22 @@
         @include('layouts.nav')
 
         <main class="container py-4">
+            <div class="errors hide errors-profile">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span class="errorMsg"></span>
+                </div>
+            </div>
+            <div class="errors hide success-profile">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span class="successMsg"></span>
+                </div>
+            </div>
             @yield('content')
         </main>
     </div>
