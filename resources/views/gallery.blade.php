@@ -24,9 +24,11 @@
                 <div>
 
                     <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $photo->image_title }}</h6>
+                    <h6 class="card-title font-weight-bold mb-2 text-capitalize">{{ $photo->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $photo->created_at }}</p>
+                    <p class="card-text"><small><i class="far fa-calendar-alt"></i>
+                            {{date('d-m-Y', strtotime($photo->created_at)) }}
+                        </small></p>
 
                 </div>
 

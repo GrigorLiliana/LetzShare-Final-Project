@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-<h2>{{ Auth::user()->name }}, welcome to your dashboard!</h2>
+<h2 class="text-capitalize">{{ Auth::user()->name }}, welcome to your dashboard!</h2>
 <div>
     <p>
         <a href="{{route('uploadphoto')}}" class="add">
@@ -30,16 +30,20 @@
             <div class="card-body d-flex flex-row">
 
                 <!-- Avatar -->
-                <img src="{{$userAvatar}}" class="rounded-circle mr-3"
-                    height="50px" width="50px" alt="avatar">
+                <img src="{{$userAvatar}}" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
 
                 <!-- Content -->
                 <div>
 
                     <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}</h6>
+                    <h6 class="card-title font-weight-bold mb-2 text-capitalize">{{ $userPhoto->image_title }}</h6>
                     <!-- Subtitle -->
-                    <p class="card-text"><i class="far fa-clock pr-2"></i>{{ $userPhoto->created_at }}</p>
+                    <p class="card-text">
+                        <small>
+                            <i class="far fa-calendar-alt"></i>
+                            {{ date('d-m-Y', strtotime($userPhoto->photodate)) }}
+                        </small>
+                    </p>
 
                 </div>
 
@@ -48,7 +52,8 @@
             <!-- Card image -->
             <div class="view overlay">
                 <a href="{{ $userPhoto->image_URL }}">
-                <img class="card-img-top rounded-0" src="{{ $userPhoto->image_URL }}" alt="{{ $userPhoto->image_title }}">
+                    <img class="card-img-top rounded-0" src="{{ $userPhoto->image_URL }}"
+                        alt="{{ $userPhoto->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
@@ -59,7 +64,8 @@
                 <div class="collapse-content">
 
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent">{{ $userPhoto->image_description }}</p>
+                    <p class="card-text text-capitalize" id="collapseContent">
+                        {{ str_limit($userPhoto->image_description, 90, '...') }}</p>
                     <!-- Button -->
                     <ul>
                         <li>
@@ -73,7 +79,7 @@
                         <li>
                             <i class="{{$cat->category_icon}}">
                             </i>
-                            <span>{{ $cat->category_name }}</span>
+                            <span class="text-capitalize">{{ $cat->category_name }}</span>
                         </li>
                     </ul>
 
@@ -84,8 +90,8 @@
         </div>
         @endforeach
         <!-- END Card -->
-        </div>
     </div>
+</div>
 
 
 @endsection
