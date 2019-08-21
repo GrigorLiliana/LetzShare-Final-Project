@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use EloquenteBuilder;
 use Auth;
 use App\Location;
 use App\Category;
 use App\Photo;
-use Illuminate\Support\Facades\Input;
 
 class PhotoController extends Controller
 {
@@ -26,7 +27,9 @@ class PhotoController extends Controller
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
             ->orderBy('created_at', 'desc')
             ->get();
-            
+
+        //$photo->name = $request->name;
+
         return view('gallery', ['photos' => $photos]);
     }
 
@@ -37,13 +40,22 @@ class PhotoController extends Controller
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
             ->join('categories', 'categories.category_id', '=', 'photos.category_id')
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
-            ->where('categories.category_id', '=', $request->category.value)
+            ->where(
+                'users.user_id',
+                '=',
+                Input::get('users')
+                    or 'locations.locality_id',
+                '=',
+                Input::get('locality')
+                    or 'categories.category_id',
+                '=',
+                Input::get('category')
+            )
             ->orderBy('created_at', 'desc')
             ->get();
-            
+
         return view('gallery', ['photos' => $photos]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
