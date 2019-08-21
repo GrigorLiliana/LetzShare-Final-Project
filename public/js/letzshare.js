@@ -44,7 +44,7 @@ $(function() {
     $('.liked').on('click', function (e) {
         event.preventDefault();
         console.log(this.id, "No likey");
-        let like=0;
+        let like= false;
         $.ajax({
             method:'POST',
             url: urlLike,
@@ -57,11 +57,14 @@ $(function() {
     $('.not-liked').on('click', function (e) {
         event.preventDefault();
         console.log(this.id, "Liked");
-        let like=1;
+        let like= true;
         $.ajax({
             method: 'POST',
             url: urlLike,
             data: {isLiked: like, photoId: this.id, _token: token}
+        })
+        .done(function() {
+            // Change the page
         })
     });
 

@@ -229,7 +229,6 @@
 
 <script>
     let token = '{{Session::token()}}';
-    let urlEdit = '{{route('useraccount')}}';
     let urlLike = '{{route('like')}}';
 </script>
 
