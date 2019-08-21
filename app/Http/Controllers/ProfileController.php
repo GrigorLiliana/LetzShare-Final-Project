@@ -59,7 +59,7 @@ class ProfileController extends Controller
             return response()->json(['errors' => $validatedData->errors()->all()]);
 
         }else{
-
+            
             return response()->json(['success' => 'successiful entered']);
             }
     }

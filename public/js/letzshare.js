@@ -84,8 +84,6 @@ $(function() {
     $('.form-profile').on('submit', function(event) {
         event.preventDefault();
         let id = $('#user_id').val();
-        id = id + id;
-        console.log(id);
         $.ajax({
             url: '/userprofile/' + id,
             type: 'post',
