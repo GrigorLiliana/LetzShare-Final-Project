@@ -77,9 +77,14 @@ h1 {
     margin: 0.5em 0em;
 }
 
-#logged-like:hover {
+.liked:hover {
     background-color: lightgrey;
 }
+
+.not-liked:hover {
+    background-color: lightgrey;
+}
+
 
 /* End of Home Page Styles */
 
