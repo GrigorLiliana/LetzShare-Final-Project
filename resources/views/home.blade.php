@@ -65,22 +65,21 @@
                         <li>
                             @if (Auth::check())
                             @php
-                            $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
-                            Auth::user()->user_id)->first();
+                            $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id', Auth::user()->user_id)->first();
                             @endphp
                             @if ($like)
-                            <div class="liked" id="logged-like">
+                            <div class="liked">
                                 <i class="fas fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                             </div>
                             @else
-                            <div class="not-liked" id="logged-like">
+                            <div class="not-liked">
                                 <i class="far fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                             </div>
                             @endif
                             @else
-                            <div id="not-logged">
+                            <div class="not-logged">
                                 <i class="far fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                             </div>
@@ -189,11 +188,11 @@
                         Auth::user()->user_id)->first();
                         @endphp
                         @if ($like)
-                        <div id="liked" class="logged">
+                        <div class="liked">
                             <i class="fas fa-heart"></i><span>{{ $picture->likes_sum }}</span>
                         </div>
                         @else
-                        <div id="not-liked" class="logged">
+                        <div class="not-liked">
                             <i class="far fa-heart"></i><span>{{ $picture->likes_sum }}</span>
                         </div>
                         @endif

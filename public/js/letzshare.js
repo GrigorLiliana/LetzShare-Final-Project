@@ -41,12 +41,16 @@ $(function() {
 
     /* Start of the Like-click listener */
 
-    $('#liked').on('click', removeLike);
-    $('#not-liked').on('click', addLike);
+    $('.liked').on('click', removeLike());
+    $('.not-liked').on('click', addLike());
 
-    function removeLike() {}
+    function removeLike() {
+        console.log("No likey");
+    }
 
-    function addLike() {}
+    function addLike() {
+        console.log("like");
+    }
 
     /* End of the Like-click listener */
 
