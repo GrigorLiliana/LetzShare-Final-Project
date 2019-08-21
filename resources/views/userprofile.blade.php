@@ -14,16 +14,22 @@ $userId=Auth::user()->user_id;
 }else
 $ownUser=false;
 @endphp
-<form action="" method="post">
+<form action="/useraccount" method="post" class="form-profile">
+    @csrf
+    @method()
     <h2>
         @if($ownUser)Hello, @endif <span class="old-name text-capitalize">{{$userPhotos[0]->name}}</span>
 
         @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
         @endif
     </h2>
-    <input class="hide" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
-        placeholder="{{$userPhotos[0]->name}}">
-    <input class="hide" type="button" value="Edit" name="edit">
+    <div class="form-group div-form-profile hide">
+        <input class="form-control profile-field" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
+            placeholder="{{$userPhotos[0]->name}}">
+        <input type="number" class="hide" name="user_is" id="user_id" value="{{Auth::user()->user_id}}">
+        <input class="btn btn-primary mb-2 profile-field" type="submit" value="Edit" name="edit">
+        <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
+    </div>
 </form>
 <hr>
 <!-- User details -->
