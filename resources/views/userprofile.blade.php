@@ -14,23 +14,27 @@ $userId=Auth::user()->user_id;
 }else
 $ownUser=false;
 @endphp
-<form action="/useraccount" method="post" class="form-profile">
+<!-- Edit Name -->
+<form action="/useraccount" method="post" class="form-flex-profile edit-name">
     @csrf
-
     <h2>
-        @if($ownUser)Hello, @endif <span class="old-name old text-capitalize">{{$userPhotos[0]->name}}</span>
+        <!--User name-->
+        @if($ownUser)Hello, @endif <span class="old-name older-name text-capitalize">{{$userPhotos[0]->name}}</span>
 
         @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
         @endif
     </h2>
-    <div class="form-group div-form-profile hide">
+    <!--Form to edit name-->
+    <div class="form-group flex-div div-edit-name hide">
         <input class="form-control profile-field" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
             placeholder="Edit your name">
-        <input type="number" class="hide" name="user_is" id="user_id" value="{{Auth::user()->user_id}}">
+        <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
         <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
         <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
     </div>
 </form>
+<!--End edit name-->
+
 <hr>
 <!-- User details -->
 <div class="card promoting-card card-user">
@@ -43,33 +47,42 @@ $ownUser=false;
             @if($ownUser)<p><a href="{{route('useraccount')}}">Edit photo</a></p>@endif
         </div>
 
-        <form action="/useraccount" method="post" class="notform-profile">
-            <div>
-                @if($userPhotos[0]->user_description)
-                <p><i class="fas fa-comment"></i><i> "{{$userPhotos[0]->user_description}}"</i>
-                    @if($ownUser) | <a href="{{route('useraccount')}}">Edit Description</a></p>
-
+        <!-- EDIT User description -->
+        <div>
+            <form action="/useraccount" method="post" class="form-flex-profile edit-description">
                 @csrf
-                <div class="form-group div-form-profile ">
-                    <textarea name="description" id="description" cols="50" rows="1"
-                        value="{{$userPhotos[0]->user_description}}" placeholder="Edit your description"></textarea>
-                    <input type="number" class="hide user_id" name="user_is" value="{{Auth::user()->user_id}}">
-                    <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
-                    <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel"
+                <div>
+                    @if($userPhotos[0]->user_description)
+                    <p><i class="fas fa-comment"></i>
+                        <span class="old-description older-description text-capitalize">
+                            <i>"{{$userPhotos[0]->user_description}}"</i>
+                        </span>
+                        @if($ownUser)
+                        <span class="old-description">|</span>
+                        <a href="#" id="editDescription">Edit Description</a>
+                    </p>
+                </div>
+
+                <div class="form-group flex-div div-edit-description hide">
+                    <textarea class="form-control" name="description" id="description" cols="50" rows="1"
+                        placeholder="Edit your description">{{$userPhotos[0]->user_description}}</textarea>
+                        <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
+                        <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
+                        <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel"
                         name="cancel">
                 </div>
-        </form>
-        @endif
-        @endif
-        @if($userPhotos[0]->user_location)
-        <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
-            @if($ownUser) | <a href="{{route('useraccount')}}">Edit Location</a></p>@endif
-        @endif
-        @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
-        @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
-        @endif
+            </form>
+            @endif
+            @endif
+            @if($userPhotos[0]->user_location)
+            <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
+                @if($ownUser) | <a href="{{route('useraccount')}}">Edit Location</a></p>@endif
+            @endif
+            @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
+            @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
+            @endif
+        </div>
     </div>
-</div>
 </div>
 <!-- End of the User details -->
 

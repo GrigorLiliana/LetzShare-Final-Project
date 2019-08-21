@@ -27,13 +27,13 @@ Route::post('/uploadphoto', 'PhotoController@store');
 Route::get('/useraccount', 'UserController@index')->name('useraccount');
 Route::get('/userprofile/{id}', 'ProfileController@index')->name('userprofile');
 Route::post('/userprofile/{id}', 'ProfileController@store');
-
+Route::post('/userprofile/description/{id}', 'ProfileController@description');
 
 Route::get('/gallery', 'PhotoController@index');
 Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
 
 //** Likes handler */
-Route::get('/like', 'PhotoController@photoLikePhoto')->name('like');
+Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 
 //** ADMIN - Middleware auth validation */
 //Route::get('/admin', 'AdminController@index')->middleware('admin');

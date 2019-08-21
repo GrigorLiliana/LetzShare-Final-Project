@@ -106,10 +106,10 @@ h1 {
     margin: 1rem 16px 0 0;
 }
 
-.form-profile {
+.form-flex-profile {
     display: flex;
 }
-.div-form-profile {
+.flex-div {
     display: flex;
 }
 .profile-field {
