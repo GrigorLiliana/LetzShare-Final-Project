@@ -125,7 +125,8 @@
                 </a>
             </div>
             <div class="card-body">
-                <p class="card-text text-capitalize"><small>{{ $user->user_description }}</small></p>
+                <p class="card-text text-capitalize"><small>{{ str_limit($user->user_description, 90, '...') }}</small>
+                </p>
                 <p class="card-text"><small class="text-muted">Has posted {{$topUser->total_photos}} photos</small></p>
             </div>
         </div>
