@@ -10,10 +10,10 @@
     <title>@yield('title')</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.fancybox.js') }}" defer></script>
     <!-- <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script> -->
-    <script src="{{ asset('js/letzshare.js') }}"></script>
+    <script src="{{ asset('js/letzshare.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
 
     <!-- Styles -->
