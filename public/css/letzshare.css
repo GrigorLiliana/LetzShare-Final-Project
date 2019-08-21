@@ -101,6 +101,17 @@ h1 {
 .edit-photo p {
     margin: 1rem 16px 0 0;
 }
+
+.form-profile {
+    display: flex;
+}
+.div-form-profile {
+    display: flex;
+}
+.profile-field {
+    width: max-content !important;
+    margin-left: 0.5rem;
+}
 .hide {
     display: none;
 }
