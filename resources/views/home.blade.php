@@ -80,7 +80,7 @@
                             </div>
                             @endif
                             @else
-                            <div class="not-liked" id="not-logged">
+                            <div id="not-logged">
                                 <i class="far fa-heart"></i>
                                 <span>{{ $picture->likes_sum }}</span>
                             </div>
