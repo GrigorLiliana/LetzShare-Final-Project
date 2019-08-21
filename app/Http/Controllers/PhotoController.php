@@ -26,7 +26,7 @@ class PhotoController extends Controller
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
             ->orderBy('created_at', 'desc')
             ->get();
-            
+
         return view('gallery', ['photos' => $photos]);
     }
 
@@ -40,7 +40,7 @@ class PhotoController extends Controller
             ->where('categories.category_id', '=', $request->category.value)
             ->orderBy('created_at', 'desc')
             ->get();
-            
+
         return view('gallery', ['photos' => $photos]);
     }
 
@@ -107,6 +107,18 @@ class PhotoController extends Controller
         $photo->save();
 
         return redirect('useraccount');
+    }
+
+    public function postLikePost(Request $request) {
+        $photo_id = $request['photoId'];
+        $is_like = $request['isLiked'] === 'true';
+        $update = false;
+        $photo = Photo::find($photo_id);
+        if (!$photo) {
+            return null;
+        }
+        $user = Auth::user();
+        $like = $user->likes()->where('photo_id' , $photo_id)->first();
     }
 
 
