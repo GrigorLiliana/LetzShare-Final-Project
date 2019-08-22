@@ -21,6 +21,7 @@ Route::view('/about-us', 'about-us')->name('about-us');
 
 Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact/sendemail', 'ContactController@sendEmail');
+Route::post('/sendmessage/{id}', 'ContactController@sendMessage');
 
 Route::get('/uploadphoto', 'PhotoController@create')->name('uploadphoto');
 Route::post('/uploadphoto', 'PhotoController@store');
@@ -52,6 +53,5 @@ Route::get('/test', function(){
   foreach ($user->likes as $key => $like) {
   echo $like->like_id;
   echo '<hr>';
-  }
-*/
+  }*/
 });
