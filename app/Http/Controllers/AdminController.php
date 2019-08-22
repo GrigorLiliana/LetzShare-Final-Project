@@ -1,22 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
-use Illuminate\Http\Request;
-use App\Photo;
 
-class UserController extends Controller
+use Illuminate\Http\Request;
+use DB;
+use App\User;
+
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $userId = Auth::user()->user_id;
-        $userPhotos = Photo::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
-        return view('useraccount', ['userPhotos' => $userPhotos]);
+    public function index(){
+        
+        //$admins = User::all()->where('user_type', '=', 'admin');
+        //$users = User::all()->where('user_type', '=', 'photographer');
+        $users = User::all();
+
+        return view('admin', [
+            //'admins' => $admins,
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -26,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-       
+        
     }
 
     /**

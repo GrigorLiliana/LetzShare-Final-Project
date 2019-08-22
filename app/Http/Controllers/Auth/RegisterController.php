@@ -49,9 +49,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+:;]).{6,}$/'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/'],
         ]);
     }
 
@@ -70,11 +70,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $userId = $user->user_id;
-
-        if (!file_exists("uploads/$userId")) {
-            mkdir("uploads/$userId", 0755, true);
-        }
+        $user->user_location = 'Luxembourg';
+        $user->user_description = "Hi, I'm " . $data['name'] . " and I love to take photos in Luxembourg!";
+        $user->save();
 
         return $user;
     }

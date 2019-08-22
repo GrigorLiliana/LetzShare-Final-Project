@@ -145,7 +145,7 @@ class PhotoController extends Controller
         $photo->likes_sum = 0;
         $photo->save();
 
-        return redirect('useraccount');
+        return redirect('userprofile/'.$userId);
     }
 
     public function photoLikePhoto(Request $request)
@@ -168,6 +168,8 @@ class PhotoController extends Controller
             $update = true;
             if ($already_like == $is_like) {
                 $like->delete();
+                $photo->likes_sum = count($photo->likes);
+                $photo->update();
                 return null;
             }
             // if not already liked, create a new like
@@ -184,6 +186,9 @@ class PhotoController extends Controller
         } else {
             $like->save();
         }
+        $count = count($photo->likes);
+        $photo->likes_sum = count($photo->likes);
+        $photo->update();
         return null;
     }
 

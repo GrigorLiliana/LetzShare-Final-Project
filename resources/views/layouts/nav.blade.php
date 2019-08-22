@@ -5,7 +5,7 @@
     return strstr( request()->path(), $uri);
     }
     @endphp
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
 
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/') }}/LetzShare_logo.png" alt="LetzShare logo." width="60">
@@ -50,16 +50,18 @@
                 @endif
                 @else
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-name nav-link dropdown-toggle text-capitalize" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a id="navbarDropdown" class="nav-name nav-link dropdown-toggle text-capitalize" href="#"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item {{ (current_page('useraccount')) ? 'active' : '' }}"
-                            href="{{ route('useraccount') }}">
-                            My account
-                        </a>
+
+                        @if (Auth::user()->user_type == 'admin')
+                            <a class="dropdown-item {{ (current_page('admin')) ? 'active' : '' }}" href="{{ route('admin')}}">Admin Dashboard</a>
+                        @endif
+
+
                         <a class="dropdown-item {{ (current_page('userprofile')) ? 'active' : '' }}"
                             href="/userprofile/{{Auth::user()->user_id}}">
                             My profile
@@ -91,4 +93,13 @@
 
     </nav>
 </header>
-
+<div class="notAdmin">
+    @if ( $message = Session::get('error') )
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <span>{{ $message }}</span>
+    </div>
+    @endif
+</div>

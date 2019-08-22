@@ -47,18 +47,19 @@ $(function() {
         }
     });
 
-    $('.liked').on('click', function (e) {
+    $('.liked').on('click', function(e) {
         event.preventDefault();
-        console.log(this.id, "No likey");
-        console.log(urlLike);
-        let like= false;
+        console.log(this.id, 'No likey');
+        let like = false;
         $.ajax({
             method: 'POST',
-            url: urlLike,
-            data: {isLiked: like, photoId: this.id}
-        })
-        .done(function() {
+            url: '/like',
+            data: { isLiked: like, photoId: this.id }
+        }).done(function() {
             // Change the page
+
+            $(this.id).addClass('not-liked');
+            $(this.id).removeClass('liked');
         });
     });
     $('.not-liked').on('click', function(e) {
@@ -67,11 +68,12 @@ $(function() {
         let like = true;
         $.ajax({
             method: 'POST',
-            url: urlLike,
-            data: {isLiked: like, photoId: this.id}
-        })
-        .done(function() {
+            url: '/like',
+            data: { isLiked: like, photoId: this.id }
+        }).done(function() {
             // Change the page
+            $(this.id).addClass('liked');
+            $(this.id).removeClass('not-liked');
         });
     });
 
@@ -130,6 +132,13 @@ $(function() {
                 }
             },
             error: function(err) {
+                $('.errors-profile').removeClass('hide');
+                $('.errorMsg').text(
+                    'An unexpected error has occurred! Please try again.'
+                );
+                setTimeout(function() {
+                    $('.errors-profile').hide(500);
+                }, 3500);
                 // IF an Ajax error happens
             }
         }); /*end ajax call*/
@@ -137,18 +146,19 @@ $(function() {
 
     /*Edit User Profile -> DESCRIPTION */
 
-    $('#editDescription').on('click', function() {
+    $('.linkEditDescription').on('click', function() {
         $('.old-description').addClass('hide');
-        $('#editDescription').addClass('hide');
+        $('.linkEditDescription').addClass('hide');
         $('.div-edit-description').removeClass('hide');
     });
 
     $('.cancel-edit').on('click', function() {
         $('.old-description').removeClass('hide');
-        $('#editDescription').removeClass('hide');
+        $('.linkEditDescription').removeClass('hide');
         $('.div-edit-description').addClass('hide');
     });
-    /*Ajax call to edit NAME profil*/
+
+    /*Ajax call to edit description profil*/
     $('.edit-description').on('submit', function(event) {
         event.preventDefault();
         let id = $('.user_id').val();
@@ -162,7 +172,7 @@ $(function() {
                     $('.success-profile').removeClass('hide');
                     $('.successMsg').text(result.success);
                     $('.old-description').removeClass('hide');
-                    $('#editDescription').removeClass('hide');
+                    $('.linkEditDescription').removeClass('hide');
                     $('.div-edit-description').addClass('hide');
                     $('.older-description').text(result.description);
                     setTimeout(function() {
@@ -179,10 +189,77 @@ $(function() {
                 }
             },
             error: function(err) {
-                // IF an Ajax error happens
+                console.log(err);
+                $('.errors-profile').removeClass('hide');
+                $('.errorMsg').text(
+                    'An unexpected error has occurred! Please try again.'
+                );
+                setTimeout(function() {
+                    $('.errors-profile').hide(500);
+                }, 3500);
             }
-        }); /*end ajax call*/
-    }); /*End of the Edit User Profile Name */
+        });
+    }); /*end ajax call*/
+    /*END of edit DESCRIPTION */
 
-    /*END of edit User Profile -> DESCRIPTION */
+    /*Send msg to a user*/
+    $('.send-msg-link').on('click', function() {
+        $('.send-msg-card').removeClass('hide');
+        $('.shadow-div').removeClass('hide');
+    });
+
+    $('.close-card').on('click', function() {
+        $('.send-msg-card').addClass('hide');
+        $('.shadow-div').addClass('hide');
+    });
+
+    /*Ajax call to send message*/
+    $('.send-message-to').on('submit', function(event) {
+        event.preventDefault();
+        let id = $('#idToSend').val();
+        $.ajax({
+            url: '/sendmessage/' + id,
+            type: 'post',
+            data: $('form').serialize(),
+            success: function(result) {
+                if (result.success) {
+                    $('.success-profile').removeClass('hide');
+                    $('.success-profile').css({
+                        position: 'absolute',
+                        'z-index': '1'
+                    });
+                    $('.successMsg').text(result.success);
+                    $('.send-msg-card').addClass('hide');
+                    $('.shadow-div').addClass('hide');
+                    setTimeout(function() {
+                        $('.success-profile').hide(500);
+                    }, 2000);
+                    console.log(result.success);
+                } else {
+                    $('.errors-profile').removeClass('hide');
+                    $('.errors-profile').css({
+                        position: 'absolute',
+                        'z-index': '1'
+                    });
+                    $.each(result.errors, function(key, value) {
+                        $('.errorMsg').text(value);
+                    });
+                    setTimeout(function() {
+                        $('.errors-profile').hide(500);
+                    }, 3500);
+                }
+            },
+            error: function(err) {
+                console.log(err);
+                $('.errors-profile').removeClass('hide');
+                $('.errorMsg').text(
+                    'An unexpected error has occurred! Please try again.'
+                );
+                setTimeout(function() {
+                    $('.errors-profile').hide(500);
+                }, 3500);
+            }
+        });
+    }); /*end ajax call to send message*/
+    /*end of send message to a user*/
 }); //LAST JQuery DO NOT DELETE
