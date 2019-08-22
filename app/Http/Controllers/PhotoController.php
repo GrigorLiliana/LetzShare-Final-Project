@@ -149,6 +149,8 @@ class PhotoController extends Controller
             $update = true;
             if ($already_like == $is_like) {
                 $like->delete();
+                $photo->likes_sum = count($photo->likes);
+                $photo->update();
                 return null;
             }
             // if not already liked, create a new like
@@ -164,7 +166,10 @@ class PhotoController extends Controller
             $like->update();
         } else {
             $like->save();
-        }
+        }        
+        $count = count($photo->likes);        
+        $photo->likes_sum = count($photo->likes);
+        $photo->update();
         return null;
     }
 
