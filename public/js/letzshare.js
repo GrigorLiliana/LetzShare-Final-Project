@@ -80,7 +80,7 @@ $(function() {
     /* End of the Like-click listener */
 
     /* Upload file field --> show selected name */
-    $('#customFile').on('change', function() {
+    $('#foto').on('change', function() {
         //replace the "Choose a file" label
         var newFileName = $(this)[0].files[0].name;
         $(this)
@@ -262,4 +262,54 @@ $(function() {
         });
     }); /*end ajax call to send message*/
     /*end of send message to a user*/
+
+    /*Ajax call to upload photo*/
+    $('#uploadform').on('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: '/uploadphoto',
+            data: new FormData($('#uploadform')[0]),
+            processData: false,
+            contentType: false,
+            success: function(result) {
+                if (result.success) {
+                    $('.success-profile').removeClass('hide');
+                    $('.success-profile').css({
+                        position: 'absolute',
+                        'z-index': '1'
+                    });
+                    $('.successMsg').text(result.success);
+
+                    setTimeout(function() {
+                        $('.success-profile').hide(500);
+                    }, 2000);
+                    console.log(result.success);
+                } else {
+                    console.log(result);
+                    console.log(result.errors);
+                    $('.errors-profile').removeClass('hide');
+                    $('.errors-profile').css({
+                        position: 'absolute',
+                        'z-index': '1'
+                    });
+                    $.each(result.errors, function(key, value) {
+                        $('.errorMsg').text(value);
+                    });
+                    setTimeout(function() {
+                        $('.errors-profile').hide(500);
+                    }, 3500);
+                }
+            },
+            error: function(err) {
+                $('.errors-profile').removeClass('hide');
+                $('.errorMsg').text(
+                    'An unexpected error has occurred! Please try again.'
+                );
+                setTimeout(function() {
+                    $('.errors-profile').hide(500);
+                }, 3500);
+            }
+        });
+    }); /*end ajax call to upload photo*/
 }); //LAST JQuery DO NOT DELETE

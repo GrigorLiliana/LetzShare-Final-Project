@@ -90,7 +90,7 @@ class PhotoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function create()
+    public function create() //upload photo -> display
     {
         $categories = Category::all();
         $locations = Location::all();
@@ -104,20 +104,28 @@ class PhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //save photo
     {
-        request()->validate([
+        $validatedData = \Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'title' => 'required|min:4|max:30',
+            'description' => 'required|min:5|max:250',
+            'locality' => 'required',
+            'category' => 'required'
         ]);
 
+        if($validatedData->fails()){
+            return response()->json(['errors' => $validatedData->errors()->all()]);
+        }else{
         $userId = Auth::user()->user_id;
         $imageName = $userId . '_0.' . request()->image->getClientOriginalExtension();
 
-
+        //create a folder if doesn't exists
         if (!file_exists("uploads/$userId")) {
             mkdir("uploads/$userId", 0755, true);
         }
 
+        //change name file while name file already exists
         if (file_exists("uploads/$userId/$imageName")) {
             $i = 0;
             do {
@@ -125,16 +133,10 @@ class PhotoController extends Controller
                 $i++;
             } while (file_exists("uploads/$userId/$imageName"));
         }
-
+        //save image in the folder
         request()->image->move(public_path("uploads/$userId"), $imageName);
 
-        $validatedData = \Validator::make($request->all(), [
-            'title' => 'required|min:4|max:20|',
-            'description' => 'required|min:4',
-            'locality' => 'required',
-            'category' => 'required'
-        ]);
-
+        //save data in database
         $photo = new Photo();
         $photo->image_title = $request->title;
         $photo->image_URL = "uploads/$userId/$imageName";
@@ -145,7 +147,8 @@ class PhotoController extends Controller
         $photo->likes_sum = 0;
         $photo->save();
 
-        return redirect('userprofile/'.$userId);
+        return response()->json(['success' => 'Congratulations, your photo was uploaded successfully!']);
+        }
     }
 
     public function photoLikePhoto(Request $request)
