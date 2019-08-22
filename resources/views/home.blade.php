@@ -232,8 +232,4 @@
 
 </div> <!-- end container -->
 
-<script>
-    let urlLike = '{{route('like')}}';
-</script>
-
 @endsection

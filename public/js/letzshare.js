@@ -50,16 +50,15 @@ $(function() {
     $('.liked').on('click', function(e) {
         event.preventDefault();
         console.log(this.id, 'No likey');
-        console.log(urlLike);
         let like = false;
         $.ajax({
             method: 'POST',
-            url: urlLike,
+            url: '/like',
             data: { isLiked: like, photoId: this.id }
         }).done(function() {
             // Change the page
-            $(e.target).addClass("not-liked");
-            $(e.target).removeClass("liked"); 
+            $(this.id).addClass('not-liked');
+            $(this.id).removeClass('liked');
         });
     });
     $('.not-liked').on('click', function(e) {
@@ -68,12 +67,12 @@ $(function() {
         let like = true;
         $.ajax({
             method: 'POST',
-            url: urlLike,
+            url: '/like',
             data: { isLiked: like, photoId: this.id }
         }).done(function() {
             // Change the page
-            $(e.target).addClass("liked");
-            $(e.target).removeClass("not-liked"); 
+            $(this.id).addClass('liked');
+            $(this.id).removeClass('not-liked');
         });
     });
 
