@@ -147,7 +147,7 @@ class PhotoController extends Controller
         $photo->likes_sum = 0;
         $photo->save();
 
-        return response()->json(['success' => 'Congratulations, your photo was uploaded successfully!']);
+        return response()->json(['success' => 'Congratulations, your photo was uploaded successfully!', 'url'=>$photo->image_URL]);
         }
     }
 

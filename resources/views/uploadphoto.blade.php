@@ -18,11 +18,16 @@
             <span aria-hidden="true">&times;</span>
         </button>
         <span class="successMsg"></span>
+        <div id="showNewPhoto"> </div>
     </div>
+
 </div>
 
 <form id="uploadform" class="formbox" method="POST" enctype="multipart/form-data">
     @csrf
+
+
+
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-10 col-lg-8">
             <div class="card">
