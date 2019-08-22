@@ -6,16 +6,22 @@
 
 @section('content')
 
+
+@guest
+@php
+$ownUser=false;
+@endphp
+@else
 @php
 // check if the profile belongs to the user
 if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
 $ownUser=true;
 $userId=Auth::user()->user_id;
-}else
-$ownUser=false;
+}
 @endphp
+@endguest
 <!-- Edit Name -->
-<form action="/useraccount" method="post" class="form-flex-profile edit-name">
+<form method="post" class="form-flex-profile edit-name">
     @csrf
     <h2>
         <!--User name-->
@@ -24,6 +30,7 @@ $ownUser=false;
         @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
         @endif
     </h2>
+    @if($ownUser)
     <!--Form to edit name-->
     <div class="form-group flex-div div-edit-name hide">
         <input class="form-control profile-field" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
@@ -32,58 +39,72 @@ $ownUser=false;
         <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
         <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
     </div>
+    @endif
 </form>
 <!--End edit name-->
 
 <hr>
 <!-- User details -->
 <div class="card promoting-card card-user">
-    @php $userAvatar = URL::asset($userPhotos[0]->user_photo); @endphp
     <!-- Avatar -->
     <div class="profile-flex">
         <div class="edit-photo">
-            <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile img-thumbnail" height="150" width="150"
-                alt="avatar">
+            <img src="{{URL::asset($userPhotos[0]->user_photo)}}" class="rounded-circle mr-3 user-profile img-thumbnail"
+                height="150" width="150" alt="{{$userPhotos[0]->name}} photo">
             @if($ownUser)<p><a href="#">Edit photo</a></p>@endif
         </div>
 
         <!-- EDIT User description -->
         <div>
-            <form action="/useraccount" method="post" class="form-flex-profile edit-description">
+            <form method="post" class="form-flex-profile edit-description">
                 @csrf
                 <div>
                     <p><i class="fas fa-comment"></i>
                         <span class="old-description older-description text-capitalize">
-                            <i>"{{$userPhotos[0]->user_description}}"</i>
-                        </span>
-                        @if($ownUser)
-                        <span class="old-description">|</span>
-                        <a href="#" class="linkEditDescription">Edit Description</a>
-                    </p>
-                </div>
-
-                <div class="form-group flex-div div-edit-description hide">
-                    <textarea class="form-control" name="description" id="description" cols="50" rows="1"
-                        placeholder="Edit your description">{{$userPhotos[0]->user_description}}</textarea>
-                    <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
-                    <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
-                    <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel"
-                        name="cancel">
-                </div>
-                @endif
-                <!--End if user is in your own profile-->
-
-            </form>
-
-            @if($userPhotos[0]->user_location)
-            <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
-                @if($ownUser) | <a href="#">Edit Location</a></p>@endif
-            @endif
-            @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
-            @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
-            @endif
+                            <i>"@if($userPhotos[0]->user_description)
+                                {{$userPhotos[0]->user_description}}@endif"</i>
+                        </span>@if(!$ownUser)
+                </div> @endif
+                @if($ownUser)
+                <span class="old-description">|</span>
+                <a href="#" class="linkEditDescription">Edit Description</a>
+                </p>
         </div>
+        @if($ownUser)
+        <div class="form-group flex-div div-edit-description hide">
+            <textarea class="form-control" name="description" id="description" cols="50" rows="1"
+                placeholder="Edit your description">{{$userPhotos[0]->user_description}}</textarea>
+            <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
+            <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
+            <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
+        </div>
+        @endif
+        @endif
+        <!--End if user is in your own profile-->
+
+        </form>
+
+
+        <p>
+            <i class="fas fa-map-marker-alt"></i>
+            @if($userPhotos[0]->user_location){{$userPhotos[0]->user_location}}
+            @if($ownUser) | <a href="#">Edit Location</a>
+            @endif
+            @endif
+        </p>
+
+        @if(!$ownUser)
+        <p>
+            <a href="mailto:{{$userPhotos[0]->email}}">
+                <i class="far fa-envelope"></i>
+                Send a message</a>
+        </p>
+        @else <p>
+            <i class="fas fa-at"></i>
+            {{$userPhotos[0]->email}}</p>
+        @endif
     </div>
+</div>
 </div>
 
 <!-- End of the User details -->
@@ -97,15 +118,14 @@ $ownUser=false;
     @endif
 </h2>
 <hr>
+
+<!-- check if the user as photos -->
+@if(count($userPhotos)>1)
+<!--create a card for each photo if the user has photo -->
 <div class="row">
     <div class="card-columns">
-        @foreach ($userPhotos as $userPhoto)
-        @php
-        $path = URL::asset($userPhoto->image_URL);
-        $cat = App\Category::where('category_id', $userPhoto->category_id)->first();
-        $loc = App\Location::where('locality_id', $userPhoto->locality_id)->first();
-        @endphp
 
+        @foreach ($userPhotos as $userPhoto)
         <div class="card promoting-card">
 
             <!-- Card content -->
@@ -132,8 +152,9 @@ $ownUser=false;
 
             <!-- Card image -->
             <div class="view overlay">
-                <a href="{{ $path }}">
-                    <img class="card-img-top rounded-0" src="{{ $path }}" alt="{{ $userPhoto->image_title }}">
+                <a href="{{ URL::asset($userPhoto->image_URL) }}">
+                    <img class="card-img-top rounded-0" src="{{ URL::asset($userPhoto->image_URL) }}"
+                        alt="{{ $userPhoto->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
@@ -153,12 +174,12 @@ $ownUser=false;
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span> {{ $loc->locality_name }}</span>
+                            <span> {{ $userPhoto->locality_name }}</span>
                         </li>
                         <li>
-                            <i class="{{$cat->category_icon}}">
+                            <i class="{{$userPhoto->category_icon}}">
                             </i>
-                            <span class="text-capitalize"> {{ $cat->category_name }}</span>
+                            <span class="text-capitalize"> {{ $userPhoto->category_name }}</span>
                         </li>
                     </ul>
 
@@ -169,8 +190,18 @@ $ownUser=false;
         </div>
         @endforeach
         <!-- END Card -->
+
     </div>
 </div>
 
+
+@else
+<!--if the portfolio is empty-->
+<div class="card promoting-card card-user">
+    <div class="card-body d-flex flex-row">
+        <p>This portfolio is empty for now. We're excited to see new photos from {{$userPhotos[0]->name}}!</p>
+    </div>
+</div>
+@endif
 <!--End of the User Portfolio -->
 @endsection

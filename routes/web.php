@@ -42,7 +42,10 @@ Route::view('/chupelagaite', 'chupelagaite');
 
 Route::get('/test', function(){
     $user = Auth::user();
+    //$user = \App\User::find(1);
+  foreach ($user->likes as $key => $like) {
+  echo $like->like_id;
+  echo '<hr>';
+  }
 
-    $like = $user->likes();//->where('photo_id', $photo_id)->first();
-    dd($like);
 });

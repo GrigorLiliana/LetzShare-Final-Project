@@ -16,13 +16,15 @@ class ProfileController extends Controller
      */
     public function index($id)
     {
-        $userPhotos = DB::table('photos')
-            ->join('users', 'users.user_id', '=', 'photos.user_id')
-            ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
-            ->where('users.user_id', $id)
-            ->select('photos.*', 'photos.created_at as photodate', 'users.*','locations.locality_name')
-            ->orderBy('photos.created_at', 'desc')
-            ->get();
+        $userPhotos = DB::table('users')
+        ->leftjoin('photos', 'users.user_id', '=', 'photos.user_id')
+        ->leftjoin('locations', 'locations.locality_id', '=', 'photos.locality_id')
+        ->leftjoin('categories', 'categories.category_id', '=', 'photos.category_id')
+        ->where('users.user_id', $id)
+        ->select('photos.*', 'photos.created_at as photodate', 'users.*','locations.*', 'categories.*')
+        ->orderby('photodate', 'desc')
+        ->get();
+
 
         return view('userprofile', ['userPhotos' => $userPhotos]);
     }
@@ -34,15 +36,7 @@ class ProfileController extends Controller
      */
     public function create($id)
     {
-        $userPhotos = DB::table('photos')
-            ->join('users', 'users.user_id', '=', 'photos.user_id')
-            ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
-            ->where('users.user_id', $id)
-            ->select('photos.*', 'users.*','locality_name')
-            ->orderBy('photos.created_at', 'desc')
-            ->get();
 
-        return view('userprofile', ['userPhotos' => $userPhotos]);
     }
 
     /**
@@ -77,7 +71,7 @@ class ProfileController extends Controller
 
         }else{
             $user = User::find($id);
-            $user->user_description = $request->descritpion;
+            $user->user_description = $request->description;
             $user->save();
             return response()->json(['success' => 'successiful entered', 'description'=>$user->user_description]);
             }
