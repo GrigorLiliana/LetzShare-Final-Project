@@ -1,6 +1,9 @@
 @charset "UTF-8";
 
 body {
+    width: 100%;
+    height: 100%;
+    position: relative;
     background: #252323;
     color: white;
 }
@@ -87,7 +90,7 @@ h1 {
 
 /* End of Home Page Styles */
 
-/* User Account Styles */
+/* User Profile Styles */
 .add {
     font-size: 1.5rem;
 }
@@ -116,14 +119,32 @@ h1 {
     width: max-content !important;
     margin-left: 0.5rem;
 }
-.hide {
-    display: none;
-}
 
 .errors {
     width: max-content !important;
 }
-/* Enf of User Account Styles */
+
+.card-user {
+    position: relative;
+}
+.send-msg-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.shadow-div {
+    position: absolute;
+    background-color: rgba(236, 236, 236, 0.747);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+.hide {
+    display: none !important;
+}
+
+/* Enf of User Profile Styles */
 
 /* Gallery Styles */
 
