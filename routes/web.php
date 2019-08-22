@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Use App\Photo;
 
 Auth::routes();
 
@@ -43,15 +42,7 @@ Route::view('/chupelagaite', 'chupelagaite');
 
 Route::get('/test', function(){
   $photo_id = 7;
-  $photo = Photo::find($photo_id);
+  $photo = App\Photo::find($photo_id);
   $photoLikes = count($photo->likes);
   echo($photoLikes);
-/*
-    $user = Auth::user();
-    echo "there are " . count($user->likes) . " likes<br>";
-  foreach ($user->likes as $key => $like) {
-  echo $like->like_id;
-  echo '<hr>';
-  }
-*/
 });

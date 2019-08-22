@@ -77,13 +77,13 @@
                             <div class="liked" id="{{$picture->photo_id}}">
                                 @csrf
                                 <i class="fas fa-heart"></i>
-                                <span>{{ $picture->likes_sum }}</span>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
                             </div>
                             @else
                             <div class="not-liked" id="{{$picture->photo_id}}">
                                 @csrf
                                 <i class="far fa-heart"></i>
-                                <span>{{ $picture->likes_sum }}</span>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
                             </div>
                             @endif
                             @else
@@ -198,13 +198,13 @@
                             <div class="liked" id="{{$picture->photo_id}}">
                                 @csrf
                                 <i class="fas fa-heart"></i>
-                                <span>{{ $picture->likes_sum }}</span>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
                             </div>
                             @else
                             <div class="not-liked" id="{{$picture->photo_id}}">
                                 @csrf
                                 <i class="far fa-heart"></i>
-                                <span>{{ $picture->likes_sum }}</span>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
                             </div>
                             @endif
                             @else

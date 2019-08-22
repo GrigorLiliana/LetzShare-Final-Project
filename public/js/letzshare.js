@@ -48,8 +48,8 @@ $(function() {
     });
 
     $('.liked').on('click', function(e) {
-        event.preventDefault();
-        console.log(this.id, 'No likey');
+        //event.preventDefault();
+        let $targetDivId = this.id;
         let like = false;
         $.ajax({
             method: 'POST',
@@ -57,14 +57,20 @@ $(function() {
             data: { isLiked: like, photoId: this.id }
         }).done(function() {
             // Change the page
-
-            $(this.id).addClass('not-liked');
-            $(this.id).removeClass('liked');
+            $('#' + $targetDivId).addClass('not-liked');
+            $('#' + $targetDivId).removeClass('liked');
+            $('#' + $targetDivId + '> .fa-heart').removeClass('fas');
+            $('#' + $targetDivId + '> .fa-heart').addClass('far');
+            let newVal = $('#' + $targetDivId + '> .likes-number').val();
+            console.log(newVal);
+            
+            $('#' + $targetDivId).off();
+            // $('#' + $targetDivId + '> .likes-number').val($newVal);
         });
     });
     $('.not-liked').on('click', function(e) {
-        event.preventDefault();
-        console.log(this.id, 'Liked');
+        //event.preventDefault();
+        let $targetDivId = this.id;
         let like = true;
         $.ajax({
             method: 'POST',
@@ -72,8 +78,16 @@ $(function() {
             data: { isLiked: like, photoId: this.id }
         }).done(function() {
             // Change the page
-            $(this.id).addClass('liked');
-            $(this.id).removeClass('not-liked');
+            $('#' + $targetDivId).addClass('liked');   
+            $('#' + $targetDivId).removeClass('not-liked');
+            $('#' + $targetDivId + '> .fa-heart').removeClass('far');
+            $('#' + $targetDivId + '> .fa-heart').addClass('fas');            
+            let newVal = $('#' + $targetDivId + '> .likes-number').text();
+            //let newVal = parseInt($('#' + $targetDivId + '> .likes-number').val());
+            console.log(newVal);
+                     
+            $('#' + $targetDivId).off();
+            // $('#' + $targetDivId + '> .likes-number').val($newVal);
         });
     });
 
