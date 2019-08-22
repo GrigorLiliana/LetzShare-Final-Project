@@ -217,15 +217,17 @@ $(function() {
     $('.send-message-to').on('submit', function(event) {
         event.preventDefault();
         let id = $('#idToSend').val();
-        console.log(id);
         $.ajax({
             url: '/sendmessage/' + id,
             type: 'post',
             data: $('form').serialize(),
             success: function(result) {
-                console.log('ok');
                 if (result.success) {
                     $('.success-profile').removeClass('hide');
+                    $('.success-profile').css({
+                        position: 'absolute',
+                        'z-index': '1'
+                    });
                     $('.successMsg').text(result.success);
                     $('.send-msg-card').addClass('hide');
                     $('.shadow-div').addClass('hide');
