@@ -58,8 +58,8 @@ $(function() {
             data: { isLiked: like, photoId: this.id }
         }).done(function() {
             // Change the page
-            $(e.target).addClass("not-liked");
-            $(e.target).removeClass("liked"); 
+            $(e.target).addClass('not-liked');
+            $(e.target).removeClass('liked');
         });
     });
     $('.not-liked').on('click', function(e) {
@@ -72,8 +72,8 @@ $(function() {
             data: { isLiked: like, photoId: this.id }
         }).done(function() {
             // Change the page
-            $(e.target).addClass("liked");
-            $(e.target).removeClass("not-liked"); 
+            $(e.target).addClass('liked');
+            $(e.target).removeClass('not-liked');
         });
     });
 
@@ -193,4 +193,17 @@ $(function() {
     }); /*end ajax call*/
     /*END of edit DESCRIPTION */
 
+    /*Send msg to a user*/
+    $('.send-msg-link').on('click', function() {
+        $('.send-msg-card').removeClass('hide');
+        $('.shadow-div').removeClass('hide');
+    });
+
+    $('.close-card').on('click', function() {
+        $('.send-msg-card').addClass('hide');
+        $('.shadow-div').addClass('hide');
+    });
+    
+
+    /*end of send message to a user*/
 }); //LAST JQuery DO NOT DELETE

@@ -1,12 +1,13 @@
 <style>
-.card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-}
-.rounded-circle {
-    margin: 0 10%;
-}
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+
+    .rounded-circle {
+        margin: 0 10%;
+    }
 </style>
 
 
@@ -126,8 +127,7 @@
             </div>
             <div class="view overlay">
                 <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$path}}" class="rounded-circle mr-3" width="80%"
-                        alt="{{ $user->name }}">
+                    <img src="{{$path}}" class="rounded-circle mr-3" width="80%" alt="{{ $user->name }}">
                 </a>
             </div>
             <div class="card-body">
@@ -173,7 +173,8 @@
             <!-- Card image -->
             <div class="view overlay">
                 <a href="{{ $picture->image_URL }}">
-                    <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}" alt="{{ $picture->image_title }}">
+                    <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
+                        alt="{{ $picture->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
@@ -232,8 +233,5 @@
 
 </div> <!-- end container -->
 
-<script>
-    let urlLike = '{{route('like')}}';
-</script>
 
 @endsection

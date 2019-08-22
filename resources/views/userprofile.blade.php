@@ -6,6 +6,22 @@
 
 @section('content')
 
+<div class="errors hide errors-profile">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="errorMsg"></span>
+    </div>
+</div>
+<div class="errors hide success-profile">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="successMsg"></span>
+    </div>
+</div>
 
 @guest
 @php
@@ -17,6 +33,8 @@ $ownUser=false;
 if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
 $ownUser=true;
 $userId=Auth::user()->user_id;
+}else{
+$ownUser=false;
 }
 @endphp
 @endguest
@@ -54,7 +72,7 @@ $userId=Auth::user()->user_id;
             @if($ownUser)<p><a href="#">Edit photo</a></p>@endif
         </div>
 
-        <!-- EDIT User description -->
+
         <div>
             <form method="post" class="form-flex-profile edit-description">
                 @csrf
@@ -70,6 +88,8 @@ $userId=Auth::user()->user_id;
                 <a href="#" class="linkEditDescription">Edit Description</a>
                 </p>
         </div>
+        
+        <!-- EDIT User description -->
         @if($ownUser)
         <div class="form-group flex-div div-edit-description hide">
             <textarea class="form-control" name="description" id="description" cols="50" rows="1"
@@ -81,10 +101,10 @@ $userId=Auth::user()->user_id;
         @endif
         @endif
         <!--End if user is in your own profile-->
-
         </form>
+        <!-- end edit description -->
 
-
+        <!-- user location -->
         <p>
             <i class="fas fa-map-marker-alt"></i>
             @if($userPhotos[0]->user_location){{$userPhotos[0]->user_location}}
@@ -92,21 +112,64 @@ $userId=Auth::user()->user_id;
             @endif
             @endif
         </p>
+        <!-- end of the user location -->
 
+        <!-- send message to user -->
         @if(!$ownUser)
         <p>
-            <a href="mailto:{{$userPhotos[0]->email}}">
+            <a href="#" class="send-msg-link">
                 <i class="far fa-envelope"></i>
                 Send a message</a>
         </p>
+
+        <!-- user email -->
         @else <p>
             <i class="fas fa-at"></i>
             {{$userPhotos[0]->email}}</p>
         @endif
     </div>
-</div>
-</div>
 
+    <!-- form to send message to the user -->
+    <div class="row justify-content-center send-msg-card hide">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <button type="button" class="close close-card">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3>Get in touch with {{$userPhotos[0]->name}}</h3>
+                </div>
+                <div class="card-body">
+                    <form class="formbox" method="POST" action="{{ url('contact/sendemail') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="fullname">Full name</label>
+                            <input type="text" class="form-control" id="fullname" name="fullname" @guest
+                                placeholder="Enter your name" @else value="{{Auth::user()->name}}" @endguest
+                                placeholder="Enter full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-Mail address</label>
+                            <input type="email" class="form-control" id="email" @guest placeholder="Enter your e-mail"
+                                @else value="{{Auth::user()->email}}" @endguest name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your message</label>
+                            <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                        </div>
+                        <input type="number" name="user_id" id="idToSend" class="hide">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Send message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end of the form to send message -->
+</div>
+</div>
 <!-- End of the User details -->
 
 <!-- User Portfolio -->
