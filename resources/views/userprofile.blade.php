@@ -6,14 +6,20 @@
 
 @section('content')
 
+
+@guest
+@php
+$ownUser=false;
+@endphp
+@else
 @php
 // check if the profile belongs to the user
 if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
 $ownUser=true;
 $userId=Auth::user()->user_id;
-}else
-$ownUser=false;
+}
 @endphp
+@endguest
 <!-- Edit Name -->
 <form method="post" class="form-flex-profile edit-name">
     @csrf
@@ -24,6 +30,7 @@ $ownUser=false;
         @if($ownUser)<span class="old-name"> | </span><a href="#" id="editName">Edit Name</a>
         @endif
     </h2>
+    @if($ownUser)
     <!--Form to edit name-->
     <div class="form-group flex-div div-edit-name hide">
         <input class="form-control profile-field" type="text" name="name" id="name" value="{{$userPhotos[0]->name}}"
@@ -32,6 +39,7 @@ $ownUser=false;
         <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
         <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
     </div>
+    @endif
 </form>
 <!--End edit name-->
 
@@ -62,7 +70,7 @@ $ownUser=false;
                 <a href="#" class="linkEditDescription">Edit Description</a>
                 </p>
         </div>
-
+        @if($ownUser)
         <div class="form-group flex-div div-edit-description hide">
             <textarea class="form-control" name="description" id="description" cols="50" rows="1"
                 placeholder="Edit your description">{{$userPhotos[0]->user_description}}</textarea>
@@ -71,16 +79,29 @@ $ownUser=false;
             <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
         </div>
         @endif
+        @endif
         <!--End if user is in your own profile-->
 
         </form>
 
-        @if($userPhotos[0]->user_location)
-        <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
-            @if($ownUser) | <a href="#">Edit Location</a></p>@endif
-        @endif
-        @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
-        @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
+
+        <p>
+            <i class="fas fa-map-marker-alt"></i>
+            @if($userPhotos[0]->user_location){{$userPhotos[0]->user_location}}
+            @if($ownUser) | <a href="#">Edit Location</a>
+            @endif
+            @endif
+        </p>
+
+        @if(!$ownUser)
+        <p>
+            <a href="mailto:{{$userPhotos[0]->email}}">
+                <i class="far fa-envelope"></i>
+                Send a message</a>
+        </p>
+        @else <p>
+            <i class="fas fa-at"></i>
+            {{$userPhotos[0]->email}}</p>
         @endif
     </div>
 </div>
