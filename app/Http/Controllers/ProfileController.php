@@ -66,7 +66,7 @@ class ProfileController extends Controller
             return response()->json(['success' => 'successiful entered', 'name'=>$user->name]);
             }
     }
-    
+
     public function description(Request $request, $id)
     {
         $validatedData = \Validator::make($request->all(),[
@@ -77,9 +77,9 @@ class ProfileController extends Controller
 
         }else{
             $user = User::find($id);
-            $user->user_description = $request->user_descritpion;
+            $user->user_description = $request->descritpion;
             $user->save();
-            return response()->json(['success' => 'successiful entered', 'description'=>$user->description]);
+            return response()->json(['success' => 'successiful entered', 'description'=>$user->user_description]);
             }
     }
     /**
