@@ -50,16 +50,12 @@
                 @endif
                 @else
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-name nav-link dropdown-toggle text-capitalize" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a id="navbarDropdown" class="nav-name nav-link dropdown-toggle text-capitalize" href="#"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item {{ (current_page('useraccount')) ? 'active' : '' }}"
-                            href="{{ route('useraccount') }}">
-                            My account
-                        </a>
                         <a class="dropdown-item {{ (current_page('userprofile')) ? 'active' : '' }}"
                             href="/userprofile/{{Auth::user()->user_id}}">
                             My profile
@@ -91,4 +87,3 @@
 
     </nav>
 </header>
-

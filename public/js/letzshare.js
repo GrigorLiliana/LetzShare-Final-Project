@@ -47,17 +47,16 @@ $(function() {
         }
     });
 
-    $('.liked').on('click', function (e) {
+    $('.liked').on('click', function(e) {
         event.preventDefault();
-        console.log(this.id, "No likey");
+        console.log(this.id, 'No likey');
         console.log(urlLike);
-        let like= false;
+        let like = false;
         $.ajax({
             method: 'POST',
             url: urlLike,
-            data: {isLiked: like, photoId: this.id}
-        })
-        .done(function() {
+            data: { isLiked: like, photoId: this.id }
+        }).done(function() {
             // Change the page
         });
     });
@@ -68,9 +67,8 @@ $(function() {
         $.ajax({
             method: 'POST',
             url: urlLike,
-            data: {isLiked: like, photoId: this.id}
-        })
-        .done(function() {
+            data: { isLiked: like, photoId: this.id }
+        }).done(function() {
             // Change the page
         });
     });
@@ -137,18 +135,19 @@ $(function() {
 
     /*Edit User Profile -> DESCRIPTION */
 
-    $('#editDescription').on('click', function() {
+    $('.linkEditDescription').on('click', function() {
         $('.old-description').addClass('hide');
-        $('#editDescription').addClass('hide');
+        $('.linkEditDescription').addClass('hide');
         $('.div-edit-description').removeClass('hide');
     });
 
     $('.cancel-edit').on('click', function() {
         $('.old-description').removeClass('hide');
-        $('#editDescription').removeClass('hide');
+        $('.linkEditDescription').removeClass('hide');
         $('.div-edit-description').addClass('hide');
     });
-    /*Ajax call to edit NAME profil*/
+
+    /*Ajax call to edit description profil*/
     $('.edit-description').on('submit', function(event) {
         event.preventDefault();
         let id = $('.user_id').val();
@@ -162,7 +161,7 @@ $(function() {
                     $('.success-profile').removeClass('hide');
                     $('.successMsg').text(result.success);
                     $('.old-description').removeClass('hide');
-                    $('#editDescription').removeClass('hide');
+                    $('.linkEditDescription').removeClass('hide');
                     $('.div-edit-description').addClass('hide');
                     $('.older-description').text(result.description);
                     setTimeout(function() {
@@ -179,10 +178,15 @@ $(function() {
                 }
             },
             error: function(err) {
-                // IF an Ajax error happens
+                console.log(err);
+                $('.errors-profile').removeClass('hide');
+                $('.errorMsg').text('Ple');
+                setTimeout(function() {
+                    $('.errors-profile').hide(500);
+                }, 3500);
             }
-        }); /*end ajax call*/
-    }); /*End of the Edit User Profile Name */
+        });
+    }); /*end ajax call*/
+    /*END of edit DESCRIPTION */
 
-    /*END of edit User Profile -> DESCRIPTION */
 }); //LAST JQuery DO NOT DELETE

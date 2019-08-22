@@ -56,7 +56,7 @@ class PhotoController extends Controller
         /* $users = User::all();
         $locations = Location::all();
         $categories = Category::all();
-    
+
         return redirect('gallery', [
             'photos' => $photos,
             'users' => $users,
@@ -126,7 +126,7 @@ class PhotoController extends Controller
         $photo->likes_sum = 0;
         $photo->save();
 
-        return redirect('useraccount');
+        return redirect('userprofile/'.$userId);
     }
 
     public function photoLikePhoto(Request $request)

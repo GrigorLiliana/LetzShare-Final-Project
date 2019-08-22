@@ -24,7 +24,6 @@ Route::post('/contact/sendemail', 'ContactController@sendEmail');
 Route::get('/uploadphoto', 'PhotoController@create')->name('uploadphoto');
 Route::post('/uploadphoto', 'PhotoController@store');
 
-Route::get('/useraccount', 'UserController@index')->name('useraccount');
 Route::get('/userprofile/{id}', 'ProfileController@index')->name('userprofile');
 Route::post('/userprofile/{id}', 'ProfileController@store');
 Route::post('/userprofile/description/{id}', 'ProfileController@description');

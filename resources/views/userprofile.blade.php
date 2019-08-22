@@ -44,7 +44,7 @@ $ownUser=false;
         <div class="edit-photo">
             <img src="{{$userAvatar}}" class="rounded-circle mr-3 user-profile img-thumbnail" height="150" width="150"
                 alt="avatar">
-            @if($ownUser)<p><a href="{{route('useraccount')}}">Edit photo</a></p>@endif
+            @if($ownUser)<p><a href="#">Edit photo</a></p>@endif
         </div>
 
         <!-- EDIT User description -->
@@ -52,31 +52,32 @@ $ownUser=false;
             <form action="/useraccount" method="post" class="form-flex-profile edit-description">
                 @csrf
                 <div>
-                    @if($userPhotos[0]->user_description)
                     <p><i class="fas fa-comment"></i>
                         <span class="old-description older-description text-capitalize">
                             <i>"{{$userPhotos[0]->user_description}}"</i>
                         </span>
                         @if($ownUser)
                         <span class="old-description">|</span>
-                        <a href="#" id="editDescription">Edit Description</a>
+                        <a href="#" class="linkEditDescription">Edit Description</a>
                     </p>
                 </div>
 
                 <div class="form-group flex-div div-edit-description hide">
                     <textarea class="form-control" name="description" id="description" cols="50" rows="1"
                         placeholder="Edit your description">{{$userPhotos[0]->user_description}}</textarea>
-                        <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
-                        <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
-                        <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel"
+                    <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
+                    <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
+                    <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel"
                         name="cancel">
                 </div>
+                @endif
+                <!--End if user is in your own profile-->
+
             </form>
-            @endif
-            @endif
+
             @if($userPhotos[0]->user_location)
             <p><i class="fas fa-map-marker-alt"></i> {{$userPhotos[0]->user_location}}
-                @if($ownUser) | <a href="{{route('useraccount')}}">Edit Location</a></p>@endif
+                @if($ownUser) | <a href="#">Edit Location</a></p>@endif
             @endif
             @if(!$ownUser)<p><a href="mailto:{{$userPhotos[0]->email}}">Send an e-email</a></p>
             @else <p><i class="fas fa-at"></i> {{$userPhotos[0]->email}}</p>
@@ -84,12 +85,13 @@ $ownUser=false;
         </div>
     </div>
 </div>
+
 <!-- End of the User details -->
 
 <!-- User Portfolio -->
 <h2>Portfolio
     @if($ownUser)|
-    <a href="{{route('uploadphoto')}}" class="add">
+    <a href="#" class="add">
         Upload new photo <i class="fas fa-plus-circle"></i>
     </a>
     @endif
@@ -115,8 +117,8 @@ $ownUser=false;
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
                         @if($ownUser)
-                        <a href="{{route('useraccount')}}"><i class="far fa-edit text-success"></i></a>
-                        <a href="{{route('useraccount')}}"><i class="far fa-trash-alt text-danger text-right"></i></a>
+                        <a href="#"><i class="far fa-edit text-success"></i></a>
+                        <a href="#"><i class="far fa-trash-alt text-danger text-right"></i></a>
                         @endif</h6>
                     <!-- Subtitle -->
                     <p class="card-text"><small><i class="far fa-calendar-alt"></i>
@@ -169,5 +171,6 @@ $ownUser=false;
         <!-- END Card -->
     </div>
 </div>
+
 <!--End of the User Portfolio -->
 @endsection
