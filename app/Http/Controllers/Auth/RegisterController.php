@@ -51,7 +51,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+:;]).{6,}$/'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/'],
         ]);
     }
 
@@ -68,9 +68,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => filter_var($data['email'], FILTER_VALIDATE_EMAIL),
             'password' => Hash::make($data['password']),
-            'user_location' => 'Luxembourg',
-            'user_description' => "Hi, I'm " . $data['name'] . " and I love to take photos in Luxembourg!"
         ]);
+
+        $user->user_location = 'Luxembourg';
+        $user->user_description = "Hi, I'm " . $data['name'] . " and I love to take photos in Luxembourg!";
+        $user->save();
+
         return $user;
     }
 }
