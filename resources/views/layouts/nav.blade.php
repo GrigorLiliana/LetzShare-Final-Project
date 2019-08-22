@@ -5,7 +5,7 @@
     return strstr( request()->path(), $uri);
     }
     @endphp
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
 
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/') }}/LetzShare_logo.png" alt="LetzShare logo." width="60">
@@ -56,6 +56,12 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                        @if (Auth::user()->user_type == 'admin')
+                            <a class="dropdown-item {{ (current_page('admin')) ? 'active' : '' }}" href="{{ route('admin')}}">Admin Dashboard</a>
+                        @endif
+
+
                         <a class="dropdown-item {{ (current_page('userprofile')) ? 'active' : '' }}"
                             href="/userprofile/{{Auth::user()->user_id}}">
                             My profile

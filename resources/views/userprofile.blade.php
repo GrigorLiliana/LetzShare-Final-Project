@@ -88,7 +88,7 @@ $ownUser=false;
                 <a href="#" class="linkEditDescription">Edit Description</a>
                 </p>
         </div>
-        
+
         <!-- EDIT User description -->
         @if($ownUser)
         <div class="form-group flex-div div-edit-description hide">
@@ -140,7 +140,7 @@ $ownUser=false;
                     <h3>Get in touch with {{$userPhotos[0]->name}}</h3>
                 </div>
                 <div class="card-body">
-                    <form class="formbox" method="POST" action="{{ url('contact/sendemail') }}">
+                    <form class="formbox send-message-to" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="fullname">Full name</label>
@@ -150,14 +150,15 @@ $ownUser=false;
                         </div>
                         <div class="form-group">
                             <label for="email">E-Mail address</label>
-                            <input type="email" class="form-control" id="email" @guest placeholder="Enter your e-mail"
-                                @else value="{{Auth::user()->email}}" @endguest name="email">
+                            <input type="email" class="form-control" id="email" name="email" @guest
+                                placeholder="Enter your e-mail" @else value="{{Auth::user()->email}}" @endguest>
                         </div>
                         <div class="form-group">
                             <label for="message">Your message</label>
                             <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                         </div>
-                        <input type="number" name="user_id" id="idToSend" class="hide">
+                        <input type="number" value="{{$userPhotos[0]->user_id}}" name="user_id" id="idToSend"
+                            class="hide">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Send message</button>
                         </div>

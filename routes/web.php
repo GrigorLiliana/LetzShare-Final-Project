@@ -20,6 +20,7 @@ Route::view('/about-us', 'about-us')->name('about-us');
 
 Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact/sendemail', 'ContactController@sendEmail');
+Route::post('/sendmessage/{id}', 'ContactController@sendMessage');
 
 Route::get('/uploadphoto', 'PhotoController@create')->name('uploadphoto');
 Route::post('/uploadphoto', 'PhotoController@store');
@@ -35,7 +36,7 @@ Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
 Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 
 //** ADMIN - Middleware auth validation */
-Route::get('/admin', 'AdminController@index')->middleware('admin');
+Route::get('/admin', 'AdminController@index')->middleware('admin')->name('admin');
 
 //** TESTs */
 Route::view('/chupelagaite', 'chupelagaite');
