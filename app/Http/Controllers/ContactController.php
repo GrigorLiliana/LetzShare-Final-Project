@@ -50,15 +50,17 @@ class ContactController extends Controller
 
         $data = array(
             'fullname' => $request->fullname,
-            'from' => $request->email,
+           // 'from' => $request->email,
             'message' => $request->message,
             'ip' => request()->ip(),
             'timestamp' => \Carbon\Carbon::now()
         );
 
-      // Mail::to($receiver[0]->email)->send(new SendMail($data));
-return back()->with('success', 'Your message was successfully sent to Michel!');
-}
+      Mail::to($receiver->email)
+      ->send(new SendMail($data));
+
+      return response()->json(['success' => 'Your message was successfully sent to '. $receiver->name .'!']);
+    }
 
     }
 }

@@ -140,7 +140,7 @@ $ownUser=false;
                     <h3>Get in touch with {{$userPhotos[0]->name}}</h3>
                 </div>
                 <div class="card-body">
-                    <form class="formbox" method="POST">
+                    <form class="formbox send-message-to" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="fullname">Full name</label>

@@ -214,7 +214,7 @@ $(function() {
     });
 
     /*Ajax call to send message*/
-    $('.formbox').on('submit', function(event) {
+    $('.send-message-to').on('submit', function(event) {
         event.preventDefault();
         let id = $('#idToSend').val();
         console.log(id);
