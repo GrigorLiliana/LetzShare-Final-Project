@@ -27,7 +27,8 @@ class ContactController extends Controller
             'fullname' => $request->fullname,
             'message' => $request->message,
             'ip' => request()->ip(),
-            'timestamp' => \Carbon\Carbon::now()
+            'timestamp' => \Carbon\Carbon::now(),
+            'sendEmail' => true
         );
 
         Mail::to($request->email)->send(new SendMail($data));
@@ -47,13 +48,13 @@ class ContactController extends Controller
             return response()->json(['errors' => $validatedData->errors()->all()]);
         }else{
         $receiver = User::find($id);
-
         $data = array(
             'fullname' => $request->fullname,
-           // 'from' => $request->email,
+           'from' => $request->email,
             'message' => $request->message,
             'ip' => request()->ip(),
-            'timestamp' => \Carbon\Carbon::now()
+            'timestamp' => \Carbon\Carbon::now(),
+            'sendEmail' => false
         );
 
       Mail::to($receiver->email)
