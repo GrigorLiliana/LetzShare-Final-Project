@@ -132,6 +132,13 @@ $(function() {
                 }
             },
             error: function(err) {
+                $('.errors-profile').removeClass('hide');
+                $('.errorMsg').text(
+                    'An unexpected error has occurred! Please try again.'
+                );
+                setTimeout(function() {
+                    $('.errors-profile').hide(500);
+                }, 3500);
                 // IF an Ajax error happens
             }
         }); /*end ajax call*/
@@ -184,7 +191,9 @@ $(function() {
             error: function(err) {
                 console.log(err);
                 $('.errors-profile').removeClass('hide');
-                $('.errorMsg').text('Ple');
+                $('.errorMsg').text(
+                    'An unexpected error has occurred! Please try again.'
+                );
                 setTimeout(function() {
                     $('.errors-profile').hide(500);
                 }, 3500);
@@ -203,7 +212,52 @@ $(function() {
         $('.send-msg-card').addClass('hide');
         $('.shadow-div').addClass('hide');
     });
-    
 
+    /*Ajax call to send message*/
+    $('.formbox').on('submit', function(event) {
+        event.preventDefault();
+        let id = $('#idToSend').val();
+        console.log(id);
+        $.ajax({
+            url: '/sendmessage/' + id,
+            type: 'post',
+            data: $('form').serialize(),
+            success: function(result) {
+                console.log('ok');
+                if (result.success) {
+                    $('.success-profile').removeClass('hide');
+                    $('.successMsg').text(result.success);
+                    $('.send-msg-card').addClass('hide');
+                    $('.shadow-div').addClass('hide');
+                    setTimeout(function() {
+                        $('.success-profile').hide(500);
+                    }, 2000);
+                    console.log(result.success);
+                } else {
+                    $('.errors-profile').removeClass('hide');
+                    $('.errors-profile').css({
+                        position: 'absolute',
+                        'z-index': '1'
+                    });
+                    $.each(result.errors, function(key, value) {
+                        $('.errorMsg').text(value);
+                    });
+                    setTimeout(function() {
+                        $('.errors-profile').hide(500);
+                    }, 3500);
+                }
+            },
+            error: function(err) {
+                console.log(err);
+                $('.errors-profile').removeClass('hide');
+                $('.errorMsg').text(
+                    'An unexpected error has occurred! Please try again.'
+                );
+                setTimeout(function() {
+                    $('.errors-profile').hide(500);
+                }, 3500);
+            }
+        });
+    }); /*end ajax call to send message*/
     /*end of send message to a user*/
 }); //LAST JQuery DO NOT DELETE

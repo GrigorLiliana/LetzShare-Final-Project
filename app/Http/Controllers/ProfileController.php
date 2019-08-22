@@ -50,7 +50,7 @@ class ProfileController extends Controller
         $validatedData = \Validator::make($request->all(),[
             'name'=> 'required|min:4|max:20|',
         ]);
-            if($validatedData->fails()){
+        if($validatedData->fails()){
             return response()->json(['errors' => $validatedData->errors()->all()]);
 
         }else{
