@@ -40,3 +40,10 @@ Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 
 //** TESTs */
 Route::view('/chupelagaite', 'chupelagaite');
+
+Route::get('/test', function(){
+    $user = Auth::user();
+
+    $like = $user->likes();//->where('photo_id', $photo_id)->first();
+    dd($like);
+});

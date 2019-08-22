@@ -190,12 +190,14 @@
                         Auth::user()->user_id)->first();
                         @endphp
                         @if ($like)
-                        <div class="liked">
+                        <div class="liked" id="{{$picture->photo_id}}">
+                            @csrf
                             <i class="fas fa-heart"></i>
                             <span>{{ $picture->likes_sum }}</span>
                         </div>
                         @else
-                        <div class="not-liked">
+                        <div class="not-liked" id="{{$picture->photo_id}}">
+                            @csrf
                             <i class="far fa-heart"></i>
                             <span>{{ $picture->likes_sum }}</span>
                         </div>
@@ -203,10 +205,7 @@
                         @else
                         <div class="not-logged">
                             <i class="far fa-heart"></i>
-                            <span> {{ $picture->likes_sum }}</span>
-                        </div>
-                        <div class="not-liked" id="not-logged">
-                            <i class="far fa-heart"></i><span> {{ $picture->likes_sum }}</span>
+                            <span>{{ $picture->likes_sum }}</span>
                         </div>
                         @endif
                     </li>
