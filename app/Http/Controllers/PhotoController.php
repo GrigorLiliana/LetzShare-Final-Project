@@ -11,6 +11,7 @@ use App\Category;
 use App\Photo;
 use App\User;
 use App\Like;
+use Illuminate\Pagination\Paginator;
 
 class PhotoController extends Controller
 {
@@ -19,57 +20,75 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
         $photos = DB::table('photos')
-            ->join('users', 'users.user_id', '=', 'photos.user_id')
-            ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
-            ->join('categories', 'categories.category_id', '=', 'photos.category_id')
-            ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
-            ->where('users.user_id', '=', $request->users)
-            /* ->where('locations.locality_id', '=', $request->locations)
-            ->where('categories.category_id', '=', $request->categories) */
-            ->orderBy('created_at', 'desc')
-            ->distinct()
-            ->get();
-
-
-        /* $likes = Photo::where('likes_sum', '=', $request->likes_sum)
-            ->orderBy('desc' or 'asc')->get(); */
+        ->paginate(10)
+        ->join('users', 'users.user_id', '=', 'photos.user_id')
+        ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
+        ->join('categories', 'categories.category_id', '=', 'photos.category_id')
+        ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
+        ->orderBy('created_at', 'desc')
+        ->distinct()
+        ->get();
 
         $users = User::all();
         $locations = Location::all();
         $categories = Category::all();
 
+
         return view('gallery', [
             'photos' => $photos,
             'users' => $users,
             'locations' => $locations,
-            'categories' => $categories,
-            //'likes' => $likes
+            'categories' => $categories
         ]);
     }
 
     public function filters(Request $request)
     {
-        /* $users = User::all();
+        $users = User::all();
         $locations = Location::all();
         $categories = Category::all();
-    
-        return redirect('gallery', [
+
+        // Show the filter query
+        $photos = DB::table('photos')
+            ->join('users', 'users.user_id', '=', 'photos.user_id')
+            ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
+            ->join('categories', 'categories.category_id', '=', 'photos.category_id')
+            ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
+            ->orWhere('photos.user_id', $request->users)
+            ->orWhere('photos.locality_id', $request->locations)
+            ->orWhere('photos.category_id', $request->categories)
+            ->get();
+
+        // Search for a user based on their name
+        /* if ($request->has('users')) {
+            $photos->where('photos.user_id', $request->users);
+        }
+        // Search for a photo based on location
+        if ($request->has('locations')) {
+            $photos->orWhere('photos.locality_id', $request->locations);
+        }
+        // Search for a photo based on category
+        if ($request->has('categories')) {
+            $photos->orWhere('photos.category_id', $request->categories);
+        }
+ */
+        return view('gallery', [
             'photos' => $photos,
             'users' => $users,
             'locations' => $locations,
-            'categories' => $categories,
-            //'likes' => $likes
-        ]); */ }
+            'categories' => $categories
+        ]);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-
 
     public function create()
     {
