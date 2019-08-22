@@ -15,7 +15,7 @@ $userId=Auth::user()->user_id;
 $ownUser=false;
 @endphp
 <!-- Edit Name -->
-<form action="/useraccount" method="post" class="form-flex-profile edit-name">
+<form method="post" class="form-flex-profile edit-name">
     @csrf
     <h2>
         <!--User name-->
@@ -48,7 +48,7 @@ $ownUser=false;
 
         <!-- EDIT User description -->
         <div>
-            <form action="/useraccount" method="post" class="form-flex-profile edit-description">
+            <form method="post" class="form-flex-profile edit-description">
                 @csrf
                 <div>
                     <p><i class="fas fa-comment"></i>
@@ -174,19 +174,13 @@ $ownUser=false;
 </div>
 
 
-
-
 @else
+<!--if the portfolio is empty-->
 <div class="card promoting-card card-user">
     <div class="card-body d-flex flex-row">
         <p>This portfolio is empty for now. We're excited to see new photos from {{$userPhotos[0]->name}}!</p>
-
     </div>
-
-
 </div>
-
-
 @endif
 <!--End of the User Portfolio -->
 @endsection

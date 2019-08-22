@@ -9,7 +9,6 @@
 }
 </style>
 
-}
 
 @extends('layouts.app')
 
@@ -24,12 +23,12 @@
 
     <div class="card-deck">
         @foreach ($topPics as $picture)
-            @php
-                $path = URL::asset($picture->image_URL);
-                $user = App\User::where('user_id', $picture->user_id)->first();
-                $cat = App\Category::where('category_id', $picture->category_id)->first();
-                $loc = App\Location::where('locality_id', $picture->locality_id)->first();
-            @endphp
+        @php
+        $path = URL::asset($picture->image_URL);
+        $user = App\User::where('user_id', $picture->user_id)->first();
+        $cat = App\Category::where('category_id', $picture->category_id)->first();
+        $loc = App\Location::where('locality_id', $picture->locality_id)->first();
+        @endphp
         <div class="card promoting-card">
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
@@ -70,7 +69,8 @@
                         <li>
                             @if (Auth::check())
                             @php
-                            $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id', Auth::user()->user_id)->first();
+                            $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
+                            Auth::user()->user_id)->first();
                             @endphp
                             @if ($like)
                             <div class="liked" id="{{$picture->photo_id}}">
