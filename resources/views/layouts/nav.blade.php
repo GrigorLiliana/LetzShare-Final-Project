@@ -5,7 +5,7 @@
     return strstr( request()->path(), $uri);
     }
     @endphp
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
 
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/') }}/LetzShare_logo.png" alt="LetzShare logo." width="60">
