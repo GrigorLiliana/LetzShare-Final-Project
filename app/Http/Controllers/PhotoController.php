@@ -142,7 +142,7 @@ class PhotoController extends Controller
         }
         // check if user has already liked photo
         $user = Auth::user();
-        $like = $user->likes()->where('photo_id', $photo_id)->first();
+        $like = $user->likes()->where('photo_id', $photo_id)->first();        
         // if yes, remove the like from the table
         if ($like) {
             $already_like = $like->islike;
