@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -13,7 +15,14 @@ class AdminController extends Controller
      */
     public function index(){
         
-        return view('admin');
+        //$admins = User::all()->where('user_type', '=', 'admin');
+        //$users = User::all()->where('user_type', '=', 'photographer');
+        $users = User::all();
+
+        return view('admin', [
+            //'admins' => $admins,
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -23,7 +32,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
