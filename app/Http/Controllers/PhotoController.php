@@ -21,37 +21,49 @@ class PhotoController extends Controller
      */
     public function index(Request $request)
     {
+
         $photos = DB::table('photos')
             ->join('users', 'users.user_id', '=', 'photos.user_id')
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
             ->join('categories', 'categories.category_id', '=', 'photos.category_id')
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
-            /* ->where('users.user_id', '=', $request->users)
-            ->whereNull('locations.locality_id', '=', $request->locality) */
+            ->where('users.user_id', '=', $request->users)
+            /* ->where('locations.locality_id', '=', $request->locations)
+            ->where('categories.category_id', '=', $request->categories) */
             ->orderBy('created_at', 'desc')
             ->distinct()
             ->get();
 
-        $users = User::all()->where('users.user_id', '=', $request->users);
 
+        /* $likes = Photo::where('likes_sum', '=', $request->likes_sum)
+            ->orderBy('desc' or 'asc')->get(); */
+
+        $users = User::all();
         $locations = Location::all();
-
         $categories = Category::all();
-
-        $likes = Photo::orderBy('likes_sum', 'desc')
-            ->get();
 
         return view('gallery', [
             'photos' => $photos,
             'users' => $users,
             'locations' => $locations,
             'categories' => $categories,
-            'likes' => $likes
+            //'likes' => $likes
         ]);
     }
 
     public function filters(Request $request)
-    { }
+    {
+        /* $users = User::all();
+        $locations = Location::all();
+        $categories = Category::all();
+    
+        return redirect('gallery', [
+            'photos' => $photos,
+            'users' => $users,
+            'locations' => $locations,
+            'categories' => $categories,
+            //'likes' => $likes
+        ]); */ }
     /**
      * Show the form for creating a new resource.
      *
@@ -117,7 +129,8 @@ class PhotoController extends Controller
         return redirect('useraccount');
     }
 
-    public function photoLikePhoto(Request $request) {
+    public function photoLikePhoto(Request $request)
+    {
         // collect data from POST
         $photo_id = $request['photoId'];
         $is_like = $request['isLiked'] === 'true';
@@ -129,7 +142,7 @@ class PhotoController extends Controller
         }
         // check if user has already liked photo
         $user = Auth::user();
-        $like = $user->likes()->where('photo_id' , $photo_id)->first();
+        $like = $user->likes()->where('photo_id', $photo_id)->first();
         // if yes, remove the like from the table
         if ($like) {
             $already_like = $like->islike;
@@ -138,7 +151,7 @@ class PhotoController extends Controller
                 $like->delete();
                 return null;
             }
-        // if not already liked, create a new like
+            // if not already liked, create a new like
         } else {
             $like = new Like();
         }
@@ -153,7 +166,6 @@ class PhotoController extends Controller
             $like->save();
         }
         return null;
-
     }
 
     /**

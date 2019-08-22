@@ -23,7 +23,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="photo-user">Location</label>
-                <select class="form-control form-control-sm" name="locality" id="locality">
+                <select class="form-control form-control-sm" name="locations" id="locations">
                     <option value="">Select</option>
                     @foreach ($locations as $location)
                     <option value="{{$location->locality_id}}">{{$location->locality_name}}</option>
@@ -43,9 +43,10 @@
                 <label for="photo-user">Likes</label>
                 <select class="form-control form-control-sm" name="likes" id="likes_sum">
                     <option value="">Select</option>
-                    @foreach ($likes as $like)
-                    <option value="{{$like->likes_sum}}">{{$like->likes_sum}}</option>
-                    @endforeach
+
+                    <option value="likes_sum desc">desc</option>
+                    <option value="likes_sum asc">asc</option>
+
                 </select>
             </div>
             <div class="form-group col-sm-4">
