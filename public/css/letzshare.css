@@ -8,6 +8,9 @@ body {
     color: white;
 }
 
+.container {
+    margin-top: 60px;
+}
 /* Registration password validation*/
 ul,
 li {
