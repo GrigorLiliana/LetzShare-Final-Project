@@ -59,6 +59,8 @@ $(function() {
         })
         .done(function() {
             // Change the page
+            $(e.target).addClass("not-liked");
+            $(e.target).removeClass("liked"); 
         });
     });
     $('.not-liked').on('click', function(e) {
@@ -72,6 +74,8 @@ $(function() {
         })
         .done(function() {
             // Change the page
+            $(e.target).addClass("liked");
+            $(e.target).removeClass("not-liked"); 
         });
     });
 
