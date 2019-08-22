@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Pagination\Paginator;
 use Auth;
 use App\Location;
 use App\Category;
 use App\Photo;
 use App\User;
 use App\Like;
-use Illuminate\Pagination\Paginator;
 
 class PhotoController extends Controller
 {
@@ -23,19 +23,18 @@ class PhotoController extends Controller
     public function index()
     {
         $photos = DB::table('photos')
-        ->paginate(10)
-        ->join('users', 'users.user_id', '=', 'photos.user_id')
-        ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
-        ->join('categories', 'categories.category_id', '=', 'photos.category_id')
-        ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
-        ->orderBy('created_at', 'desc')
-        ->distinct()
-        ->get();
+            ->join('users', 'users.user_id', '=', 'photos.user_id')
+            ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
+            ->join('categories', 'categories.category_id', '=', 'photos.category_id')
+            ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate(9);
 
         $users = User::all();
         $locations = Location::all();
         $categories = Category::all();
 
+        //Photo::paginate(15);
 
         return view('gallery', [
             'photos' => $photos,
@@ -74,7 +73,8 @@ class PhotoController extends Controller
         if ($request->has('categories')) {
             $photos->orWhere('photos.category_id', $request->categories);
         }
- */
+        */
+
         return view('gallery', [
             'photos' => $photos,
             'users' => $users,
