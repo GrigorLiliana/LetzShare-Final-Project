@@ -31,12 +31,12 @@ class User extends Authenticatable
 
     public function photos()
     {
-        return $this->hasMany('App\Photo');
+        return $this->hasMany('App\Photo', 'user_id');
     }
 
     public function likes()
     {
-        return $this->hasMany('App\Like');
+        return $this->hasMany('App\Like', 'user_id');
     }
 
     /**
