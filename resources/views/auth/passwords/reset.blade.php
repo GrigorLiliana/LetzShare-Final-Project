@@ -54,6 +54,9 @@
                         <li id="length" class="invalid">
                             At least <strong>8 caracters</strong>
                         </li>
+                        <li id="symbol" class="invalid">
+                            At least <strong>1 symbol (#?!@$%^&*-+:;)</strong>
+                        </li>
                         </ul>
                     </div>
                         </div>

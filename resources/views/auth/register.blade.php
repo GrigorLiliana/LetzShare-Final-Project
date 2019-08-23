@@ -49,18 +49,21 @@
                             <div id="pswd_info">
                         <h4>Your passwork must contains :</h4>
                         <ul>
-                        <li id="letter" class="invalid">
-                            At least <strong>a letter</strong>
-                        </li>
-                        <li id="capital" class="invalid">
-                            At least <strong>a capital letter</strong>
-                        </li>
-                        <li id="number" class="invalid">
-                            At least <strong>a number</strong>
-                        </li>
-                        <li id="length" class="invalid">
-                            At least <strong>8 caracters</strong>
-                        </li>
+                            <li id="letter" class="invalid">
+                                At least <strong>a letter</strong>
+                            </li>
+                            <li id="capital" class="invalid">
+                                At least <strong>a capital letter</strong>
+                            </li>
+                            <li id="number" class="invalid">
+                                At least <strong>a number</strong>
+                            </li>
+                            <li id="length" class="invalid">
+                                At least <strong>8 caracters</strong>
+                            </li>
+                            <li id="symbol" class="invalid">
+                                At least <strong>1 symbol (#?!@$%^&*-+:;)</strong>
+                            </li>
                         </ul>
                     </div>
                         </div>
