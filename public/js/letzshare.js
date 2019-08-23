@@ -161,7 +161,7 @@ $(function() {
         $('.div-edit-description').removeClass('hide');
     });
 
-    $('.cancel-edit').on('click', function() {
+    $('.cancel-edit-description').on('click', function() {
         $('.old-description').removeClass('hide');
         $('.linkEditDescription').removeClass('hide');
         $('.div-edit-description').addClass('hide');
@@ -176,7 +176,6 @@ $(function() {
             type: 'post',
             data: $('form').serialize(),
             success: function(result) {
-                console.log('ok');
                 if (result.success) {
                     $('.success-profile').removeClass('hide');
                     $('.successMsg').text(result.success);
@@ -198,7 +197,6 @@ $(function() {
                 }
             },
             error: function(err) {
-                console.log(err);
                 $('.errors-profile').removeClass('hide');
                 $('.errorMsg').text(
                     'An unexpected error has occurred! Please try again.'
@@ -259,7 +257,6 @@ $(function() {
                 }
             },
             error: function(err) {
-                console.log(err);
                 $('.errors-profile').removeClass('hide');
                 $('.errorMsg').text(
                     'An unexpected error has occurred! Please try again.'
@@ -338,4 +335,61 @@ $(function() {
         modal.find('.modal-title').text(user + ' choose a new photo');
     });
     /*Change photo profil*/
+
+    /*edit location*/
+    $('.linkEditLocation').on('click', function() {
+        $('.old-location').addClass('hide');
+        $('.linkEditLocation').addClass('hide');
+        $('.div-edit-location').removeClass('hide');
+    });
+
+    $('.cancel-edit-location').on('click', function() {
+        $('.old-location').removeClass('hide');
+        $('.linkEditLocation').removeClass('hide');
+        $('.div-edit-location').addClass('hide');
+    });
+
+    /*Ajax call to edit Location profil*/
+    $('.edit-location').on('submit', function(event) {
+        event.preventDefault();
+        let id = $('.user_id').val();
+        $.ajax({
+            url: '/userprofile/location/' + id,
+            type: 'post',
+            data: $('.edit-location').serialize(),
+            success: function(result) {
+                console.log('ok');
+                if (result.success) {
+                    $('.success-profile').removeClass('hide');
+                    $('.successMsg').text(result.success);
+                    $('.old-location').removeClass('hide');
+                    $('.linkEditLocation').removeClass('hide');
+                    $('.div-edit-location').addClass('hide');
+                    $('.older-location').text(result.location);
+                    setTimeout(function() {
+                        $('.success-profile').hide(500);
+                    }, 2000);
+                } else {
+                    $('.errors-profile').removeClass('hide');
+                    $.each(result.errors, function(key, value) {
+                        $('.errorMsg').text(value);
+                    });
+                    setTimeout(function() {
+                        $('.errors-profile').hide(500);
+                    }, 3500);
+                }
+            },
+            error: function(err) {
+                console.log(err);
+                $('.errors-profile').removeClass('hide');
+                $('.errorMsg').text(
+                    'An unexpected error has occurred! Please try again.'
+                );
+                setTimeout(function() {
+                    $('.errors-profile').hide(500);
+                }, 3500);
+            }
+        });
+    }); /*end ajax call*/
+    /*END of edit Location */
 }); //LAST JQuery DO NOT DELETE
