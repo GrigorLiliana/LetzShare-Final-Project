@@ -77,59 +77,56 @@ $(function() {
             $('#' + $targetDivId).toggleClass('liked');
             $('#' + $targetDivId).toggleClass('not-liked');
             $('#' + $targetDivId + '> .fa-heart').toggleClass('far');
-            $('#' + $targetDivId + '> .fa-heart').toggleClass('fas');           ;
-            $('#' + $targetDivId + '> .likes-number').text(count);
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('fas');
             $('#' + $targetDivId + '> .likes-number').text(count);
         });
     });
 
     /* End of the Like-click listener */
 
-/* Start of the Report-click listener */
+    /* Start of the Report-click listener */
 
-$('.reported').on('click', function(e) {
-    event.preventDefault();
-    let $targetDivId = this.id;
-    let like = false;
-    $.ajax({
-        method: 'POST',
-        url: '/like',
-        data: { isLiked: like, photoId: this.id }
-    }).done(function() {
-        console.log ("done unreporting");
-        console.log ($targetDivId);
-        // Change the page
-        $('#' + $targetDivId).toggleClass('not-reported');
-        $('#' + $targetDivId).toggleClass('reported');
-        $('#' + $targetDivId + '> .fa-flag').toggleClass('fas');
-        $('#' + $targetDivId + '> .fa-flag').toggleClass('far');
-        $('#' + $targetDivId + '> .rep-text').text('Report');
+    $('.reported').on('click', function(e) {
+        event.preventDefault();
+        let $targetDivId = this.id;
+        let like = false;
+        $.ajax({
+            method: 'POST',
+            url: '/like',
+            data: { isLiked: like, photoId: this.id }
+        }).done(function() {
+            console.log('done unreporting');
+            console.log($targetDivId);
+            // Change the page
+            $('#' + $targetDivId).toggleClass('not-reported');
+            $('#' + $targetDivId).toggleClass('reported');
+            $('#' + $targetDivId + '> .fa-flag').toggleClass('fas');
+            $('#' + $targetDivId + '> .fa-flag').toggleClass('far');
+            $('#' + $targetDivId + '> .rep-text').toggleClass('hide');
+        });
     });
-});
-$('.not-reported').on('click', function(e) {
-    event.preventDefault();
-    let $targetDivId = this.id;
-    let like = false;
-    $.ajax({
-        method: 'POST',
-        url: '/like',
-        data: { isLiked: like, photoId: this.id }
-    }).done(function() {
-        console.log ("done reporting");
-        console.log ($targetDivId);
-        // Change the page
-        $('#' + $targetDivId).toggleClass('reported');
-        $('#' + $targetDivId).toggleClass('not-reported');
-        $('#' + $targetDivId + '> .fa-flag').toggleClass('far');
-        $('#' + $targetDivId + '> .fa-flag').toggleClass('fas');
-        $('#' + $targetDivId + '> .rep-text').text('Reported');
+    $('.not-reported').on('click', function(e) {
+        event.preventDefault();
+        let $targetDivId = this.id;
+        let like = false;
+        $.ajax({
+            method: 'POST',
+            url: '/like',
+            data: { isLiked: like, photoId: this.id }
+        }).done(function() {
+            console.log('done reporting');
+            console.log($targetDivId);
+            // Change the page
+            $('#' + $targetDivId).toggleClass('reported');
+            $('#' + $targetDivId).toggleClass('not-reported');
+            $('#' + $targetDivId + '> .fa-flag').toggleClass('far');
+            $('#' + $targetDivId + '> .fa-flag').toggleClass('fas');
+            //  $('#' + $targetDivId + '> .rep-text').text('Reported');
+            $('#' + $targetDivId + '> .rep-text').toggleClass('hide');
+        });
     });
-});
 
-/* End of the Report-click listener */
-
-
-
+    /* End of the Report-click listener */
 
     /* Upload file field --> show selected name */
     $('#foto').on('change', function() {
