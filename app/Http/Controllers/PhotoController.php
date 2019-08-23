@@ -23,7 +23,7 @@ class PhotoController extends Controller
     {
         /* Show only photos that users already have,
             else it will not show the user */
-            $users = DB::table('users')
+        $users = DB::table('users')
             ->join('photos', 'photos.user_id', '=', 'users.user_id')
             ->select('users.*')
             ->distinct()
@@ -60,9 +60,9 @@ class PhotoController extends Controller
 
     public function filters(Request $request)
     {
-         /* Show only photos that users already have,
+        /* Show only photos that users already have,
             else it will not show the user */
-            $users = DB::table('users')
+        $users = DB::table('users')
             ->join('photos', 'photos.user_id', '=', 'users.user_id')
             ->select('users.*')
             ->distinct()
@@ -81,9 +81,14 @@ class PhotoController extends Controller
             ->distinct()
             ->get();
 
+
+        /* $firstdate = $request->firstdatepicker;
+        $lastdate = $request->lastdatepicker;
+
         $date = DB::table('photos')
-        ->where('created_at', $request->date)
-        ->get();
+            ->whereBetween('created_at', array($firstdate->toDateTimeString(), $lastdate->toDateTimeString()) )
+            ->select('photos.*')
+            ->get(); */
 
         // Show the filter query
         $photos = DB::table('photos')
@@ -115,7 +120,7 @@ class PhotoController extends Controller
             'users' => $users,
             'locations' => $locations,
             'categories' => $categories,
-            'date' => $date
+            //'date' => $date
         ]);
     }
 

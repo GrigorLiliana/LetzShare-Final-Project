@@ -35,9 +35,14 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-2">
                 <label for="photo-user">Date From</label>
-                <input type="date" class="form-control form-control-sm" type="date" id="date" value="{{ $photos->created_at }}">
+                <input type="date" class="form-control form-control-sm" name="firstdatepicker"
+                id="firstdatepicker" value="{{-- {{ $photos->created_at }} --}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="photo-user">Date To</label>
+                <input type="date" class="form-control form-control-sm" id="lastdatepicker" name="lastdatepicker"  value="{{-- {{ $photos->created_at }} --}}">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
