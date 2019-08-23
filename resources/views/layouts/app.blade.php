@@ -36,7 +36,21 @@
     </div>
 
     @include('layouts.footer')
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+    <script>
+        $('.container').infiniteScroll({
+                // options
 
+                path: '.page-link',
+                append: '.card-columns',
+                status: '.scroller-status',
+                hideNav: '.pagination',
+                checkLastPage: false,
+                scrollThreshold: 400,
+            });
+    </script>
 </body>
 
 </html>

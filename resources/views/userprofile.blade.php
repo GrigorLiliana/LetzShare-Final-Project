@@ -188,7 +188,7 @@ $ownUser=false;
 <!-- check if the user as photos -->
 @if(count($userPhotos)>1)
 <!--create a card for each photo if the user has photo -->
-<div class="row">
+<div class="row gallery">
     <div class="card-columns">
 
         @foreach ($userPhotos as $userPhoto)
@@ -270,4 +270,7 @@ $ownUser=false;
 </div>
 @endif
 <!--End of the User Portfolio -->
+<div class="pagination">
+    {{ $userPhotos->links() }}
+</div>
 @endsection

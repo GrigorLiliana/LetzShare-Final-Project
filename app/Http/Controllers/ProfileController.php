@@ -23,7 +23,7 @@ class ProfileController extends Controller
         ->where('users.user_id', $id)
         ->select('photos.*', 'photos.created_at as photodate', 'users.*','locations.*', 'categories.*')
         ->orderby('photodate', 'desc')
-        ->get();
+        ->simplePaginate(15);
 
 
         return view('userprofile', ['userPhotos' => $userPhotos]);
