@@ -55,6 +55,8 @@
         </div>
     </div>
 </div>
+<!-- end of the model to edit photo -->
+
 @guest
 @php
 $ownUser=false;
@@ -139,13 +141,25 @@ $ownUser=false;
         <!-- end edit description -->
 
         <!-- user location -->
-        <p>
-            <i class="fas fa-map-marker-alt"></i>
-            @if($userPhotos[0]->user_location){{$userPhotos[0]->user_location}}
-            @if($ownUser) | <a href="#">Edit Location</a>
+        <form action="" class="form-flex-profile edit-location">
+            @csrf
+            <p>
+                <i class="fas fa-map-marker-alt"></i>
+                @if($userPhotos[0]->user_location){{$userPhotos[0]->user_location}}@endif
+                @if($ownUser) | <a href="#">Edit Location</a>
+                @endif
+            </p>
+            @if($ownUser)
+            <!--Form to edit name-->
+            <div class="form-group flex-div div-edit-location hide">
+                <input class="form-control profile-field" type="text" name="location" id="location"
+                    value="{{$userPhotos[0]->user_location}}" placeholder="Edit your location">
+                <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
+                <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
+                <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
+            </div>
             @endif
-            @endif
-        </p>
+        </form>
         <!-- end of the user location -->
 
         <!-- send message to user -->

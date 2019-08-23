@@ -25,10 +25,24 @@
 <body>
 
     <div id="app">
+        <!-- shadow div (user profile when user send message) -->
         <div class="shadow-div hide"></div>
+
+
         @include('layouts.nav')
 
         <main class="container py-4">
+            <!-- div to display errors -->
+            <div class="notAdmin">
+                @if ( $message = Session::get('error') )
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span>{{ $message }}</span>
+                </div>
+                @endif
+            </div>
 
             @yield('content')
         </main>

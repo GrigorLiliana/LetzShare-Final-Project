@@ -84,11 +84,11 @@ class ProfileController extends Controller
 
             $errors = $validatedData->errors()->all();
 
-           /* $string='';
-            foreach ($errors as $key => $value){
-               $string .= $key.": ". $value.',';
-            }*/
-            return redirect('userprofile/' . $id)->with('error', "Not saved");
+            $string='';
+            foreach ($errors as $value){
+               $string .=  $value .' ';
+            }
+            return redirect('userprofile/' . $id)->with('error', "$string");
 
         }else{
 
