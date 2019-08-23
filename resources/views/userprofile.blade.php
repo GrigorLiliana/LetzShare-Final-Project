@@ -235,6 +235,7 @@ $ownUser=false;
                     <!-- Button -->
                     <ul>
                         <li>
+                            <!-- code to implement like /unlike functionality in page -->
                             @if (Auth::check())
                             @php
                             $like = App\Like::where('photo_id' , $userPhoto->photo_id)->where('user_id' ,
