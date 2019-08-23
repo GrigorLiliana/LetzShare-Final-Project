@@ -54,7 +54,7 @@ $(function() {
     $('.liked').on('click', function(e) {
         event.preventDefault();
         let $targetDivId = this.id;
-        let like = false;
+        let like = true;
         $.ajax({
             method: 'POST',
             url: '/like',
