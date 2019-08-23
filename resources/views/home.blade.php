@@ -9,9 +9,9 @@
         margin: 0 10%;
     }
 </style>
-
-
 @extends('layouts.app')
+
+@section('title', 'LetzShare | Home page')
 
 @section('content')
 <div class="container">
@@ -35,7 +35,7 @@
             <div class="card-body d-flex flex-row">
                 <!-- Avatar -->
                 <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px"
+                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50" width="50"
                         alt="{{$user->name}}">
                 </a>
                 <!-- Content -->
@@ -62,7 +62,7 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text text-capitalize" id="collapseContent">
+                    <p class="card-text text-capitalize">
                         {{ str_limit($picture->image_description, 75, '...') }}
                     </p>
                     <!-- Button -->
@@ -127,7 +127,7 @@
             </div>
             <div class="view overlay">
                 <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$path}}" class="rounded-circle mr-3" width="80%" alt="{{ $user->name }}">
+                    <img src="{{$path}}" class="rounded-circle mr-3" width="200" alt="{{ $user->name }}">
                 </a>
             </div>
             <div class="card-body">
@@ -156,7 +156,7 @@
             <div class="card-body d-flex flex-row">
                 <!-- Avatar -->
                 <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px"
+                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50" width="50"
                         alt="{{$user->name}}">
                 </a>
                 <!-- Content -->
@@ -184,7 +184,7 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text " id="collapseContent text-capitalize">
+                    <p class="card-text ">
                         {{ str_limit($picture->image_description, 75, '...') }}</p>
                     <!-- Button -->
                     <ul>
