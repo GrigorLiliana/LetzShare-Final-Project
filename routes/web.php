@@ -29,6 +29,7 @@ Route::get('/userprofile/{id}', 'ProfileController@index')->name('userprofile');
 Route::post('/userprofile/{id}', 'ProfileController@store');
 Route::post('/userprofile/description/{id}', 'ProfileController@description');
 Route::post('/userprofile/photo/{id}','ProfileController@changePhoto');
+Route::post('/userprofile/location/{id}', 'ProfileController@location');
 
 Route::get('/gallery', 'PhotoController@index');
 Route::post('/gallery', 'PhotoController@filters');
@@ -42,6 +43,7 @@ Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 
 //** ADMIN - Middleware auth validation */
 Route::get('/admin', 'AdminController@index')->middleware('admin')->name('admin');
+Route::get('/admin/delete/{id}', 'AdminController@deleteUser')->middleware('admin');
 
 //** TESTS */
 Route::view('/chupelagaite', 'chupelagaite');

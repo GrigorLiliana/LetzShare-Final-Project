@@ -84,11 +84,11 @@ class ProfileController extends Controller
 
             $errors = $validatedData->errors()->all();
 
-           /* $string='';
-            foreach ($errors as $key => $value){
-               $string .= $key.": ". $value.',';
-            }*/
-            return redirect('userprofile/' . $id)->with('error', "Not saved");
+            $string='';
+            foreach ($errors as $value){
+               $string .=  $value .' ';
+            }
+            return redirect('userprofile/' . $id)->with('error', "$string");
 
         }else{
 
@@ -101,6 +101,20 @@ class ProfileController extends Controller
             $user->user_photo = $imageName;
             $user->save();
             return redirect('userprofile/' . $id);
+        }
+    }
+    public function location(Request $request, $id)
+    {
+        $validatedData = \Validator::make($request->all(), [
+            'location' => 'required|min:3|max:30|',
+        ]);
+        if ($validatedData->fails()) {
+            return response()->json(['errors' => $validatedData->errors()->all()]);
+        } else {
+            $user = User::find($id);
+            $user->user_location = $request->location;
+            $user->save();
+            return response()->json(['success' => 'successiful entered', 'location' => $user->user_location]);
         }
     }
     /**
