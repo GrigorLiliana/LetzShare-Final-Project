@@ -11,6 +11,7 @@
     <table class="table table-sm table-striped table-bordered table-hover">
         <thead class="thead-dark">
           <tr>
+            <th scope="col">Photo ID <i class="fa fa-fw fa-sort"></i></th>
             <th scope="col">Name <i class="fa fa-fw fa-sort"></i></th>
             <th scope="col">E-Mail <i class="fa fa-fw fa-sort"></i></th>
             <th scope="col">User Type <i class="fa fa-fw fa-sort"></i></th>
@@ -20,13 +21,14 @@
         <tbody>
     @foreach ($users as $user)
           <tr>
-          <td><a href="userprofile/{{ $user->user_id }}">{{ $user->name }}</a></td>
+            <td>{{ $user->user_id }}</td>
+            <td><a href="userprofile/{{ $user->user_id }}">{{ $user->name }}</a></td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->user_type }}</td>
             <td>
               @if ( $user->user_type != 'admin' ) 
-                <a href="#">Delete user</a>
-                @else
+                <a href="/admin/delete/{{ $user->user_id }}">Delete user</a>
+              @else
                   <span>Nada ;-)</span>
               @endif
             </td>

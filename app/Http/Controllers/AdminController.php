@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\User;
+use App\Photo;
 
 class AdminController extends Controller
 {
@@ -15,14 +16,38 @@ class AdminController extends Controller
      */
     public function index(){
         
-        //$admins = User::all()->where('user_type', '=', 'admin');
-        //$users = User::all()->where('user_type', '=', 'photographer');
         $users = User::all();
 
         return view('admin', [
-            //'admins' => $admins,
             'users' => $users,
         ]);
+    }
+
+    public function deleteUser($id){
+        
+        /* $photos = DB::table('photos')
+            ->join('users', 'users.user_id', '=', 'photos.user_id')
+            ->select('photos.*', 'users.name', 'users.user_photo')
+            ->where('photos.user_id', '=', $id); */
+
+        $photos = Photo::where('user_id', '=', $id)->get();
+
+        return view('admin-delete-user', [
+            'photos' => $photos]
+        );
+
+        if( $photos_deleted) {
+            //User::destroy($id);
+            //return redirect('admin');
+        }
+        
+        
+        
+
+
+        
+
+        
     }
 
     /**
