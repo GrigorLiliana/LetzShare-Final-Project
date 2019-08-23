@@ -25,35 +25,36 @@
     </div>
 </div>
 <!-- Modal to edit photo -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Recipient:</label>
-              <input type="text" class="form-control" id="recipient-name">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="message-text"></textarea>
+            <div class="modal-body">
+                <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="image">Select a photo</label>
+                        <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="foto" required>
+                            <label class="custom-file-label" for="foto"></label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save photo</button>
+                    </div>
+                </form>
             </div>
-          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send message</button>
-        </div>
-      </div>
     </div>
-  </div>
-  
+</div>
 @guest
 @php
 $ownUser=false;
@@ -102,11 +103,11 @@ $ownUser=false;
                 height="150" width="150" alt="{{$userPhotos[0]->name}} photo">
             @if($ownUser)
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                data-whatever="@getbootstrap">Edit photo</button>@endif
+                data-whatever="{{$userPhotos[0]->name}}">Edit photo</button>@endif
         </div>
 
 
-        <div>
+        <div class="user-details-flex">
             <form method="post" class="form-flex-profile edit-description">
                 @csrf
                 <div>

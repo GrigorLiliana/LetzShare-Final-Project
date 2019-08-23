@@ -11,10 +11,10 @@
     <table class="table table-sm table-striped table-bordered table-hover">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">User ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">E-Mail</th>
-            <th scope="col">User Type</th>
+            <th scope="col">User ID <i class="fa fa-fw fa-sort"></i></th>
+            <th scope="col">Name <i class="fa fa-fw fa-sort"></i></th>
+            <th scope="col">E-Mail <i class="fa fa-fw fa-sort"></i></th>
+            <th scope="col">User Type <i class="fa fa-fw fa-sort"></i></th>
           </tr>
         </thead>
         <tbody>

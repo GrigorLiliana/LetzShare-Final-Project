@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Photo;
 use App\User;
+use File;
+use Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
@@ -70,6 +72,35 @@ class ProfileController extends Controller
             $user->user_description = $request->description;
             $user->save();
             return response()->json(['success' => 'successiful entered', 'description' => $user->user_description]);
+        }
+    }
+    public function changePhoto(Request $request, $id)
+    {
+        $validatedData = \Validator::make($request->all(),[
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if($validatedData->fails()){
+
+            $errors = $validatedData->errors()->all();
+
+           /* $string='';
+            foreach ($errors as $key => $value){
+               $string .= $key.": ". $value.',';
+            }*/
+            return redirect('userprofile/' . $id)->with('error', "Not saved");
+
+        }else{
+
+            $user = User::find($id);
+            $imageName ="uploads/users/". $id . '.' . request()->image->getClientOriginalExtension();
+
+            $destinationPath = $user->user_photo;
+            File::delete($destinationPath);
+            request()->image->move(public_path("uploads/users"), $imageName);
+            $user->user_photo = $imageName;
+            $user->save();
+            return redirect('userprofile/' . $id);
         }
     }
     /**

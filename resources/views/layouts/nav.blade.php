@@ -58,7 +58,8 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                         @if (Auth::user()->user_type == 'admin')
-                            <a class="dropdown-item {{ (current_page('admin')) ? 'active' : '' }}" href="{{ route('admin')}}">Admin Dashboard</a>
+                        <a class="dropdown-item {{ (current_page('admin')) ? 'active' : '' }}"
+                            href="{{ route('admin')}}">Admin Dashboard</a>
                         @endif
 
 

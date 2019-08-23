@@ -24,6 +24,10 @@ $(function() {
         displayValid('#length', lengthValid);
         displayValid('#capital', upperValid);
         displayValid('#number', numberValid);
+
+        //prettier-ignore
+        if(letterValid && lengthValid && upperValid && numberValid)
+            $('#pswd_info').hide(250);
     }
 
     function displayValid(selector, condition) {
@@ -50,7 +54,7 @@ $(function() {
     $('.liked').on('click', function(e) {
         event.preventDefault();
         let $targetDivId = this.id;
-        let like = false;
+        let like = true;
         $.ajax({
             method: 'POST',
             url: '/like',
@@ -77,7 +81,7 @@ $(function() {
             $('#' + $targetDivId).toggleClass('liked');
             $('#' + $targetDivId).toggleClass('not-liked');
             $('#' + $targetDivId + '> .fa-heart').toggleClass('far');
-            $('#' + $targetDivId + '> .fa-heart').toggleClass('fas');           ;
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('fas');
             $('#' + $targetDivId + '> .likes-number').text(count);
         });
     });
@@ -326,13 +330,12 @@ $(function() {
         });
     }); /*end ajax call to upload photo*/
 
+    /*Change photo profil*/
     $('#exampleModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
-        var recipient = button.data('whatever'); // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var user = button.data('whatever'); // Extract info from data-* attributes
         var modal = $(this);
-        modal.find('.modal-title').text('New message to ' + recipient);
-        modal.find('.modal-body input').val(recipient);
+        modal.find('.modal-title').text(user + ' choose a new photo');
     });
+    /*Change photo profil*/
 }); //LAST JQuery DO NOT DELETE
