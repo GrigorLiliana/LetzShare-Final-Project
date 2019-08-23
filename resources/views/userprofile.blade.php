@@ -132,7 +132,8 @@ $ownUser=false;
                 placeholder="Edit your description">{{$userPhotos[0]->user_description}}</textarea>
             <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
             <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
-            <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
+            <input class="btn btn-danger mb-2 profile-field cancel-edit-description" type="button" value="Cancel"
+                name="cancel">
         </div>
         @endif
         @endif
@@ -141,22 +142,29 @@ $ownUser=false;
         <!-- end edit description -->
 
         <!-- user location -->
-        <form action="" class="form-flex-profile edit-location">
+        <form method="POST" class="form-flex-profile edit-location">
             @csrf
             <p>
                 <i class="fas fa-map-marker-alt"></i>
-                @if($userPhotos[0]->user_location){{$userPhotos[0]->user_location}}@endif
-                @if($ownUser) | <a href="#">Edit Location</a>
+                @if($userPhotos[0]->user_location)
+                <span class="old-location older-location">
+                    {{$userPhotos[0]->user_location}}
+                </span>
+                @endif
+                @if($ownUser)
+                <span class="old-location"> | </span>
+                <a href="#" class="linkEditLocation">Edit Location</a>
                 @endif
             </p>
             @if($ownUser)
-            <!--Form to edit name-->
+            <!--Form to edit location-->
             <div class="form-group flex-div div-edit-location hide">
                 <input class="form-control profile-field" type="text" name="location" id="location"
                     value="{{$userPhotos[0]->user_location}}" placeholder="Edit your location">
                 <input type="number" class="hide user_id" name="user_id" value="{{Auth::user()->user_id}}">
                 <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
-                <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
+                <input class="btn btn-danger mb-2 profile-field cancel-edit-location" type="button" value="Cancel"
+                    name="cancel">
             </div>
             @endif
         </form>
