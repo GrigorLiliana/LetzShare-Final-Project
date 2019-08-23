@@ -24,7 +24,36 @@
         <span class="successMsg"></span>
     </div>
 </div>
-
+<!-- Modal to edit photo -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Recipient:</label>
+              <input type="text" class="form-control" id="recipient-name">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Send message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 @guest
 @php
 $ownUser=false;
@@ -68,10 +97,12 @@ $ownUser=false;
 <div class="card promoting-card card-user">
     <!-- Avatar -->
     <div class="profile-flex">
-        <div class="edit-photo">
-            <img src="{{URL::asset($userPhotos[0]->user_photo)}}" class="rounded-circle mr-3 user-profile img-thumbnail"
+        <div class="edit-photo ">
+            <img src="{{URL::asset($userPhotos[0]->user_photo)}}" class="rounded-circle user-profile img-thumbnail"
                 height="150" width="150" alt="{{$userPhotos[0]->name}} photo">
-            @if($ownUser)<p><a href="#">Edit photo</a></p>@endif
+            @if($ownUser)
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                data-whatever="@getbootstrap">Edit photo</button>@endif
         </div>
 
 
@@ -235,8 +266,31 @@ $ownUser=false;
                     <!-- Button -->
                     <ul>
                         <li>
-                            <i class="fas fa-heart"></i>
-                            <span> {{ $userPhoto->likes_sum }}</span>
+                            <!-- code to implement like /unlike functionality in page -->
+                            @if (Auth::check())
+                            @php
+                            $like = App\Like::where('photo_id' , $userPhoto->photo_id)->where('user_id' ,
+                            Auth::user()->user_id)->first();
+                            @endphp
+                            @if ($like)
+                            <div class="liked" id="{{$userPhoto->photo_id}}">
+                                @csrf
+                                <i class="fas fa-heart"></i>
+                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
+                            </div>
+                            @else
+                            <div class="not-liked" id="{{$userPhoto->photo_id}}">
+                                @csrf
+                                <i class="far fa-heart"></i>
+                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
+                            </div>
+                            @endif
+                            @else
+                            <div class="not-logged">
+                                <i class="far fa-heart"></i>
+                                <span>{{ $userPhoto->likes_sum }}</span>
+                            </div>
+                            @endif
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>

@@ -49,31 +49,36 @@ $(function() {
 
     $('.liked').on('click', function(e) {
         event.preventDefault();
-        console.log(this.id, 'No likey');
+        let $targetDivId = this.id;
         let like = false;
         $.ajax({
             method: 'POST',
             url: '/like',
             data: { isLiked: like, photoId: this.id }
-        }).done(function() {
+        }).done(function(count) {
             // Change the page
-
-            $(this.id).addClass('not-liked');
-            $(this.id).removeClass('liked');
+            $('#' + $targetDivId).toggleClass('not-liked');
+            $('#' + $targetDivId).toggleClass('liked');
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('fas');
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('far');
+            $('#' + $targetDivId + '> .likes-number').text(count);
         });
     });
     $('.not-liked').on('click', function(e) {
         event.preventDefault();
-        console.log(this.id, 'Liked');
+        let $targetDivId = this.id;
         let like = true;
         $.ajax({
             method: 'POST',
             url: '/like',
             data: { isLiked: like, photoId: this.id }
-        }).done(function() {
+        }).done(function(count) {
             // Change the page
-            $(this.id).addClass('liked');
-            $(this.id).removeClass('not-liked');
+            $('#' + $targetDivId).toggleClass('liked');
+            $('#' + $targetDivId).toggleClass('not-liked');
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('far');
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('fas');           ;
+            $('#' + $targetDivId + '> .likes-number').text(count);
         });
     });
 
@@ -274,40 +279,39 @@ $(function() {
             contentType: false,
             success: function(result) {
                 if (result.success) {
-                    console.log(result.url);
-                    $('input').val("");
-                    $('textarea').val("");
-                    $('#foto').next('.custom-file-label').text("");
+                    $('input').val('');
+                    $('textarea').val('');
+                    $('#foto')
+                        .next('.custom-file-label')
+                        .text('');
                     $('.success-profile').removeClass('hide');
                     $('.success-profile').css({
                         position: 'absolute',
                         'z-index': '1'
                     });
                     $('.successMsg').text(result.success);
-                    console.log("<img src='{{URL::asset(" + result.url + "}}'></img>");
-                    $("#showNewPhoto").append("<img class='img-thumbnail' src='"+ result.url + "' >");
+                    $('#showNewPhoto').append(
+                        "<img class='img-thumbnail' src='" + result.url + "' >"
+                    );
                     setTimeout(function() {
                         $('.success-profile').hide(500);
                         $('.success-profile').addClass('hide');
                     }, 5000);
                     setTimeout(function() {
-                        $('.success-profile').css("display","initial");
-                    },5001);
-
+                        $('.success-profile').css('display', 'initial');
+                    }, 5001);
                 } else {
-                    console.log(result);
-                    console.log(result.errors);
                     $('.errors-profile').removeClass('hide');
                     $('.errors-profile').css({
                         position: 'absolute',
                         'z-index': '1'
                     });
                     $.each(result.errors, function(key, value) {
-                        $('.errorMsg').text(value);
+                        $('.errorMsg').append('<span>' + value + '</span><br>');
                     });
                     setTimeout(function() {
                         $('.errors-profile').hide(500);
-                    }, 3500);
+                    }, 5000);
                 }
             },
             error: function(err) {
@@ -321,4 +325,14 @@ $(function() {
             }
         });
     }); /*end ajax call to upload photo*/
+
+    $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var recipient = button.data('whatever'); // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this);
+        modal.find('.modal-title').text('New message to ' + recipient);
+        modal.find('.modal-body input').val(recipient);
+    });
 }); //LAST JQuery DO NOT DELETE
