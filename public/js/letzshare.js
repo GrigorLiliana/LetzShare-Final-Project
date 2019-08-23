@@ -55,17 +55,13 @@ $(function() {
             method: 'POST',
             url: '/like',
             data: { isLiked: like, photoId: this.id }
-        }).done(function() {
+        }).done(function(count) {
             // Change the page
-            $('#' + $targetDivId).addClass('not-liked');
-            $('#' + $targetDivId).removeClass('liked');
-            $('#' + $targetDivId + '> .fa-heart').removeClass('fas');
-            $('#' + $targetDivId + '> .fa-heart').addClass('far');
-            let newVal = $('#' + $targetDivId + '> .likes-number').val();
-            console.log(newVal);
-            
-            $('#' + $targetDivId).off();
-            // $('#' + $targetDivId + '> .likes-number').val($newVal);
+            $('#' + $targetDivId).toggleClass('not-liked');
+            $('#' + $targetDivId).toggleClass('liked');
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('fas');
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('far');
+            $('#' + $targetDivId + '> .likes-number').text(count);
         });
     });
     $('.not-liked').on('click', function(e) {
@@ -76,18 +72,13 @@ $(function() {
             method: 'POST',
             url: '/like',
             data: { isLiked: like, photoId: this.id }
-        }).done(function() {
+        }).done(function(count) {
             // Change the page
-            $('#' + $targetDivId).addClass('liked');   
-            $('#' + $targetDivId).removeClass('not-liked');
-            $('#' + $targetDivId + '> .fa-heart').removeClass('far');
-            $('#' + $targetDivId + '> .fa-heart').addClass('fas');            
-            let newVal = $('#' + $targetDivId + '> .likes-number').text();
-            //let newVal = parseInt($('#' + $targetDivId + '> .likes-number').val());
-            console.log(newVal);
-                     
-            $('#' + $targetDivId).off();
-            // $('#' + $targetDivId + '> .likes-number').val($newVal);
+            $('#' + $targetDivId).toggleClass('liked');
+            $('#' + $targetDivId).toggleClass('not-liked');
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('far');
+            $('#' + $targetDivId + '> .fa-heart').toggleClass('fas');           ;
+            $('#' + $targetDivId + '> .likes-number').text(count);
         });
     });
 
