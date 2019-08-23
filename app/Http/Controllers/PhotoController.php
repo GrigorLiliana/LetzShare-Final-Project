@@ -34,8 +34,6 @@ class PhotoController extends Controller
         $locations = Location::all();
         $categories = Category::all();
 
-        //Photo::paginate(15);
-
         return view('gallery', [
             'photos' => $photos,
             'users' => $users,
@@ -56,14 +54,14 @@ class PhotoController extends Controller
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
             ->join('categories', 'categories.category_id', '=', 'photos.category_id')
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
-            ->orWhere('photos.user_id', $request->users)
+            /* ->orWhere('photos.user_id', $request->users)
             ->orWhere('photos.locality_id', $request->locations)
-            ->orWhere('photos.category_id', $request->categories)
-            ->get();
+            ->orWhere('photos.category_id', $request->categories) */
+            /* ->simplePaginate(15) */;
 
         // Search for a user based on their name
-        /* if ($request->has('users')) {
-            $photos->where('photos.user_id', $request->users);
+        if ($request->has('users')) {
+            $photos->orWhere('photos.user_id', $request->users);
         }
         // Search for a photo based on location
         if ($request->has('locations')) {
@@ -73,10 +71,20 @@ class PhotoController extends Controller
         if ($request->has('categories')) {
             $photos->orWhere('photos.category_id', $request->categories);
         }
-        */
+
+        // show photo based on likes by Desc
+        if ($request->has('likes_sum')) {
+            $photos->orderBy('likes_sum', 'desc', $request->likes_sum);
+        }
+
+        // show photo based on likes by Asc
+        if ($request->has('likes_sum')) {
+            $photos->orderBy('likes_sum', 'asc', $request->likes_sum);
+        }
+
 
         return view('gallery', [
-            'photos' => $photos,
+            'photos' => $photos->simplePaginate(9),
             'users' => $users,
             'locations' => $locations,
             'categories' => $categories
