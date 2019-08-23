@@ -72,6 +72,7 @@ class RegisterController extends Controller
 
         $user->user_location = 'Luxembourg';
         $user->user_description = "Hi, I'm " . $data['name'] . " and I love to take photos in Luxembourg!";
+        $user->user_photo = "uploads/users/default_user.gif";
         $user->save();
 
         return $user;
