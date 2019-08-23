@@ -135,9 +135,18 @@ h1 {
 
 .form-flex-profile {
     display: flex;
+    flex-wrap: wrap;
 }
 .flex-div {
     display: flex;
+}
+@media screen and (max-width: 775px) {
+    .flex-div {
+        display: initial;
+    }
+}
+.user-details-flex {
+    width: 50%;
 }
 .profile-field {
     width: max-content !important;
