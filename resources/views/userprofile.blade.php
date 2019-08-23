@@ -146,11 +146,13 @@ $ownUser=false;
             @csrf
             <p>
                 <i class="fas fa-map-marker-alt"></i>
-                @if($userPhotos[0]->user_location)
+
                 <span class="old-location older-location">
+                    @if($userPhotos[0]->user_location)
                     {{$userPhotos[0]->user_location}}
+                    @endif
                 </span>
-                @endif
+
                 @if($ownUser)
                 <span class="old-location"> | </span>
                 <a href="#" class="linkEditLocation">Edit Location</a>
