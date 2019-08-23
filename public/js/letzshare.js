@@ -288,36 +288,35 @@ $(function() {
             contentType: false,
             success: function(result) {
                 if (result.success) {
-                    console.log(result.url);
-                    $('input').val("");
-                    $('textarea').val("");
-                    $('#foto').next('.custom-file-label').text("");
+                    $('input').val('');
+                    $('textarea').val('');
+                    $('#foto')
+                        .next('.custom-file-label')
+                        .text('');
                     $('.success-profile').removeClass('hide');
                     $('.success-profile').css({
                         position: 'absolute',
                         'z-index': '1'
                     });
                     $('.successMsg').text(result.success);
-                    console.log("<img src='{{URL::asset(" + result.url + "}}'></img>");
-                    $("#showNewPhoto").append("<img class='img-thumbnail' src='"+ result.url + "' >");
+                    $('#showNewPhoto').append(
+                        "<img class='img-thumbnail' src='" + result.url + "' >"
+                    );
                     setTimeout(function() {
                         $('.success-profile').hide(500);
                         $('.success-profile').addClass('hide');
                     }, 5000);
                     setTimeout(function() {
-                        $('.success-profile').css("display","initial");
-                    },5001);
-
+                        $('.success-profile').css('display', 'initial');
+                    }, 5001);
                 } else {
-                    console.log(result);
-                    console.log(result.errors);
                     $('.errors-profile').removeClass('hide');
                     $('.errors-profile').css({
                         position: 'absolute',
                         'z-index': '1'
                     });
                     $.each(result.errors, function(key, value) {
-                        $('.errorMsg').text(value);
+                        $('.errorMsg').append('<span>' + value + '</span><br>');
                     });
                     setTimeout(function() {
                         $('.errors-profile').hide(500);
