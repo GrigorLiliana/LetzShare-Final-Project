@@ -235,8 +235,30 @@ $ownUser=false;
                     <!-- Button -->
                     <ul>
                         <li>
-                            <i class="fas fa-heart"></i>
-                            <span> {{ $userPhoto->likes_sum }}</span>
+                            @if (Auth::check())
+                            @php
+                            $like = App\Like::where('photo_id' , $userPhoto->photo_id)->where('user_id' ,
+                            Auth::user()->user_id)->first();
+                            @endphp
+                            @if ($like)
+                            <div class="liked" id="{{$userPhoto->photo_id}}">
+                                @csrf
+                                <i class="fas fa-heart"></i>
+                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
+                            </div>
+                            @else
+                            <div class="not-liked" id="{{$userPhoto->photo_id}}">
+                                @csrf
+                                <i class="far fa-heart"></i>
+                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
+                            </div>
+                            @endif
+                            @else
+                            <div class="not-logged">
+                                <i class="far fa-heart"></i>
+                                <span>{{ $userPhoto->likes_sum }}</span>
+                            </div>
+                            @endif
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
