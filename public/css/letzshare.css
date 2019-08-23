@@ -151,6 +151,10 @@ h1 {
 
 /* Gallery Styles */
 
+/* .gallery {
+    padding: 0 15px;
+} */
+
 .card {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
         0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -161,7 +165,7 @@ h1 {
 /* Filters Form Styles */
 
 .filters {
-    padding: 10px;  
+    padding: 30px 0;
 }
 
 /* fancybox Form Styles */
@@ -196,4 +200,11 @@ h1 {
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;
+}
+
+/* Pagination Styles */
+
+.pagination {
+    padding: 10px;
+    justify-content: center;
 }

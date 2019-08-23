@@ -57,7 +57,7 @@
     </form>
 </div>
 
-<div class="row">
+<div class="row gallery">
     <div class="card-columns">
 
         <!-- Card -->
