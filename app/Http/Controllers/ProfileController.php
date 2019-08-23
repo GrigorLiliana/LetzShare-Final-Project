@@ -19,13 +19,13 @@ class ProfileController extends Controller
     public function index($id)
     {
         $userPhotos = DB::table('users')
-        ->leftjoin('photos', 'users.user_id', '=', 'photos.user_id')
-        ->leftjoin('locations', 'locations.locality_id', '=', 'photos.locality_id')
-        ->leftjoin('categories', 'categories.category_id', '=', 'photos.category_id')
-        ->where('users.user_id', $id)
-        ->select('photos.*', 'photos.created_at as photodate', 'users.*','locations.*', 'categories.*')
-        ->orderby('photodate', 'desc')
-        ->simplePaginate(15);
+            ->leftjoin('photos', 'users.user_id', '=', 'photos.user_id')
+            ->leftjoin('locations', 'locations.locality_id', '=', 'photos.locality_id')
+            ->leftjoin('categories', 'categories.category_id', '=', 'photos.category_id')
+            ->where('users.user_id', $id)
+            ->select('photos.*', 'photos.created_at as photodate', 'users.*', 'locations.*', 'categories.*')
+            ->orderby('photodate', 'desc')
+            ->simplePaginate(12);
 
 
         return view('userprofile', ['userPhotos' => $userPhotos]);
@@ -37,9 +37,7 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($id)
-    {
-
-    }
+    { }
 
     /**
      * Store a newly created resource in storage.
@@ -49,34 +47,32 @@ class ProfileController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $validatedData = \Validator::make($request->all(),[
-            'name'=> 'required|min:4|max:20|',
+        $validatedData = \Validator::make($request->all(), [
+            'name' => 'required|min:4|max:20|',
         ]);
-        if($validatedData->fails()){
+        if ($validatedData->fails()) {
             return response()->json(['errors' => $validatedData->errors()->all()]);
-
-        }else{
+        } else {
             $user = User::find($id);
             $user->name = $request->name;
             $user->save();
-            return response()->json(['success' => 'successiful entered', 'name'=>$user->name]);
-            }
+            return response()->json(['success' => 'successiful entered', 'name' => $user->name]);
+        }
     }
 
     public function description(Request $request, $id)
     {
-        $validatedData = \Validator::make($request->all(),[
-            'description'=> 'required|min:4|max:200|',
+        $validatedData = \Validator::make($request->all(), [
+            'description' => 'required|min:4|max:200|',
         ]);
-            if($validatedData->fails()){
+        if ($validatedData->fails()) {
             return response()->json(['errors' => $validatedData->errors()->all()]);
-
-        }else{
+        } else {
             $user = User::find($id);
             $user->user_description = $request->description;
             $user->save();
-            return response()->json(['success' => 'successiful entered', 'description'=>$user->user_description]);
-            }
+            return response()->json(['success' => 'successiful entered', 'description' => $user->user_description]);
+        }
     }
     public function changePhoto(Request $request, $id)
     {
@@ -88,11 +84,11 @@ class ProfileController extends Controller
 
             $errors = $validatedData->errors()->all();
 
-           /* $string='';
-            foreach ($errors as $key => $value){
-               $string .= $key.": ". $value.',';
-            }*/
-            return redirect('userprofile/' . $id)->with('error', "Not saved");
+            $string='';
+            foreach ($errors as $value){
+               $string .=  $value .' ';
+            }
+            return redirect('userprofile/' . $id)->with('error', "$string");
 
         }else{
 
