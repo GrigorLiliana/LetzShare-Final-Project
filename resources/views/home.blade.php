@@ -276,18 +276,18 @@
                                     @if (!($like->islike))
                                     <div class="reported" id="r{{$picture->photo_id}}">
                                         @csrf
-                                        <i class="fas fa-flag"></i><span>Reported<span>
+                                        <i class="fas fa-flag"></i><span class="rep-text">Reported<span>
                                     </div>
                                     @else
                                     <div class="not-reported" id="r{{$picture->photo_id}}">
                                         @csrf
-                                        <i class="far fa-flag"></i><span>Report<span>
+                                        <i class="far fa-flag"></i><span class="rep-text">Report<span>
                                     </div>
                                     @endif
                                 @else
                                 <div class="not-reported" id="r{{$picture->photo_id}}">
                                     @csrf
-                                    <i class="far fa-flag"></i><span>Report<span>
+                                    <i class="far fa-flag"></i><span class="rep-text">Report<span>
                                 </div>
                                 @endif
                             @endif
