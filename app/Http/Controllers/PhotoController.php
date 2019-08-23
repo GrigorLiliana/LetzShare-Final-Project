@@ -171,6 +171,7 @@ class PhotoController extends Controller
         if ($like) {
             $already_like = $like->islike;
             $update = true;
+            // if current like status in table
             if ($already_like == $is_like) {
                 $like->delete();
                 $count = count($photo->likes);
