@@ -12,7 +12,7 @@
 
 
 @extends('layouts.app')
-
+@section('title', 'LetzShare | Home page')
 @section('content')
 <div class="container">
     <h1>LetzShare - The beauty of Luxembourg</h1>
@@ -35,7 +35,7 @@
             <div class="card-body d-flex flex-row">
                 <!-- Avatar -->
                 <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50px" width="50px"
+                    <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50" width="50"
                         alt="{{$user->name}}">
                 </a>
                 <!-- Content -->
@@ -62,7 +62,7 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text text-capitalize" id="collapseContent">
+                    <p class="card-text text-capitalize">
                         {{ str_limit($picture->image_description, 75, '...') }}
                     </p>
                     <!-- Button -->
