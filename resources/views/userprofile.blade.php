@@ -224,7 +224,7 @@ $ownUser=false;
 <!-- User Portfolio -->
 <h2>Portfolio
     @if($ownUser)|
-    <a href="#" class="add">
+    <a href="/uploadphoto" class="add">
         Upload new photo <i class="fas fa-plus-circle"></i>
     </a>
     @endif
