@@ -21,6 +21,27 @@ class PhotoController extends Controller
      */
     public function index()
     {
+        /* Show only photos that users already have,
+            else it will not show the user */
+            $users = DB::table('users')
+            ->join('photos', 'photos.user_id', '=', 'users.user_id')
+            ->select('users.*')
+            ->distinct()
+            ->get();
+
+        /* Show only photos that have locations assigned */
+        $locations = DB::table('locations')
+            ->join('photos', 'photos.locality_id', '=', 'locations.locality_id')
+            ->select('locations.*')
+            ->distinct()
+            ->get();
+
+        $categories = DB::table('categories')
+            ->join('photos', 'photos.category_id', '=', 'categories.category_id')
+            ->select('categories.*')
+            ->distinct()
+            ->get();
+
         $photos = DB::table('photos')
             ->join('users', 'users.user_id', '=', 'photos.user_id')
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
@@ -28,10 +49,6 @@ class PhotoController extends Controller
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
             ->orderBy('created_at', 'desc')
             ->simplePaginate(12);
-
-        $users = User::all();
-        $locations = Location::all();
-        $categories = Category::all();
 
         return view('gallery', [
             'photos' => $photos,
@@ -43,14 +60,30 @@ class PhotoController extends Controller
 
     public function filters(Request $request)
     {
-        $users = User::all();
-        /* $users = User::all()
-        ->join('photos', 'photos.photo_id', '=', 'users.users_id')
-        ->having()
-        ->select('name'); */
+         /* Show only photos that users already have,
+            else it will not show the user */
+            $users = DB::table('users')
+            ->join('photos', 'photos.user_id', '=', 'users.user_id')
+            ->select('users.*')
+            ->distinct()
+            ->get();
 
-        $locations = Location::all();
-        $categories = Category::all();
+        /* Show only photos that have locations assigned */
+        $locations = DB::table('locations')
+            ->join('photos', 'photos.locality_id', '=', 'locations.locality_id')
+            ->select('locations.*')
+            ->distinct()
+            ->get();
+
+        $categories = DB::table('categories')
+            ->join('photos', 'photos.category_id', '=', 'categories.category_id')
+            ->select('categories.*')
+            ->distinct()
+            ->get();
+
+        $date = DB::table('photos')
+        ->where('created_at', $request->date)
+        ->get();
 
         // Show the filter query
         $photos = DB::table('photos')
@@ -58,14 +91,14 @@ class PhotoController extends Controller
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
             ->join('categories', 'categories.category_id', '=', 'photos.category_id')
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
-            /* ->orWhere('photos.user_id', $request->users)
+            ->orWhere('photos.user_id', $request->users)
             ->orWhere('photos.locality_id', $request->locations)
-            ->orWhere('photos.category_id', $request->categories) */
+            ->orWhere('photos.category_id', $request->categories)
             ->simplePaginate(12);
 
         // Search for a user based on their name
 
-        if ($request->has('users')) {
+        /* if ($request->has('users')) {
             $photos->orWhere('photos.user_id', $request->users);
         }
         // Search for a photo based on location
@@ -76,12 +109,13 @@ class PhotoController extends Controller
         if ($request->has('categories')) {
             $photos->orWhere('photos.category_id', $request->categories);
         }
-
+ */
         return view('gallery', [
             'photos' => $photos,
             'users' => $users,
             'locations' => $locations,
-            'categories' => $categories
+            'categories' => $categories,
+            'date' => $date
         ]);
     }
 

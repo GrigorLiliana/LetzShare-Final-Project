@@ -8,7 +8,7 @@
     <form action="" method="POST">
         @csrf
         <div class="form-row">
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
                 <label for="photo-user">Photographers</label>
                 <select class="form-control form-control-sm" name="users" id="users">
                     <option value="default">Select</option>
@@ -17,7 +17,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
                 <label for="photo-user">Location</label>
                 <select class="form-control form-control-sm" name="locations" id="locations">
                     <option value="">Select</option>
@@ -35,22 +35,9 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-2">
-                <label for="photo-user">Likes</label>
-                <select class="form-control form-control-sm" name="likes_sum" id="likes_sum">
-                    <option value="">Select</option>
-
-                    <option value="likes_sum desc">descente</option>
-                    <option value="likes_sum asc">ascente</option>
-
-                </select>
-            </div>
             <div class="form-group col-sm-4">
-                <label for="photo-user">Date</label>
-                <select class="form-control form-control-sm">
-                    <option>select</option>
-                    <option>A-Z</option>
-                </select>
+                <label for="photo-user">Date From</label>
+                <input type="date" class="form-control form-control-sm" type="date" id="date" value="{{ $photos->created_at }}">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
