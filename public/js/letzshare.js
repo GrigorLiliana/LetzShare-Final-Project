@@ -63,7 +63,7 @@ $(function() {
             $('#' + $targetDivId + '> .fa-heart').addClass('far');
             let newVal = $('#' + $targetDivId + '> .likes-number').val();
             console.log(newVal);
-            
+
             $('#' + $targetDivId).off();
             // $('#' + $targetDivId + '> .likes-number').val($newVal);
         });
@@ -78,14 +78,14 @@ $(function() {
             data: { isLiked: like, photoId: this.id }
         }).done(function() {
             // Change the page
-            $('#' + $targetDivId).addClass('liked');   
+            $('#' + $targetDivId).addClass('liked');
             $('#' + $targetDivId).removeClass('not-liked');
             $('#' + $targetDivId + '> .fa-heart').removeClass('far');
-            $('#' + $targetDivId + '> .fa-heart').addClass('fas');            
+            $('#' + $targetDivId + '> .fa-heart').addClass('fas');
             let newVal = $('#' + $targetDivId + '> .likes-number').text();
             //let newVal = parseInt($('#' + $targetDivId + '> .likes-number').val());
             console.log(newVal);
-                     
+
             $('#' + $targetDivId).off();
             // $('#' + $targetDivId + '> .likes-number').val($newVal);
         });
@@ -320,7 +320,7 @@ $(function() {
                     });
                     setTimeout(function() {
                         $('.errors-profile').hide(500);
-                    }, 3500);
+                    }, 5000);
                 }
             },
             error: function(err) {
