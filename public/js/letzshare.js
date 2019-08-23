@@ -48,7 +48,7 @@ $(function() {
     });
 
     $('.liked').on('click', function(e) {
-        //event.preventDefault();
+        event.preventDefault();
         let $targetDivId = this.id;
         let like = false;
         $.ajax({
@@ -65,7 +65,7 @@ $(function() {
         });
     });
     $('.not-liked').on('click', function(e) {
-        //event.preventDefault();
+        event.preventDefault();
         let $targetDivId = this.id;
         let like = true;
         $.ajax({
