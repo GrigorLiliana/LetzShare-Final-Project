@@ -27,7 +27,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row label-password">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -39,6 +39,23 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div id="pswd_info">
+                        <h4>Your passwork must contains :</h4>
+                        <ul>
+                        <li id="letter" class="invalid">
+                            At least <strong>a letter</strong>
+                        </li>
+                        <li id="capital" class="invalid">
+                            At least <strong>a capital letter</strong>
+                        </li>
+                        <li id="number" class="invalid">
+                            At least <strong>a number</strong>
+                        </li>
+                        <li id="length" class="invalid">
+                            At least <strong>8 caracters</strong>
+                        </li>
+                        </ul>
+                    </div>
                         </div>
 
                         <div class="form-group row">
@@ -57,23 +74,7 @@
                             </div>
                         </div>
                     </form>
-                    <div id="pswd_info">
-                        <h4>Your passwork must contains :</h4>
-                        <ul>
-                        <li id="letter" class="invalid">
-                            At least <strong>a letter</strong>
-                        </li>
-                        <li id="capital" class="invalid">
-                            At least <strong>a capital letter</strong>
-                        </li>
-                        <li id="number" class="invalid">
-                            At least <strong>a number</strong>
-                        </li>
-                        <li id="length" class="invalid">
-                            At least <strong>8 caracters</strong>
-                        </li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </div>

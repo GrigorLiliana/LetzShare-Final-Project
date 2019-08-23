@@ -1,11 +1,33 @@
 @extends('layouts.app')
-
+@section('title', 'Upload a photo | LetzShare')
 @section('content')
 
-@section('title', 'Upload a photo | LetzShare')
+<!-- Div to show errors messages -->
+<div class="errors hide errors-profile">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="errorMsg"></span>
+    </div>
+</div>
+<!-- Div to show success messages -->
+<div class="errors hide success-profile">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="successMsg"></span>
+        <div id="showNewPhoto"> </div>
+    </div>
+
+</div>
 
 <form id="uploadform" class="formbox" method="POST" enctype="multipart/form-data">
     @csrf
+
+
+
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-10 col-lg-8">
             <div class="card">
@@ -16,8 +38,8 @@
                     <div class="form-group">
                         <label for="image">Select a photo</label>
                         <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="customFile" required>
-                            <label class="custom-file-label" for="customFile"></label>
+                            <input type="file" name="image" class="custom-file-input" id="foto" required>
+                            <label class="custom-file-label" for="foto"></label>
                         </div>
                     </div>
 
