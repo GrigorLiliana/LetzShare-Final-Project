@@ -5,12 +5,8 @@
 @section('content')
 
 <div class="filters form-group">
-    <form action="" method="GET">
+    <form action="" method="POST">
         @csrf
-        <div class="form-group form-inline">
-            <input class="form-control mr-sm-2 form-control-sm" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </div>
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="photo-user">Photographers</label>
@@ -32,7 +28,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="photo-user">Category</label>
-                <select class="form-control form-control-sm" name="category" id="category">
+                <select class="form-control form-control-sm" name="categories" id="categories">
                     <option value="">Select</option>
                     @foreach ($categories as $category)
                     <option value="{{$category->category_id}}">{{$category->category_name}}</option>
@@ -41,7 +37,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="photo-user">Likes</label>
-                <select class="form-control form-control-sm" name="likes" id="likes_sum">
+                <select class="form-control form-control-sm" name="likes_sum" id="likes_sum">
                     <option value="">Select</option>
 
                     <option value="likes_sum desc">desc</option>
@@ -137,5 +133,7 @@
 
     </div>
 </div>
-
+<div class="pagination">
+    {{ $photos->links() }}
+</div>
 @endsection
