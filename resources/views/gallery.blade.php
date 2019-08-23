@@ -40,8 +40,8 @@
                 <select class="form-control form-control-sm" name="likes_sum" id="likes_sum">
                     <option value="">Select</option>
 
-                    <option value="likes_sum desc">desc</option>
-                    <option value="likes_sum asc">asc</option>
+                    <option value="likes_sum desc">descente</option>
+                    <option value="likes_sum asc">ascente</option>
 
                 </select>
             </div>

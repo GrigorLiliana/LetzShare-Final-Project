@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Pagination\Paginator;
 use Auth;
 use App\Location;
 use App\Category;
@@ -28,7 +27,7 @@ class PhotoController extends Controller
             ->join('categories', 'categories.category_id', '=', 'photos.category_id')
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
             ->orderBy('created_at', 'desc')
-            ->simplePaginate(9);
+            ->simplePaginate(12);
 
         $users = User::all();
         $locations = Location::all();
@@ -45,6 +44,11 @@ class PhotoController extends Controller
     public function filters(Request $request)
     {
         $users = User::all();
+        /* $users = User::all()
+        ->join('photos', 'photos.photo_id', '=', 'users.users_id')
+        ->having()
+        ->select('name'); */
+
         $locations = Location::all();
         $categories = Category::all();
 
@@ -57,9 +61,10 @@ class PhotoController extends Controller
             /* ->orWhere('photos.user_id', $request->users)
             ->orWhere('photos.locality_id', $request->locations)
             ->orWhere('photos.category_id', $request->categories) */
-            /* ->simplePaginate(15) */;
+            ->simplePaginate(12);
 
         // Search for a user based on their name
+
         if ($request->has('users')) {
             $photos->orWhere('photos.user_id', $request->users);
         }
@@ -72,19 +77,8 @@ class PhotoController extends Controller
             $photos->orWhere('photos.category_id', $request->categories);
         }
 
-        // show photo based on likes by Desc
-        if ($request->has('likes_sum')) {
-            $photos->orderBy('likes_sum', 'desc', $request->likes_sum);
-        }
-
-        // show photo based on likes by Asc
-        if ($request->has('likes_sum')) {
-            $photos->orderBy('likes_sum', 'asc', $request->likes_sum);
-        }
-
-
         return view('gallery', [
-            'photos' => $photos->simplePaginate(9),
+            'photos' => $photos,
             'users' => $users,
             'locations' => $locations,
             'categories' => $categories
@@ -122,40 +116,40 @@ class PhotoController extends Controller
             'category' => 'required'
         ]);
 
-        if($validatedData->fails()){
+        if ($validatedData->fails()) {
             return response()->json(['errors' => $validatedData->errors()->all()]);
-        }else{
-        $userId = Auth::user()->user_id;
-        $imageName = $userId . '_0.' . request()->image->getClientOriginalExtension();
+        } else {
+            $userId = Auth::user()->user_id;
+            $imageName = $userId . '_0.' . request()->image->getClientOriginalExtension();
 
-        //create a folder if doesn't exists
-        if (!file_exists("uploads/$userId")) {
-            mkdir("uploads/$userId", 0755, true);
-        }
+            //create a folder if doesn't exists
+            if (!file_exists("uploads/$userId")) {
+                mkdir("uploads/$userId", 0755, true);
+            }
 
-        //change name file while name file already exists
-        if (file_exists("uploads/$userId/$imageName")) {
-            $i = 0;
-            do {
-                $imageName = $userId . "_" . $i . '.' . request()->image->getClientOriginalExtension();
-                $i++;
-            } while (file_exists("uploads/$userId/$imageName"));
-        }
-        //save image in the folder
-        request()->image->move(public_path("uploads/$userId"), $imageName);
+            //change name file while name file already exists
+            if (file_exists("uploads/$userId/$imageName")) {
+                $i = 0;
+                do {
+                    $imageName = $userId . "_" . $i . '.' . request()->image->getClientOriginalExtension();
+                    $i++;
+                } while (file_exists("uploads/$userId/$imageName"));
+            }
+            //save image in the folder
+            request()->image->move(public_path("uploads/$userId"), $imageName);
 
-        //save data in database
-        $photo = new Photo();
-        $photo->image_title = $request->title;
-        $photo->image_URL = "uploads/$userId/$imageName";
-        $photo->image_description = $request->description;
-        $photo->category_id = Input::get('category');
-        $photo->locality_id = Input::get('locality');
-        $photo->user_id = $userId;
-        $photo->likes_sum = 0;
-        $photo->save();
+            //save data in database
+            $photo = new Photo();
+            $photo->image_title = $request->title;
+            $photo->image_URL = "uploads/$userId/$imageName";
+            $photo->image_description = $request->description;
+            $photo->category_id = Input::get('category');
+            $photo->locality_id = Input::get('locality');
+            $photo->user_id = $userId;
+            $photo->likes_sum = 0;
+            $photo->save();
 
-        return response()->json(['success' => 'Congratulations, your photo was uploaded successfully!', 'url'=>$photo->image_URL]);
+            return response()->json(['success' => 'Congratulations, your photo was uploaded successfully!', 'url' => $photo->image_URL]);
         }
     }
 
