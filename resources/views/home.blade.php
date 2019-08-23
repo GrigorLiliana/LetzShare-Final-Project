@@ -69,28 +69,36 @@
                     <ul>
                         <li>
                             @if (Auth::check())
-                            @php
-                            $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
-                            Auth::user()->user_id)->first();
-                            @endphp
-                            @if ($like)
-                            <div class="liked" id="{{$picture->photo_id}}">
-                                @csrf
-                                <i class="fas fa-heart"></i>
-                                <span class="likes-number">{{ $picture->likes_sum }}</span>
-                            </div>
+                                @php
+                                $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
+                                Auth::user()->user_id)->first();
+                                @endphp
+                                @if ($like)
+                                    @if ($like->islike)
+                                        <div class="liked" id="{{$picture->photo_id}}">
+                                            @csrf
+                                            <i class="fas fa-heart"></i>
+                                            <span class="likes-number">{{ $picture->likes_sum }}</span>
+                                        </div>
+                                    @else
+                                        <div class="not-liked" id="{{$picture->photo_id}}">
+                                            @csrf
+                                            <i class="far fa-heart"></i>
+                                            <span class="likes-number">{{ $picture->likes_sum }}</span>
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="not-liked" id="{{$picture->photo_id}}">
+                                        @csrf
+                                        <i class="far fa-heart"></i>
+                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
+                                    </div>
+                                @endif
                             @else
-                            <div class="not-liked" id="{{$picture->photo_id}}">
-                                @csrf
-                                <i class="far fa-heart"></i>
-                                <span class="likes-number">{{ $picture->likes_sum }}</span>
-                            </div>
-                            @endif
-                            @else
-                            <div class="not-logged">
-                                <i class="far fa-heart"></i>
-                                <span>{{ $picture->likes_sum }}</span>
-                            </div>
+                                <div class="not-logged">
+                                    <i class="far fa-heart"></i>
+                                    <span>{{ $picture->likes_sum }}</span>
+                                </div>
                             @endif
                         </li>
                         <li>
@@ -101,6 +109,33 @@
                             <i class="{{$cat->category_icon}}">
                             </i>
                             <span class="text-capitalize">{{ $cat->category_name }}</span>
+                        </li>
+                        <li>
+                            <!-- code to implement report functionality in page -->
+                            @if (Auth::check())
+                                @php
+                                $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
+                                Auth::user()->user_id)->first();
+                                @endphp
+                                @if ($like)
+                                    @if (!($like->islike))
+                                    <div class="reported" id="r{{$picture->photo_id}}">
+                                        @csrf
+                                        <i class="fas fa-flag"></i><span class="rep-text">Reported<span>
+                                    </div>
+                                    @else
+                                    <div class="not-reported" id="r{{$picture->photo_id}}">
+                                        @csrf
+                                        <i class="far fa-flag"></i><span class="rep-text">Report<span>
+                                    </div>
+                                    @endif
+                                @else
+                                <div class="not-reported" id="r{{$picture->photo_id}}">
+                                    @csrf
+                                    <i class="far fa-flag"></i><span class="rep-text">Report<span>
+                                </div>
+                                @endif
+                            @endif
                         </li>
                     </ul>
                 </div>
@@ -186,33 +221,41 @@
                     <!-- Text -->
                     <p class="card-text ">
                         {{ str_limit($picture->image_description, 75, '...') }}</p>
-                    <!-- Button -->
+                    <!-- Icons Row -->
                     <ul>
                         <li>
                             <!-- code to implement like /unlike functionality in page -->
                             @if (Auth::check())
-                            @php
-                            $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
-                            Auth::user()->user_id)->first();
-                            @endphp
-                            @if ($like)
-                            <div class="liked" id="{{$picture->photo_id}}">
-                                @csrf
-                                <i class="fas fa-heart"></i>
-                                <span class="likes-number">{{ $picture->likes_sum }}</span>
-                            </div>
+                                @php
+                                $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
+                                Auth::user()->user_id)->first();
+                                @endphp
+                                @if ($like)
+                                    @if ($like->islike)
+                                        <div class="liked" id="{{$picture->photo_id}}">
+                                            @csrf
+                                            <i class="fas fa-heart"></i>
+                                            <span class="likes-number">{{ $picture->likes_sum }}</span>
+                                        </div>
+                                    @else
+                                        <div class="not-liked" id="{{$picture->photo_id}}">
+                                            @csrf
+                                            <i class="far fa-heart"></i>
+                                            <span class="likes-number">{{ $picture->likes_sum }}</span>
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="not-liked" id="{{$picture->photo_id}}">
+                                        @csrf
+                                        <i class="far fa-heart"></i>
+                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
+                                    </div>
+                                @endif
                             @else
-                            <div class="not-liked" id="{{$picture->photo_id}}">
-                                @csrf
-                                <i class="far fa-heart"></i>
-                                <span class="likes-number">{{ $picture->likes_sum }}</span>
-                            </div>
-                            @endif
-                            @else
-                            <div class="not-logged">
-                                <i class="far fa-heart"></i>
-                                <span>{{ $picture->likes_sum }}</span>
-                            </div>
+                                <div class="not-logged">
+                                    <i class="far fa-heart"></i>
+                                    <span>{{ $picture->likes_sum }}</span>
+                                </div>
                             @endif
                         </li>
                         <li>
@@ -222,12 +265,37 @@
                             <i class="{{$cat->category_icon}}"></i><span class="text-capitalize">
                                 {{ $cat->category_name }}</span>
                         </li>
-                    </ul>
-                </div>
-
-            </div>
-
-        </div>
+                        <li>
+                            <!-- code to implement report functionality in page -->
+                            @if (Auth::check())
+                                @php
+                                $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
+                                Auth::user()->user_id)->first();
+                                @endphp
+                                @if ($like)
+                                    @if (!($like->islike))
+                                    <div class="reported" id="r{{$picture->photo_id}}">
+                                        @csrf
+                                        <i class="fas fa-flag"></i><span>Reported<span>
+                                    </div>
+                                    @else
+                                    <div class="not-reported" id="r{{$picture->photo_id}}">
+                                        @csrf
+                                        <i class="far fa-flag"></i><span>Report<span>
+                                    </div>
+                                    @endif
+                                @else
+                                <div class="not-reported" id="r{{$picture->photo_id}}">
+                                    @csrf
+                                    <i class="far fa-flag"></i><span>Report<span>
+                                </div>
+                                @endif
+                            @endif
+                        </li>
+                    </ul> <!-- end of icons row -->
+                </div> <!-- end of collapse content div -->
+            </div> <!-- end of card body div -->
+        </div> <!-- end of card div -->
         @endforeach
     </div> <!-- end card deck -->
     <br>
