@@ -234,6 +234,7 @@ $ownUser=false;
 <!-- End of the User details -->
 
 <!-- User Portfolio -->
+<section id=portfolio>
 <h2>Portfolio
     @if($ownUser)|
     <a href="/uploadphoto" class="add">
@@ -250,7 +251,7 @@ $ownUser=false;
     <div class="card-columns">
 
         @foreach ($userPhotos as $userPhoto)
-        <div class="card promoting-card">
+        <article class="card promoting-card">
 
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
@@ -334,7 +335,7 @@ $ownUser=false;
 
             </div>
 
-        </div>
+</article>
         @endforeach
         <!-- END Card -->
 
@@ -354,4 +355,5 @@ $ownUser=false;
 <div class="pagination">
     {{ $userPhotos->links() }}
 </div>
+</section>
 @endsection
