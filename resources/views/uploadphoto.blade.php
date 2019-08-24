@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="image">Select a photo</label>
+                        <label for="foto">Select a photo</label>
                         <div class="custom-file">
                             <input type="file" name="image" class="custom-file-input" id="foto" required>
                             <label class="custom-file-label" for="foto"></label>

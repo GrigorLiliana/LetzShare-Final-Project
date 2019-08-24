@@ -55,7 +55,7 @@ $ownUser=false;
                 <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="image">Select a photo</label>
+                        <label for="foto">Select a photo</label>
                         <div class="custom-file">
                             <input type="file" name="image" class="custom-file-input" id="foto" required>
                             <label class="custom-file-label" for="foto"></label>
@@ -206,7 +206,7 @@ $ownUser=false;
                             <label for="fullname">Full name</label>
                             <input type="text" class="form-control" id="fullname" name="fullname" @guest
                                 placeholder="Enter your name" @else value="{{Auth::user()->name}}" @endguest
-                                placeholder="Enter full name">
+                                >
                         </div>
                         <div class="form-group">
                             <label for="email">E-Mail address</label>
