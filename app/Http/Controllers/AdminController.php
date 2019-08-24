@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use File;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\File;
+
 use App\User;
 use App\Photo;
 
@@ -16,7 +18,7 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        
+
         $users = User::all();
 
         return view('admin', [
@@ -37,16 +39,12 @@ class AdminController extends Controller
 
     public function deleteUser($id){
 
-        $photos = DB::table("photos")->where("user_id", $id)->delete();
-        $users = DB::table("users")->where("user_id", $id)->delete();
+        $users = User::where('user_id', '=', $id)->get();
 
-        $table->foreign('user_id')
-            ->references('user_id')->on('users')
-            ->onDelete('cascade');
+        $userDeleted = DB::table("users")->where("user_id", $id)->delete();
+        //$photosDeleted = DB::table("photos")->where("user_id", $id)->delete();
 
-        $condition = true;
-
-        if($condition) {
+        if($userDeleted) {
             $userFolder = 'uploads/' . $id;
             File::deleteDirectory($userFolder);
 
