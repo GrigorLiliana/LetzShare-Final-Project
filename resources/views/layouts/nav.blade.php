@@ -28,7 +28,7 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item {{ (current_page('gallery')) ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('/gallery') }}">Photo gallery</a>
+                    <a class="nav-link" href="{{ url('/gallery') }}">Gallery</a>
                 </li>
                 <li class="nav-item {{ (current_page('about-us')) ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('about-us') }}">About us</a>

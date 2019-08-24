@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/letzshare.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/filters.js') }}" defer></script> --}}
     <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
 
     <!-- Styles -->

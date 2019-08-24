@@ -83,10 +83,13 @@ class PhotoController extends Controller
 
 
         /* $firstdate = $request->firstdatepicker;
-        $lastdate = $request->lastdatepicker;
+        $lastdate = $request->lastdatepicker;*/
+
+        /* $firstdate = date("YYYY-mm-dd",strtotime($request->firstdate));
+        $lastdate = date("YYYY-mm-dd",strtotime($request->lastdate));
 
         $date = DB::table('photos')
-            ->whereBetween('created_at', array($firstdate->toDateTimeString(), $lastdate->toDateTimeString()) )
+            ->whereBetween('created_at', [$firstdate, $lastdate])
             ->select('photos.*')
             ->get(); */
 
@@ -99,6 +102,7 @@ class PhotoController extends Controller
             ->orWhere('photos.user_id', $request->users)
             ->orWhere('photos.locality_id', $request->locations)
             ->orWhere('photos.category_id', $request->categories)
+            ->whereBetween('photos.created_at', [$request->firstdate, $request->lastdate])
             ->simplePaginate(12);
 
         // Search for a user based on their name

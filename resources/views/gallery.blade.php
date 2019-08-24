@@ -5,12 +5,13 @@
 @section('content')
 
 <div class="filters form-group">
-    <form action="" method="POST">
+    <div id="form-messages"></div>
+    <form action="" method="POST" class="form-filters">
         @csrf
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="photo-user">Photographers</label>
-                <select class="form-control form-control-sm" name="users" id="users">
+                <select class="form-control users form-control-sm" name="users" id="users">
                     <option value="default">Select</option>
                     @foreach ($users as $user)
                     <option value="{{$user->user_id}}">{{$user->name}}</option>
@@ -19,7 +20,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="photo-user">Location</label>
-                <select class="form-control form-control-sm" name="locations" id="locations">
+                <select class="form-control locations form-control-sm" name="locations" id="locations">
                     <option value="">Select</option>
                     @foreach ($locations as $location)
                     <option value="{{$location->locality_id}}">{{$location->locality_name}}</option>
@@ -28,7 +29,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="photo-user">Category</label>
-                <select class="form-control form-control-sm" name="categories" id="categories">
+                <select class="form-control categories form-control-sm" name="categories" id="categories">
                     <option value="">Select</option>
                     @foreach ($categories as $category)
                     <option value="{{$category->category_id}}">{{$category->category_name}}</option>
@@ -37,12 +38,13 @@
             </div>
             <div class="form-group col-sm-2">
                 <label for="photo-user">Date From</label>
-                <input type="date" class="form-control form-control-sm" name="firstdatepicker"
-                id="firstdatepicker" value="{{-- {{ $photos->created_at }} --}}">
+                <input type="text" class="form-control form-control-sm" name="firstdate" id="firstdate"
+                    value="{{-- {{ date('d-m-Y',strtotime($photos->created_at)) }} --}}">
             </div>
             <div class="form-group col-sm-2">
                 <label for="photo-user">Date To</label>
-                <input type="date" class="form-control form-control-sm" id="lastdatepicker" name="lastdatepicker"  value="{{-- {{ $photos->created_at }} --}}">
+                <input type="text" class="form-control form-control-sm" id="lastdate" name="lastdate"
+                    value="{{-- {{ date('d-m-Y',strtotime($photos->created_at)) }} --}}">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
