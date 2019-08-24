@@ -1,7 +1,7 @@
 <style>
     .card-img-top {
         width: 100%;
-        height: 15vw;
+        max-height: 200px;
         object-fit: cover;
     }
 
@@ -14,15 +14,15 @@
 @section('title', 'LetzShare | Home page')
 
 @section('content')
-<div class="container">
+
+<section id="home_page">
     <h1>LetzShare - The beauty of Luxembourg</h1>
-    <br>
-    <br>
-</div>
+</section>
 <div class="container">
+<section id="rated_photos">
     <h3>Top Rated Photos</h3>
 
-    <div class="card-deck">
+        <div class="card-deck">
         @foreach ($topPics as $picture)
         @php
         $path = URL::asset($picture->image_URL);
@@ -149,8 +149,13 @@
 
         </div>
         @endforeach
-    </div> <!-- end card deck -->
-    <br>
+    </div>
+
+
+
+
+    </section> <!-- end card deck -->
+<section id="top_photographers">
 
     <h3>Top Photographers</h3>
 
@@ -178,8 +183,8 @@
         </div>
         @endforeach
     </div>
-    <br>
-
+</section>
+<section id="latest_photos">
     <h3>Latest Photos</h3>
 
     <div class="card-deck">
@@ -307,8 +312,5 @@
         </div> <!-- end of card div -->
         @endforeach
     </div> <!-- end card deck -->
-    <br>
-
-</div> <!-- end container -->
-
+</section></div>
 @endsection
