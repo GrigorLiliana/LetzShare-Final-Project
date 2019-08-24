@@ -4,15 +4,19 @@ body {
     width: 100%;
     height: 100%;
     position: relative;
-    background: #252323;
+    background: white !important;
     color: white;
 }
 
 .container {
     margin-top: 100px;
 }
-
-
+.container-home{
+    margin-top: 0;
+}
+.navbar{
+    padding: 0 1rem !important;
+}
 /* Registration password validation*/
 ul,
 li {
@@ -84,10 +88,6 @@ li {
 
 /* Home Page Styles */
 
-h1 {
-    margin: 0.3em 0em;
-}
-
 #blurb {
     margin: 0.5em 0em;
 }
@@ -99,6 +99,7 @@ h1 {
 .not-liked:hover {
     background-color: lightgrey;
 }
+/*height of the sections in the home page*/
 #home_page, #latest_photos{
     min-height: 80vh;
     width: 100%;
@@ -106,10 +107,12 @@ h1 {
 #rated_photos, #top_photographers{
     min-height: 100vh;
     width: 100%;
+    background-color: white;
+    background-attachment: fixed;
 }
-#rated_photos h3{
-    margin-top: 2rem;
-}
+/*end of the height*/
+
+/*first section - big photo background*/
 #home_page{
 background-image: url(http://luxembourg.public.lu/pictures/gallery/photos-telechargeables/02-ville-luxembourg/003-vdl-grund-224431-xxxhdpi.jpg);
 background-repeat: no-repeat;
@@ -119,6 +122,9 @@ height: 100vh;
 margin-top:2rem;
 }
 #home_page h1{
+    color:black;
+    font-weight: bold;
+    font-family: calibri, sans-serif;
     position: relative;
     display: block;
     max-width: max-content;
@@ -126,6 +132,34 @@ margin-top:2rem;
     left: 20%;
     background-color: rgba(119, 136, 153, 0.411);
 }
+
+/* card photos section*/
+.container-home h3{
+    font-family: Calibri, sans-serif;
+    border-bottom: 2px solid red;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    margin-top:2rem;
+}
+#rated_photos h3{
+    margin-top: 4rem;
+}
+.card-deck .card{
+    margin: 1rem;
+}
+.card .view.overlay{
+    text-align: center !important;
+}
+.photographers img{
+    max-width: 200px;
+}
+.card-img-top.home {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+/*responsive home page*/
 @media screen and (max-width:800px){
     #home_page h1
     {
@@ -137,16 +171,18 @@ margin-top:2rem;
         background-color: unset;
     }
 }
+
 @media screen and (min-width:768px) and (max-width:995px){
-.card-deck .card{
-flex:1 40% !important;
-}
+    .card-deck .card{
+    flex:1 40% !important;
+    }
 }
 @media screen and (min-width:556px) and (max-width:768px){
     .card-deck .card{
     flex: 1 1 auto !important;
     }
-    }
+}
+
 /* End of Home Page Styles */
 
 /* User Profile Styles */
@@ -276,9 +312,9 @@ flex:1 40% !important;
 /* Footer */
 
 .footer {
-   width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
+    width: 100%;
+    height: max-content;
+    min-height: 60px;
     line-height: 60px; /* Vertically center the text there */
     background-color: #f5f5f5;
     padding-right: 15px;
@@ -287,6 +323,12 @@ flex:1 40% !important;
 .footer p{
 margin-bottom: 0;
 }
+
+.footer img{
+    display: inline-block;
+    margin-left: 2rem;
+}
+
 /* Pagination Styles */
 
 .pagination {
