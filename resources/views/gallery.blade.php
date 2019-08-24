@@ -38,13 +38,11 @@
             </div>
             <div class="form-group col-sm-2">
                 <label for="photo-user">Date From</label>
-                <input type="text" class="form-control form-control-sm" name="firstdate" id="firstdate"
-                    value="{{-- {{ date('d-m-Y',strtotime($photos->created_at)) }} --}}">
+                <input type="date" class="form-control form-control-sm" name="firstdate" id="firstdate">
             </div>
             <div class="form-group col-sm-2">
                 <label for="photo-user">Date To</label>
-                <input type="text" class="form-control form-control-sm" id="lastdate" name="lastdate"
-                    value="{{-- {{ date('d-m-Y',strtotime($photos->created_at)) }} --}}">
+                <input type="date" class="form-control form-control-sm" id="lastdate" name="lastdate">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

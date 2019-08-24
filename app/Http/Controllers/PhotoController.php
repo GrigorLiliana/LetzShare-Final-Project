@@ -36,12 +36,14 @@ class PhotoController extends Controller
             ->distinct()
             ->get();
 
+        /* Show only photos that have categories assigned */
         $categories = DB::table('categories')
             ->join('photos', 'photos.category_id', '=', 'categories.category_id')
             ->select('categories.*')
             ->distinct()
             ->get();
 
+        /* Show all photos by descente date order */
         $photos = DB::table('photos')
             ->join('users', 'users.user_id', '=', 'photos.user_id')
             ->join('locations', 'locations.locality_id', '=', 'photos.locality_id')
@@ -74,24 +76,12 @@ class PhotoController extends Controller
             ->select('locations.*')
             ->distinct()
             ->get();
-
+        /* Show only photos that have categories assigned */
         $categories = DB::table('categories')
             ->join('photos', 'photos.category_id', '=', 'categories.category_id')
             ->select('categories.*')
             ->distinct()
             ->get();
-
-
-        /* $firstdate = $request->firstdatepicker;
-        $lastdate = $request->lastdatepicker;*/
-
-        /* $firstdate = date("YYYY-mm-dd",strtotime($request->firstdate));
-        $lastdate = date("YYYY-mm-dd",strtotime($request->lastdate));
-
-        $date = DB::table('photos')
-            ->whereBetween('created_at', [$firstdate, $lastdate])
-            ->select('photos.*')
-            ->get(); */
 
         // Show the filter query
         $photos = DB::table('photos')
@@ -102,23 +92,9 @@ class PhotoController extends Controller
             ->orWhere('photos.user_id', $request->users)
             ->orWhere('photos.locality_id', $request->locations)
             ->orWhere('photos.category_id', $request->categories)
-            ->whereBetween('photos.created_at', [$request->firstdate, $request->lastdate])
+            ->orWhereBetween('photos.created_at', [$request->firstdate, $request->lastdate])
             ->simplePaginate(12);
 
-        // Search for a user based on their name
-
-        /* if ($request->has('users')) {
-            $photos->orWhere('photos.user_id', $request->users);
-        }
-        // Search for a photo based on location
-        if ($request->has('locations')) {
-            $photos->orWhere('photos.locality_id', $request->locations);
-        }
-        // Search for a photo based on category
-        if ($request->has('categories')) {
-            $photos->orWhere('photos.category_id', $request->categories);
-        }
- */
         return view('gallery', [
             'photos' => $photos,
             'users' => $users,
