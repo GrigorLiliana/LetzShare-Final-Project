@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\File;
 
@@ -40,20 +40,21 @@ class AdminController extends Controller
     public function deleteUser($id){
 
         $users = User::where('user_id', '=', $id)->get();
-
-        $userDeleted = DB::table("users")->where("user_id", $id)->delete();
+        //* $userDeleted = DB::table("users")->where("user_id", $id)->delete();
         //$photosDeleted = DB::table("photos")->where("user_id", $id)->delete();
 
         if($userDeleted) {
-            $userFolder = 'uploads/' . $id;
-            File::deleteDirectory($userFolder);
+            //$userFolder = 'uploads/' . $id;
+            //File::deleteDirectory($userFolder);
+            File::deleteDirectory(public_path('uploads/' . $id));
 
             $userPhoto = $users->user_photo;
             File:delete($userPhoto);
+        } else {
+            return redirect('admin')->with('error', 'ERROR: User & related files.'); 
         }
         
-
-        return redirect('admin')->with('success', 'User & related files deleted successfully.');       
+        return redirect('admin')->with('error', 'SUCCESS: User & related files deleted successfully.');       
     }
 
 }

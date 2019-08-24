@@ -6,7 +6,7 @@
 
 <h1>Admin Dashborad</h1>
 <hr>
-<form action="{{ $user->user_id }}" method="post">
+<form action="" method="post">
 @csrf
 <h3>Photos from user <a href="/userprofile/{{ $user->user_id }}" class="badge badge-secondary">{{ $user->name }}, ID: {{ $user->user_id }}</a></h3>
 <div class="table-responsive">
