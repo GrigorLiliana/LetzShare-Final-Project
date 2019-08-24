@@ -4,8 +4,7 @@
 
 @section('content')
 
-<div class="filters form-group">
-    <div id="form-messages"></div>
+<div class="filters collapse show form-group" id="formCollapse">
     <form action="" method="POST" class="form-filters">
         @csrf
         <div class="form-row">
@@ -47,6 +46,13 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
+
+<div class="formHide">
+    <a class="btn btn-primary" data-toggle="collapse" href="#formCollapse" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        <i class="fas fa-angle-down"></i>
+    </a>
 </div>
 
 <div class="row gallery">
@@ -129,5 +135,4 @@
 <div class="pagination">
     {{ $photos->links() }}
 </div>
-
 @endsection
