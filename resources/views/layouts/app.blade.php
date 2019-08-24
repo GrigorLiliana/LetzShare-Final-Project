@@ -13,7 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/letzshare.js') }}" defer></script>
     <script src="{{ asset('js/jquery.fancybox.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
+    <script src="https://kit.fontawesome.com/ff9603d652.js" ></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet" />
@@ -23,15 +23,15 @@
 </head>
 
 <body>
-
     <div id="app">
         <!-- shadow div (user profile when user send message) -->
         <div class="shadow-div hide"></div>
-
-
         @include('layouts.nav')
 
-        <main class="container py-4">
+        <main
+        @if (\Route::current()->getName() != 'home')
+class="container"
+@endif >
             <!-- div to display errors -->
             <div class="notAdmin">
                 @if ( $message = Session::get('error') )
@@ -46,10 +46,8 @@
 
             @yield('content')
         </main>
-    </div>
-
     @include('layouts.footer')
-
+</div>
 </body>
 
 </html>

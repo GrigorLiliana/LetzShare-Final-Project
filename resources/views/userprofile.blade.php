@@ -5,6 +5,21 @@
 @endsection
 
 @section('content')
+@guest
+@php
+$ownUser=false;
+@endphp
+@else
+@php
+// check if the profile belongs to the user
+if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
+$ownUser=true;
+$userId=Auth::user()->user_id;
+}else{
+$ownUser=false;
+}
+@endphp
+@endguest
 
 <!-- Div to show errors messages -->
 <div class="errors hide errors-profile">
@@ -24,6 +39,7 @@
         <span class="successMsg"></span>
     </div>
 </div>
+@if($ownUser)
 <!-- Modal to edit photo -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -56,22 +72,8 @@
     </div>
 </div>
 <!-- end of the model to edit photo -->
+@endif
 
-@guest
-@php
-$ownUser=false;
-@endphp
-@else
-@php
-// check if the profile belongs to the user
-if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
-$ownUser=true;
-$userId=Auth::user()->user_id;
-}else{
-$ownUser=false;
-}
-@endphp
-@endguest
 <!-- Edit Name -->
 <form method="post" class="form-flex-profile edit-name">
     @csrf
