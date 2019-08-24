@@ -24,12 +24,13 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6 col-lg-6 mb-5">
-                    {{-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> --}}
                     <div class="">
                         <a href="{{ url('userprofile/10') }}"><img src="{{ asset('uploads/avatars-admin/liliana.jpg')}}" alt="Liliana" title="Liliana" class="rounded-circle mb-3 img-thumbnail" width="150px" height="150px"></a>
                     </div>
                     <div class="m-3">   
                         <h2>Liliana</h2>
+                        <a href="https://www.linkedin.com/in/grigorliliana/"><i class="fa-3x fab fa-linkedin"></i></a>&nbsp;
+                        <a href="https://github.com/GrigorLiliana/"><i class="fa-3x fab fa-github-square"></i></a>
                         <p>Full Stack Web Developer</p>
                         <p>Back-End: PHP, PHP OOP, Laravel, MySQL Database, SQL, Wordpress</p>
                             
@@ -44,6 +45,8 @@
                     </div>
                     <div class="m-3">   
                         <h2>Stuart</h2>
+                        <a href="https://www.linkedin.com/in/stuart-walker-in-lux/"><i class="fa-3x fab fa-linkedin"></i></a>&nbsp;
+                        <a href="https://github.com/batecsw"><i class="fa-3x fab fa-github-square"></i></a>
                         <p>Full Stack Web Developer</p>
                         <p>Back-End: PHP, PHP OOP, Laravel, MySQL Database, SQL, Wordpress</p>
                             
@@ -58,6 +61,8 @@
                     </div>
                     <div class="m-3">   
                         <h2>Ricardo</h2>
+                        <a href="https://www.linkedin.com/in/kodii-rr/"><i class="fa-3x fab fa-linkedin"></i></a>&nbsp;
+                        <a href="https://github.com/kodiii"><i class="fa-3x fab fa-github-square"></i></a>
                         <p>Full Stack Web Developer</p>
                         <p>Back-End: PHP, PHP OOP, Laravel, MySQL Database, SQL, Wordpress</p>
                             
@@ -72,6 +77,8 @@
                     </div>
                     <div class="m-3">   
                         <h2>Michel</h2>
+                        <a href="https://www.linkedin.com/in/michelds78/"><i class="fa-3x fab fa-linkedin"></i></a>&nbsp;
+                        <a href="https://github.com/michelds78"><i class="fa-3x fab fa-github-square"></i></a>
                         <p>Full Stack Web Developer</p>
                         <p>Back-End: PHP, PHP OOP, Laravel, MySQL Database, SQL, Wordpress</p>
                             

@@ -49,7 +49,7 @@ li {
 }
 
 #pswd_info::before {
-    content: '\25B2';
+    content: "\25B2";
     /* triangle pointu en haut de la div */
     position: absolute;
     top: -12px;
@@ -224,9 +224,7 @@ h1 {
     padding: 10px;
 }
 
-/* Custom page CSS
-  -------------------------------------------------- */
-/* Not required for template or sticky footer method. */
+/* Footer */
 
 .footer {
     position: sticky;
@@ -250,3 +248,7 @@ h1 {
     justify-content: center;
 }
 
+/* About Us */
+.fa-github-square {
+    color: black;
+}
