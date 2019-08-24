@@ -100,15 +100,9 @@ li {
     background-color: lightgrey;
 }
 /*height of the sections in the home page*/
-#home_page, #latest_photos{
-    min-height: 80vh;
+section{
+    min-height: 90vh;
     width: 100%;
-}
-#rated_photos, #top_photographers{
-    min-height: 100vh;
-    width: 100%;
-    background-color: white;
-    background-attachment: fixed;
 }
 /*end of the height*/
 
@@ -139,8 +133,7 @@ margin-top:2rem;
     border-bottom: 2px solid red;
     font-weight: bold;
     font-size: 2rem;
-    margin-bottom: 1rem;
-    margin-top:2rem;
+    margin-top: 2rem;
 }
 #rated_photos h3{
     margin-top: 4rem;
