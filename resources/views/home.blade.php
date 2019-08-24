@@ -1,7 +1,7 @@
 <style>
     .card-img-top {
         width: 100%;
-        height: 15vw;
+        max-height: 200px;
         object-fit: cover;
     }
 
@@ -22,7 +22,7 @@
 <section id="rated_photos">
     <h3>Top Rated Photos</h3>
 
-    <div class="card-deck">
+        <div class="card-deck">
         @foreach ($topPics as $picture)
         @php
         $path = URL::asset($picture->image_URL);
@@ -150,6 +150,10 @@
         </div>
         @endforeach
     </div>
+
+
+
+
     </section> <!-- end card deck -->
 <section id="top_photographers">
 
