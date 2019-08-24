@@ -30,7 +30,7 @@
           @endforeach
         </tbody>
       </table>
-      <button type="submit" class="btn btn-danger">Delete user & all related photos</button>
+      <button type="submit" class="btn btn-danger" disabled>Delete user & all related photos</button>
       <a class="btn btn-secondary" href="{{ url()->previous() }}" role="button">Cancel</a>
 </div>
 
