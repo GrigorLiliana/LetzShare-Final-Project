@@ -1,7 +1,3 @@
-<style>
-
-
-</style>
 @extends('layouts.app')
 
 @section('title', 'LetzShare | Home page')
@@ -9,7 +5,7 @@
 @section('content')
 
 <section id="home_page">
-    <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" width=250></h1>
+    <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250></h1>
 </section>
 <div class="container container-home">
 <section id="rated_photos">

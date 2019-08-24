@@ -75,7 +75,7 @@
                         <div class="form-group policies-register">
                             <p>
                                 <small>
-                                    <input type="checkbox" name="policies" id="policies">
+                                    <input required type="checkbox" name="policies" id="policies">
                                     <label for="policies"> I agree with the </label>
                                     <a href="/terms" target="_blanck">Terms and Conditions</a>
                                 </small>
