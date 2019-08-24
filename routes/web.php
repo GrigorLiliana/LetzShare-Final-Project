@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::view('/terms', 'termsconditions')->name('terms');
+Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/about-us', 'about-us')->name('about-us');
 
 Route::get('/contact', 'ContactController@index')->name('contact');
