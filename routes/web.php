@@ -36,9 +36,6 @@ Route::get('/gallery', 'PhotoController@index');
 Route::post('/gallery', 'PhotoController@filters');
 Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
 
-Route::get('/search', 'AutoCompleteController@index');
-Route::get('/autocomplete', 'AutoCompleteController@search');
-
 //** Likes handler */
 Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 
