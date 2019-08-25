@@ -19,23 +19,16 @@ class AdminController extends Controller
     public function index(){
 
         $users = User::all();
+        
         $reportedPhotos = DB::table('photos')
             ->leftJoin('users', 'photos.user_id', '=', 'users.user_id')
             ->leftJoin('locations', 'photos.locality_id', '=', 'locations.locality_id')
             ->leftJoin('categories', 'photos.category_id', '=', 'categories.category_id')
             ->leftJoin('likes', 'photos.photo_id', '=', 'likes.photo_id')
-            ->select('photos.photo_id', 'users.user_id as user_id', 'users.name', 'photos.image_title as image_title', 'likes.islike', 'locations.locality_name as locality', 'categories.category_name as category')
+            ->select('photos.photo_id as photo_id', 'users.user_id as user_id', 'users.name as user', 'photos.image_title', 'photos.image_URL as image_URL','likes.islike as islike', 'locations.locality_name as locality', 'categories.category_name as category')
             ->where('likes.islike', '=', 0)
             ->get();
         
-        /* SELECT photos.photo_id, users.name, photos.image_title, likes.islike, locations.locality_name, categories.category_name
-        FROM photos
-        LEFT JOIN users ON photos.user_id = users.user_id
-        LEFT JOIN locations ON photos.locality_id = locations.locality_id
-        LEFT JOIN categories ON photos.category_id = categories.category_id
-        LEFT JOIN likes ON photos.photo_id = likes.photo_id
-        WHERE likes.islike = 0; */
-
         return view('admin', [
             'users' => $users,
             'reportedPhotos' => $reportedPhotos,
