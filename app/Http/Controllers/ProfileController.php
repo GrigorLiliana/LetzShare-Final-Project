@@ -117,6 +117,27 @@ class ProfileController extends Controller
             return response()->json(['success' => 'successiful entered', 'location' => $user->user_location]);
         }
     }
+
+    public function photoDetails(Request $request, $id)
+    {
+        $validatedData = \Validator::make($request->all(), [
+            'title'=> 'required|min:3|max:30|',
+            'description' => 'required|min:5|max:250|',
+            'locality' => 'required',
+            'category' =>'required'
+        ]);
+        if ($validatedData->fails()) {
+            return response()->json(['errors' => $validatedData->errors()->all()]);
+        } else {
+            $photo = Photo::find($id);
+            $photo->image_title = $request->title;
+            $photo->image_description = $request->description;
+            $photo->category_id = Input::get('category');
+            $photo->locality_id = Input::get('locality');
+            $photo->save();
+            return response()->json(['success' => 'successiful entered']);
+        }
+    }
     /**
      * Display the specified resource.
      *

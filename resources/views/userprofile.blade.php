@@ -234,7 +234,7 @@ $ownUser=false;
 <!-- End of the User details -->
 
 <!-- User Portfolio -->
-<section id=portfolio>
+<section id="portfolio">
 <h2>Portfolio
     @if($ownUser)|
     <a href="/uploadphoto" class="add">
@@ -258,7 +258,8 @@ $ownUser=false;
 
                 <!-- Content -->
                 <div>
-
+                    @if($ownUser) <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST" class="edit-photo-details">
+                    @csrf @endif
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
                         @if($ownUser)
