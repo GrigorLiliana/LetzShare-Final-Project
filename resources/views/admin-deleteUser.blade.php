@@ -6,8 +6,9 @@
 
 <h1>Admin Dashborad</h1>
 <hr>
-<form action="/admin/deleteUser/{{$user->user_id}}" method="get">
+<form action="/admin/{{ $user->user_id }}" method="POST">
   @csrf
+  @method('DELETE')
 <h3>Photos from user <a href="/userprofile/{{ $user->user_id }}" class="badge badge-secondary">{{ $user->name }}, ID: {{ $user->user_id }}</a></h3>
 <div class="table-responsive">
     <table class="table table-sm table-striped table-bordered table-hover">

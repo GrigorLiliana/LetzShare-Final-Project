@@ -59,7 +59,7 @@
 
                         @if (Auth::user()->user_type == 'admin')
                         <a class="dropdown-item {{ (current_page('admin')) ? 'active' : '' }}"
-                            href="{{ route('admin')}}">Admin Dashboard</a>
+                            href="{{ url('/admin')}}">Admin Dashboard</a>
                         @endif
 
 

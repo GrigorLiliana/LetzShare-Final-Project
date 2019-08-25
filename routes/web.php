@@ -41,11 +41,8 @@ Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
 Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 
 //** ADMIN - Middleware auth validation */
-Route::get('/admin', 'AdminController@index')->middleware('admin')->name('admin');
-Route::get('/admin/showUser/{user_id}', 'AdminController@showUser')->middleware('admin');
-Route::get('/admin/deleteUser/{user_id}', 'AdminController@deleteUser')->middleware('admin');
-Route::get('/admin/showPhoto/{photo_id}', 'AdminController@showPhoto')->middleware('admin');
-Route::get('/admin/deletePhoto/{photo_id}', 'AdminController@deletePhoto')->middleware('admin');
+Route::resource('/admin', 'AdminController')->middleware('admin');
+Route::delete('/admin/deletePhoto/{photo_id}', 'AdminController@deletePhoto')->middleware('admin');
 
 //** TESTS */
 Route::view('/chupelagaite', 'chupelagaite');
