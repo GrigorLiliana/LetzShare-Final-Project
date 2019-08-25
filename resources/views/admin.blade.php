@@ -81,7 +81,7 @@
                           <tr>
                             <td>{{ $reportedPhoto->photo_id }}</td>
                             <td>{{ $reportedPhoto->user }}</td>
-                            <td><a href="{{ $reportedPhoto->image_URL }}" target="_blank">{{ $reportedPhoto->image_title }}</a></td>
+                            <td><a href="{{ $reportedPhoto->image_URL }}">{{ $reportedPhoto->image_title }}</a></td>
                             <td>{{ $reportedPhoto->locality }}</td>
                             <td>{{ ucfirst($reportedPhoto->category) }}</td>
                             <td>
