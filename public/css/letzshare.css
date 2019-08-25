@@ -260,7 +260,11 @@ li {
 .hide {
     display: none !important;
 }
-
+.delete-user-account{
+    position: absolute;
+    top: 0;
+    right:0;
+}
 /* Enf of User Profile Styles */
 
 /* Gallery Styles */

@@ -183,4 +183,36 @@ class ProfileController extends Controller
                 'class' => 'alert alert-success alert-dismissible fade show',
             ]);
     }
+
+/*Delete user account by own user*/
+public function deleteAccount($id)
+    {
+        $user = User::find($id);
+        $userFolder = 'uploads/' . $id;
+        $userPhoto = $user->user_photo;
+        $userPhotoDefault = strstr($user->user_photo, 'default_user');
+
+        $userDeleted = DB::table("users")->where("user_id", $id)->delete();
+
+
+        if($userDeleted) {
+            if(File::exists($userFolder))
+                File::deleteDirectory($userFolder);
+
+            if(File::exists($userPhoto) && $userPhotoDefault == false)
+                File::delete($userPhoto);
+        } else {
+            return redirect('/userprofile/'.$id)->with([
+                'status' => 'ERROR: User & related files.',
+                'class' => 'alert alert-danger alert-dismissible fade show',
+            ]);
+        }
+
+        return redirect('home')->with([
+            'status' => 'SUCCESS: User & related files deleted successfully.',
+            'class' => 'alert alert-success alert-dismissible fade show',
+        ]);
+    }
+/*end of delete user account by own user*/
+
 }

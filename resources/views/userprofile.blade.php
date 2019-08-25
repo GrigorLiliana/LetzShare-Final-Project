@@ -60,13 +60,14 @@ $ownUser=false;
         <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
         <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
     </div>
+
     @endif
 </form>
 <!--End edit name-->
 
 <hr>
 <!-- User details -->
-<div class="card promoting-card card-user">
+<section id="user_details" class="card promoting-card card-user">
     <!-- Avatar -->
     <div class="profile-flex">
         <div class="edit-photo ">
@@ -77,40 +78,7 @@ $ownUser=false;
                 data-whatever="{{$userPhotos[0]->name}}">Edit photo</button>@endif
         </div>
 
-        @if($ownUser)
-<!-- Modal to edit user photo -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="foto">Select a photo</label>
-                        <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="foto" required>
-                            <label class="custom-file-label" for="foto"></label>
-                        </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save photo</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end of the model to edit photo -->
-@endif
         <div class="user-details-flex">
             <form method="post" class="form-flex-profile edit-description">
                 @csrf
@@ -229,8 +197,38 @@ $ownUser=false;
 
     </div>
     <!-- end of the form to send message -->
+
+    @if($ownUser)
+    <!--delete user account by own user-->
+    <button type="submit" class="text-danger btn delete-user-account" data-toggle="modal" data-target="#deleteAccountModal">Delete account</button>
+
+<!-- Modal to confirm delete account -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteAccountModalLabel">Attention, this action is irreversible!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Thank you for the time you were with us,<br>
+      We hope you come back soon...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Go back</button>
+         <form action="/delete/user-account/{{Auth::user()->user_id}}"  method="post">
+    @csrf
+        <button type="submit" class="btn btn-danger">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+    @endif
 </div>
+</section>
 <!-- End of the User details -->
 
 <!-- User Portfolio -->
@@ -254,7 +252,40 @@ $ownUser=false;
         @foreach ($userPhotos as $userPhoto)
         <article class="card promoting-card">
         @if($ownUser)
+        @if($ownUser)
+<!-- Modal to edit user photo -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="foto">Select a photo</label>
+                        <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="foto" required>
+                            <label class="custom-file-label" for="foto"></label>
+                        </div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save photo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of the model to edit photo -->
+@endif
 <!-- Modal to confirm delete photo -->
 <div class="modal fade" id="deletePhoto{{ $userPhoto->photo_id }}" tabindex="-1" role="dialog" aria-labelledby="deletePhotoLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
