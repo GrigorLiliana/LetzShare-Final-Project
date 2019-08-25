@@ -2,7 +2,7 @@
     @php
     // navbar active link
     function current_page($uri = '/') {
-    return strstr( request()->path(), $uri);
+        return strstr( request()->path(), $uri);
     }
     @endphp
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">

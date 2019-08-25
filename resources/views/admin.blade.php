@@ -11,7 +11,7 @@
     <table class="table table-sm table-striped table-bordered table-hover">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Photo ID <i class="fa fa-fw fa-sort"></i></th>
+            <th scope="col">User ID <i class="fa fa-fw fa-sort"></i></th>
             <th scope="col">Name <i class="fa fa-fw fa-sort"></i></th>
             <th scope="col">E-Mail <i class="fa fa-fw fa-sort"></i></th>
             <th scope="col">User Type <i class="fa fa-fw fa-sort"></i></th>
@@ -27,9 +27,9 @@
             <td>{{ $user->user_type }}</td>
             <td>
               @if ( $user->user_type != 'admin' ) 
-                <a href="/admin/delete/{{ $user->user_id }}">Delete user</a>
+                <a href="/admin/show/{{ $user->user_id }}">Delete user</a>
               @else
-                  <span>Nada ;-)</span>
+                  <span class="text-muted">Nada ;-)</span>
               @endif
             </td>
           </tr>

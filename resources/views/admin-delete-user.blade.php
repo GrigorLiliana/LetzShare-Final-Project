@@ -6,8 +6,8 @@
 
 <h1>Admin Dashborad</h1>
 <hr>
-<form action="" method="post">
-@csrf
+<form action="/admin/delete/{{$user->user_id}}" method="get">
+  @csrf
 <h3>Photos from user <a href="/userprofile/{{ $user->user_id }}" class="badge badge-secondary">{{ $user->name }}, ID: {{ $user->user_id }}</a></h3>
 <div class="table-responsive">
     <table class="table table-sm table-striped table-bordered table-hover">
@@ -30,7 +30,7 @@
           @endforeach
         </tbody>
       </table>
-      <button type="submit" class="btn btn-danger" disabled>Delete user & all related photos</button>
+      <button type="submit" class="btn btn-danger">Delete user & all related photos</button>
       <a class="btn btn-secondary" href="{{ url()->previous() }}" role="button">Cancel</a>
 </div>
 

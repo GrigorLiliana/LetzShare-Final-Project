@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\File;
+use Illuminate\Support\Facades\File;
 
 use App\User;
 use App\Photo;
@@ -27,7 +26,7 @@ class AdminController extends Controller
     }
 
     public function showUser($id){
-
+        
         $photos = Photo::where('user_id', '=', $id)->get();
         $user = User::find($id);
 
@@ -37,24 +36,33 @@ class AdminController extends Controller
         ]);        
     }
 
-    public function deleteUser($id){
+    public function deleteUser($id) {
 
-        $users = User::where('user_id', '=', $id)->get();
-        //* $userDeleted = DB::table("users")->where("user_id", $id)->delete();
-        //$photosDeleted = DB::table("photos")->where("user_id", $id)->delete();
+        $user = User::find($id);
+        $userFolder = 'uploads/' . $id;
+        $userPhoto = $user->user_photo;
+        $userPhotoDefault = strstr($user->user_photo, 'default_user');
+
+        $userDeleted = DB::table("users")->where("user_id", $id)->delete();
+
 
         if($userDeleted) {
-            //$userFolder = 'uploads/' . $id;
-            //File::deleteDirectory($userFolder);
-            File::deleteDirectory(public_path('uploads/' . $id));
-
-            $userPhoto = $users->user_photo;
-            File:delete($userPhoto);
+            if(File::exists($userFolder)) 
+                File::deleteDirectory($userFolder);
+            
+            if(File::exists($userPhoto) && $userPhotoDefault == false)   
+                File::delete($userPhoto);
         } else {
-            return redirect('admin')->with('error', 'ERROR: User & related files.'); 
+            return redirect('admin')->with([
+                'status' => 'ERROR: User & related files.',
+                'class' => 'alert alert-danger alert-dismissible fade show',
+            ]);
         }
         
-        return redirect('admin')->with('error', 'SUCCESS: User & related files deleted successfully.');       
+        return redirect('admin')->with([
+            'status' => 'SUCCESS: User & related files deleted successfully.',
+            'class' => 'alert alert-success alert-dismissible fade show',
+        ]);       
     }
 
 }

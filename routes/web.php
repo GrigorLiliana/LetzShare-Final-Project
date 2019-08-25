@@ -41,8 +41,8 @@ Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 
 //** ADMIN - Middleware auth validation */
 Route::get('/admin', 'AdminController@index')->middleware('admin')->name('admin');
-Route::get('/admin/delete/{id}', 'AdminController@showUser')->middleware('admin');
-Route::post('/admin/delete/{id}', 'AdminController@deleteUser')->middleware('admin');
+Route::get('/admin/show/{id}', 'AdminController@showUser')->middleware('admin');
+Route::get('/admin/delete/{id}', 'AdminController@deleteUser')->middleware('admin');
 
 //** TESTS */
 Route::view('/chupelagaite', 'chupelagaite');
