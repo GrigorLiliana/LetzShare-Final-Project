@@ -20,7 +20,7 @@ class AdminController extends Controller
 
         $users = User::all();
         
-        $reportedPhotos = DB::table('photos')
+        $reportedPhotos = DB::table('photos')->distinct()
             ->leftJoin('users', 'photos.user_id', '=', 'users.user_id')
             ->leftJoin('locations', 'photos.locality_id', '=', 'locations.locality_id')
             ->leftJoin('categories', 'photos.category_id', '=', 'categories.category_id')
