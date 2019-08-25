@@ -90,7 +90,7 @@ class ProfileController extends Controller
 
             $string='';
             foreach ($errors as $value){
-               $string .=  $value .' ';
+            $string .=  $value .' ';
             }
             return redirect('userprofile/' . $id)->with('error', "$string");
 
@@ -124,6 +124,8 @@ class ProfileController extends Controller
 
     public function photoDetails(Request $request, $id)
     {
+        $userId = Auth::user()->user_id;
+
         $validatedData = \Validator::make($request->all(), [
             'title'=> 'required|min:3|max:30|',
             'description' => 'required|min:5|max:250|',
@@ -131,7 +133,13 @@ class ProfileController extends Controller
             'category' =>'required'
         ]);
         if ($validatedData->fails()) {
-            return response()->json(['errors' => $validatedData->errors()->all()]);
+            $errors = $validatedData->errors()->all();
+
+            $string='';
+            foreach ($errors as $value){
+               $string .=  $value .' ';
+            }
+            return redirect('userprofile/' . $userId )->with('error', "$string");
         } else {
             $photo = Photo::find($id);
             $photo->image_title = $request->title;
@@ -139,7 +147,7 @@ class ProfileController extends Controller
             $photo->category_id = Input::get('category');
             $photo->locality_id = Input::get('locality');
             $photo->save();
-            return response()->json(['success' => 'successiful entered']);
+            return redirect('userprofile/' . $userId );
         }
     }
     /**

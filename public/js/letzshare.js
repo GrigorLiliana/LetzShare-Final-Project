@@ -436,4 +436,24 @@ $(function() {
         });
     }); /*end ajax call*/
     /*END of edit Location */
+
+    /*Edit photo details - user profile*/
+$("a.edit-photo-button").on("click", function(e){
+    e.preventDefault();
+    let photoId = this.id;
+    $("h6."+photoId).addClass("hide");
+    $(".buttons-photo-"+photoId).removeClass("hide");
+    $(".edit-photo-"+photoId).removeClass("hide");
+    $(".old-fields-"+photoId).addClass("hide");
+})
+$(".cancel-edit-photo").on("click", function(e){
+    e.preventDefault();
+    let Id = this.id;
+let photoId= Id.substring(7);
+    $("h6."+photoId).removeClass("hide");
+    $(".buttons-photo-"+photoId).addClass("hide");
+    $(".edit-photo-"+photoId).addClass("hide");
+    $(".old-fields-"+photoId).removeClass("hide");
+})
+    /*end of edit photo details - user profile*/
 }); //LAST JQuery DO NOT DELETE

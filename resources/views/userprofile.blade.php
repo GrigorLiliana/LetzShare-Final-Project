@@ -252,24 +252,25 @@ $ownUser=false;
 
         @foreach ($userPhotos as $userPhoto)
         <article class="card promoting-card">
-
-            <!-- Card content -->
-            <div class="card-body d-flex flex-row">
-                @if($ownUser)
+        @if($ownUser)
                 <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST" class="edit-photo-details-{{ $userPhoto->photo_id }}">
                     @csrf @endif
+            <!-- Card content -->
+            <div class="card-body d-flex flex-row">
+
                 <!-- Content -->
                 <div>
 
                     <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
+                    <h6 class="card-title font-weight-bold mb-2 {{ $userPhoto->photo_id }}">{{ $userPhoto->image_title }}
                         @if($ownUser)
-                        <a href="#" id="{{ $userPhoto->photo_id }}"><i class="far fa-edit edit-photo-button text-success"></i></a>
+                        <a href="#" class="edit-photo-button" id="{{ $userPhoto->photo_id }}"><i class="far fa-edit  text-success" ></i></a>
                         <a href="#"><i class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>
-                      </h6>
-                     <input type="text" name="title" class="edit-photo-{{ $userPhoto->photo_id }} hide" placeholder="Enter a new title" value="{{ $userPhoto->image_title }}">
+                    @endif</h6>@if($ownUser)
+                    <input type="text" class="edit-photo-{{ $userPhoto->photo_id }} hide form-control" name="title" placeholder="Enter a new title" value="{{ $userPhoto->image_title }}">
+
                         @endif
-                    </h6>
+
                     <!-- Subtitle -->
                     <p class="card-text"><small><i class="far fa-calendar-alt"></i>
                             {{ date('d-m-Y', strtotime($userPhoto->photodate)) }}
@@ -304,7 +305,7 @@ $ownUser=false;
                     <p class="card-text collapse text-capitalize" id="collapse-{{ $userPhoto->photo_id }}">
                         {{ $userPhoto->image_description }}</p>
                         @if($ownUser)
-                        <input type="text" name="image_description" class="edit-photo-{{ $userPhoto->photo_id }} hide" placeholder="Enter a new description" value="{{ $userPhoto->image_description }}">
+                        <textarea name="image_description" class="form-control edit-photo-{{ $userPhoto->photo_id }} hide" placeholder="Enter a new description">{{ $userPhoto->image_description }}</textarea>
                         @endif
                     <!-- Button -->
                     <ul>
@@ -337,10 +338,10 @@ $ownUser=false;
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span> {{ $userPhoto->locality_name }}</span>
+                            <span class="old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->locality_name }}</span>
                             @if($ownUser)
-                            <select class="custom-select hide" name="locality" id="locality" required>
-                            <option value="" disabled>Select</option>
+                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="locality" required>
+                            <option disabled>Locality</option>
                             @foreach ($locations as $locality)
                                 <option value="{{$locality->locality_id}}">{{$locality->locality_name}}</option>
                             @endforeach
@@ -350,10 +351,10 @@ $ownUser=false;
                         <li>
                             <i class="{{$userPhoto->category_icon}}">
                             </i>
-                            <span class="text-capitalize"> {{ $userPhoto->category_name }}</span>
+                            <span class="text-capitalize old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->category_name }}</span>
                             @if($ownUser)
-                            <select class="custom-select hide" name="category" id="category" required>
-                            <option value="" disabled>Select</option>
+                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="category" required>
+                            <option disabled>Category</option>
                             @foreach ($categories as $category)
                                 <option value="{{$category->category_id}}">{{ ucfirst($category->category_name) }}</option>
                             @endforeach
@@ -361,11 +362,15 @@ $ownUser=false;
                         @endif
                         </li>
                     </ul>
-
+                    @if($ownUser)
+                    <div class="buttons-photo-{{ $userPhoto->photo_id }} hide">
+                    <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
+                    <input class="btn btn-danger mb-2 profile-field cancel-edit-photo" id="cancel_{{ $userPhoto->photo_id}}" type="button" value="Cancel"
+                    name="cancel">@endif</div>
                 </div>
-                @if($ownUser)</form>@endif
-            </div>
 
+            </div>
+            @if($ownUser)</form>@endif
 </article>
         @endforeach
         <!-- END Card -->
