@@ -73,7 +73,7 @@
 
                 <!-- Avatar -->
                 <a href="/userprofile/{{$photo->user_id}}">
-                    <img src="{{URL::asset($photo->user_photo)}}" class="rounded-circle mr-3" height="50px" width="50px"
+                    <img src="{{URL::asset($photo->user_photo)}}" class="rounded-circle mr-3" height="50" width="50"
                         alt="avatar">
                 </a>
                 <!-- Content -->

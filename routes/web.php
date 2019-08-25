@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::view('/terms', 'termsconditions')->name('terms');
+Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/about-us', 'about-us')->name('about-us');
 
 Route::get('/contact', 'ContactController@index')->name('contact');
@@ -35,15 +36,15 @@ Route::get('/gallery', 'PhotoController@index');
 Route::post('/gallery', 'PhotoController@filters');
 Route::get('/gallery/{category_id}', 'PhotoController@getCategory');
 
-Route::get('/search', 'AutoCompleteController@index');
-Route::get('/autocomplete', 'AutoCompleteController@search');
-
 //** Likes handler */
 Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 
 //** ADMIN - Middleware auth validation */
 Route::get('/admin', 'AdminController@index')->middleware('admin')->name('admin');
-Route::get('/admin/delete/{id}', 'AdminController@deleteUser')->middleware('admin');
+Route::get('/admin/showUser/{user_id}', 'AdminController@showUser')->middleware('admin');
+Route::get('/admin/deleteUser/{user_id}', 'AdminController@deleteUser')->middleware('admin');
+Route::get('/admin/showPhoto/{photo_id}', 'AdminController@showPhoto')->middleware('admin');
+Route::get('/admin/deletePhoto/{photo_id}', 'AdminController@deletePhoto')->middleware('admin');
 
 //** TESTS */
 Route::view('/chupelagaite', 'chupelagaite');

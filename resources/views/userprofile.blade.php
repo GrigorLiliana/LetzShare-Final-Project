@@ -5,6 +5,21 @@
 @endsection
 
 @section('content')
+@guest
+@php
+$ownUser=false;
+@endphp
+@else
+@php
+// check if the profile belongs to the user
+if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
+$ownUser=true;
+$userId=Auth::user()->user_id;
+}else{
+$ownUser=false;
+}
+@endphp
+@endguest
 
 <!-- Div to show errors messages -->
 <div class="errors hide errors-profile">
@@ -24,7 +39,8 @@
         <span class="successMsg"></span>
     </div>
 </div>
-<!-- Modal to edit photo -->
+@if($ownUser)
+<!-- Modal to edit user photo -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -39,7 +55,7 @@
                 <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="image">Select a photo</label>
+                        <label for="foto">Select a photo</label>
                         <div class="custom-file">
                             <input type="file" name="image" class="custom-file-input" id="foto" required>
                             <label class="custom-file-label" for="foto"></label>
@@ -56,22 +72,8 @@
     </div>
 </div>
 <!-- end of the model to edit photo -->
+@endif
 
-@guest
-@php
-$ownUser=false;
-@endphp
-@else
-@php
-// check if the profile belongs to the user
-if((Auth::user()->user_id)==($userPhotos[0]->user_id)){
-$ownUser=true;
-$userId=Auth::user()->user_id;
-}else{
-$ownUser=false;
-}
-@endphp
-@endguest
 <!-- Edit Name -->
 <form method="post" class="form-flex-profile edit-name">
     @csrf
@@ -204,7 +206,7 @@ $ownUser=false;
                             <label for="fullname">Full name</label>
                             <input type="text" class="form-control" id="fullname" name="fullname" @guest
                                 placeholder="Enter your name" @else value="{{Auth::user()->name}}" @endguest
-                                placeholder="Enter full name">
+                                >
                         </div>
                         <div class="form-group">
                             <label for="email">E-Mail address</label>
@@ -232,6 +234,7 @@ $ownUser=false;
 <!-- End of the User details -->
 
 <!-- User Portfolio -->
+<section id=portfolio>
 <h2>Portfolio
     @if($ownUser)|
     <a href="/uploadphoto" class="add">
@@ -248,7 +251,7 @@ $ownUser=false;
     <div class="card-columns">
 
         @foreach ($userPhotos as $userPhoto)
-        <div class="card promoting-card">
+        <article class="card promoting-card">
 
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
@@ -339,7 +342,7 @@ $ownUser=false;
 
             </div>
 
-        </div>
+</article>
         @endforeach
         <!-- END Card -->
 
@@ -359,4 +362,5 @@ $ownUser=false;
 <div class="pagination">
     {{ $userPhotos->links() }}
 </div>
+</section>
 @endsection

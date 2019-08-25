@@ -7,13 +7,13 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
+    <title>@yield('title', 'LetzShare')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/letzshare.js') }}" defer></script>
     <script src="{{ asset('js/jquery.fancybox.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
+    <script src="https://kit.fontawesome.com/ff9603d652.js" ></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet" />
@@ -23,19 +23,19 @@
 </head>
 
 <body>
-
     <div id="app">
         <!-- shadow div (user profile when user send message) -->
         <div class="shadow-div hide"></div>
-
-
         @include('layouts.nav')
 
-        <main class="container py-4">
+        <main
+        @if (\Route::current()->getName() != 'home')
+            class="container"
+        @endif >
             <!-- div to display errors -->
-            <div class="notAdmin">
-                @if ( $message = Session::get('error') )
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="statusMsg">
+                @if ( $message = Session::get('status') )
+                <div class="{{ Session::get('class')}}" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -46,8 +46,6 @@
 
             @yield('content')
         </main>
-    </div>
-
     @include('layouts.footer')
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"

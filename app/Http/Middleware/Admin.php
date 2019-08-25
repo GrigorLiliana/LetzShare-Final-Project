@@ -24,7 +24,10 @@ class Admin
         else
             //... ->with('ERROR','You have not admin access'); returns ==> {{ session('ERROR') }}
             //return redirect()->route('home')->with('error', 'Restricted area. You have not admin access');
-            return redirect('/')->with('error', 'Restricted area. You have not admin access');
+            return redirect('/')->with([
+                'status' => 'access denied you don\'t have permission to access',
+                'class' => 'alert alert-danger alert-dismissible fade show',
+            ]);
         
     }
 
