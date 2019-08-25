@@ -99,12 +99,6 @@ li {
 .not-liked:hover {
     background-color: lightgrey;
 }
-/*height of the sections in the home page*/
-section {
-    min-height: 90vh;
-    width: 100%;
-}
-/*end of the height*/
 
 /*first section - big photo background*/
 #home_page {

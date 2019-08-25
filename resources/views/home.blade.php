@@ -7,7 +7,7 @@
 <section id="home_page">
     <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250></h1>
 </section>
-<div class="container container-home">
+<div class="container container-home" id="homeView">
 <section id="rated_photos">
     <h3>Top Rated Photos</h3>
 
