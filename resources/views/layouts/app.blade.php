@@ -14,6 +14,10 @@
     <script src="{{ asset('js/letzshare.js') }}" defer></script>
     <script src="{{ asset('js/jquery.fancybox.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/ff9603d652.js" ></script>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet" />
@@ -47,10 +51,7 @@
             @yield('content')
         </main>
     @include('layouts.footer')
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
+
 </body>
 
 </html>
