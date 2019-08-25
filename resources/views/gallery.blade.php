@@ -4,55 +4,61 @@
 
 @section('content')
 
-<div class="filters collapse show form-group" id="formCollapse">
-    <form action="" method="POST" class="form-filters">
-        @csrf
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="photo-user">Photographers</label>
-                <select class="form-control users form-control-sm" name="users" id="users">
-                    <option value="default">Select</option>
-                    @foreach ($users as $user)
-                    <option value="{{$user->user_id}}">{{$user->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-md-3">
-                <label for="photo-user">Location</label>
-                <select class="form-control locations form-control-sm" name="locations" id="locations">
-                    <option value="">Select</option>
-                    @foreach ($locations as $location)
-                    <option value="{{$location->locality_id}}">{{$location->locality_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="photo-user">Category</label>
-                <select class="form-control categories form-control-sm" name="categories" id="categories">
-                    <option value="">Select</option>
-                    @foreach ($categories as $category)
-                    <option value="{{$category->category_id}}">{{$category->category_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-sm-2">
-                <label for="photo-user">Date From</label>
-                <input type="date" class="form-control form-control-sm" name="firstdate" id="firstdate">
-            </div>
-            <div class="form-group col-sm-2">
-                <label for="photo-user">Date To</label>
-                <input type="date" class="form-control form-control-sm" id="lastdate" name="lastdate">
-            </div>
+<div id="accordion">
+    <div class="filters">
+        <div class="card-header formfilters" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    FILTERS
+                </button>
+            </h5>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
 
-<div class="formHide">
-    <a class="btn btn-primary" data-toggle="collapse" href="#formCollapse" role="button" aria-expanded="false"
-        aria-controls="collapseExample">
-        <i class="fas fa-angle-down"></i>
-    </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <form action="" method="POST" class="form-filters">
+                @csrf
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="photo-user">Photographers</label>
+                        <select class="form-control users form-control-sm" name="users" id="users">
+                            <option value="default">Select</option>
+                            @foreach ($users as $user)
+                            <option value="{{$user->user_id}}">{{$user->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="photo-user">Location</label>
+                        <select class="form-control locations form-control-sm" name="locations" id="locations">
+                            <option value="">Select</option>
+                            @foreach ($locations as $location)
+                            <option value="{{$location->locality_id}}">{{$location->locality_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="photo-user">Category</label>
+                        <select class="form-control categories form-control-sm" name="categories" id="categories">
+                            <option value="">Select</option>
+                            @foreach ($categories as $category)
+                            <option value="{{$category->category_id}}">{{$category->category_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="photo-user">Date From</label>
+                        <input type="date" class="form-control form-control-sm" name="firstdate" id="firstdate">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="photo-user">Date To</label>
+                        <input type="date" class="form-control form-control-sm" id="lastdate" name="lastdate">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="row gallery">
@@ -89,47 +95,128 @@
                 <a href="{{ $photo->image_URL }}" data-fancybox="gallery" data-caption="<p>{{ $photo->image_description }}</p><hr><ul><li>
                             <i class='fas fa-map-marker-alt'></i>
                             <span>{{ $photo->locality_name }}</span>
-                        </li><li><i class='fas fa-heart'></i>
-                            <span>{{ $photo->likes_sum }}</span></li><li><i class='{{ $photo->category_icon }}'></i>
-                            <span class='text-capitalize'>{{ $photo->category_name }}</span></li></ul>">
-                    <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}" alt="{{ $photo->image_title }}">
-                    <div class="mask rgba-white-slight"></div>
-                </a>
+                        </li>    <li>
+                                {{-- code to implement like /unlike functionality in page --}}
+                                @if (Auth::check())
+                                @php
+                                $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
+                                Auth::user()->user_id)->first();
+                                @endphp
+                                /* Does a " 'like'" exist in the table for this user, photo? */
+                    @if ($like)
+                    /* If so is it a like? */
+                    @if ($like->islike)
+                    <div class=" liked" id="{{$picture->photo_id}}">
+                    @csrf
+                    <i class="fas fa-heart"></i>
+                    <span class="likes-number">{{ $picture->likes_sum }}</span>
             </div>
-
-            <!-- Card content -->
-            <div class="card-body">
-
-                <div class="collapse-content">
-
-                    <!-- Text -->
-                    <p class="card-text collapse text-capitalize" id="collapseContent">
-                        {{ $photo->image_description }}</p>
-                    <!-- Button -->
-                    <ul>
-                        <li>
-                            <i class="fas fa-heart"></i>
-                            <span>{{ $photo->likes_sum }}</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ $photo->locality_name }}</span>
-                        </li>
-                        <li>
-                            <i class="{{ $photo->category_icon }}"></i>
-                            <span class="text-capitalize">{{ $photo->category_name }}</span>
-                        </li>
-                    </ul>
-
+            /* Else is it currently a report? */
+            @else
+            <div class="not-liked" id="{{$picture->photo_id}}">
+                @csrf
+                <i class="far fa-heart"></i>
+                <span class="likes-number">{{ $picture->likes_sum }}</span>
+            </div>
+            @endif
+            /* Or else there isn't a like in the table i.e. not liked or reported */
+            @else
+            <div class="not-liked" id="{{$picture->photo_id}}">
+                @csrf
+                <i class="far fa-heart"></i>
+                <span class="likes-number">{{ $picture->likes_sum }}</span>
+            </div>
+            @endif
+            /* finally, if the user is not logged on the like/report functionality is not enabled */
+            @else
+            <div class="not-logged">
+                <i class="far fa-heart"></i>
+                <span>{{ $picture->likes_sum }}</span>
+            </div>
+            @endif
+            </li>
+            /* code to implement report functionality in page */
+            <li>
+                @if (Auth::check())
+                @php
+                $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
+                Auth::user()->user_id)->first();
+                @endphp
+                /* Does a "like" exist in the table for this user, photo? */
+                @if ($like)
+                /* If so is it a report? */
+                @if (!($like->islike))
+                <div class="reported" id="r{{$picture->photo_id}}">
+                    @csrf
+                    <i class="fas fa-flag"></i>
+                    <!-- the show/hide of the spans are toggled by JS -->
+                    <span class="rep-text">Reported</span><span class="rep-text hide">Report</span>
                 </div>
+                /* Else is it currently a like? */
+                @else
+                <div class="not-reported" id="r{{$picture->photo_id}}">
+                    @csrf
+                    <i class="far fa-flag"></i>
+                    <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
+                </div>
+                @endif
+                /* Or else there isn't a like in the table i.e. not liked or reported */
+                @else
+                <div class="not-reported" id="r{{$picture->photo_id}}">
+                    @csrf
+                    <i class='far fa-flag'></i>
+                    <span class='rep-text'>Report</span><span class='rep-text hide'>Reported</span>
+                </div>
+                @endif
+                @endif
+            </li>
+            <li><i class='{{ $photo->category_icon }}'></i>
+                <span class='text-capitalize'>{{ $photo->category_name }}</span></li>
+            </ul>">
+            <img class='card-img-top rounded-0' src='{{ $photo->image_URL }}' alt='{{ $photo->image_title }}'>
+            <div class='mask rgba-white-slight'></div>
+            </a>
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body">
+
+            <div class="collapse-content">
+
+                <!-- Text -->
+                <div class="formHide">
+                    <a class="readMore" data-toggle="collapse" href="#collapse-{{ $photo->photo_id }}" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-angle-down"></i>
+                    </a>
+                </div>
+                <p class="card-text collapse text-capitalize" id="collapse-{{ $photo->photo_id }}">
+                    {{ $photo->image_description }}</p>
+                <!-- Button -->
+                <ul>
+                    <li>
+                        <i class="fas fa-heart"></i>
+                        <span>{{ $photo->likes_sum }}</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ $photo->locality_name }}</span>
+                    </li>
+                    <li>
+                        <i class="{{ $photo->category_icon }}"></i>
+                        <span class="text-capitalize">{{ $photo->category_name }}</span>
+                    </li>
+                </ul>
 
             </div>
 
         </div>
-        @endforeach
-        <!-- END Card -->
 
     </div>
+    @endforeach
+    <!-- END Card -->
+
+</div>
 </div>
 
 <div class="pagination">
