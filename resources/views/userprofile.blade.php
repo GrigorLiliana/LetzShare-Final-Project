@@ -255,17 +255,21 @@ $ownUser=false;
 
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
-
+                @if($ownUser)
+                <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST" class="edit-photo-details-{{ $userPhoto->photo_id }}">
+                    @csrf @endif
                 <!-- Content -->
                 <div>
-                    @if($ownUser) <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST" class="edit-photo-details">
-                    @csrf @endif
+
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
                         @if($ownUser)
-                        <a href="#"><i class="far fa-edit text-success"></i></a>
-                        <a href="#"><i class="far fa-trash-alt text-danger text-right"></i></a>
-                        @endif</h6>
+                        <a href="#" id="{{ $userPhoto->photo_id }}"><i class="far fa-edit edit-photo-button text-success"></i></a>
+                        <a href="#"><i class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>
+                      </h6>
+                     <input type="text" name="title" class="edit-photo-{{ $userPhoto->photo_id }} hide" placeholder="Enter a new title" value="{{ $userPhoto->image_title }}">
+                        @endif
+                    </h6>
                     <!-- Subtitle -->
                     <p class="card-text"><small><i class="far fa-calendar-alt"></i>
                             {{ date('d-m-Y', strtotime($userPhoto->photodate)) }}
@@ -299,6 +303,9 @@ $ownUser=false;
                     </div>
                     <p class="card-text collapse text-capitalize" id="collapse-{{ $userPhoto->photo_id }}">
                         {{ $userPhoto->image_description }}</p>
+                        @if($ownUser)
+                        <input type="text" name="image_description" class="edit-photo-{{ $userPhoto->photo_id }} hide" placeholder="Enter a new description" value="{{ $userPhoto->image_description }}">
+                        @endif
                     <!-- Button -->
                     <ul>
                         <li>
@@ -331,16 +338,32 @@ $ownUser=false;
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
                             <span> {{ $userPhoto->locality_name }}</span>
+                            @if($ownUser)
+                            <select class="custom-select hide" name="locality" id="locality" required>
+                            <option value="" disabled>Select</option>
+                            @foreach ($locations as $locality)
+                                <option value="{{$locality->locality_id}}">{{$locality->locality_name}}</option>
+                            @endforeach
+                        </select>
+                        @endif
                         </li>
                         <li>
                             <i class="{{$userPhoto->category_icon}}">
                             </i>
                             <span class="text-capitalize"> {{ $userPhoto->category_name }}</span>
+                            @if($ownUser)
+                            <select class="custom-select hide" name="category" id="category" required>
+                            <option value="" disabled>Select</option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->category_id}}">{{ ucfirst($category->category_name) }}</option>
+                            @endforeach
+                        </select>
+                        @endif
                         </li>
                     </ul>
 
                 </div>
-
+                @if($ownUser)</form>@endif
             </div>
 
 </article>

@@ -8,6 +8,8 @@ use App\User;
 use File;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use App\Category;
+use App\Location;
 
 class ProfileController extends Controller
 {
@@ -26,9 +28,11 @@ class ProfileController extends Controller
             ->select('photos.*', 'photos.created_at as photodate', 'users.*', 'locations.*', 'categories.*')
             ->orderby('photodate', 'desc')
             ->simplePaginate(12);
+            $categories = Category::all();
+            $locations = Location::all();
 
 
-        return view('userprofile', ['userPhotos' => $userPhotos]);
+        return view('userprofile', ['userPhotos' => $userPhotos, 'categories' => $categories, 'locations' => $locations]);
     }
 
     /**
