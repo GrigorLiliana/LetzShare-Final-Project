@@ -8,8 +8,10 @@
     <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250></h1>
 </section>
 <div class="container container-home" id="homeView">
-<section id="rated_photos">
-    <h3>Top Rated Photos</h3>
+
+    <section id="rated_photos">
+        
+        <h3>Top Rated Photos</h3>
 
         <div class="card-deck">
         @foreach ($topPics as $picture)
@@ -164,29 +166,30 @@
 
     <div class="card-deck">
         @foreach ($topUsers as $topUser)
-        @php
-        $userId = $topUser->user_id;
-        $user = App\User::where('user_id', $userId)->first();
-        $path = URL::asset($user->user_photo);
-        @endphp
-        <div class="card photographers">
-            <div class="card-body d-flex flex-row">
-                <h6 class="card-title font-weight-bold mb-2 text-capitalize">{{ $user->name }}</h6>
+            @php
+                $userId = $topUser->user_id;
+                $user = App\User::where('user_id', $userId)->first();
+                $path = URL::asset($user->user_photo);
+            @endphp
+            <div class="card photographers">
+                <div class="card-body d-flex flex-row">
+                    <h6 class="card-title font-weight-bold mb-2 text-capitalize">{{ $user->name }}</h6>
+                </div>
+                <div class="view overlay">
+                    <a href="/userprofile/{{$user->user_id}}">
+                        <img src="{{$path}}" class="rounded-circle img-thumbnail" alt="{{ $user->name }}">
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-capitalize"><small>{{ str_limit($user->user_description, 90, '...') }}</small>
+                    </p>
+                    <p class="card-text"><small class="text-muted">Has posted {{$topUser->total_photos}} photos</small></p>
+                </div>
             </div>
-            <div class="view overlay">
-                <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$path}}" class="rounded-circle" alt="{{ $user->name }}">
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="card-text text-capitalize"><small>{{ str_limit($user->user_description, 90, '...') }}</small>
-                </p>
-                <p class="card-text"><small class="text-muted">Has posted {{$topUser->total_photos}} photos</small></p>
-            </div>
-        </div>
         @endforeach
     </div>
 </section>
+
 <section id="latest_photos">
     <h3>Latest Photos</h3>
 

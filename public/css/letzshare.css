@@ -92,6 +92,10 @@ li {
     margin: 0.5em 0em;
 }
 
+#homeView section h3 {
+    margin-top: 4rem;
+}
+
 .liked:hover {
     background-color: lightgrey;
 }
@@ -129,9 +133,7 @@ li {
     font-size: 2rem;
     margin-top: 2rem;
 }
-#rated_photos h3 {
-    margin-top: 4rem;
-}
+
 .card-deck .card {
     margin: 1rem;
 }
