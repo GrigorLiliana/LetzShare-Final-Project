@@ -11,10 +11,10 @@ body {
 .container {
     margin-top: 100px;
 }
-.container-home{
+.container-home {
     margin-top: 0;
 }
-.navbar{
+.navbar {
     padding: 0 1rem !important;
 }
 /* Registration password validation*/
@@ -100,51 +100,51 @@ li {
     background-color: lightgrey;
 }
 /*height of the sections in the home page*/
-section{
+section {
     min-height: 90vh;
     width: 100%;
 }
 /*end of the height*/
 
 /*first section - big photo background*/
-#home_page{
-background-image: url(http://luxembourg.public.lu/pictures/gallery/photos-telechargeables/02-ville-luxembourg/003-vdl-grund-224431-xxxhdpi.jpg);
-background-repeat: no-repeat;
-background-size: cover;
-background-position: center;
-height: 100vh;
-margin-top:2rem;
+#home_page {
+    background-image: url(http://luxembourg.public.lu/pictures/gallery/photos-telechargeables/02-ville-luxembourg/003-vdl-grund-224431-xxxhdpi.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin-top: 2rem;
 }
-#home_page h1{
-    color:black;
+#home_page h1 {
+    color: black;
     font-weight: bold;
     font-family: calibri, sans-serif;
     position: relative;
     display: block;
     max-width: max-content;
-    top:10rem;
+    top: 10rem;
     left: 20%;
     background-color: rgba(119, 136, 153, 0.411);
 }
 
 /* card photos section*/
-.container-home h3{
+.container-home h3 {
     font-family: Calibri, sans-serif;
     border-bottom: 2px solid red;
     font-weight: bold;
     font-size: 2rem;
     margin-top: 2rem;
 }
-#rated_photos h3{
+#rated_photos h3 {
     margin-top: 4rem;
 }
-.card-deck .card{
+.card-deck .card {
     margin: 1rem;
 }
-.card .view.overlay{
+.card .view.overlay {
     text-align: center !important;
 }
-.photographers img{
+.photographers img {
     max-width: 200px;
 }
 .card-img-top.home {
@@ -153,26 +153,25 @@ margin-top:2rem;
     object-fit: cover;
 }
 /*responsive home page*/
-@media screen and (max-width:800px){
-    #home_page h1
-    {
+@media screen and (max-width: 800px) {
+    #home_page h1 {
         max-width: 250px;
         left: 50%;
         transform: translateX(-50%);
-        top:5rem;
+        top: 5rem;
         text-align: center;
         background-color: unset;
     }
 }
 
-@media screen and (min-width:768px) and (max-width:995px){
-    .card-deck .card{
-    flex:1 40% !important;
+@media screen and (min-width: 768px) and (max-width: 995px) {
+    .card-deck .card {
+        flex: 1 40% !important;
     }
 }
-@media screen and (min-width:556px) and (max-width:768px){
-    .card-deck .card{
-    flex: 1 1 auto !important;
+@media screen and (min-width: 556px) and (max-width: 768px) {
+    .card-deck .card {
+        flex: 1 1 auto !important;
     }
 }
 
@@ -293,13 +292,13 @@ margin-top:2rem;
 }
 
 .fancybox-caption__body {
-  /*  padding: 10px;*/
+    /*  padding: 10px;*/
     color: #252323;
     background-color: white;
 }
 .fancybox-caption__body li {
-   color: #252323;
-   /* padding: 10px;*/
+    color: #252323;
+    /* padding: 10px;*/
 }
 
 /* Footer */
@@ -313,11 +312,11 @@ margin-top:2rem;
     padding-right: 15px;
     padding-left: 15px;
 }
-.footer p{
-margin-bottom: 0;
+.footer p {
+    margin-bottom: 0;
 }
 
-.footer img{
+.footer img {
     display: inline-block;
     margin-left: 2rem;
 }
@@ -329,11 +328,24 @@ margin-bottom: 0;
     justify-content: center;
 }
 
+/* Fontawesome */
 /* About Us */
 .fa-github-square {
     color: black;
 }
+/* Admin Dashboard */
+.fa-edit {
+    color: green;
+}
+.fa-minus-circle {
+    color: red;
+}
+
+.fa-disabled {
+    color: gray;
+    cursor: not-allowed;
+}
 /*register*/
-.policies-register{
+.policies-register {
     text-align: center;
 }
