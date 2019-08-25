@@ -36,13 +36,6 @@ class ProfileController extends Controller
         return view('userprofile', ['userPhotos' => $userPhotos, 'categories' => $categories, 'locations' => $locations]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
-    { }
 
     /**
      * Store a newly created resource in storage.
@@ -65,6 +58,7 @@ class ProfileController extends Controller
         }
     }
 
+/*edit user description*/
     public function description(Request $request, $id)
     {
         $validatedData = \Validator::make($request->all(), [
@@ -79,6 +73,8 @@ class ProfileController extends Controller
             return response()->json(['success' => 'successiful entered', 'description' => $user->user_description]);
         }
     }
+
+    /*change user photo*/
     public function changePhoto(Request $request, $id)
     {
         $validatedData = \Validator::make($request->all(),[
@@ -112,6 +108,8 @@ class ProfileController extends Controller
             ]);;
         }
     }
+
+    /*edit user location*/
     public function location(Request $request, $id)
     {
         $validatedData = \Validator::make($request->all(), [
@@ -127,7 +125,7 @@ class ProfileController extends Controller
         }
     }
 
- /*edit photo details*/
+/*edit photo details*/
     public function photoDetails(Request $request, $id)
     {
         $userId = Auth::user()->user_id;
@@ -143,7 +141,7 @@ class ProfileController extends Controller
 
             $string='';
             foreach ($errors as $value){
-               $string .=  $value .' ';
+            $string .=  $value .' ';
             }
             return redirect('userprofile/' . $userId )->with(['status' => "$string",
             'class' => 'alert alert-danger alert-dismissible fade show']);
@@ -160,39 +158,6 @@ class ProfileController extends Controller
             ]);
         }
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -200,8 +165,22 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     /*delete user photo */
     public function destroy($id)
     {
-        //
+        $userId = Auth::user()->user_id;
+        $photo = Photo::find($id);
+
+            if(File::exists($photo->image_URL)){
+                File::delete($photo->image_URL);
+            }
+
+            Photo::destroy($id);
+
+            return redirect('userprofile/' . $userId )->with([
+                'status' => 'SUCCESS: Photo deleted successfully.',
+                'class' => 'alert alert-success alert-dismissible fade show',
+            ]);
     }
 }

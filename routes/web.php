@@ -32,6 +32,8 @@ Route::post('/userprofile/description/{id}', 'ProfileController@description');
 Route::post('/userprofile/photo/{id}','ProfileController@changePhoto');
 Route::post('/userprofile/location/{id}', 'ProfileController@location');
 Route::post('/edit-photo-details/{id}', 'ProfileController@photoDetails');
+Route::post('/delete/user-photo/{id}', 'ProfileController@destroy');
+Route::post('/delete/user-account/{id}', 'ProfileController@deleteAccount');
 
 Route::get('/gallery', 'PhotoController@index');
 Route::post('/gallery', 'PhotoController@filters');
