@@ -51,44 +51,54 @@
 
                 <div class="collapse-content">
                     <!-- Text -->
-                    <p class="card-text text-capitalize">
-                        {{ str_limit($picture->image_description, 75, '...') }}
-                    </p>
+                    <div class="formHide">
+                        <a class="readMore" data-toggle="collapse" href="#collapse-{{ $picture->photo_id }}" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fas fa-angle-down"></i>
+                        </a>
+                    </div>
+                    <p class="card-text collapse text-capitalize" id="collapse-{{ $picture->photo_id }}">
+                        {{ $picture->image_description }}</p>
                     <!-- Icons Row -->
                     <ul>
                         <li>
                             <!-- code to implement like /unlike functionality in page -->
                             @if (Auth::check())
-                                @php
-                                $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
-                                Auth::user()->user_id)->first();
-                                @endphp
-                                @if ($like) <!-- Does a "like" exist in the table for this user, photo? -->
-                                    @if ($like->islike) <!-- If so is it a like? -->
-                                        <div class="liked" id="{{$picture->photo_id}}">
-                                            @csrf
-                                            <i class="fas fa-heart"></i>
-                                            <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                        </div>
-                                    @else <!-- Else is it currently a report? -->
-                                        <div class="not-liked" id="{{$picture->photo_id}}">
-                                            @csrf
-                                            <i class="far fa-heart"></i>
-                                            <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                        </div>
-                                    @endif
-                                @else <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                    <div class="not-liked" id="{{$picture->photo_id}}">
-                                        @csrf
-                                        <i class="far fa-heart"></i>
-                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                    </div>
-                                @endif
-                            @else <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
-                                <div class="not-logged">
-                                    <i class="far fa-heart"></i>
-                                    <span>{{ $picture->likes_sum }}</span>
-                                </div>
+                            @php
+                            $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
+                            Auth::user()->user_id)->first();
+                            @endphp
+                            @if ($like)
+                            <!-- Does a "like" exist in the table for this user, photo? -->
+                            @if ($like->islike)
+                            <!-- If so is it a like? -->
+                            <div class="liked" id="{{$picture->photo_id}}">
+                                @csrf
+                                <i class="fas fa-heart"></i>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
+                            </div>
+                            @else
+                            <!-- Else is it currently a report? -->
+                            <div class="not-liked" id="{{$picture->photo_id}}">
+                                @csrf
+                                <i class="far fa-heart"></i>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- Or else there isn't a like in the table i.e. not liked or reported -->
+                            <div class="not-liked" id="{{$picture->photo_id}}">
+                                @csrf
+                                <i class="far fa-heart"></i>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
+                            <div class="not-logged">
+                                <i class="far fa-heart"></i>
+                                <span>{{ $picture->likes_sum }}</span>
+                            </div>
                             @endif
                         </li>
                         <li>
@@ -103,32 +113,36 @@
                         <li>
                             <!-- code to implement report functionality in page -->
                             @if (Auth::check())
-                                @php
-                                $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
-                                Auth::user()->user_id)->first();
-                                @endphp
-                                @if ($like) <!-- Does a "like" exist in the table for this user, photo? -->
-                                    @if (!($like->islike)) <!-- If so is it a report? -->
-                                    <div class="reported" id="r{{$picture->photo_id}}">
-                                        @csrf
-                                        <i class="fas fa-flag"></i>
-                                        <!-- the show/hide of the spans are toggled by JS -->
-                                        <span class="rep-text">Reported</span><span class="rep-text hide">Report</span>
-                                    </div>
-                                    @else <!-- Else is it currently a like? -->
-                                    <div class="not-reported" id="r{{$picture->photo_id}}">
-                                        @csrf
-                                        <i class="far fa-flag"></i>
-                                        <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
-                                    </div>
-                                    @endif
-                                @else <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                <div class="not-reported" id="r{{$picture->photo_id}}">
-                                    @csrf
-                                    <i class="far fa-flag"></i>
-                                    <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
-                                </div>
-                                @endif
+                            @php
+                            $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
+                            Auth::user()->user_id)->first();
+                            @endphp
+                            @if ($like)
+                            <!-- Does a "like" exist in the table for this user, photo? -->
+                            @if (!($like->islike))
+                            <!-- If so is it a report? -->
+                            <div class="reported" id="r{{$picture->photo_id}}">
+                                @csrf
+                                <i class="fas fa-flag"></i>
+                                <!-- the show/hide of the spans are toggled by JS -->
+                                <span class="rep-text">Reported</span><span class="rep-text hide">Report</span>
+                            </div>
+                            @else
+                            <!-- Else is it currently a like? -->
+                            <div class="not-reported" id="r{{$picture->photo_id}}">
+                                @csrf
+                                <i class="far fa-flag"></i>
+                                <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- Or else there isn't a like in the table i.e. not liked or reported -->
+                            <div class="not-reported" id="r{{$picture->photo_id}}">
+                                @csrf
+                                <i class="far fa-flag"></i>
+                                <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
+                            </div>
+                            @endif
                             @endif
                         </li>
                     </ul>
@@ -225,36 +239,41 @@
                         <li>
                             <!-- code to implement like /unlike functionality in page -->
                             @if (Auth::check())
-                                @php
-                                $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
-                                Auth::user()->user_id)->first();
-                                @endphp
-                                @if ($like) <!-- Does a "like" exist in the table for this user, photo? -->
-                                    @if ($like->islike) <!-- If so is it a like? -->
-                                        <div class="liked" id="{{$picture->photo_id}}">
-                                            @csrf
-                                            <i class="fas fa-heart"></i>
-                                            <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                        </div>
-                                    @else <!-- Else is it currently a report? -->
-                                        <div class="not-liked" id="{{$picture->photo_id}}">
-                                            @csrf
-                                            <i class="far fa-heart"></i>
-                                            <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                        </div>
-                                    @endif
-                                @else <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                    <div class="not-liked" id="{{$picture->photo_id}}">
-                                        @csrf
-                                        <i class="far fa-heart"></i>
-                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                    </div>
-                                @endif
-                            @else <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
-                                <div class="not-logged">
-                                    <i class="far fa-heart"></i>
-                                    <span>{{ $picture->likes_sum }}</span>
-                                </div>
+                            @php
+                            $like = App\Like::where('photo_id', $picture->photo_id)->where('user_id',
+                            Auth::user()->user_id)->first();
+                            @endphp
+                            @if ($like)
+                            <!-- Does a "like" exist in the table for this user, photo? -->
+                            @if ($like->islike)
+                            <!-- If so is it a like? -->
+                            <div class="liked" id="{{$picture->photo_id}}">
+                                @csrf
+                                <i class="fas fa-heart"></i>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
+                            </div>
+                            @else
+                            <!-- Else is it currently a report? -->
+                            <div class="not-liked" id="{{$picture->photo_id}}">
+                                @csrf
+                                <i class="far fa-heart"></i>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- Or else there isn't a like in the table i.e. not liked or reported -->
+                            <div class="not-liked" id="{{$picture->photo_id}}">
+                                @csrf
+                                <i class="far fa-heart"></i>
+                                <span class="likes-number">{{ $picture->likes_sum }}</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
+                            <div class="not-logged">
+                                <i class="far fa-heart"></i>
+                                <span>{{ $picture->likes_sum }}</span>
+                            </div>
                             @endif
                         </li>
                         <li>
@@ -267,32 +286,36 @@
                         <li>
                             <!-- code to implement report functionality in page -->
                             @if (Auth::check())
-                                @php
-                                $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
-                                Auth::user()->user_id)->first();
-                                @endphp
-                                @if ($like) <!-- Does a "like" exist in the table for this user, photo? -->
-                                    @if (!($like->islike)) <!-- If so is it a report? -->
-                                    <div class="reported" id="r{{$picture->photo_id}}">
-                                        @csrf
-                                        <i class="fas fa-flag"></i>
-                                        <!-- the show/hide of the spans are toggled by JS -->
-                                        <span class="rep-text">Reported</span><span class="rep-text hide">Report</span>
-                                    </div>
-                                    @else <!-- Else is it currently a like? -->
-                                    <div class="not-reported" id="r{{$picture->photo_id}}">
-                                        @csrf
-                                        <i class="far fa-flag"></i>
-                                        <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
-                                    </div>
-                                    @endif
-                                @else <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                <div class="not-reported" id="r{{$picture->photo_id}}">
-                                    @csrf
-                                    <i class="far fa-flag"></i>
-                                    <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
-                                </div>
-                                @endif
+                            @php
+                            $like = App\Like::where('photo_id' , $picture->photo_id)->where('user_id' ,
+                            Auth::user()->user_id)->first();
+                            @endphp
+                            @if ($like)
+                            <!-- Does a "like" exist in the table for this user, photo? -->
+                            @if (!($like->islike))
+                            <!-- If so is it a report? -->
+                            <div class="reported" id="r{{$picture->photo_id}}">
+                                @csrf
+                                <i class="fas fa-flag"></i>
+                                <!-- the show/hide of the spans are toggled by JS -->
+                                <span class="rep-text">Reported</span><span class="rep-text hide">Report</span>
+                            </div>
+                            @else
+                            <!-- Else is it currently a like? -->
+                            <div class="not-reported" id="r{{$picture->photo_id}}">
+                                @csrf
+                                <i class="far fa-flag"></i>
+                                <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- Or else there isn't a like in the table i.e. not liked or reported -->
+                            <div class="not-reported" id="r{{$picture->photo_id}}">
+                                @csrf
+                                <i class="far fa-flag"></i>
+                                <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
+                            </div>
+                            @endif
                             @endif
                         </li>
                     </ul> <!-- end of icons row -->

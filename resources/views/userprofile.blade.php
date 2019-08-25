@@ -290,7 +290,14 @@ $ownUser=false;
                 <div class="collapse-content">
 
                     <!-- Text -->
-                    <p class="card-text ">{{ str_limit($userPhoto->image_description, 90, '...') }}</p>
+                    <div class="formHide">
+                        <a class="readMore" data-toggle="collapse" href="#collapse-{{ $userPhoto->photo_id }}" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fas fa-angle-down"></i>
+                        </a>
+                    </div>
+                    <p class="card-text collapse text-capitalize" id="collapse-{{ $userPhoto->photo_id }}">
+                        {{ $userPhoto->image_description }}</p>
                     <!-- Button -->
                     <ul>
                         <li>

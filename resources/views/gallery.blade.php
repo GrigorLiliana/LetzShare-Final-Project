@@ -4,49 +4,61 @@
 
 @section('content')
 
-<div class="filters form-group">
-    <div id="form-messages"></div>
-    <form method="POST" class="form-filters">
-        @csrf
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="users">Photographers</label>
-                <select class="form-control users form-control-sm" name="users" id="users">
-                    <option value="default">Select</option>
-                    @foreach ($users as $user)
-                    <option value="{{$user->user_id}}">{{$user->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-md-3">
-                <label for="locations">Location</label>
-                <select class="form-control locations form-control-sm" name="locations" id="locations">
-                    <option value="">Select</option>
-                    @foreach ($locations as $location)
-                    <option value="{{$location->locality_id}}">{{$location->locality_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="categories">Category</label>
-                <select class="form-control categories form-control-sm" name="categories" id="categories">
-                    <option value="">Select</option>
-                    @foreach ($categories as $category)
-                    <option value="{{$category->category_id}}">{{$category->category_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-sm-2">
-                <label for="firstdate">Date From</label>
-                <input type="date" class="form-control form-control-sm" name="firstdate" id="firstdate">
-            </div>
-            <div class="form-group col-sm-2">
-                <label for="lastdate">Date To</label>
-                <input type="date" class="form-control form-control-sm" id="lastdate" name="lastdate">
-            </div>
+<div id="accordion">
+    <div class="filters">
+        <div class="card-header formfilters" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    FILTERS
+                </button>
+            </h5>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <form action="" method="POST" class="form-filters">
+                @csrf
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="photo-user">Photographers</label>
+                        <select class="form-control users form-control-sm" name="users" id="users">
+                            <option value="default">Select</option>
+                            @foreach ($users as $user)
+                            <option value="{{$user->user_id}}">{{$user->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="photo-user">Location</label>
+                        <select class="form-control locations form-control-sm" name="locations" id="locations">
+                            <option value="">Select</option>
+                            @foreach ($locations as $location)
+                            <option value="{{$location->locality_id}}">{{$location->locality_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="photo-user">Category</label>
+                        <select class="form-control categories form-control-sm" name="categories" id="categories">
+                            <option value="">Select</option>
+                            @foreach ($categories as $category)
+                            <option value="{{$category->category_id}}">{{$category->category_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="photo-user">Date From</label>
+                        <input type="date" class="form-control form-control-sm" name="firstdate" id="firstdate">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="photo-user">Date To</label>
+                        <input type="date" class="form-control form-control-sm" id="lastdate" name="lastdate">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="row gallery">
@@ -97,7 +109,13 @@
                 <div class="collapse-content">
 
                     <!-- Text -->
-                    <p class="card-text collapse text-capitalize">
+                    <div class="formHide">
+                        <a class="readMore" data-toggle="collapse" href="#collapse-{{ $photo->photo_id }}" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fas fa-angle-down"></i>
+                        </a>
+                    </div>
+                    <p class="card-text collapse text-capitalize" id="collapse-{{ $photo->photo_id }}">
                         {{ $photo->image_description }}</p>
                     <!-- Button -->
                     <ul>
@@ -129,5 +147,4 @@
 <div class="pagination">
     {{ $photos->links() }}
 </div>
-
 @endsection
