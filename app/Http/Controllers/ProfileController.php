@@ -8,6 +8,9 @@ use App\User;
 use File;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use App\Category;
+use App\Location;
+use Illuminate\Support\Facades\Input;
 
 class ProfileController extends Controller
 {
@@ -26,18 +29,13 @@ class ProfileController extends Controller
             ->select('photos.*', 'photos.created_at as photodate', 'users.*', 'locations.*', 'categories.*')
             ->orderby('photodate', 'desc')
             ->simplePaginate(12);
+            $categories = Category::all();
+            $locations = Location::all();
 
 
-        return view('userprofile', ['userPhotos' => $userPhotos]);
+        return view('userprofile', ['userPhotos' => $userPhotos, 'categories' => $categories, 'locations' => $locations]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
-    { }
 
     /**
      * Store a newly created resource in storage.
@@ -60,6 +58,7 @@ class ProfileController extends Controller
         }
     }
 
+/*edit user description*/
     public function description(Request $request, $id)
     {
         $validatedData = \Validator::make($request->all(), [
@@ -74,6 +73,8 @@ class ProfileController extends Controller
             return response()->json(['success' => 'successiful entered', 'description' => $user->user_description]);
         }
     }
+
+    /*change user photo*/
     public function changePhoto(Request $request, $id)
     {
         $validatedData = \Validator::make($request->all(),[
@@ -86,9 +87,10 @@ class ProfileController extends Controller
 
             $string='';
             foreach ($errors as $value){
-               $string .=  $value .' ';
+            $string .=  $value .' ';
             }
-            return redirect('userprofile/' . $id)->with('error', "$string");
+            return redirect('userprofile/' . $id)->with(['status' => $string,
+            'class' => 'alert alert-danger alert-dismissible fade show']);
 
         }else{
 
@@ -100,9 +102,14 @@ class ProfileController extends Controller
             request()->image->move(public_path("uploads/users"), $imageName);
             $user->user_photo = $imageName;
             $user->save();
-            return redirect('userprofile/' . $id);
+            return redirect('userprofile/' . $id)->with([
+                'status' => "SUCCESS: profile photo changed successfully.",
+                'class' => 'alert alert-success alert-dismissible fade show',
+            ]);;
         }
     }
+
+    /*edit user location*/
     public function location(Request $request, $id)
     {
         $validatedData = \Validator::make($request->all(), [
@@ -117,38 +124,39 @@ class ProfileController extends Controller
             return response()->json(['success' => 'successiful entered', 'location' => $user->user_location]);
         }
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+/*edit photo details*/
+    public function photoDetails(Request $request, $id)
     {
-        //
-    }
+        $userId = Auth::user()->user_id;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $validatedData = \Validator::make($request->all(), [
+            'title'=> 'required|min:3|max:30|',
+            'image_description' => 'required|min:5|max:250|',
+            'locality' => 'required',
+            'category' =>'required'
+        ]);
+        if ($validatedData->fails()) {
+            $errors = $validatedData->errors()->all();
+
+            $string='';
+            foreach ($errors as $value){
+            $string .=  $value .' ';
+            }
+            return redirect('userprofile/' . $userId )->with(['status' => "$string",
+            'class' => 'alert alert-danger alert-dismissible fade show']);
+        } else {
+            $photo = Photo::find($id);
+            $photo->image_title = $request->title;
+            $photo->image_description = $request->image_description;
+            $photo->category_id = Input::get('category');
+            $photo->locality_id = Input::get('locality');
+            $photo->save();
+            return redirect('userprofile/' . $userId )->with([
+                'status' => "SUCCESS: $request->title edited successfully.",
+                'class' => 'alert alert-success alert-dismissible fade show',
+            ]);
+        }
     }
 
     /**
@@ -157,8 +165,54 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     /*delete user photo */
     public function destroy($id)
     {
-        //
+        $userId = Auth::user()->user_id;
+        $photo = Photo::find($id);
+
+            if(File::exists($photo->image_URL)){
+                File::delete($photo->image_URL);
+            }
+
+            Photo::destroy($id);
+
+            return redirect('userprofile/' . $userId )->with([
+                'status' => 'SUCCESS: Photo deleted successfully.',
+                'class' => 'alert alert-success alert-dismissible fade show',
+            ]);
     }
+
+/*Delete user account by own user*/
+public function deleteAccount($id)
+    {
+        $user = User::find($id);
+        $userFolder = 'uploads/' . $id;
+        $userPhoto = $user->user_photo;
+        $userPhotoDefault = strstr($user->user_photo, 'default_user');
+
+        $userDeleted = DB::table("users")->where("user_id", $id)->delete();
+
+
+        if($userDeleted) {
+            if(File::exists($userFolder))
+                File::deleteDirectory($userFolder);
+
+            if(File::exists($userPhoto) && $userPhotoDefault == false)
+                File::delete($userPhoto);
+        } else {
+            return redirect('/userprofile/'.$id)->with([
+                'status' => 'ERROR: User & related files.',
+                'class' => 'alert alert-danger alert-dismissible fade show',
+            ]);
+        }
+
+        return redirect('home')->with([
+            'status' => 'SUCCESS: User & related files deleted successfully.',
+            'class' => 'alert alert-success alert-dismissible fade show',
+        ]);
+    }
+/*end of delete user account by own user*/
+
 }

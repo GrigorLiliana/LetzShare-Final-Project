@@ -13,7 +13,9 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/letzshare.js') }}" defer></script>
     <script src="{{ asset('js/jquery.fancybox.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/ff9603d652.js" ></script>
+    <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet" />
@@ -28,10 +30,9 @@
         <div class="shadow-div hide"></div>
         @include('layouts.nav')
 
-        <main
-        @if (\Route::current()->getName() != 'home')
+        <main @if (\Route::current()->getName() != 'home')
             class="container"
-        @endif >
+            @endif >
             <!-- div to display errors -->
             <div class="statusMsg">
                 @if ( $message = Session::get('status') )
@@ -46,8 +47,8 @@
 
             @yield('content')
         </main>
-    @include('layouts.footer')
-
+        @include('layouts.footer')
+    </div>
 </body>
 
 </html>

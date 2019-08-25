@@ -39,40 +39,7 @@ $ownUser=false;
         <span class="successMsg"></span>
     </div>
 </div>
-@if($ownUser)
-<!-- Modal to edit user photo -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="foto">Select a photo</label>
-                        <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="foto" required>
-                            <label class="custom-file-label" for="foto"></label>
-                        </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save photo</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end of the model to edit photo -->
-@endif
 
 <!-- Edit Name -->
 <form method="post" class="form-flex-profile edit-name">
@@ -93,13 +60,14 @@ $ownUser=false;
         <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
         <input class="btn btn-danger mb-2 profile-field cancel-edit" type="button" value="Cancel" name="cancel">
     </div>
+
     @endif
 </form>
 <!--End edit name-->
 
 <hr>
 <!-- User details -->
-<div class="card promoting-card card-user">
+<section id="user_details" class="card promoting-card card-user">
     <!-- Avatar -->
     <div class="profile-flex">
         <div class="edit-photo ">
@@ -229,12 +197,42 @@ $ownUser=false;
 
     </div>
     <!-- end of the form to send message -->
+
+    @if($ownUser)
+    <!--delete user account by own user-->
+    <button type="submit" class="text-danger btn delete-user-account" data-toggle="modal" data-target="#deleteAccountModal">Delete account</button>
+
+<!-- Modal to confirm delete account -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteAccountModalLabel">Attention, this action is irreversible!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Thank you for the time you were with us,<br>
+      We hope you come back soon...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Go back</button>
+         <form action="/delete/user-account/{{Auth::user()->user_id}}"  method="post">
+    @csrf
+        <button type="submit" class="btn btn-danger">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+    @endif
 </div>
+</section>
 <!-- End of the User details -->
 
 <!-- User Portfolio -->
-<section id=portfolio>
+<section id="portfolio">
 <h2>Portfolio
     @if($ownUser)|
     <a href="/uploadphoto" class="add">
@@ -246,13 +244,75 @@ $ownUser=false;
 
 <!-- check if the user as photos -->
 @if(count($userPhotos)>1)
+
 <!--create a card for each photo if the user has photo -->
 <div class="row gallery">
     <div class="card-columns">
 
         @foreach ($userPhotos as $userPhoto)
         <article class="card promoting-card">
+        @if($ownUser)
+        @if($ownUser)
+<!-- Modal to edit user photo -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="foto">Select a photo</label>
+                        <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="foto" required>
+                            <label class="custom-file-label" for="foto"></label>
+                        </div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save photo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of the model to edit photo -->
+@endif
+<!-- Modal to confirm delete photo -->
+<div class="modal fade" id="deletePhoto{{ $userPhoto->photo_id }}" tabindex="-1" role="dialog" aria-labelledby="deletePhotoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deletePhotoLabel">Attention, this action is irreversible!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">Are you sure you want to delete this photo?
+      <img class="card-img-top img-thumbnail" src="{{ URL::asset($userPhoto->image_URL) }}"
+                        alt="{{ $userPhoto->image_title }}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Desist</button>
+        <form action="/delete/user-photo/{{ $userPhoto->photo_id }}" class="delete-user-photo" method="post">
+        @csrf
+        <button type="submit" class="btn btn-danger">Delete photo</button>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end model to confirm delete photo-->
+        <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST" class="edit-photo-details-{{ $userPhoto->photo_id }}">
+                    @csrf @endif
             <!-- Card content -->
             <div class="card-body d-flex flex-row">
 
@@ -260,11 +320,19 @@ $ownUser=false;
                 <div>
 
                     <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2">{{ $userPhoto->image_title }}
+                    <h6 class="card-title font-weight-bold mb-2 {{ $userPhoto->photo_id }}">{{ $userPhoto->image_title }}
                         @if($ownUser)
-                        <a href="#"><i class="far fa-edit text-success"></i></a>
-                        <a href="#"><i class="far fa-trash-alt text-danger text-right"></i></a>
-                        @endif</h6>
+                        <!--edit photo button-->
+                        <a href="#" class="edit-photo-button" id="edit-{{ $userPhoto->photo_id }}"><i class="far fa-edit  text-success" ></i></a>
+                        <!--delete photo button-->
+                        <a href="#" data-toggle="modal" data-target="#deletePhoto{{ $userPhoto->photo_id }}"><i class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>
+                    @endif</h6>@if($ownUser)<!-- Button trigger modal -->
+
+
+                    <input type="text" class="edit-photo-{{ $userPhoto->photo_id }} hide form-control" name="title" placeholder="Enter a new title" value="{{ $userPhoto->image_title }}">
+
+                        @endif
+
                     <!-- Subtitle -->
                     <p class="card-text"><small><i class="far fa-calendar-alt"></i>
                             {{ date('d-m-Y', strtotime($userPhoto->photodate)) }}
@@ -298,6 +366,9 @@ $ownUser=false;
                     </div>
                     <p class="card-text collapse text-capitalize" id="collapse-{{ $userPhoto->photo_id }}">
                         {{ $userPhoto->image_description }}</p>
+                        @if($ownUser)
+                        <textarea name="image_description" class="form-control edit-photo-{{ $userPhoto->photo_id }} hide">{{ $userPhoto->image_description }}</textarea>
+                        @endif
                     <!-- Button -->
                     <ul>
                         <li>
@@ -329,19 +400,46 @@ $ownUser=false;
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span> {{ $userPhoto->locality_name }}</span>
+                            <span class="old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->locality_name }}</span>
+                            @if($ownUser)
+                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="locality" required>
+                            <option value="" disabled>Locality</option>
+                            @foreach ($locations as $locality)
+                                <option value="{{$locality->locality_id}}"
+                                @if(($userPhoto->locality_id) == ($locality->locality_id))
+                                    selected
+                                    @endif
+                                    >{{$locality->locality_name}}</option>
+                            @endforeach
+                        </select>
+                        @endif
                         </li>
                         <li>
                             <i class="{{$userPhoto->category_icon}}">
                             </i>
-                            <span class="text-capitalize"> {{ $userPhoto->category_name }}</span>
+                            <span class="text-capitalize old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->category_name }}</span>
+                            @if($ownUser)
+                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="category" required>
+                            <option value="" disabled>Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->category_id}}"
+                                @if(($userPhoto->category_id) == ($category->category_id))
+                                    selected
+                                    @endif>{{ ucfirst($category->category_name) }}</option>
+                            @endforeach
+                        </select>
+                        @endif
                         </li>
                     </ul>
-
+                    @if($ownUser)
+                    <div class="buttons-photo-{{ $userPhoto->photo_id }} hide">
+                    <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
+                    <input class="btn btn-danger mb-2 profile-field cancel-edit-photo" id="cancel_{{ $userPhoto->photo_id}}" type="button" value="Cancel"
+                    name="cancel">@endif</div>
                 </div>
 
             </div>
-
+            @if($ownUser)</form>@endif
 </article>
         @endforeach
         <!-- END Card -->
@@ -363,4 +461,5 @@ $ownUser=false;
     {{ $userPhotos->links() }}
 </div>
 </section>
+
 @endsection
