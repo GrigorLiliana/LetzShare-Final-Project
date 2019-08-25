@@ -85,22 +85,63 @@
                     <p class="card-text"><small><i class="far fa-calendar-alt"></i>
                             {{date('d-m-Y', strtotime($photo->created_at)) }}
                         </small></p>
-
                 </div>
-
             </div>
 
             <!-- Card image -->
             <div class="view overlay">
-                <a href="{{ $photo->image_URL }}" data-fancybox="gallery" data-caption="<p>{{ $photo->image_description }}</p><hr><ul><li>
-                            <i class='fas fa-map-marker-alt'></i>
-                            <span>{{ $photo->locality_name }}</span>
-                        </li><li><i class='fas fa-heart'></i>
-                            <span>{{ $photo->likes_sum }}</span></li><li><i class='{{ $photo->category_icon }}'></i>
-                            <span class='text-capitalize'>{{ $photo->category_name }}</span></li></ul>">
+                <a href="{{ $photo->image_URL }}" data-toggle="modal" data-target="#modal-{{ $photo->photo_id }}">
                     <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}" alt="{{ $photo->image_title }}">
-                    <div class="mask rgba-white-slight"></div>
                 </a>
+                <!-- Modal -->
+                <div class="modal fade bd-example-modal-lg" id="modal-{{ $photo->photo_id }}" tabindex="-1"
+                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <a href="/userprofile/{{$photo->user_id}}">
+                                    <img src="{{URL::asset($photo->user_photo)}}" class="rounded-circle mr-3"
+                                        height="50" width="50" alt="avatar">
+                                </a>
+                                <h5 class="modal-title" id="exampleModalLabel">{{ $photo->image_title }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}"
+                                    alt="{{ $photo->image_title }}">
+                            </div>
+
+                            <div class="modal-footer">
+                                <div class="col modal-description">
+                                    {{ $photo->image_description }}
+                                </div>
+                                <div class="col modal-icons">
+                                    <ul>
+                                        <li>
+                                            <i class="fas fa-heart"></i>
+                                            <span>{{ $photo->likes_sum }}</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>{{ $photo->locality_name }}</span>
+                                        </li>
+                                        <li>
+                                            <i class="{{ $photo->category_icon }}"></i>
+                                            <span class="text-capitalize">{{ $photo->category_name }}</span>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-flag"></i>
+                                            <span class="rep-text">Report</span>
+                                            <span class="rep-text hide">Reported</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Card content -->
@@ -117,26 +158,96 @@
                     </div>
                     <p class="card-text collapse text-capitalize" id="collapse-{{ $photo->photo_id }}">
                         {{ $photo->image_description }}</p>
-                    <!-- Button -->
+                    <!-- Like, Location, Categories, Reports icons -->
                     <ul>
                         <li>
-                            <i class="fas fa-heart"></i>
-                            <span>{{ $photo->likes_sum }}</span>
+                            {{-- code to implement like /unlike functionality in page --}}
+                            @if (Auth::check())
+                            @php
+                            $like = App\Like::where('photo_id', $photo->photo_id)->where('user_id',
+                            Auth::user()->user_id)->first();
+                            @endphp
+                            @if ($like)
+                            {{-- Does a "like" exist in the table for this user, photo? --}}
+                            @if ($like->islike)
+                            {{-- If so is it a like? --}}
+                            <div class="liked" id="{{$photo->photo_id}}">
+                                @csrf
+                                <i class="fas fa-heart"></i>
+                                <span class="likes-number">{{ $photo->likes_sum }}</span>
+                            </div>
+                            @else
+                            <!-- Else is it currently a report? -->
+                            <div class="not-liked" id="{{$photo->photo_id}}">
+                                @csrf
+                                <i class="far fa-heart"></i>
+                                <span class="likes-number">{{ $photo->likes_sum }}</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- Or else there isn't a like in the table i.e. not liked or reported -->
+                            <div class="not-liked" id="{{$photo->photo_id}}">
+                                @csrf
+                                <i class="far fa-heart"></i>
+                                <span class="likes-number">{{ $photo->likes_sum }}</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
+                            <div class="not-logged">
+                                <i class="far fa-heart"></i>
+                                <span>{{ $photo->likes_sum }}</span>
+                            </div>
+                            @endif
                         </li>
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
                             <span>{{ $photo->locality_name }}</span>
                         </li>
                         <li>
-                            <i class="{{ $photo->category_icon }}"></i>
+                            <i class="{{$photo->category_icon}}">
+                            </i>
                             <span class="text-capitalize">{{ $photo->category_name }}</span>
                         </li>
+                        <li>
+                            <!-- code to implement report functionality in page -->
+                            @if (Auth::check())
+                            @php
+                            $like = App\Like::where('photo_id' , $photo->photo_id)->where('user_id' ,
+                            Auth::user()->user_id)->first();
+                            @endphp
+                            @if ($like)
+                            <!-- Does a "like" exist in the table for this user, photo? -->
+                            @if (!($like->islike))
+                            <!-- If so is it a report? -->
+                            <div class="reported" id="r{{$photo->photo_id}}">
+                                @csrf
+                                <i class="fas fa-flag"></i>
+                                <!-- the show/hide of the spans are toggled by JS -->
+                                <span class="rep-text">Reported</span><span class="rep-text hide">Report</span>
+                            </div>
+                            @else
+                            <!-- Else is it currently a like? -->
+                            <div class="not-reported" id="r{{$photo->photo_id}}">
+                                @csrf
+                                <i class="far fa-flag"></i>
+                                <span class="rep-text">Report</span>
+                                <span class="rep-text hide">Reported</span>
+                            </div>
+                            @endif
+                            @else
+                            <!-- Or else there isn't a like in the table i.e. not liked or reported -->
+                            <div class="not-reported" id="r{{$photo->photo_id}}">
+                                @csrf
+                                <i class="far fa-flag"></i>
+                                <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
+                            </div>
+                            @endif
+                            @endif
+                        </li>
                     </ul>
-
                 </div>
-
             </div>
-
         </div>
         @endforeach
         <!-- END Card -->

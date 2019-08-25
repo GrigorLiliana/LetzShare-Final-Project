@@ -1,17 +1,28 @@
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+
+    .rounded-circle {
+        margin: 0 10%;
+    }
+</style>
 @extends('layouts.app')
 
 @section('title', 'LetzShare | Home page')
 
 @section('content')
-
-<section id="home_page">
-    <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250></h1>
-</section>
-<div class="container container-home">
-<section id="rated_photos">
+<div class="container">
+    <h1>LetzShare - The beauty of Luxembourg</h1>
+    <br>
+    <br>
+</div>
+<div class="container">
     <h3>Top Rated Photos</h3>
 
-        <div class="card-deck">
+    <div class="card-deck">
         @foreach ($topPics as $picture)
         @php
         $path = URL::asset($picture->image_URL);
@@ -40,7 +51,7 @@
             <!-- Card image -->
             <div class="view overlay">
                 <a href="{{ $picture->image_URL }}">
-                    <img class="card-img-top home rounded-0" src="{{ $picture->image_URL }}"
+                    <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
                         alt="{{ $picture->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
@@ -152,13 +163,8 @@
 
         </div>
         @endforeach
-    </div>
-
-
-
-
-    </section> <!-- end card deck -->
-<section id="top_photographers">
+    </div> <!-- end card deck -->
+    <br>
 
     <h3>Top Photographers</h3>
 
@@ -169,13 +175,13 @@
         $user = App\User::where('user_id', $userId)->first();
         $path = URL::asset($user->user_photo);
         @endphp
-        <div class="card photographers">
+        <div class="card">
             <div class="card-body d-flex flex-row">
                 <h6 class="card-title font-weight-bold mb-2 text-capitalize">{{ $user->name }}</h6>
             </div>
             <div class="view overlay">
                 <a href="/userprofile/{{$user->user_id}}">
-                    <img src="{{$path}}" class="rounded-circle" alt="{{ $user->name }}">
+                    <img src="{{$path}}" class="rounded-circle mr-3" width="200" alt="{{ $user->name }}">
                 </a>
             </div>
             <div class="card-body">
@@ -186,8 +192,8 @@
         </div>
         @endforeach
     </div>
-</section>
-<section id="latest_photos">
+    <br>
+
     <h3>Latest Photos</h3>
 
     <div class="card-deck">
@@ -221,7 +227,7 @@
             <!-- Card image -->
             <div class="view overlay">
                 <a href="{{ $picture->image_URL }}">
-                    <img class="card-img-top home rounded-0" src="{{ $picture->image_URL }}"
+                    <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
                         alt="{{ $picture->image_title }}">
                     <div class="mask rgba-white-slight"></div>
                 </a>
@@ -324,5 +330,8 @@
         </div> <!-- end of card div -->
         @endforeach
     </div> <!-- end card deck -->
-</section></div>
+    <br>
+
+</div> <!-- end container -->
+
 @endsection

@@ -22,7 +22,7 @@ ul,
 li {
     display: inline-block;
     margin: 0;
-    padding: 0;
+    padding: 0 2px;
     list-style-type: none;
 }
 .label-password {
@@ -299,13 +299,18 @@ section {
     margin-top: 20px;
 }
 
+.card-body {
+    flex: 1 1 auto;
+    padding: 0.75rem !important;
+}
+
 #headingOne h5 {
     text-align: center;
 }
 
 .formHide {
     text-align: center;
-    margin: -25px 0 20px;
+    margin: -18px 0 20px;
 }
 
 .readMore {
@@ -332,6 +337,23 @@ section {
     /* padding: 10px;*/
 }
 
+.modal-body {
+    padding: 0 !important;
+}
+
+.modal-description {
+    padding-bottom: 3px;
+    border-bottom: 1px solid lightgray;
+}
+
+.modal-icons {
+    padding-top: 3px;
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: column;
+}
 /* Footer */
 
 .footer {
@@ -360,6 +382,17 @@ section {
 }
 
 /* Fontawesome */
+.fa-heart {
+    color: #ec3f41;
+}
+
+.fa-map-marker-alt {
+    color: #3f7bec;
+}
+
+.fa-monument {
+    color: #331f07;
+}
 /* About Us */
 .fa-github-square {
     color: black;
