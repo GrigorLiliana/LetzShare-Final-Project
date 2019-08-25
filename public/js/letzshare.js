@@ -440,7 +440,8 @@ $(function() {
     /*Edit photo details - user profile*/
 $("a.edit-photo-button").on("click", function(e){
     e.preventDefault();
-    let photoId = this.id;
+    let Id = this.id;
+    let photoId= Id.substring(5);
     $("h6."+photoId).addClass("hide");
     $(".buttons-photo-"+photoId).removeClass("hide");
     $(".edit-photo-"+photoId).removeClass("hide");

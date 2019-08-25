@@ -10,6 +10,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Category;
 use App\Location;
+use Illuminate\Support\Facades\Input;
 
 class ProfileController extends Controller
 {
@@ -92,7 +93,8 @@ class ProfileController extends Controller
             foreach ($errors as $value){
             $string .=  $value .' ';
             }
-            return redirect('userprofile/' . $id)->with('error', "$string");
+            return redirect('userprofile/' . $id)->with(['status' => $string,
+            'class' => 'alert alert-danger alert-dismissible fade show']);
 
         }else{
 
@@ -104,7 +106,10 @@ class ProfileController extends Controller
             request()->image->move(public_path("uploads/users"), $imageName);
             $user->user_photo = $imageName;
             $user->save();
-            return redirect('userprofile/' . $id);
+            return redirect('userprofile/' . $id)->with([
+                'status' => "SUCCESS: profile photo changed successfully.",
+                'class' => 'alert alert-success alert-dismissible fade show',
+            ]);;
         }
     }
     public function location(Request $request, $id)
@@ -122,13 +127,14 @@ class ProfileController extends Controller
         }
     }
 
+ /*edit photo details*/
     public function photoDetails(Request $request, $id)
     {
         $userId = Auth::user()->user_id;
 
         $validatedData = \Validator::make($request->all(), [
             'title'=> 'required|min:3|max:30|',
-            'description' => 'required|min:5|max:250|',
+            'image_description' => 'required|min:5|max:250|',
             'locality' => 'required',
             'category' =>'required'
         ]);
@@ -139,15 +145,19 @@ class ProfileController extends Controller
             foreach ($errors as $value){
                $string .=  $value .' ';
             }
-            return redirect('userprofile/' . $userId )->with('error', "$string");
+            return redirect('userprofile/' . $userId )->with(['status' => "$string",
+            'class' => 'alert alert-danger alert-dismissible fade show']);
         } else {
             $photo = Photo::find($id);
             $photo->image_title = $request->title;
-            $photo->image_description = $request->description;
+            $photo->image_description = $request->image_description;
             $photo->category_id = Input::get('category');
             $photo->locality_id = Input::get('locality');
             $photo->save();
-            return redirect('userprofile/' . $userId );
+            return redirect('userprofile/' . $userId )->with([
+                'status' => "SUCCESS: $request->title edited successfully.",
+                'class' => 'alert alert-success alert-dismissible fade show',
+            ]);
         }
     }
     /**

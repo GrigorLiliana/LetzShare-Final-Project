@@ -264,7 +264,7 @@ $ownUser=false;
                     <!-- Title -->
                     <h6 class="card-title font-weight-bold mb-2 {{ $userPhoto->photo_id }}">{{ $userPhoto->image_title }}
                         @if($ownUser)
-                        <a href="#" class="edit-photo-button" id="{{ $userPhoto->photo_id }}"><i class="far fa-edit  text-success" ></i></a>
+                        <a href="#" class="edit-photo-button" id="edit-{{ $userPhoto->photo_id }}"><i class="far fa-edit  text-success" ></i></a>
                         <a href="#"><i class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>
                     @endif</h6>@if($ownUser)
                     <input type="text" class="edit-photo-{{ $userPhoto->photo_id }} hide form-control" name="title" placeholder="Enter a new title" value="{{ $userPhoto->image_title }}">
@@ -305,7 +305,7 @@ $ownUser=false;
                     <p class="card-text collapse text-capitalize" id="collapse-{{ $userPhoto->photo_id }}">
                         {{ $userPhoto->image_description }}</p>
                         @if($ownUser)
-                        <textarea name="image_description" class="form-control edit-photo-{{ $userPhoto->photo_id }} hide" placeholder="Enter a new description">{{ $userPhoto->image_description }}</textarea>
+                        <textarea name="image_description" class="form-control edit-photo-{{ $userPhoto->photo_id }} hide">{{ $userPhoto->image_description }}</textarea>
                         @endif
                     <!-- Button -->
                     <ul>
@@ -341,9 +341,13 @@ $ownUser=false;
                             <span class="old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->locality_name }}</span>
                             @if($ownUser)
                             <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="locality" required>
-                            <option disabled>Locality</option>
+                            <option value="" disabled>Locality</option>
                             @foreach ($locations as $locality)
-                                <option value="{{$locality->locality_id}}">{{$locality->locality_name}}</option>
+                                <option value="{{$locality->locality_id}}"
+                                @if(($userPhoto->locality_id) == ($locality->locality_id))
+                                    selected
+                                    @endif
+                                    >{{$locality->locality_name}}</option>
                             @endforeach
                         </select>
                         @endif
@@ -354,9 +358,12 @@ $ownUser=false;
                             <span class="text-capitalize old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->category_name }}</span>
                             @if($ownUser)
                             <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="category" required>
-                            <option disabled>Category</option>
+                            <option value="" disabled>Category</option>
                             @foreach ($categories as $category)
-                                <option value="{{$category->category_id}}">{{ ucfirst($category->category_name) }}</option>
+                                <option value="{{$category->category_id}}"
+                                @if(($userPhoto->category_id) == ($category->category_id))
+                                    selected
+                                    @endif>{{ ucfirst($category->category_name) }}</option>
                             @endforeach
                         </select>
                         @endif
@@ -392,4 +399,5 @@ $ownUser=false;
     {{ $userPhotos->links() }}
 </div>
 </section>
+
 @endsection
