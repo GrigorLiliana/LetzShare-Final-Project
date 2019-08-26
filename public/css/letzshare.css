@@ -271,8 +271,8 @@ li {
 .fa-angle-down {
     font-size: 20px;
 }
-/* modal photo Form Styles */
 
+/* modal photo Form Styles */
 .modalBodyGallery {
     padding: 0 !important;
 }
@@ -357,64 +357,57 @@ li {
     padding: 5rem 0;
 }
 
-.sectionFluid {
+.intro {
+    padding: 2rem 1rem;
+    background-color: rgba(95, 93, 93, 0.404);
+}
+
+.sectionFluidTop {
     margin-top: 0;
 }
 
 .container-fluid:nth-child(2) {
     background-image: url(../images/fj1axt-1.jpg);
     background-size: cover;
-    transform: skewY(-2deg);
+    /* transform: skewY(-2deg); */
     padding: 15rem 0;
 }
-
-.container-fluid:nth-child(2) .container {
+/* .container-fluid:nth-child(2) .sectionFluidTop {
     transform: skewY(2deg);
-}
-
+} */
 .container-fluid:nth-child(2) h1 {
     color: #fff;
     text-align: center;
 }
-.intro {
-    padding: 2rem 1rem;
-    background-color: rgba(95, 93, 93, 0.404);
-}
 
 .container-fluid:nth-child(3) {
     background-color: tomato;
-    transform: skewY(-2deg);
+    /* transform: skewY(-2deg); */
 }
-
-.container-fluid:nth-child(3) .container {
+/* .container-fluid:nth-child(3) .sectionFluidTop {
     transform: skewY(2deg);
-}
-
+} */
 .container-fluid:nth-child(3) h1 {
     color: #fff;
 }
 
-.container-fluid:nth-child(4) {
-    background-color: #fff;
+/* .container-fluid:nth-child(4) {
     transform: skewY(-2deg);
 }
-
-.container-fluid:nth-child(4) .container {
+.container-fluid:nth-child(4) .sectionFluidTop {
     transform: skewY(2deg);
-}
-
+} */
 .container-fluid:nth-child(4) h1 {
     color: #0099ff;
 }
 
 .container-fluid:nth-child(5) {
-    background-color: #0099ff;
-    transform: skewY(-2deg);
+    background-color: #0099FF;
+    /* transform: skewY(-2deg); */
 }
-.container-fluid:nth-child(5) .container {
-    /* background-color: teal; */
+/* .container-fluid:nth-child(5) .sectionFluidTop {
     transform: skewY(2deg);
-}
+} */
 .container-fluid:nth-child(5) h1 {
     color: #fff;
 }
