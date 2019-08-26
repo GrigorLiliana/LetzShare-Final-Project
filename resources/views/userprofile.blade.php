@@ -39,7 +39,41 @@ $ownUser=false;
         <span class="successMsg"></span>
     </div>
 </div>
+@if($ownUser)
 
+<!-- Modal to edit user photo -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Select a new photo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="foto">Select a photo</label>
+                        <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="foto" required>
+                            <label class="custom-file-label" for="foto"></label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save photo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of the model to edit photo -->
+@endif
 
 <!-- Edit Name -->
 <form method="post" class="form-flex-profile edit-name">
@@ -173,8 +207,7 @@ $ownUser=false;
                         <div class="form-group">
                             <label for="fullname">Full name</label>
                             <input type="text" class="form-control" id="fullname" name="fullname" @guest
-                                placeholder="Enter your name" @else value="{{Auth::user()->name}}" @endguest
-                                >
+                                placeholder="Enter your name" @else value="{{Auth::user()->name}}" @endguest>
                         </div>
                         <div class="form-group">
                             <label for="email">E-Mail address</label>
@@ -200,266 +233,253 @@ $ownUser=false;
 
     @if($ownUser)
     <!--delete user account by own user-->
-    <button type="submit" class="text-danger btn delete-user-account" data-toggle="modal" data-target="#deleteAccountModal">Delete account</button>
+    <button type="submit" class="text-danger btn delete-user-account" data-toggle="modal"
+        data-target="#deleteAccountModal">Delete account</button>
 
-<!-- Modal to confirm delete account -->
-<div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-danger" id="deleteAccountModalLabel">Attention, this action is irreversible!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      Thank you for the time you were with us,<br>
-      We hope you come back soon...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Go back</button>
-         <form action="/delete/user-account/{{Auth::user()->user_id}}"  method="post">
-    @csrf
-        <button type="submit" class="btn btn-danger">Confirm</button>
-        </form>
-      </div>
+    <!-- Modal to confirm delete account -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog"
+        aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="deleteAccountModalLabel">Attention, this action is
+                        irreversible!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Thank you for the time you were with us,<br>
+                    We hope you come back soon...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Go back</button>
+                    <form action="/delete/user-account/{{Auth::user()->user_id}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
     @endif
-</div>
+    </div>
 </section>
 <!-- End of the User details -->
 
 <!-- User Portfolio -->
 <section id="portfolio">
-<h2>Portfolio
-    @if($ownUser)|
-    <a href="/uploadphoto" class="add">
-        Upload new photo <i class="fas fa-plus-circle"></i>
-    </a>
-    @endif
-</h2>
-<hr>
+    <h2>Portfolio
+        @if($ownUser)|
+        <a href="/uploadphoto" class="add">
+            Upload new photo <i class="fas fa-plus-circle"></i>
+        </a>
+        @endif
+    </h2>
+    <hr>
 
-<!-- check if the user as photos -->
-@if(count($userPhotos)>1)
+    <!-- check if the user as photos -->
+    @if(count($userPhotos)>1)
 
-<!--create a card for each photo if the user has photo -->
-<div class="row gallery">
-    <div class="card-columns">
+    <!--create a card for each photo if the user has photo -->
+    <div class="row gallery">
+        <div class="card-columns">
 
-        @foreach ($userPhotos as $userPhoto)
-        <article class="card promoting-card">
-        @if($ownUser)
-        @if($ownUser)
-<!-- Modal to edit user photo -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/userprofile/photo/{{Auth::user()->user_id}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="foto">Select a photo</label>
-                        <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="foto" required>
-                            <label class="custom-file-label" for="foto"></label>
+            @foreach ($userPhotos as $userPhoto)
+            <article class="card promoting-card">
+                @if($ownUser)
+
+                <!-- Modal to confirm delete photo -->
+                <div class="modal fade" id="deletePhoto{{ $userPhoto->photo_id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="deletePhotoLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-danger" id="deletePhotoLabel">Attention, this action is
+                                    irreversible!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Are you sure you want to delete this photo?
+                                <img class="card-img-top img-thumbnail" src="{{ URL::asset($userPhoto->image_URL) }}"
+                                    alt="{{ $userPhoto->image_title }}">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Desist</button>
+                                <form action="/delete/user-photo/{{ $userPhoto->photo_id }}" class="delete-user-photo"
+                                    method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Delete photo</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end model to confirm delete photo-->
+                <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST"
+                    class="edit-photo-details-{{ $userPhoto->photo_id }}">
+                    @csrf @endif
+                    <!-- Card content -->
+                    <div class="card-body d-flex flex-row">
+
+                        <!-- Content -->
+                        <div>
+
+                            <!-- Title -->
+                            <h6 class="card-title font-weight-bold mb-2 {{ $userPhoto->photo_id }}">
+                                {{ $userPhoto->image_title }}
+                                @if($ownUser)
+                                <!--edit photo button-->
+                                <a href="#" class="edit-photo-button" id="edit-{{ $userPhoto->photo_id }}"><i
+                                        class="far fa-edit  text-success"></i></a>
+                                <!--delete photo button-->
+                                <a href="#" data-toggle="modal" data-target="#deletePhoto{{ $userPhoto->photo_id }}"><i
+                                        class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>
+                                @endif</h6>@if($ownUser)
+                            <!-- Button trigger modal -->
+
+
+                            <input type="text" class="edit-photo-{{ $userPhoto->photo_id }} hide form-control"
+                                name="title" placeholder="Enter a new title" value="{{ $userPhoto->image_title }}">
+
+                            @endif
+
+                            <!-- Subtitle -->
+                            <p class="card-text"><small><i class="far fa-calendar-alt"></i>
+                                    {{ date('d-m-Y', strtotime($userPhoto->photodate)) }}
+
+                                </small></p>
+
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save photo</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end of the model to edit photo -->
-@endif
-<!-- Modal to confirm delete photo -->
-<div class="modal fade" id="deletePhoto{{ $userPhoto->photo_id }}" tabindex="-1" role="dialog" aria-labelledby="deletePhotoLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-danger" id="deletePhotoLabel">Attention, this action is irreversible!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">Are you sure you want to delete this photo?
-      <img class="card-img-top img-thumbnail" src="{{ URL::asset($userPhoto->image_URL) }}"
-                        alt="{{ $userPhoto->image_title }}">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Desist</button>
-        <form action="/delete/user-photo/{{ $userPhoto->photo_id }}" class="delete-user-photo" method="post">
-        @csrf
-        <button type="submit" class="btn btn-danger">Delete photo</button>
-    </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!--end model to confirm delete photo-->
-        <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST" class="edit-photo-details-{{ $userPhoto->photo_id }}">
-                    @csrf @endif
-            <!-- Card content -->
-            <div class="card-body d-flex flex-row">
 
-                <!-- Content -->
-                <div>
-
-                    <!-- Title -->
-                    <h6 class="card-title font-weight-bold mb-2 {{ $userPhoto->photo_id }}">{{ $userPhoto->image_title }}
-                        @if($ownUser)
-                        <!--edit photo button-->
-                        <a href="#" class="edit-photo-button" id="edit-{{ $userPhoto->photo_id }}"><i class="far fa-edit  text-success" ></i></a>
-                        <!--delete photo button-->
-                        <a href="#" data-toggle="modal" data-target="#deletePhoto{{ $userPhoto->photo_id }}"><i class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>
-                    @endif</h6>@if($ownUser)<!-- Button trigger modal -->
-
-
-                    <input type="text" class="edit-photo-{{ $userPhoto->photo_id }} hide form-control" name="title" placeholder="Enter a new title" value="{{ $userPhoto->image_title }}">
-
-                        @endif
-
-                    <!-- Subtitle -->
-                    <p class="card-text"><small><i class="far fa-calendar-alt"></i>
-                            {{ date('d-m-Y', strtotime($userPhoto->photodate)) }}
-
-                        </small></p>
-
-                </div>
-
-            </div>
-
-            <!-- Card image -->
-            <div class="view overlay">
-                <a href="{{ URL::asset($userPhoto->image_URL) }}">
-                    <img class="card-img-top rounded-0" src="{{ URL::asset($userPhoto->image_URL) }}"
-                        alt="{{ $userPhoto->image_title }}">
-                    <div class="mask rgba-white-slight"></div>
-                </a>
-            </div>
-
-            <!-- Card content -->
-            <div class="card-body">
-
-                <div class="collapse-content">
-
-                    <!-- Text -->
-                    <div class="formHide">
-                        <a class="readMore" data-toggle="collapse" href="#collapse-{{ $userPhoto->photo_id }}" role="button"
-                            aria-expanded="false" aria-controls="collapseExample">
-                            <i class="fas fa-angle-down"></i>
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <a href="{{ URL::asset($userPhoto->image_URL) }}">
+                            <img class="card-img-top rounded-0" src="{{ URL::asset($userPhoto->image_URL) }}"
+                                alt="{{ $userPhoto->image_title }}">
+                            <div class="mask rgba-white-slight"></div>
                         </a>
                     </div>
-                    <p class="card-text collapse text-capitalize" id="collapse-{{ $userPhoto->photo_id }}">
-                        {{ $userPhoto->image_description }}</p>
-                        @if($ownUser)
-                        <textarea name="image_description" class="form-control edit-photo-{{ $userPhoto->photo_id }} hide">{{ $userPhoto->image_description }}</textarea>
-                        @endif
-                    <!-- Button -->
-                    <ul>
-                        <li>
-                            <!-- code to implement like /unlike functionality in page -->
-                            @if (Auth::check())
-                            @php
-                            $like = App\Like::where('photo_id' , $userPhoto->photo_id)->where('user_id' ,
-                            Auth::user()->user_id)->first();
-                            @endphp
-                            @if ($like)
-                            <div class="liked" id="{{$userPhoto->photo_id}}">
-                                @csrf
-                                <i class="fas fa-heart"></i>
-                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <div class="collapse-content">
+
+                            <!-- Text -->
+                            <div class="formHide">
+                                <a class="readMore" data-toggle="collapse" href="#collapse-{{ $userPhoto->photo_id }}"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fas fa-angle-down"></i>
+                                </a>
                             </div>
-                            @else
-                            <div class="not-liked" id="{{$userPhoto->photo_id}}">
-                                @csrf
-                                <i class="far fa-heart"></i>
-                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
-                            </div>
-                            @endif
-                            @else
-                            <div class="not-logged">
-                                <i class="far fa-heart"></i>
-                                <span>{{ $userPhoto->likes_sum }}</span>
-                            </div>
-                            @endif
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span class="old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->locality_name }}</span>
+                            <p class="card-text collapse text-capitalize" id="collapse-{{ $userPhoto->photo_id }}">
+                                {{ $userPhoto->image_description }}</p>
                             @if($ownUser)
-                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="locality" required>
-                            <option value="" disabled>Locality</option>
-                            @foreach ($locations as $locality)
-                                <option value="{{$locality->locality_id}}"
-                                @if(($userPhoto->locality_id) == ($locality->locality_id))
-                                    selected
+                            <textarea name="image_description"
+                                class="form-control edit-photo-{{ $userPhoto->photo_id }} hide">{{ $userPhoto->image_description }}</textarea>
+                            @endif
+                            <!-- Button -->
+                            <ul>
+                                <li>
+                                    <!-- code to implement like /unlike functionality in page -->
+                                    @if (Auth::check())
+                                    @php
+                                    $like = App\Like::where('photo_id' , $userPhoto->photo_id)->where('user_id' ,
+                                    Auth::user()->user_id)->first();
+                                    @endphp
+                                    @if ($like)
+                                    <div class="liked" id="{{$userPhoto->photo_id}}">
+                                        @csrf
+                                        <i class="fas fa-heart"></i>
+                                        <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
+                                    </div>
+                                    @else
+                                    <div class="not-liked" id="{{$userPhoto->photo_id}}">
+                                        @csrf
+                                        <i class="far fa-heart"></i>
+                                        <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
+                                    </div>
                                     @endif
-                                    >{{$locality->locality_name}}</option>
-                            @endforeach
-                        </select>
-                        @endif
-                        </li>
-                        <li>
-                            <i class="{{$userPhoto->category_icon}}">
-                            </i>
-                            <span class="text-capitalize old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->category_name }}</span>
+                                    @else
+                                    <div class="not-logged">
+                                        <i class="far fa-heart"></i>
+                                        <span>{{ $userPhoto->likes_sum }}</span>
+                                    </div>
+                                    @endif
+                                </li>
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="old-fields-{{ $userPhoto->photo_id }}">
+                                        {{ $userPhoto->locality_name }}</span>
+                                    @if($ownUser)
+                                    <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}"
+                                        name="locality" required>
+                                        <option value="" disabled>Locality</option>
+                                        @foreach ($locations as $locality)
+                                        <option value="{{$locality->locality_id}}" @if(($userPhoto->locality_id) ==
+                                            ($locality->locality_id))
+                                            selected
+                                            @endif
+                                            >{{$locality->locality_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @endif
+                                </li>
+                                <li>
+                                    <i class="{{$userPhoto->category_icon}}">
+                                    </i>
+                                    <span class="text-capitalize old-fields-{{ $userPhoto->photo_id }}">
+                                        {{ $userPhoto->category_name }}</span>
+                                    @if($ownUser)
+                                    <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}"
+                                        name="category" required>
+                                        <option value="" disabled>Category</option>
+                                        @foreach ($categories as $category)
+                                        <option value="{{$category->category_id}}" @if(($userPhoto->category_id) ==
+                                            ($category->category_id))
+                                            selected
+                                            @endif>{{ ucfirst($category->category_name) }}</option>
+                                        @endforeach
+                                    </select>
+                                    @endif
+                                </li>
+                            </ul>
                             @if($ownUser)
-                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="category" required>
-                            <option value="" disabled>Category</option>
-                            @foreach ($categories as $category)
-                                <option value="{{$category->category_id}}"
-                                @if(($userPhoto->category_id) == ($category->category_id))
-                                    selected
-                                    @endif>{{ ucfirst($category->category_name) }}</option>
-                            @endforeach
-                        </select>
-                        @endif
-                        </li>
-                    </ul>
+                            <div class="buttons-photo-{{ $userPhoto->photo_id }} hide">
+                                <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save"
+                                    name="save">
+                                <input class="btn btn-danger mb-2 profile-field cancel-edit-photo"
+                                    id="cancel_{{ $userPhoto->photo_id}}" type="button" value="Cancel"
+                                    name="cancel">@endif</div>
+                        </div>
+
+                    </div>
                     @if($ownUser)
-                    <div class="buttons-photo-{{ $userPhoto->photo_id }} hide">
-                    <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
-                    <input class="btn btn-danger mb-2 profile-field cancel-edit-photo" id="cancel_{{ $userPhoto->photo_id}}" type="button" value="Cancel"
-                    name="cancel">@endif</div>
-                </div>
+                </form>@endif
+            </article>
+            @endforeach
+            <!-- END Card -->
 
-            </div>
-            @if($ownUser)</form>@endif
-</article>
-        @endforeach
-        <!-- END Card -->
-
+        </div>
     </div>
-</div>
 
 
-@else
-<!--if the portfolio is empty-->
-<div class="card promoting-card card-user">
-    <div class="card-body d-flex flex-row">
-        <p>This portfolio is empty for now. We're excited to see new photos from {{$userPhotos[0]->name}}!</p>
+    @else
+    <!--if the portfolio is empty-->
+    <div class="card promoting-card card-user">
+        <div class="card-body d-flex flex-row">
+            <p>This portfolio is empty for now. We're excited to see new photos from {{$userPhotos[0]->name}}!</p>
+        </div>
     </div>
-</div>
-@endif
-<!--End of the User Portfolio -->
-<div class="pagination">
-    {{ $userPhotos->links() }}
-</div>
+    @endif
+    <!--End of the User Portfolio -->
+    <div class="pagination">
+        {{ $userPhotos->links() }}
+    </div>
 </section>
 
 @endsection
