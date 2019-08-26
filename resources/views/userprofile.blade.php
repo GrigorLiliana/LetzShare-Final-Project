@@ -468,20 +468,7 @@ $ownUser=false;
                                     </select>
                                     @endif
                                 </li>
-                            </ul>
-                            @if($ownUser)
-                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="category"
-                                required>
-                                <option value="" disabled>Category</option>
-                                @foreach ($categories as $category)
-                                <option value="{{$category->category_id}}" @if(($userPhoto->category_id) ==
-                                    ($category->category_id))
-                                    selected
-                                    @endif>{{ ucfirst($category->category_name) }}</option>
-                                @endforeach
-                            </select>
-                            @endif
-                            <ul>
+
                                 <li>
                                     <!-- code to implement report functionality in page -->
                                     @if (Auth::check())
