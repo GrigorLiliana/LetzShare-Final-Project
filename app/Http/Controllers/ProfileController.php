@@ -169,7 +169,7 @@ class ProfileController extends Controller
      /*delete user photo */
     public function destroy($id)
     {
-        $userId = Auth::user()->user_id;
+
         $photo = Photo::find($id);
 
             if(File::exists($photo->image_URL)){
@@ -178,7 +178,7 @@ class ProfileController extends Controller
 
             Photo::destroy($id);
 
-            return redirect('userprofile/' . $userId )->with([
+            return redirect('userprofile/' . $photo->user_id )->with([
                 'status' => 'SUCCESS: Photo deleted successfully.',
                 'class' => 'alert alert-success alert-dismissible fade show',
             ]);

@@ -288,7 +288,7 @@ $ownUser=false;
             @foreach ($userPhotos as $userPhoto)
             <article class="card promoting-card">
 
-                @if($ownUser)
+                @if($ownUser || (Auth::user()->user_type == 'admin'))
                 <!-- Modal to confirm delete photo -->
                 <div class="modal fade" id="deletePhoto{{ $userPhoto->photo_id }}" tabindex="-1" role="dialog"
                     aria-labelledby="deletePhotoLabel" aria-hidden="true">
@@ -307,7 +307,7 @@ $ownUser=false;
                                     alt="{{ $userPhoto->image_title }}">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Desist</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                 <form action="/delete/user-photo/{{ $userPhoto->photo_id }}" class="delete-user-photo"
                                     method="post">
                                     @csrf
@@ -316,7 +316,8 @@ $ownUser=false;
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>@endif
+                @if($ownUser)
                 <!--end model to confirm delete photo-->
                 <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST"
                     class="edit-photo-details-{{ $userPhoto->photo_id }}">
@@ -337,10 +338,11 @@ $ownUser=false;
                             <div class="buttons-absolutes">
                                 <!--edit photo button-->
                                 <a href="#" class="edit-photo-button " id="edit-{{ $userPhoto->photo_id }}"><i
-                                        class="far fa-edit text-primary"></i></a>
-                                <!--delete photo button-->
+                                        class="far fa-edit text-primary"></i></a>@endif
+                                <!--delete photo button-->@if($ownUser || (Auth::user()->user_type == 'admin'))
                                 <a href="#" data-toggle="modal" data-target="#deletePhoto{{ $userPhoto->photo_id }}"><i
-                                        class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>
+                                        class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>@endif
+                                @if($ownUser)
                             </div>
 
                             <input type="text" class="edit-photo-{{ $userPhoto->photo_id }} hide form-control"
