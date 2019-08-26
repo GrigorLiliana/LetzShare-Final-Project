@@ -141,30 +141,6 @@
 
                 <!-- Card image -->
                 <div class="view overlay">
-                    {{-- <a href="{{ $photo->image_URL }}" data-fancybox="gallery" data-caption="
-                    <a href='/userprofile/{{$photo->user_id}}'>
-                        <img src='{{URL::asset($photo->user_photo)}}' class='rounded-circle mr-3' height='50' width='50'
-                            alt='avatar'>
-                    </a>
-                    <hr>
-                    <p>{{ $photo->image_description }}</p>
-                    <hr>
-                    <ul>
-                        <li>
-                            <i class='fas fa-heart'></i>
-                            <span>{{ $photo->likes_sum }}</span>
-                        </li>
-                        <li>
-                            <i class='fas fa-map-marker-alt'></i>
-                            <span>{{ $photo->locality_name }}</span>
-                        </li>
-                        <li>
-                            <i class='{{ $photo->category_icon }}'></i>
-                            <span class='text-capitalize'>{{ $photo->category_name }}</span>
-                        </li>
-                    </ul>">
-                    <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}" alt="{{ $photo->image_title }}">
-                    </a> --}}
                     <a href="{{ $photo->image_URL }}" data-toggle="modal" data-target="#modal-{{ $photo->photo_id }}">
                         <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}"
                             alt="{{ $photo->image_title }}">
@@ -702,7 +678,7 @@
     </div>
 </div>
 <div class="container-fluid">
-  
+
 </div>
 <div class="container-fluid">
     <div class="container">

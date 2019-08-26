@@ -291,7 +291,7 @@ li {
     flex-direction: column-reverse;
 }
 
-.card-header.formfilters {
+.formfilters {
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
     background-color: rgba(0, 0, 0, 0.03);
@@ -322,20 +322,7 @@ li {
 .fa-angle-down {
     font-size: 20px;
 }
-/* fancybox Form Styles */
-.fancybox-caption {
-    padding: 0 !important;
-}
-
-.fancybox-caption__body {
-    /*  padding: 10px;*/
-    color: #252323;
-    background-color: white;
-}
-.fancybox-caption__body li {
-    color: #252323;
-    /* padding: 10px;*/
-}
+/* modal photo Form Styles */
 
 .modal-body {
     padding: 0 !important;
@@ -354,6 +341,7 @@ li {
     display: flex;
     flex-direction: column;
 }
+
 /* Footer */
 
 .footer {
