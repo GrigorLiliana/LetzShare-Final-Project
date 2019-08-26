@@ -208,7 +208,7 @@ public function deleteAccount($id)
             ]);
         }
 
-        return redirect('home')->with([
+        return redirect('/')->with([
             'status' => 'SUCCESS: User & related files deleted successfully.',
             'class' => 'alert alert-success alert-dismissible fade show',
         ]);
