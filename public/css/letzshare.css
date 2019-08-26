@@ -12,7 +12,7 @@ body {
     margin-top: 100px;
 } */
 .container {
-    margin-top: 100px;
+    margin-top: 80px;
 }
 .navbar {
     padding: 0 1rem !important;
@@ -105,7 +105,7 @@ li {
 }
 
 /*first section - big photo background*/
-#home_page {
+/* #home_page {
     background-image: url(http://luxembourg.public.lu/pictures/gallery/photos-telechargeables/02-ville-luxembourg/003-vdl-grund-224431-xxxhdpi.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -123,7 +123,7 @@ li {
     top: 10rem;
     left: 20%;
     background-color: rgba(119, 136, 153, 0.411);
-}
+} */
 
 /* card photos section*/
 .container-home h3 {
@@ -382,6 +382,10 @@ li {
 .container-fluid {
     width: 100%;
     padding: 5rem 0;
+}
+
+.sectionFluid {
+    margin-top: 0;
 }
 
 .container-fluid:nth-child(2) {

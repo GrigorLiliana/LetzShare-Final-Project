@@ -31,7 +31,7 @@
         @include('layouts.nav')
 
         <main @if (\Route::current()->getName() != 'home')
-            class="container"
+            class="container py-4"
             @endif >
             <!-- div to display errors -->
             <div class="statusMsg">
