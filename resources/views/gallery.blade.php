@@ -181,7 +181,7 @@
                                             <!-- Does a "like" exist in the table for this user, photo? -->
                                             @if (!($like->islike))
                                             <!-- If so is it a report? -->
-                                            <div class="reported" id="r{{$photo->photo_id}}">
+                                            <div class="reported" id="0{{$photo->photo_id}}">
                                                 @csrf
                                                 <i class="fas fa-flag"></i>
                                                 <!-- the show/hide of the spans are toggled by JS -->
@@ -190,7 +190,7 @@
                                             </div>
                                             @else
                                             <!-- Else is it currently a like? -->
-                                            <div class="not-reported" id="r{{$photo->photo_id}}">
+                                            <div class="not-reported" id="0{{$photo->photo_id}}">
                                                 @csrf
                                                 <i class="far fa-flag"></i>
                                                 <span class="rep-text">Report</span>
@@ -199,7 +199,7 @@
                                             @endif
                                             @else
                                             <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                            <div class="not-reported" id="r{{$photo->photo_id}}">
+                                            <div class="not-reported" id="0{{$photo->photo_id}}">
                                                 @csrf
                                                 <i class="far fa-flag"></i>
                                                 <span class="rep-text">Report</span><span
@@ -292,7 +292,7 @@
                             <!-- Does a "like" exist in the table for this user, photo? -->
                             @if (!($like->islike))
                             <!-- If so is it a report? -->
-                            <div class="reported" id="r{{$photo->photo_id}}">
+                            <div class="reported" id="0{{$photo->photo_id}}">
                                 @csrf
                                 <i class="fas fa-flag"></i>
                                 <!-- the show/hide of the spans are toggled by JS -->
@@ -300,7 +300,7 @@
                             </div>
                             @else
                             <!-- Else is it currently a like? -->
-                            <div class="not-reported" id="r{{$photo->photo_id}}">
+                            <div class="not-reported" id="0{{$photo->photo_id}}">
                                 @csrf
                                 <i class="far fa-flag"></i>
                                 <span class="rep-text">Report</span>
@@ -309,7 +309,7 @@
                             @endif
                             @else
                             <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                            <div class="not-reported" id="r{{$photo->photo_id}}">
+                            <div class="not-reported" id="0{{$photo->photo_id}}">
                                 @csrf
                                 <i class="far fa-flag"></i>
                                 <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
