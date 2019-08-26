@@ -279,7 +279,7 @@ $ownUser=false;
     <hr>
 
     <!-- check if the user as photos -->
-    @if(count($userPhotos)>1)
+    @if(count($userPhotos)>0)
 
     <!--create a card for each photo if the user has photo -->
     <div class="row gallery">
