@@ -287,15 +287,16 @@ $ownUser=false;
 
             @foreach ($userPhotos as $userPhoto)
             <article class="card promoting-card">
-                @if($ownUser)
 
+                @if($ownUser)
                 <!-- Modal to confirm delete photo -->
                 <div class="modal fade" id="deletePhoto{{ $userPhoto->photo_id }}" tabindex="-1" role="dialog"
                     aria-labelledby="deletePhotoLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title text-danger" id="deletePhotoLabel">Attention, this action is
+                                <h5 class="modal-title text-danger" id="deletePhotoLabel{{ $userPhoto->photo_id }}">
+                                    Attention, this action is
                                     irreversible!</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -319,7 +320,9 @@ $ownUser=false;
                 <!--end model to confirm delete photo-->
                 <form action="/edit-photo-details/{{ $userPhoto->photo_id }}" method="POST"
                     class="edit-photo-details-{{ $userPhoto->photo_id }}">
-                    @csrf @endif
+                    @csrf
+
+                    @endif
                     <!-- Card content -->
                     <div class="card-body d-flex flex-row">
 
@@ -369,63 +372,6 @@ $ownUser=false;
 
                         <div class="collapse-content">
 
-                    <!-- Text -->
-                    <div class="formHide">
-                        <a class="readMore" data-toggle="collapse" href="#collapse-{{ $userPhoto->photo_id }}" role="button"
-                            aria-expanded="false" aria-controls="collapseExample">
-                            <i class="fas fa-angle-down"></i>
-                        </a>
-                    </div>
-                    <p class="card-text collapse text-capitalize" id="collapse-{{ $userPhoto->photo_id }}">
-                        {{ $userPhoto->image_description }}</p>
-                        @if($ownUser)
-                        <textarea name="image_description" class="form-control edit-photo-{{ $userPhoto->photo_id }} hide">{{ $userPhoto->image_description }}</textarea>
-                        @endif
-                    <!-- Button -->
-                    <ul>
-                        <li>
-                            <!-- code to implement like /unlike functionality in page -->
-                            @if (Auth::check())
-                            @php
-                            $like = App\Like::where('photo_id', $userPhoto->photo_id)->where('user_id',
-                            Auth::user()->user_id)->first();
-                            @endphp
-                            @if ($like)
-                            <!-- Does a "like" exist in the table for this user, photo? -->
-                            @if ($like->islike)
-                            <!-- If so is it a like? -->
-                            <div class="liked" id="{{$userPhoto->photo_id}}">
-                                @csrf
-                                <i class="fas fa-heart"></i>
-                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
-                            </div>
-                            @else
-                            <!-- Else is it currently a report? -->
-                            <div class="not-liked" id="{{$userPhoto->photo_id}}">
-                                @csrf
-                                <i class="far fa-heart"></i>
-                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
-                            </div>
-                            @endif
-                            @else
-                            <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                            <div class="not-liked" id="{{$userPhoto->photo_id}}">
-                                @csrf
-                                <i class="far fa-heart"></i>
-                                <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
-                            </div>
-                            @endif
-                            @else
-                            <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
-                            <div class="not-logged">
-                                <i class="far fa-heart"></i>
-                                <span>{{ $userPhoto->likes_sum }}</span>
-                            </div>
-                            @endif
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span class="old-fields-{{ $userPhoto->photo_id }}"> {{ $userPhoto->locality_name }}</span>
                             <!-- Text -->
                             <div class="formHide">
                                 <a class="readMore" data-toggle="collapse" href="#collapse-{{ $userPhoto->photo_id }}"
@@ -445,16 +391,20 @@ $ownUser=false;
                                     <!-- code to implement like /unlike functionality in page -->
                                     @if (Auth::check())
                                     @php
-                                    $like = App\Like::where('photo_id' , $userPhoto->photo_id)->where('user_id' ,
+                                    $like = App\Like::where('photo_id', $userPhoto->photo_id)->where('user_id',
                                     Auth::user()->user_id)->first();
                                     @endphp
                                     @if ($like)
+                                    <!-- Does a "like" exist in the table for this user, photo? -->
+                                    @if ($like->islike)
+                                    <!-- If so is it a like? -->
                                     <div class="liked" id="{{$userPhoto->photo_id}}">
                                         @csrf
                                         <i class="fas fa-heart"></i>
                                         <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
                                     </div>
                                     @else
+                                    <!-- Else is it currently a report? -->
                                     <div class="not-liked" id="{{$userPhoto->photo_id}}">
                                         @csrf
                                         <i class="far fa-heart"></i>
@@ -462,11 +412,25 @@ $ownUser=false;
                                     </div>
                                     @endif
                                     @else
+                                    <!-- Or else there isn't a like in the table i.e. not liked or reported -->
+                                    <div class="not-liked" id="{{$userPhoto->photo_id}}">
+                                        @csrf
+                                        <i class="far fa-heart"></i>
+                                        <span class="likes-number">{{ $userPhoto->likes_sum }}</span>
+                                    </div>
+                                    @endif
+                                    @else
+                                    <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
                                     <div class="not-logged">
                                         <i class="far fa-heart"></i>
                                         <span>{{ $userPhoto->likes_sum }}</span>
                                     </div>
                                     @endif
+                                </li>
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="old-fields-{{ $userPhoto->photo_id }}">
+                                        {{ $userPhoto->locality_name }}</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-map-marker-alt"></i>
@@ -506,62 +470,66 @@ $ownUser=false;
                                 </li>
                             </ul>
                             @if($ownUser)
-                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="category" required>
-                            <option value="" disabled>Category</option>
-                            @foreach ($categories as $category)
-                                <option value="{{$category->category_id}}"
-                                @if(($userPhoto->category_id) == ($category->category_id))
+                            <select class="custom-select hide edit-photo-{{ $userPhoto->photo_id }}" name="category"
+                                required>
+                                <option value="" disabled>Category</option>
+                                @foreach ($categories as $category)
+                                <option value="{{$category->category_id}}" @if(($userPhoto->category_id) ==
+                                    ($category->category_id))
                                     selected
                                     @endif>{{ ucfirst($category->category_name) }}</option>
-                            @endforeach
-                        </select>
-                        @endif
-                        </li>
-                        <li>
-                            <!-- code to implement report functionality in page -->
-                            @if (Auth::check())
-                            @php
-                            $like = App\Like::where('photo_id' , $userPhoto->photo_id)->where('user_id' ,
-                            Auth::user()->user_id)->first();
-                            @endphp
-                            @if ($like)
-                            <!-- Does a "like" exist in the table for this user, photo? -->
-                            @if (!($like->islike))
-                            <!-- If so is it a report? -->
-                            <div class="reported" id="0{{$userPhoto->photo_id}}">
-                                @csrf
-                                <i class="fas fa-flag"></i>
-                                <!-- the show/hide of the spans are toggled by JS -->
-                                <span class="rep-text">Reported</span><span class="rep-text hide">Report</span>
-                            </div>
-                            @else
-                            <!-- Else is it currently a like? -->
-                            <div class="not-reported" id="0{{$userPhoto->photo_id}}">
-                                @csrf
-                                <i class="far fa-flag"></i>
-                                <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
-                            </div>
+                                @endforeach
+                            </select>
                             @endif
-                            @else
-                            <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                            <div class="not-reported" id="0{{$userPhoto->photo_id}}">
-                                @csrf
-                                <i class="far fa-flag"></i>
-                                <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
-                            </div>
-                            @endif
-                            @endif
-                        </li>
-                    </ul>
-                    @if($ownUser)
-                    <div class="buttons-photo-{{ $userPhoto->photo_id }} hide">
-                    <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save" name="save">
-                    <input class="btn btn-danger mb-2 profile-field cancel-edit-photo" id="cancel_{{ $userPhoto->photo_id}}" type="button" value="Cancel"
-                    name="cancel">@endif</div>
-                </div>
+                            <ul>
+                                <li>
+                                    <!-- code to implement report functionality in page -->
+                                    @if (Auth::check())
+                                    @php
+                                    $like = App\Like::where('photo_id' , $userPhoto->photo_id)->where('user_id' ,
+                                    Auth::user()->user_id)->first();
+                                    @endphp
+                                    @if ($like)
+                                    <!-- Does a "like" exist in the table for this user, photo? -->
+                                    @if (!($like->islike))
+                                    <!-- If so is it a report? -->
+                                    <div class="reported" id="0{{$userPhoto->photo_id}}">
+                                        @csrf
+                                        <i class="fas fa-flag"></i>
+                                        <!-- the show/hide of the spans are toggled by JS -->
+                                        <span class="rep-text">Reported</span><span class="rep-text hide">Report</span>
+                                    </div>
+                                    @else
+                                    <!-- Else is it currently a like? -->
+                                    <div class="not-reported" id="0{{$userPhoto->photo_id}}">
+                                        @csrf
+                                        <i class="far fa-flag"></i>
+                                        <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
+                                    </div>
+                                    @endif
+                                    @else
+                                    <!-- Or else there isn't a like in the table i.e. not liked or reported -->
+                                    <div class="not-reported" id="0{{$userPhoto->photo_id}}">
+                                        @csrf
+                                        <i class="far fa-flag"></i>
+                                        <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
+                                    </div>
+                                    @endif
+                                    @endif
+                                </li>
+                            </ul>
+                            @if($ownUser)
+                            <div class="buttons-photo-{{ $userPhoto->photo_id }} hide">
+                                <input class="btn btn-primary mb-2 profile-field" type="submit" value="Save"
+                                    name="save">
+                                <input class="btn btn-danger mb-2 profile-field cancel-edit-photo"
+                                    id="cancel_{{ $userPhoto->photo_id}}" type="button" value="Cancel"
+                                    name="cancel">@endif</div>
+                        </div>
 
+
+                        @if($ownUser)
                     </div>
-                    @if($ownUser)
                 </form>@endif
             </article>
             @endforeach
