@@ -288,7 +288,7 @@ $ownUser=false;
             @foreach ($userPhotos as $userPhoto)
             <article class="card promoting-card">
 
-                @if($ownUser || (Auth::user()->user_type == 'admin'))
+                @if($ownUser || (Auth::check() && Auth::user()->user_type == 'admin'))
                 <!-- Modal to confirm delete photo -->
                 <div class="modal fade" id="deletePhoto{{ $userPhoto->photo_id }}" tabindex="-1" role="dialog"
                     aria-labelledby="deletePhotoLabel" aria-hidden="true">
@@ -339,7 +339,8 @@ $ownUser=false;
                                 <!--edit photo button-->
                                 <a href="#" class="edit-photo-button " id="edit-{{ $userPhoto->photo_id }}"><i
                                         class="far fa-edit text-primary"></i></a>@endif
-                                <!--delete photo button-->@if($ownUser || (Auth::user()->user_type == 'admin'))
+                                <!--delete photo button-->@if($ownUser || (Auth::check() && Auth::user()->user_type ==
+                                'admin'))
                                 <a href="#" data-toggle="modal" data-target="#deletePhoto{{ $userPhoto->photo_id }}"><i
                                         class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>@endif
                                 @if($ownUser)
