@@ -12,7 +12,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/letzshare.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.fancybox.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -20,8 +19,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-
 </head>
 
 <body>
