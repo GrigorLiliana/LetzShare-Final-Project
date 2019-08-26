@@ -55,7 +55,7 @@ li {
 }
 
 #pswd_info::before {
-    content: "\25B2";
+    content: '\25B2';
     /* triangle pointu en haut de la div */
     position: absolute;
     top: -12px;
@@ -114,6 +114,15 @@ li {
 }
 
 /* User Profile Styles */
+.container-button {
+    position: relative;
+}
+.buttons-absolutes {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 1.2rem;
+}
 .add {
     font-size: 1.5rem;
 }
@@ -386,7 +395,7 @@ li {
 }
 
 .container-fluid:nth-child(4) {
-    background-color: #0099FF;
+    background-color: #0099ff;
     transform: skewY(-2deg);
 }
 
@@ -409,5 +418,3 @@ li {
 .container-fluid:nth-child(5) h1 {
     color: #fff;
 }
-
-
