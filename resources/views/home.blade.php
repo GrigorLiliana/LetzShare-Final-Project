@@ -9,9 +9,8 @@
     <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250></h1>
     </div>
 </div>
-{{-- Top Rated photos section --}}
 <div class="container-fluid">
-    <div class="container sectionFluid">
+    <div class="container">
         <div class="row">
             <h3>Top Rated Photos</h3>
 
@@ -162,9 +161,8 @@
         </div>
     </div>
 </div>
-{{-- Top Rated photos section --}}
 <div class="container-fluid">
-    <div class="container sectionFluid">
+    <div class="container">
         <h3>Top Photographers</h3>
 
         <div class="card-deck">
@@ -196,7 +194,7 @@
     </div>
 </div>
 <div class="container-fluid second">
-    <div class="container sectionFluid">
+    <div class="container">
         <div class="row">
             <h3>Latest Photos</h3>
 
