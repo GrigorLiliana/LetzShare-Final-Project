@@ -57,7 +57,7 @@
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <a href="/userprofile/{{$picture->user_id}}">
+                                        <a href="{{URL::asset($picture->user_photo)}}">
                                             <img src="{{URL::asset($picture->user_photo)}}" class="rounded-circle mr-3"
                                                 height="50" width="50" alt="avatar">
                                         </a>
@@ -200,14 +200,14 @@
                                     <!-- Does a "like" exist in the table for this user, photo? -->
                                     @if ($like->islike)
                                     <!-- If so is it a like? -->
-                                    <div class="liked" id="{{$picture->photo_id}}">
+                                    <div class="liked" id="00{{$picture->photo_id}}">
                                         @csrf
                                         <i class="fas fa-heart"></i>
                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
                                     </div>
                                     @else
                                     <!-- Else is it currently a report? -->
-                                    <div class="not-liked" id="{{$picture->photo_id}}">
+                                    <div class="not-liked" id="00{{$picture->photo_id}}">
                                         @csrf
                                         <i class="far fa-heart"></i>
                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
@@ -215,7 +215,7 @@
                                     @endif
                                     @else
                                     <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                    <div class="not-liked" id="{{$picture->photo_id}}">
+                                    <div class="not-liked" id="00{{$picture->photo_id}}">
                                         @csrf
                                         <i class="far fa-heart"></i>
                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
@@ -249,7 +249,7 @@
                                     <!-- Does a "like" exist in the table for this user, photo? -->
                                     @if (!($like->islike))
                                     <!-- If so is it a report? -->
-                                    <div class="reported" id="0{{$picture->photo_id}}">
+                                    <div class="reported" id="000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="fas fa-flag"></i>
                                         <!-- the show/hide of the spans are toggled by JS -->
@@ -257,7 +257,7 @@
                                     </div>
                                     @else
                                     <!-- Else is it currently a like? -->
-                                    <div class="not-reported" id="0{{$picture->photo_id}}">
+                                    <div class="not-reported" id="000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="far fa-flag"></i>
                                         <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
@@ -265,7 +265,7 @@
                                     @endif
                                     @else
                                     <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                    <div class="not-reported" id="0{{$picture->photo_id}}">
+                                    <div class="not-reported" id="000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="far fa-flag"></i>
                                         <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
@@ -400,14 +400,14 @@
                                                     {{-- Does a "like" exist in the table for this user, photo? --}}
                                                     @if ($like->islike)
                                                     {{-- If so is it a like? --}}
-                                                    <div class="liked" id="{{$picture->photo_id}}">
+                                                    <div class="liked" id="0000{{$picture->photo_id}}">
                                                         @csrf
                                                         <i class="fas fa-heart"></i>
                                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
                                                     </div>
                                                     @else
                                                     <!-- Else is it currently a report? -->
-                                                    <div class="not-liked" id="{{$picture->photo_id}}">
+                                                    <div class="not-liked" id="0000{{$picture->photo_id}}">
                                                         @csrf
                                                         <i class="far fa-heart"></i>
                                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
@@ -415,7 +415,7 @@
                                                     @endif
                                                     @else
                                                     <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                                    <div class="not-liked" id="{{$picture->photo_id}}">
+                                                    <div class="not-liked" id="0000{{$picture->photo_id}}">
                                                         @csrf
                                                         <i class="far fa-heart"></i>
                                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
@@ -450,7 +450,7 @@
                                                     <!-- Does a "like" exist in the table for this user, photo? -->
                                                     @if (!($like->islike))
                                                     <!-- If so is it a report? -->
-                                                    <div class="reported" id="0{{$picture->photo_id}}">
+                                                    <div class="reported" id="00000{{$picture->photo_id}}">
                                                         @csrf
                                                         <i class="fas fa-flag"></i>
                                                         <!-- the show/hide of the spans are toggled by JS -->
@@ -459,7 +459,7 @@
                                                     </div>
                                                     @else
                                                     <!-- Else is it currently a like? -->
-                                                    <div class="not-reported" id="0{{$picture->photo_id}}">
+                                                    <div class="not-reported" id="00000{{$picture->photo_id}}">
                                                         @csrf
                                                         <i class="far fa-flag"></i>
                                                         <span class="rep-text">Report</span>
@@ -468,7 +468,7 @@
                                                     @endif
                                                     @else
                                                     <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                                    <div class="not-reported" id="0{{$picture->photo_id}}">
+                                                    <div class="not-reported" id="00000{{$picture->photo_id}}">
                                                         @csrf
                                                         <i class="far fa-flag"></i>
                                                         <span class="rep-text">Report</span><span
@@ -511,14 +511,14 @@
                                     <!-- Does a "like" exist in the table for this user, photo? -->
                                     @if ($like->islike)
                                     <!-- If so is it a like? -->
-                                    <div class="liked" id="{{$picture->photo_id}}">
+                                    <div class="liked" id="000000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="fas fa-heart"></i>
                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
                                     </div>
                                     @else
                                     <!-- Else is it currently a report? -->
-                                    <div class="not-liked" id="{{$picture->photo_id}}">
+                                    <div class="not-liked" id="000000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="far fa-heart"></i>
                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
@@ -526,7 +526,7 @@
                                     @endif
                                     @else
                                     <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                    <div class="not-liked" id="{{$picture->photo_id}}">
+                                    <div class="not-liked" id="000000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="far fa-heart"></i>
                                         <span class="likes-number">{{ $picture->likes_sum }}</span>
@@ -558,7 +558,7 @@
                                     <!-- Does a "like" exist in the table for this user, photo? -->
                                     @if (!($like->islike))
                                     <!-- If so is it a report? -->
-                                    <div class="reported" id="0{{$picture->photo_id}}">
+                                    <div class="reported" id="0000000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="fas fa-flag"></i>
                                         <!-- the show/hide of the spans are toggled by JS -->
@@ -566,7 +566,7 @@
                                     </div>
                                     @else
                                     <!-- Else is it currently a like? -->
-                                    <div class="not-reported" id="0{{$picture->photo_id}}">
+                                    <div class="not-reported" id="0000000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="far fa-flag"></i>
                                         <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
@@ -574,7 +574,7 @@
                                     @endif
                                     @else
                                     <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                    <div class="not-reported" id="0{{$picture->photo_id}}">
+                                    <div class="not-reported" id="0000000{{$picture->photo_id}}">
                                         @csrf
                                         <i class="far fa-flag"></i>
                                         <span class="rep-text">Report</span><span class="rep-text hide">Reported</span>
