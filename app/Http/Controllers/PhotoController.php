@@ -99,8 +99,7 @@ class PhotoController extends Controller
             'photos' => $photos,
             'users' => $users,
             'locations' => $locations,
-            'categories' => $categories,
-            //'date' => $date
+            'categories' => $categories
         ]);
     }
 
