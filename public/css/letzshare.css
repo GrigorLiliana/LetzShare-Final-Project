@@ -104,27 +104,6 @@ li {
     background-color: lightgrey;
 }
 
-/*first section - big photo background*/
-/* #home_page {
-    background-image: url(http://luxembourg.public.lu/pictures/gallery/photos-telechargeables/02-ville-luxembourg/003-vdl-grund-224431-xxxhdpi.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    margin-top: 2rem;
-}
-#home_page h1 {
-    color: black;
-    font-weight: bold;
-    font-family: calibri, sans-serif;
-    position: relative;
-    display: block;
-    max-width: max-content;
-    top: 10rem;
-    left: 20%;
-    background-color: rgba(119, 136, 153, 0.411);
-} */
-
 /* card photos section*/
 .container-home h3 {
     font-family: Calibri, sans-serif;
@@ -143,7 +122,7 @@ li {
 .photographers img {
     max-width: 200px;
 }
-.card-img-top .home {
+.card-img-top {
     width: 100%;
     max-height: 200px;
     object-fit: cover;
