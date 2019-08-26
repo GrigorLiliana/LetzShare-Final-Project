@@ -21,7 +21,7 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for="photo-user">Photographers</label>
+                        <label for="users">Photographers</label>
                         <select class="form-control users form-control-sm" name="users" id="users">
                             <option value="default">Select</option>
                             @foreach ($users as $user)
@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="photo-user">Location</label>
+                        <label for="locations">Location</label>
                         <select class="form-control locations form-control-sm" name="locations" id="locations">
                             <option value="">Select</option>
                             @foreach ($locations as $location)
@@ -39,7 +39,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="photo-user">Category</label>
+                        <label for="categories">Category</label>
                         <select class="form-control categories form-control-sm" name="categories" id="categories">
                             <option value="">Select</option>
                             @foreach ($categories as $category)
@@ -48,11 +48,11 @@
                         </select>
                     </div>
                     <div class="form-group col-sm-2">
-                        <label for="photo-user">Date From</label>
+                        <label for="firstdate">Date From</label>
                         <input type="date" class="form-control form-control-sm" name="firstdate" id="firstdate">
                     </div>
                     <div class="form-group col-sm-2">
-                        <label for="photo-user">Date To</label>
+                        <label for="lastdate">Date To</label>
                         <input type="date" class="form-control form-control-sm" id="lastdate" name="lastdate">
                     </div>
                 </div>
@@ -224,7 +224,7 @@
                     <!-- Text -->
                     <div class="formHide">
                         <a class="readMore" data-toggle="collapse" href="#collapse-{{ $photo->photo_id }}" role="button"
-                            aria-expanded="false" aria-controls="collapseExample">
+                            aria-expanded="false">
                             <i class="fas fa-angle-down"></i>
                         </a>
                     </div>

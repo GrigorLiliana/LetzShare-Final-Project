@@ -31,7 +31,7 @@
                           <th scope="col">User photos</th>
                           <th scope="col">E-Mail</th>
                           <th scope="col">User Type</th>
-                          <th scope="col">Action</i></th>
+                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -47,7 +47,7 @@
                           <td>{{ $user->user_type }}</td>
                           <td>
                               <a href="userprofile/{{ $user->user_id }}" title="User details"><i class="fas fa-eye"></i></a>&nbsp;
-                            @if ( $user->user_type != 'admin' ) 
+                            @if ( $user->user_type != 'admin' )
                               <a href="/admin/{{ $user->user_id }}" title="Delete User & files"><i class="fas fa-minus-circle"></i></a>
                             @else
                             <span title="You can't delete an admin"><i class="fas fa-minus-circle fa-disabled"></i></span>
@@ -73,7 +73,7 @@
                             <th scope="col">Image Title</th>
                             <th scope="col">Location</th>
                             <th scope="col">Category</th>
-                            <th scope="col">Action</i></th>
+                            <th scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
