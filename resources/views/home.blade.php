@@ -30,7 +30,7 @@
                     <div class="card-body d-flex flex-row">
                         <!-- Avatar -->
                         <a href="/userprofile/{{$user->user_id}}">
-                            <img src="{{$user->user_photo}}" class="rounded-circle mr-3" height="50" width="50"
+                            <img src="{{ $user->user_photo }}" class="rounded-circle mr-3" height="50" width="50"
                                 alt="{{$user->name}}">
                         </a>
                         <!-- Content -->
@@ -57,8 +57,8 @@
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <a href="{{URL::asset($picture->user_photo)}}">
-                                            <img src="{{URL::asset($picture->user_photo)}}" class="rounded-circle mr-3"
+                                        <a href="/userprofile/{{$picture->user_id}}">
+                                            <img src="{{ $user->user_photo }}" class="rounded-circle mr-3"
                                                 height="50" width="50" alt="avatar">
                                         </a>
                                         <h5 class="modal-title">{{ $picture->image_title }}</h5>
@@ -369,7 +369,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <a href="/userprofile/{{$picture->user_id}}">
-                                            <img src="{{URL::asset($picture->user_photo)}}" class="rounded-circle mr-3"
+                                            <img src="{{ $user->user_photo }}" class="rounded-circle mr-3"
                                                 height="50" width="50" alt="avatar">
                                         </a>
                                         <h5 class="modal-title">{{ $picture->image_title }}</h5>
