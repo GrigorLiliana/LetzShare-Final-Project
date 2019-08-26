@@ -6,8 +6,7 @@
 
 <div class="container-fluid">
     <div class="intro">
-        <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250>
-        </h1>
+    <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250></h1>
     </div>
 </div>
 {{-- Top Rated photos section --}}
@@ -45,132 +44,11 @@
 
                     <!-- Card image -->
                     <div class="view overlay">
-                        <a href="{{ $picture->image_URL }}" data-toggle="modal"
-                            data-target="#modal-{{ $photo->photo_id }}">
+                        <a href="{{ $picture->image_URL }}">
                             <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
                                 alt="{{ $picture->image_title }}">
+                            <div class="mask rgba-white-slight"></div>
                         </a>
-                        <!-- Modal -->
-                        <div class="modal fade bd-example-modal-lg" id="modal-{{ $picture->photo_id }}" tabindex="-1"
-                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <a href="/userprofile/{{$picture->user_id}}">
-                                            <img src="{{URL::asset($picture->user_photo)}}" class="rounded-circle mr-3"
-                                                height="50" width="50" alt="avatar">
-                                        </a>
-                                        <h5 class="modal-title" id="exampleModalLabel">{{ $picture->image_title }}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body modalBodyGallery">
-                                        <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
-                                            alt="{{ $picture->image_title }}">
-                                    </div>
-
-                                    <div class="modal-footer modalFooterGallery">
-                                        <div class="col modal-description">
-                                            {{ $picture->image_description }}
-                                        </div>
-                                        <div class="col modal-icons">
-                                            <ul>
-                                                <li>
-                                                    {{-- code to implement like /unlike functionality in page --}}
-                                                    @if (Auth::check())
-                                                    @php
-                                                    $like = App\Like::where('photo_id',
-                                                    $picture->photo_id)->where('user_id',
-                                                    Auth::user()->user_id)->first();
-                                                    @endphp
-                                                    @if ($like)
-                                                    {{-- Does a "like" exist in the table for this user, photo? --}}
-                                                    @if ($like->islike)
-                                                    {{-- If so is it a like? --}}
-                                                    <div class="liked" id="{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="fas fa-heart"></i>
-                                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                                    </div>
-                                                    @else
-                                                    <!-- Else is it currently a report? -->
-                                                    <div class="not-liked" id="{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="far fa-heart"></i>
-                                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                                    </div>
-                                                    @endif
-                                                    @else
-                                                    <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                                    <div class="not-liked" id="{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="far fa-heart"></i>
-                                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                                    </div>
-                                                    @endif
-                                                    @else
-                                                    <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
-                                                    <div class="not-logged">
-                                                        <i class="far fa-heart"></i>
-                                                        <span>{{ $picture->likes_sum }}</span>
-                                                    </div>
-                                                    @endif
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-map-marker-alt"></i>
-                                                    <span>{{ $picture->locality_name }}</span>
-                                                </li>
-                                                <li>
-                                                    <i class="{{$picture->category_icon}}">
-                                                    </i>
-                                                    <span class="text-capitalize">{{ $picture->category_name }}</span>
-                                                </li>
-                                                <li>
-                                                    <!-- code to implement report functionality in page -->
-                                                    @if (Auth::check())
-                                                    @php
-                                                    $like = App\Like::where('photo_id' ,
-                                                    $picture->photo_id)->where('user_id' ,
-                                                    Auth::user()->user_id)->first();
-                                                    @endphp
-                                                    @if ($like)
-                                                    <!-- Does a "like" exist in the table for this user, photo? -->
-                                                    @if (!($like->islike))
-                                                    <!-- If so is it a report? -->
-                                                    <div class="reported" id="0{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="fas fa-flag"></i>
-                                                        <!-- the show/hide of the spans are toggled by JS -->
-                                                        <span class="rep-text">Reported</span><span
-                                                            class="rep-text hide">Report</span>
-                                                    </div>
-                                                    @else
-                                                    <!-- Else is it currently a like? -->
-                                                    <div class="not-reported" id="0{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="far fa-flag"></i>
-                                                        <span class="rep-text">Report</span>
-                                                        <span class="rep-text hide">Reported</span>
-                                                    </div>
-                                                    @endif
-                                                    @else
-                                                    <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                                    <div class="not-reported" id="0{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="far fa-flag"></i>
-                                                        <span class="rep-text">Report</span><span
-                                                            class="rep-text hide">Reported</span>
-                                                    </div>
-                                                    @endif
-                                                    @endif
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Card content -->
@@ -284,7 +162,7 @@
         </div>
     </div>
 </div>
-{{-- Top Photographers photos section --}}
+{{-- Top Rated photos section --}}
 <div class="container-fluid">
     <div class="container sectionFluid">
         <h3>Top Photographers</h3>
@@ -317,7 +195,6 @@
         </div>
     </div>
 </div>
-{{-- Last photos section --}}
 <div class="container-fluid second">
     <div class="container sectionFluid">
         <div class="row">
@@ -354,132 +231,11 @@
 
                     <!-- Card image -->
                     <div class="view overlay">
-                        <a href="{{ $picture->image_URL }}" data-toggle="modal"
-                            data-target="#modal-{{ $photo->photo_id }}">
+                        <a href="{{ $picture->image_URL }}">
                             <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
                                 alt="{{ $picture->image_title }}">
+                            <div class="mask rgba-white-slight"></div>
                         </a>
-                        <!-- Modal -->
-                        <div class="modal fade bd-example-modal-lg" id="modal-{{ $picture->photo_id }}" tabindex="-1"
-                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <a href="/userprofile/{{$picture->user_id}}">
-                                            <img src="{{URL::asset($picture->user_photo)}}" class="rounded-circle mr-3"
-                                                height="50" width="50" alt="avatar">
-                                        </a>
-                                        <h5 class="modal-title" id="exampleModalLabel">{{ $picture->image_title }}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body modalBodyGallery">
-                                        <img class="card-img-top rounded-0" src="{{ $picture->image_URL }}"
-                                            alt="{{ $picture->image_title }}">
-                                    </div>
-
-                                    <div class="modal-footer modalFooterGallery">
-                                        <div class="col modal-description">
-                                            {{ $picture->image_description }}
-                                        </div>
-                                        <div class="col modal-icons">
-                                            <ul>
-                                                <li>
-                                                    {{-- code to implement like /unlike functionality in page --}}
-                                                    @if (Auth::check())
-                                                    @php
-                                                    $like = App\Like::where('photo_id',
-                                                    $picture->photo_id)->where('user_id',
-                                                    Auth::user()->user_id)->first();
-                                                    @endphp
-                                                    @if ($like)
-                                                    {{-- Does a "like" exist in the table for this user, photo? --}}
-                                                    @if ($like->islike)
-                                                    {{-- If so is it a like? --}}
-                                                    <div class="liked" id="{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="fas fa-heart"></i>
-                                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                                    </div>
-                                                    @else
-                                                    <!-- Else is it currently a report? -->
-                                                    <div class="not-liked" id="{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="far fa-heart"></i>
-                                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                                    </div>
-                                                    @endif
-                                                    @else
-                                                    <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                                    <div class="not-liked" id="{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="far fa-heart"></i>
-                                                        <span class="likes-number">{{ $picture->likes_sum }}</span>
-                                                    </div>
-                                                    @endif
-                                                    @else
-                                                    <!-- finally, if the user is not logged on the like/report functionality is not enabled -->
-                                                    <div class="not-logged">
-                                                        <i class="far fa-heart"></i>
-                                                        <span>{{ $picture->likes_sum }}</span>
-                                                    </div>
-                                                    @endif
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-map-marker-alt"></i>
-                                                    <span>{{ $picture->locality_name }}</span>
-                                                </li>
-                                                <li>
-                                                    <i class="{{$picture->category_icon}}">
-                                                    </i>
-                                                    <span class="text-capitalize">{{ $picture->category_name }}</span>
-                                                </li>
-                                                <li>
-                                                    <!-- code to implement report functionality in page -->
-                                                    @if (Auth::check())
-                                                    @php
-                                                    $like = App\Like::where('photo_id' ,
-                                                    $picture->photo_id)->where('user_id' ,
-                                                    Auth::user()->user_id)->first();
-                                                    @endphp
-                                                    @if ($like)
-                                                    <!-- Does a "like" exist in the table for this user, photo? -->
-                                                    @if (!($like->islike))
-                                                    <!-- If so is it a report? -->
-                                                    <div class="reported" id="0{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="fas fa-flag"></i>
-                                                        <!-- the show/hide of the spans are toggled by JS -->
-                                                        <span class="rep-text">Reported</span><span
-                                                            class="rep-text hide">Report</span>
-                                                    </div>
-                                                    @else
-                                                    <!-- Else is it currently a like? -->
-                                                    <div class="not-reported" id="0{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="far fa-flag"></i>
-                                                        <span class="rep-text">Report</span>
-                                                        <span class="rep-text hide">Reported</span>
-                                                    </div>
-                                                    @endif
-                                                    @else
-                                                    <!-- Or else there isn't a like in the table i.e. not liked or reported -->
-                                                    <div class="not-reported" id="0{{$picture->photo_id}}">
-                                                        @csrf
-                                                        <i class="far fa-flag"></i>
-                                                        <span class="rep-text">Report</span><span
-                                                            class="rep-text hide">Reported</span>
-                                                    </div>
-                                                    @endif
-                                                    @endif
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Card content -->
@@ -488,13 +244,13 @@
                         <div class="collapse-content">
                             <!-- Text -->
                             <div class="formHide">
-                                <a class="readMore" data-toggle="collapse" href="#collapse-{{ $picture->photo_id }}"
-                                    role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    <i class="fas fa-angle-down"></i>
-                                </a>
-                            </div>
-                            <p class="card-text collapse text-capitalize" id="collapse-{{ $picture->photo_id }}">
-                                {{ $picture->image_description }}</p>
+                                    <a class="readMore" data-toggle="collapse" href="#collapse-{{ $picture->photo_id }}"
+                                        role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <i class="fas fa-angle-down"></i>
+                                    </a>
+                                </div>
+                                <p class="card-text collapse text-capitalize" id="collapse-{{ $picture->photo_id }}">
+                                    {{ $picture->image_description }}</p>
                             <!-- Icons Row -->
                             <ul>
                                 <li>

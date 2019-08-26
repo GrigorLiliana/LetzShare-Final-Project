@@ -17,7 +17,7 @@
         </div>
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-            <form action="" method="POST" class="form-filters">
+            <form method="POST" class="form-filters">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-3">
@@ -97,7 +97,7 @@
                 </a>
                 <!-- Modal -->
                 <div class="modal fade bd-example-modal-lg" id="modal-{{ $photo->photo_id }}" tabindex="-1"
-                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
