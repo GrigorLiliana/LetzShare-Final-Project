@@ -15,7 +15,7 @@
 <div class="container-fluid">
     <div class="container sectionFluidTop">
         <div class="row">
-            <h3>Top Rated Photos</h3>
+            <h2>Top Rated Photos</h2>
 
             <div class="card-deck">
                 @foreach ($topPics as $picture)
@@ -58,8 +58,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <a href="/userprofile/{{$picture->user_id}}">
-                                            <img src="{{ $user->user_photo }}" class="rounded-circle mr-3"
-                                                height="50" width="50" alt="avatar">
+                                            <img src="{{ $user->user_photo }}" class="rounded-circle mr-3" height="50"
+                                                width="50" alt="avatar">
                                         </a>
                                         <h5 class="modal-title">{{ $picture->image_title }}</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -289,31 +289,26 @@
 {{-- top photographers photos --}}
 <div class="container-fluid">
     <div class="container sectionFluidTop">
-        <h3>Top Photographers</h3>
-
-        <div class="card-deck">
+        <h2>Top Photographers</h2>
+        <div class="row">
             @foreach ($topUsers as $topUser)
             @php
             $userId = $topUser->user_id;
             $user = App\User::where('user_id', $userId)->first();
             $path = URL::asset($user->user_photo);
             @endphp
-            <div class="card photographers">
-                <div class="card-body d-flex flex-row">
-                    <h6 class="card-title font-weight-bold mb-2 text-capitalize">{{ $user->name }}</h6>
-                </div>
-                <div class="view overlay">
-                    <a href="/userprofile/{{$user->user_id}}">
-                        <img src="{{$path}}" class="rounded-circle img-thumbnail" alt="{{ $user->name }}">
-                    </a>
-                </div>
-                <div class="card-body">
-                    <p class="card-text text-capitalize">
-                        <small>{{ str_limit($user->user_description, 90, '...') }}</small>
-                    </p>
-                    <p class="card-text"><small class="text-muted">Has posted {{$topUser->total_photos}} photos</small>
-                    </p>
-                </div>
+            <div class="col-sm userPhoto">
+                <h4>{{ $user->name }}</h4>
+                {{-- <div class="view overlay"> --}}
+                <a href="/userprofile/{{$user->user_id}}">
+                    <img src="{{$path}}" class="rounded-circle topUsers img-thumbnail" alt="{{ $user->name }}">
+                </a>
+                {{-- </div> --}}
+                <p>
+                    <span>{{ str_limit($user->user_description, 70, '...') }}</span>
+                </p>
+                <p class="card-text"><small class="text-muted">Has posted {{$topUser->total_photos}} photos</small>
+                </p>
             </div>
             @endforeach
         </div>
@@ -324,7 +319,7 @@
 <div class="container-fluid second">
     <div class="container sectionFluidTop">
         <div class="row">
-            <h3>Latest Photos</h3>
+            <h2>Latest Photos</h2>
 
             <div class="card-deck">
                 @foreach ($recentPics as $picture)
@@ -369,8 +364,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <a href="/userprofile/{{$picture->user_id}}">
-                                            <img src="{{ $user->user_photo }}" class="rounded-circle mr-3"
-                                                height="50" width="50" alt="avatar">
+                                            <img src="{{ $user->user_photo }}" class="rounded-circle mr-3" height="50"
+                                                width="50" alt="avatar">
                                         </a>
                                         <h5 class="modal-title">{{ $picture->image_title }}</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

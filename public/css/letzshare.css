@@ -371,6 +371,10 @@ li {
     margin-top: 0;
 }
 
+.sectionFluidTop h2{
+    margin-top: 0;
+}
+
 .container-fluid:nth-child(2) {
     background-image: url(../images/fj1axt-1.jpg);
     background-size: cover;
@@ -416,3 +420,17 @@ li {
 .container-fluid:nth-child(5) h1 {
     color: #fff;
 }
+
+/* top users photo styles*/
+
+.userPhoto {
+    text-align: center;
+}
+
+.userPhoto h4, p{
+    padding: 15px;
+}
+
+.topUsers  {
+    max-width: 70% !important;
+ }
