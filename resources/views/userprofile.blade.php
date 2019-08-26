@@ -324,24 +324,24 @@ $ownUser=false;
 
                     @endif
                     <!-- Card content -->
-                    <div class="card-body d-flex flex-row">
+                    <div class="card-body d-flex flex-row container-button">
 
                         <!-- Content -->
-                        <div>
+                        <div class="">
 
                             <!-- Title -->
                             <h6 class="card-title font-weight-bold mb-2 {{ $userPhoto->photo_id }}">
                                 {{ $userPhoto->image_title }}
-                                @if($ownUser)
+                            </h6>@if($ownUser)
+                            <!-- Button trigger modal -->
+                            <div class="buttons-absolutes">
                                 <!--edit photo button-->
-                                <a href="#" class="edit-photo-button" id="edit-{{ $userPhoto->photo_id }}"><i
-                                        class="far fa-edit  text-success"></i></a>
+                                <a href="#" class="edit-photo-button " id="edit-{{ $userPhoto->photo_id }}"><i
+                                        class="far fa-edit text-primary"></i></a>
                                 <!--delete photo button-->
                                 <a href="#" data-toggle="modal" data-target="#deletePhoto{{ $userPhoto->photo_id }}"><i
                                         class="far fa-trash-alt delete-photo-button text-danger text-right"></i></a>
-                                @endif</h6>@if($ownUser)
-                            <!-- Button trigger modal -->
-
+                            </div>
 
                             <input type="text" class="edit-photo-{{ $userPhoto->photo_id }} hide form-control"
                                 name="title" placeholder="Enter a new title" value="{{ $userPhoto->image_title }}">
@@ -426,11 +426,6 @@ $ownUser=false;
                                         <span>{{ $userPhoto->likes_sum }}</span>
                                     </div>
                                     @endif
-                                </li>
-                                <li>
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span class="old-fields-{{ $userPhoto->photo_id }}">
-                                        {{ $userPhoto->locality_name }}</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-map-marker-alt"></i>
