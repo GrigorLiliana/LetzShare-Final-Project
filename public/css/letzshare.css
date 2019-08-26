@@ -11,8 +11,8 @@ body {
 /* .container {
     margin-top: 100px;
 } */
-.container-home {
-    margin-top: 0;
+.container {
+    margin-top: 100px;
 }
 .navbar {
     padding: 0 1rem !important;
@@ -324,7 +324,7 @@ li {
 }
 /* modal photo Form Styles */
 
-.modal-body {
+.modalBodyGallery {
     padding: 0 !important;
 }
 
@@ -337,7 +337,7 @@ li {
     padding-top: 3px;
 }
 
-.modal-footer {
+.modalFooterGallery {
     display: flex;
     flex-direction: column;
 }

@@ -1,15 +1,4 @@
-<style>
-    .card-img-top {
-        width: 100%;
-        height: 15vw;
-        object-fit: cover;
-    }
-
-    .rounded-circle {
-        margin: 0 10%;
-    }
-</style>
-@extends('layouts.app')
+ @extends('layouts.app')
 
 @section('title', 'LetzShare | Home page')
 

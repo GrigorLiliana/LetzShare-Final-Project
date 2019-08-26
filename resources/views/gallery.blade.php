@@ -9,14 +9,14 @@
         <div class="filters">
             <div class="card-header formfilters" id="headingOne">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse show" data-target="#collapseOne" aria-expanded="true"
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
                         aria-controls="collapseOne">
                         FILTERS
                     </button>
                 </h5>
             </div>
 
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                 <form action="" method="POST" class="form-filters">
                     @csrf
                     <div class="form-row">
@@ -110,12 +110,12 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body modalBodyGallery">
                                 <img class="card-img-top rounded-0" src="{{ $photo->image_URL }}"
                                     alt="{{ $photo->image_title }}">
                             </div>
 
-                            <div class="modal-footer">
+                            <div class="modal-footer modalFooterGallery">
                                 <div class="col modal-description">
                                     {{ $photo->image_description }}
                                 </div>
@@ -325,9 +325,9 @@
         <!-- END Card -->
     </div>
 
-    <div class="pagination">
-        {{ $photos->links() }}
-    </div>
+</div>
+<div class="pagination">
+    {{ $photos->links() }}
 </div>
 
 @endsection
