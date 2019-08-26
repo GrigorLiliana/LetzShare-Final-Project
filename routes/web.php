@@ -45,13 +45,3 @@ Route::post('/like', 'PhotoController@photoLikePhoto')->name('like');
 //** ADMIN - Middleware auth validation */
 Route::resource('/admin', 'AdminController')->middleware('admin');
 Route::delete('/admin/deletePhoto/{photo_id}', 'AdminController@deletePhoto')->middleware('admin');
-
-//** TESTS */
-Route::view('/chupelagaite', 'chupelagaite');
-
-Route::get('/test', function(){
-  $photo_id = 7;
-  $photo = App\Photo::find($photo_id);
-  $photoLikes = count($photo->likes);
-  echo($photoLikes);
-});
