@@ -8,9 +8,9 @@ body {
     color: white;
 }
 
-.container {
+/* .container {
     margin-top: 100px;
-}
+} */
 .container-home {
     margin-top: 0;
 }
@@ -260,10 +260,10 @@ li {
 .hide {
     display: none !important;
 }
-.delete-user-account{
+.delete-user-account {
     position: absolute;
     top: 0;
-    right:0;
+    right: 0;
 }
 /* Enf of User Profile Styles */
 
@@ -413,3 +413,69 @@ li {
 .policies-register {
     text-align: center;
 }
+
+/* Home Containers Styles */
+.container-fluid {
+    width: 100%;
+    padding: 5rem 0;
+}
+
+.container-fluid:nth-child(2) {
+    background-image: url(../images/fj1axt-1.jpg);
+    background-size: cover;
+    transform: skewY(-2deg);
+    padding: 15rem 0;
+}
+
+.container-fluid:nth-child(2) .container {
+    transform: skewY(2deg);
+}
+
+.container-fluid:nth-child(2) h1 {
+    color: #fff;
+    text-align: center;
+}
+.intro {
+    padding: 2rem 1rem;
+    background-color: rgba(95, 93, 93, 0.404);
+}
+
+.container-fluid:nth-child(3) {
+    background-color: tomato;
+    transform: skewY(-2deg);
+}
+
+.container-fluid:nth-child(3) .container {
+    transform: skewY(2deg);
+}
+
+.container-fluid:nth-child(3) h1 {
+    color: #fff;
+}
+
+.container-fluid:nth-child(4) {
+    background-color: #0099FF;
+    transform: skewY(-2deg);
+}
+
+.container-fluid:nth-child(4) .container {
+    transform: skewY(2deg);
+}
+
+.container-fluid:nth-child(4) h1 {
+    color: #fff;
+}
+
+.container-fluid:nth-child(5) {
+    /* background-color: teal; */
+    transform: skewY(-2deg);
+}
+.container-fluid:nth-child(5) .container {
+    /* background-color: teal; */
+    transform: skewY(2deg);
+}
+.container-fluid:nth-child(5) h1 {
+    color: #fff;
+}
+
+
