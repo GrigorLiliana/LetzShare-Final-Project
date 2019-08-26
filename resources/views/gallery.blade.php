@@ -105,7 +105,7 @@
                                     <img src="{{URL::asset($photo->user_photo)}}" class="rounded-circle mr-3"
                                         height="50" width="50" alt="avatar">
                                 </a>
-                                <h5 class="modal-title" id="exampleModalLabel">{{ $photo->image_title }}</h5>
+                                <h5 class="modal-title">{{ $photo->image_title }}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
