@@ -15,8 +15,10 @@
     <script src="https://kit.fontawesome.com/ff9603d652.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
     <link href="{{ asset('css/letzshare.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
 </head>
@@ -46,6 +48,7 @@
         </main>
         @include('layouts.footer')
     </div>
+    <script src="{{ asset('js/scroolreveal.js') }}" defer></script>
 </body>
 
 </html>

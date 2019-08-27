@@ -1,4 +1,4 @@
-<footer class="footer mt-5">
+<footer class="footer">
 
       <p class="float-right">
         <a href="#">Back to top</a>

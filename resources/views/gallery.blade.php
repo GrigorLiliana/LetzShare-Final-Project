@@ -326,8 +326,5 @@
     </div>
 
 </div>
-<div class="pagination">
-    {{ $photos->links() }}
-</div>
 
 @endsection
