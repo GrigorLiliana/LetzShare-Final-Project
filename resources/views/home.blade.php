@@ -5,9 +5,12 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="intro">
-        <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250>
-        </h1>
+    <div class="container intro">
+        {{-- <h1>LetzShare - The beauty of<img src="{{ asset('images/') }}/luxembourg-logo.png" alt="Luxembourg." width=250>
+        </h1> --}}
+        <h1>LetzShare</h1>
+        <h3>A plataform where you can share your experiences</h3>
+        <h3>using photos and let others know more about from Luxembourg!</h3>
     </div>
 </div>
 

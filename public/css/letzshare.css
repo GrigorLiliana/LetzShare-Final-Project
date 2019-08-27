@@ -378,18 +378,15 @@ li {
 }
 
 .intro {
-    padding: 2rem 1rem;
-    background-color: rgba(95, 93, 93, 0.404);
+    text-align: center;
+    padding: 2rem 0;
+    background-color: rgba(95, 93, 93, 0.6);
 }
 
 .sectionFluidTop,
 .sectionFluidMid,
 .sectionFluidBot {
     margin-top: 0;
-}
-
-.sectionFluidTop {
-    margin-top: -200px;
 }
 
 .middle-container {
@@ -433,17 +430,22 @@ li {
 .container-fluid:nth-child(2) h1 {
     color: #fff;
     text-shadow: 0 2px 3px rgba(49, 49, 49, 0.479);
+    text-decoration: underline;
+}
+.container-fluid:nth-child(2) h3 {
+    color: #fff;
+    text-shadow: 0 2px 3px rgba(49, 49, 49, 0.479);
 }
 
 .container-fluid:nth-child(3) {
     background-color: tomato;
 }
 .container-fluid:nth-child(3) h1 {
-    color: #fff;
+    color: #000;
     text-shadow: 0 2px 3px rgba(49, 49, 49, 0.479);
 }
 .container-fluid:nth-child(4) h1 {
-    color: #0099ff;
+    color: #000000;
     text-shadow: 0 2px 3px rgba(49, 49, 49, 0.479);
 }
 
