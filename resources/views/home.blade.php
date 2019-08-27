@@ -14,8 +14,8 @@
 {{-- top rated photos --}}
 <div class="container-fluid">
     <div class="container sectionFluidTop">
+        <h1>Top Rated Photos</h1>
         <div class="row">
-            <h2>Top Rated Photos</h2>
 
             <div class="card-deck">
                 @foreach ($topPics as $picture)
@@ -287,9 +287,9 @@
 </div>
 
 {{-- top photographers photos --}}
-<div class="container-fluid">
-    <div class="container sectionFluidTop">
-        <h2>Top Photographers</h2>
+<div class="container-fluid middle-container">
+    <div class="container sectionFluidMid">
+        <h1>Top Photographers</h1>
         <div class="row">
             @foreach ($topUsers as $topUser)
             @php
@@ -298,13 +298,13 @@
             $path = URL::asset($user->user_photo);
             @endphp
             <div class="col-sm userPhoto">
-                <h4>{{ $user->name }}</h4>
+                <h3>{{ $user->name }}</h3>
                 {{-- <div class="view overlay"> --}}
                 <a href="/userprofile/{{$user->user_id}}">
                     <img src="{{$path}}" class="rounded-circle topUsers img-thumbnail" alt="{{ $user->name }}">
                 </a>
                 {{-- </div> --}}
-                <p>
+                <p class="userIntro">
                     <span>{{ str_limit($user->user_description, 70, '...') }}</span>
                 </p>
                 <p class="card-text"><small class="text-muted">Has posted {{$topUser->total_photos}} photos</small>
@@ -317,9 +317,9 @@
 
 {{-- last photos --}}
 <div class="container-fluid second">
-    <div class="container sectionFluidTop">
+    <div class="container sectionFluidBot">
+        <h1>Latest Photos</h1>
         <div class="row">
-            <h2>Latest Photos</h2>
 
             <div class="card-deck">
                 @foreach ($recentPics as $picture)

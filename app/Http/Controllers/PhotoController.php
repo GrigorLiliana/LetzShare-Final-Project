@@ -50,7 +50,7 @@ class PhotoController extends Controller
             ->join('categories', 'categories.category_id', '=', 'photos.category_id')
             ->select('photos.*', 'users.name', 'users.user_photo', 'locations.locality_name', 'categories.category_icon', 'categories.category_name')
             ->orderBy('created_at', 'desc')
-            ->simplePaginate(12);
+            ->get();
 
         return view('gallery', [
             'photos' => $photos,
@@ -93,7 +93,7 @@ class PhotoController extends Controller
             ->orWhere('photos.locality_id', $request->locations)
             ->orWhere('photos.category_id', $request->categories)
             ->orWhereBetween('photos.created_at', [$request->firstdate, $request->lastdate])
-            ->simplePaginate(12);
+            ->get();
 
         return view('gallery', [
             'photos' => $photos,
