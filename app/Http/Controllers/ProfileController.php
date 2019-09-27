@@ -171,14 +171,14 @@ class ProfileController extends Controller
     {
 
         $photo = Photo::find($id);
-
-            if(File::exists($photo->image_URL)){
-                File::delete($photo->image_URL);
+        $idUser = $photo["user_id"];
+            if(File::exists($photo["image_URL"])){
+                File::delete($photo["image_URL"]);
             }
 
             Photo::destroy($id);
 
-            return redirect('userprofile/' . $photo->user_id )->with([
+            return redirect('userprofile/' . $idUser )->with([
                 'status' => 'SUCCESS: Photo deleted successfully.',
                 'class' => 'alert alert-success alert-dismissible fade show',
             ]);
